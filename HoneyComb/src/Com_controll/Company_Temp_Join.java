@@ -7,6 +7,8 @@ import com_bean.HoneyCombDBBean;
 
 public class Company_Temp_Join implements CommandAction{
 
+// setting
+	
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub

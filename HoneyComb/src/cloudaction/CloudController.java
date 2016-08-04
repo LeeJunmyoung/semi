@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CloudControllerUsingURI extends HttpServlet{
+public class CloudController extends HttpServlet{
 
 	private Map commandMap = new HashMap();
 

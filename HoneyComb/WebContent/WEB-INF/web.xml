@@ -31,7 +31,7 @@
 		<servlet-class>LogInaction.ControllerUsingURI</servlet-class>
 		<init-param>
 			<param-name>login_propertyConfig</param-name>
-			<param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
+			<param-value>C:\Users\Administrator\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
 		</init-param>
 	</servlet>
 	 <servlet-mapping>
@@ -45,7 +45,7 @@
 		<servlet-class>Com_controll.Controller</servlet-class>
 		<init-param>
 			<param-name>com_Controller</param-name>
-			<param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
+			<param-value>C:\Users\Administrator\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
 		</init-param>
 	</servlet>
 	

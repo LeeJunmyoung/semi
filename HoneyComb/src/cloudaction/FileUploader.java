@@ -20,48 +20,48 @@ public class FileUploader implements CommandActionCloud{
 		if (request.getParameter("upload")==null){
 		CloudDataBean cloudDB = new CloudDataBean();
 		CloudDBBean cloud = CloudDBBean.getInstance();
-		System.out.println("ì—¬ê¸°ê¹Œì§€ì˜´");
+		System.out.println("?—¬ê¸°ê¹Œì§??˜´");
 		
 		String savefilepath = "D://cloud//";
 		HttpSession session = request.getSession();
-		//ì„ì‹œë¡œ ì„¸ì…˜ì£¼ê¸°
+		//?„?‹œë¡? ?„¸?…˜ì£¼ê¸°
 		session.setAttribute("mem_num", "11");
 		session.setAttribute("com_num", "44");
 		session.setAttribute("name", "tester");
-		//ë
+		//?
 		MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*10,"utf-8", new DefaultFileRenamePolicy());
-		// (ìš”ì²­ê°ì²´, íŒŒì¼ì´ ì“°ì—¬ì§ˆ ê²½ë¡œ, íŒŒì¼ì˜ ìµœëŒ€í¬ê¸°, ì¸ì½”ë”©ë°©ì‹, íŒŒì¼ëª…ì´ ì´ë¯¸ ìˆì„ ê²½ìš° 'íŒŒì¼ëª…+1')
-		//íŒŒì¼ê²½ë¡œ ê°€ì ¸ì˜¤ê¸°
+		// (?š”ì²?ê°ì²´, ?ŒŒ?¼?´ ?“°?—¬ì§? ê²½ë¡œ, ?ŒŒ?¼?˜ ìµœë??¬ê¸?, ?¸ì½”ë”©ë°©ì‹, ?ŒŒ?¼ëª…ì´ ?´ë¯? ?ˆ?„ ê²½ìš° '?ŒŒ?¼ëª?+1')
+		//?ŒŒ?¼ê²½ë¡œ ê°?? ¸?˜¤ê¸?
 		File file = mr.getFile("uploadFile");
 		String filename = String.valueOf(file);
-		//íŒŒì¼ê²½ë¡œ ê°€ì ¸ì˜¤ê¸°ë
-		//ìƒˆë¡œ ë°”ê¿€ íŒŒì¼ëª… \3E(<)(ë‚ ì§œ+íšŒì‚¬ë²ˆí˜¸+ì˜¬ë¦°ì‚¬ëŒì´ë¦„_íŒŒì¼ëª…+ë‚œìˆ˜1~9)
+		//?ŒŒ?¼ê²½ë¡œ ê°?? ¸?˜¤ê¸°ë
+		//?ƒˆë¡? ë°”ê? ?ŒŒ?¼ëª? \3E(<)(?‚ ì§?+?šŒ?‚¬ë²ˆí˜¸+?˜¬ë¦°ì‚¬?Œ?´ë¦?_?ŒŒ?¼ëª?+?‚œ?ˆ˜1~9)
 		CreateFilePath createfilePath =  CreateFilePath.getInstance();
 		String oldPath = filename.replace("\\", "/");
 		System.out.println(oldPath);
 		cloudDB = tempInsert(cloudDB, request);
 		cloudDB = createfilePath.FilePath(cloudDB, oldPath);
 		System.out.println(cloudDB.getFile_path());
-		//ë°”ê¿€íŒŒì¼ëª…ë
-		//ì´ë¯¸ì €ì¥ëœ í™•ì¥ì ì´ì™¸ì˜ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
+		//ë°”ê??ŒŒ?¼ëª…ë
+		//?´ë¯¸ì??¥?œ ?™•?¥? ?´?™¸?˜ ?´ë¦? ê°?? ¸?˜¤ê¸?
 		String newfilename = cloudDB.getFile_path();
 		int i = 0;
 		i = filename.lastIndexOf(".");
 		String realFileName = newfilename+filename.substring(i,filename.length());
-		//ì´ë¯¸ì €ì¥ëœ í™•ì¥ì ì´ì™¸ì˜ ì´ë¦„ ê°€ì ¸ì˜¤ê¸° ë
-		//íŒŒì¼ ì´ë¦„ ë°”ê¾¸ê¸°
+		//?´ë¯¸ì??¥?œ ?™•?¥? ?´?™¸?˜ ?´ë¦? ê°?? ¸?˜¤ê¸? ?
+		//?ŒŒ?¼ ?´ë¦? ë°”ê¾¸ê¸?
 		File oldfile = new File(filename);
 		File newfile = new File(savefilepath+realFileName);
 		oldfile.renameTo(newfile);
-		//íŒŒì¼ì´ë¦„ë°”ê¾¸ê¸°ë
-		//íŒŒì¼ê²½ë¡œ ì €ì¥
+		//?ŒŒ?¼?´ë¦„ë°”ê¾¸ê¸°?
+		//?ŒŒ?¼ê²½ë¡œ ???¥
 		String file_path = String.valueOf(newfile);
-		//íŒŒì¼ê²½ë¡œì €ì¥ë
-		//í´ë¼ìš°ë“œdbì— ì €ì¥
-		//ë°ì´í„° ì…‹íŒ…(com_num, name ì€ tempInsertì—ì„œ ì§€ì •, file_name ì€ createFilePath.javaì—ì„œ ì§€ì •)
+		//?ŒŒ?¼ê²½ë¡œ???¥?
+		//?´?¼?š°?“œdb?— ???¥
+		//?°?´?„° ?…‹?Œ…(com_num, name ?? tempInsert?—?„œ ì§?? •, file_name ?? createFilePath.java?—?„œ ì§?? •)
 		cloudDB.setFile_size((int)newfile.length());
 		cloudDB.setFile_path(file_path);
-		//ë°ì´í„° ì…‹íŒ… ë
+		//?°?´?„° ?…‹?Œ… ?
 		//DB insert
 		cloud.cloudInsert(cloudDB);
 		}
@@ -77,5 +77,5 @@ public class FileUploader implements CommandActionCloud{
 	}
 
 }
-/*ë‚ ì§œ(xxxxxx)com_num(xxxx), mem_num(xxxxxx), fileë²ˆí˜¸(xxxxxx)
-íšŒì‚¬ ë¶€ì„œ ì‚¬ì›ì •ë³´ ì‹œê°„(milli)*/
+/*?‚ ì§?(xxxxxx)com_num(xxxx), mem_num(xxxxxx), fileë²ˆí˜¸(xxxxxx)
+?šŒ?‚¬ ë¶??„œ ?‚¬?›? •ë³? ?‹œê°?(milli)*/

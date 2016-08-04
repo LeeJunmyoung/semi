@@ -1,4 +1,4 @@
-//íŒŒì¼ê²½ë¡œ(íŒŒì¼ëª…)ìƒì„±
+//?ŒŒ?¼ê²½ë¡œ(?ŒŒ?¼ëª?)?ƒ?„±
 package cloudaction;
 
 import java.sql.SQLException;
@@ -24,21 +24,21 @@ public class CreateFilePath {
 		String com = null;
 		String Val = null;
 		String oldFile = null;
-		//ìƒˆë¡œ ë°”ê¿€ íŒŒì¼ëª… \3E(<)(ë‚ ì§œ+íšŒì‚¬ë²ˆí˜¸+ì˜¬ë¦°ì‚¬ëŒì´ë¦„_íŒŒì¼ëª…+ë‚œìˆ˜1~9)
-		//ë‚ ì§œëŠ” long ë„ˆë¬´ ê¸¸ì–´ì„œ int ì—ì„œ í˜•ë³€í™˜
+		//?ƒˆë¡? ë°”ê? ?ŒŒ?¼ëª? \3E(<)(?‚ ì§?+?šŒ?‚¬ë²ˆí˜¸+?˜¬ë¦°ì‚¬?Œ?´ë¦?_?ŒŒ?¼ëª?+?‚œ?ˆ˜1~9)
+		//?‚ ì§œëŠ” long ?„ˆë¬? ê¸¸ì–´?„œ int ?—?„œ ?˜•ë³??™˜
 		int today = (int)System.currentTimeMillis();
 		day = String.valueOf(today);
-		//ë‚ ì§œë
-		//íšŒì‚¬ë²ˆí˜¸ì‹œì‘
+		//?‚ ì§œë
+		//?šŒ?‚¬ë²ˆí˜¸?‹œ?‘
 		com  = String.valueOf(cloudDB.getCom_num());
-		//íšŒì‚¬ë²ˆí˜¸ ë
+		//?šŒ?‚¬ë²ˆí˜¸ ?
 
-		//ë‚œìˆ˜
+		//?‚œ?ˆ˜
 		Random random = new Random();
 		int rVal = random.nextInt(8)+1;
 		Val = String.valueOf(rVal);
-		//ë‚œìˆ˜ ë
-		//ì´ì „ê²½ë¡œì„¤ì •
+		//?‚œ?ˆ˜ ?
+		//?´? „ê²½ë¡œ?„¤? •
 		int i= 0;
 		int j = 0;
 		i = oldPath.lastIndexOf(".");
@@ -47,10 +47,10 @@ public class CreateFilePath {
 		oldFile = tempFilePath.substring(j+1,tempFilePath.length());
 		System.out.println(tempFilePath);
 		System.out.println(oldFile);
-		//(ë‚ ì§œ+íšŒì‚¬ë²ˆí˜¸+ì˜¬ë¦°ì‚¬ëŒì´ë¦„_íŒŒì¼ëª…+ë‚œìˆ˜1~9)
-		//ì´ë¦„
+		//(?‚ ì§?+?šŒ?‚¬ë²ˆí˜¸+?˜¬ë¦°ì‚¬?Œ?´ë¦?_?ŒŒ?¼ëª?+?‚œ?ˆ˜1~9)
+		//?´ë¦?
 		 String name = cloudDB.getFile_uploader();
-		//ì´ë¦„ë		
+		//?´ë¦„ë		
 		file_Path = day+com+name+"_"+oldFile+"_"+Val;
 		cloudDB.setFile_path(file_Path);
 		cloudDB.setFile_name(oldFile);

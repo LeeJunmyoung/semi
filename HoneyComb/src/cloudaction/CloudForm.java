@@ -18,10 +18,10 @@ public class CloudForm implements CommandActionCloud{
 		List cloudList = new ArrayList();
 		
 		HttpSession session = request.getSession();
-		/*comnum session ì„¤ì •test*/
-		System.out.println("cloudform.java com_numì„¤ì •//test");
+		/*comnum session ?„¤? •test*/
+		System.out.println("cloudform.java com_num?„¤? •//test");
 		session.setAttribute("com_num", "44");
-		/*comnum session ì„¤ì •test*/
+		/*comnum session ?„¤? •test*/
 		
 		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
 		

@@ -9,6 +9,7 @@
 <body>
 <% response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); %>
 
-<%-- setting  --%>
+<%--setting --%>
+
 </body>
 </html> 

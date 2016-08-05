@@ -3,7 +3,7 @@ package notice;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NoticeContentAction implements FormAction {
+public class NoticeContentAction implements NoticeFormAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {

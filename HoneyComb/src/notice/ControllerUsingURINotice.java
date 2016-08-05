@@ -85,7 +85,7 @@ public class ControllerUsingURINotice extends HttpServlet {
 			throws ServletException, IOException {
 
 		String view = null;
-		FormAction com = null;
+		NoticeFormAction com = null;
 
 		try {
 
@@ -96,7 +96,7 @@ public class ControllerUsingURINotice extends HttpServlet {
 				System.out.println("command ::: " + command);
 			}
 
-			com = (FormAction) commandMap.get(command);
+			com = (NoticeFormAction) commandMap.get(command);
 
 			System.out.println("com ::: " + com);
 

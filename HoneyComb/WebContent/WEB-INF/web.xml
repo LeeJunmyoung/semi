@@ -106,5 +106,18 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<servlet>
+		<servlet-name>ControllerUsingURIProMgr</servlet-name>
+		<servlet-class>proMgr.ControllerUsingURIProMgr</servlet-class>
+		<init-param>
+			<param-name>propertyConfigProMgr</param-name>
+			<param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\ProMgrHandlerURI.properties</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ControllerUsingURIProMgr</servlet-name>
+		<url-pattern>*.pro</url-pattern>
+	</servlet-mapping>
 
 </web-app>

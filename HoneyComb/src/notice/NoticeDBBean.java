@@ -15,16 +15,9 @@ public class NoticeDBBean {
 
 	private Connection getConnection() throws Exception {
 
-		 Class.forName("oracle.jdbc.driver.OracleDriver");
+		String jdbcDriver = "jdbc:apache:commons:dbcp:/pool";
 		
-		 String jdbcDriver = "jdbc:oracle:thin:@192.168.20.21:1521:XE";
-		 String dbUser = "member";
-		 String dbPass = "member";
-		
-		 return DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-
-//		String jdbcDriver = "jdbc:apache:commons:dbcp:/pool";
-//		return DriverManager.getConnection(jdbcDriver);
+		return DriverManager.getConnection(jdbcDriver);
 
 	} // getConnection() end
 

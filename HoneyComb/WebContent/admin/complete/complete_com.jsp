@@ -26,8 +26,7 @@
 </script>
 
 <script>
-	function listCheck(come_num) {
-
+	function listCheck(come_num) {;
 		var num = come_num;
 		
 		url = "complete_comPro.admin?com_num=" + num;
@@ -39,22 +38,33 @@
  
 	}
 
-	function del() {
-		<c:forEach var="compl" items="${comList}">
+	function del(come_num) {
+		var num = come_num;
+		/* <c:forEach var="compl" items="${comList}"> */
+		alert(come_num);
 		
-		if ($("#company").prop("checked")) {
+		if ($("#delete").prop("checked",true)) {
+			url = "complete_comDel.admin?com_num" + num;
+
+			window
+					.open(
+							url,
+							"post",
+							"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
 			
 
+		}else{
+		alert("체크된 사업장이 없습니다.");
 		}
-		</c:forEach>
+		/* </c:forEach> */
 
-		url = "complete_comdel.admin?com_num"+num;
+/* 		url = "complete_comdel.admin?com_num"+num;
 
 		window
 				.open(
 						url,
 						"post",
-						"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+						"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); */
 	}
 </script>
 </head>
@@ -78,14 +88,14 @@
 					<c:if test="${ !empty comList }">
 						<c:forEach var="compl" items="${comList}">
 							<tr>
-								<td><input type="checkbox" id="company" name="com_name" value="${compl.com_num}">
-								<a onclick="listCheck(${compl.com_num})" ">${compl.com_name}</a></td>
+								<td><input type="checkbox" id="company">
+								<a onclick="listCheck(${compl.com_num})">${compl.com_name}</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<tr>
 						<td align="center"><input type="button" id="delete"
-							value="선택삭제" onclick="del()"> <input type="submit"
+							value="선택삭제" onclick="del(${compl.com_num})"> <input type="submit"
 							value="선택등록"></td>
 					</tr>
 				</tbody>

@@ -1,5 +1,7 @@
 package com_complete;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,17 +12,13 @@ public class Complete_ComDelAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
-		String com_name = request.getParameter("com_name");
+		int com_num = Integer.parseInt(request.getParameter("com_num"));
+			HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
+			int check = 0;
+			check = dbPro.deleteComplete(com_num);
+			request.setAttribute("check", Integer.parseInt("check"));
 		
-		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
-		
-//		int check = dbPro.deleteComplete(com_name);
-		
-//		if (check == 1) {
-//			return "complete_comdel.jsp";
-//		}
-		
-		return "complete_com.jsp";
+		return "/admin/complete/completedelPro_com.jsp";
 	}
 
 }

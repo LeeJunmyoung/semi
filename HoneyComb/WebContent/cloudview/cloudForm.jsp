@@ -17,9 +17,10 @@ $(document).bind("contextmenu", function(event) {
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href='javascript:fileUploader()'<p>업로드</p></a>"+
     "<p>다운로드</p>"+
+    "<p>폴더 만들기</p>"+
     "<p>공유</p>"+    
     +"</div>")
-        .appendTo("body")
+        .appendTo("div.cloudForm")
         .css({top: event.pageY + "px", left: event.pageX + "px"});
 }).bind("click", function(event) {
     $("div.cloud_menu").hide();
@@ -27,7 +28,14 @@ $(document).bind("contextmenu", function(event) {
 
 </script>
 <title>Insert title here</title>
+<style type="text/css">
+div.file{
+width=200px;
+text-align: center;}
+
+</style>
 </head>
+
 <body>
 	<input type="button"name="upload" value="업로드" onclick='return fileUploader()'>
 	<input type="button" name="download" value="다운로드">
@@ -35,21 +43,21 @@ $(document).bind("contextmenu", function(event) {
 		<input type="text" name="search">
 		<input type="button" name="searchbutton" value="검색">
 	</form>
-	<div id="cloudForm">
+	<div class="cloudForm">
 	<ul>
 		<c:forEach items="${cloudList}" var="cloudlist">
 				<li style="display: inline;">
 					<div style="width: 150px; display: inline-block;">
 						<input type="checkbox" value="${cloudlist.file_num}">
-						<div>이곳은 파일그림입니다</div>
+						<div class="file"><img src="../cloudview/images/file.png" width="150px"></div>
 						
-						<div>파일명:${cloudlist.file_name}</div>
-						<div>올린사람:${cloudlist.file_uploader}</div>
+						<div class="file">${cloudlist.file_name}</div>
+						<div class="file">${cloudlist.file_uploader}</div>
 							<!-- 파일사이즈 byte 로 포맷 -->
 							<fmt:parseNumber value="${cloudlist.file_size/1024}" integerOnly="true" var="file_size"/>
-						<div>파일 크기:${file_size}byte</div>
+						<div class="file">파일 크기:${file_size}byte</div>
 						
-						<div>올린날짜: ${cloudlist.file_date}</div>
+						<div class="file">${cloudlist.file_date}</div>
 					</div>
 				</li>
 		</c:forEach>

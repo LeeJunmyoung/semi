@@ -20,48 +20,48 @@ public class FileUploader implements CommandActionCloud{
 		if (request.getParameter("upload")==null){
 			CloudDataBean cloudDB = new CloudDataBean();
 			CloudDBBean cloud = CloudDBBean.getInstance();
-			System.out.println("여기까지옴");
+			System.out.println("�뿬湲곌퉴吏��샂");
 			
 			String savefilepath = "E://cloud//";
 			HttpSession session = request.getSession();
-			//임시로 세션주기
+			//�엫�떆濡� �꽭�뀡二쇨린
 			session.setAttribute("mem_num", "11");
 			session.setAttribute("com_num", "44");
 			session.setAttribute("name", "tester");
-			//끝
-			MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*10,"utf-8", new DefaultFileRenamePolicy());
-			// (요청객체, 파일이 쓰여질 경로, 파일의 최대크기, 인코딩방식, 파일명이 이미 있을 경우 '파일명+1')
-			//파일경로 가져오기
+			//�걹
+			MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*100,"utf-8", new DefaultFileRenamePolicy());
+			// (�슂泥�媛앹껜, �뙆�씪�씠 �벐�뿬吏� 寃쎈줈, �뙆�씪�쓽 理쒕��겕湲�, �씤肄붾뵫諛⑹떇, �뙆�씪紐낆씠 �씠誘� �엳�쓣 寃쎌슦 '�뙆�씪紐�+1')
+			//�뙆�씪寃쎈줈 媛��졇�삤湲�
 			File file = mr.getFile("uploadFile");
 			String filename = String.valueOf(file);
-			//파일경로 가져오기끝
-			//새로 바꿀 파일명 \3E(<)(날짜+회사번호+올린사람이름_파일명+난수1~9)
+			//�뙆�씪寃쎈줈 媛��졇�삤湲곕걹
+			//�깉濡� 諛붽� �뙆�씪紐� \3E(<)(�궇吏�+�쉶�궗踰덊샇+�삱由곗궗�엺�씠由�_�뙆�씪紐�+�궃�닔1~9)
 			CreateFilePath createfilePath =  CreateFilePath.getInstance();
 			String oldPath = filename.replace("\\", "/");
 			System.out.println(oldPath);
 			cloudDB = tempInsert(cloudDB, request);
 			cloudDB = createfilePath.FilePath(cloudDB, oldPath);
 			System.out.println(cloudDB.getFile_path());
-			//바꿀파일명끝
-			//이미저장된 확장자 이외의 이름 가져오기
+			//諛붽��뙆�씪紐낅걹
+			//�씠誘몄��옣�맂 �솗�옣�옄 �씠�쇅�쓽 �씠由� 媛��졇�삤湲�
 			String newfilename = cloudDB.getFile_path();
 			int i = 0;
 			i = filename.lastIndexOf(".");
 			String realFileName = newfilename+filename.substring(i,filename.length());
-			//이미저장된 확장자 이외의 이름 가져오기 끝
-			//파일 이름 바꾸기
+			//�씠誘몄��옣�맂 �솗�옣�옄 �씠�쇅�쓽 �씠由� 媛��졇�삤湲� �걹
+			//�뙆�씪 �씠由� 諛붽씀湲�
 			File oldfile = new File(filename);
 			File newfile = new File(savefilepath+realFileName);
 			oldfile.renameTo(newfile);
-			//파일이름바꾸기끝
-			//파일경로 저장
+			//�뙆�씪�씠由꾨컮袁멸린�걹
+			//�뙆�씪寃쎈줈 ���옣
 			String file_path = String.valueOf(newfile);
-			//파일경로저장끝
-			//클라우드db에 저장
-			//데이터 셋팅(com_num, name 은 tempInsert에서 지정, file_name 은 createFilePath.java에서 지정)
+			//�뙆�씪寃쎈줈���옣�걹
+			//�겢�씪�슦�뱶db�뿉 ���옣
+			//�뜲�씠�꽣 �뀑�똿(com_num, name �� tempInsert�뿉�꽌 吏��젙, file_name �� createFilePath.java�뿉�꽌 吏��젙)
 			cloudDB.setFile_size((int)newfile.length());
 			cloudDB.setFile_path(file_path);
-			//데이터 셋팅 끝
+			//�뜲�씠�꽣 �뀑�똿 �걹
 			//DB insert
 			cloud.cloudInsert(cloudDB);
 			}
@@ -77,5 +77,5 @@ public class FileUploader implements CommandActionCloud{
 	}
 
 }
-/*?���?(xxxxxx)com_num(xxxx), mem_num(xxxxxx), file번호(xxxxxx)
-?��?�� �??�� ?��?��?���? ?���?(milli)*/
+/*?占쏙옙占�?(xxxxxx)com_num(xxxx), mem_num(xxxxxx), file踰덊샇(xxxxxx)
+?占쏙옙?占쏙옙 占�??占쏙옙 ?占쏙옙?占쏙옙?占쏙옙占�? ?占쏙옙占�?(milli)*/

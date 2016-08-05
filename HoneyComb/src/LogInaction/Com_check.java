@@ -26,7 +26,7 @@ public class Com_check implements CommandAction{
 			
 			}
 		
-		return "/honey_comb_main/start_main.jsp";
+		return "/page_layout/home.jsp";
 	}
 
 }

@@ -27,7 +27,7 @@ public class Company_Temp_Join implements CommandAction{
 		request.getSession().setAttribute("com_num", com_num);
 		System.out.println("com_num");
 		
-		return "/HoneyComb/coin/Com_check.coin";
+		return "/coin/Com_check.coin";
 	}
 
 }

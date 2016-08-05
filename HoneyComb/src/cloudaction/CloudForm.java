@@ -13,13 +13,14 @@ import clouddb.LogOnDBBean;
 
 public class CloudForm implements CommandActionCloud{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		System.out.println("여기까진 옴?");
 		CloudDBBean cloud = CloudDBBean.getInstance();
 		CloudDataBean list = new CloudDataBean();
 		List cloudList = new ArrayList();
 		
 		HttpSession session = request.getSession();
 		/*comnum session ?꽕?젙test*/
-		System.out.println("cloudform.java com_num?꽕?젙//test");
+		System.out.println("cloudform.java com_num?주기");
 		session.setAttribute("com_num", "44");
 		/*comnum session ?꽕?젙test*/
 		

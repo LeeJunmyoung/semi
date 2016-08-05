@@ -58,13 +58,13 @@
 		<servlet-name>cloud_Controller</servlet-name>
 		<servlet-class>cloudaction.CloudController</servlet-class>
 		<init-param>
-			<param-name>com_Controller</param-name>
+			<param-name>cloud_Controller</param-name>
 			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
 		</init-param>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>com_Controller</servlet-name>
+		<servlet-name>cloud_Controller</servlet-name>
 		<url-pattern>*.cloud</url-pattern>
 	</servlet-mapping> 
 	

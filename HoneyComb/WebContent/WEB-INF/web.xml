@@ -34,13 +34,13 @@
 			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
 		</init-param>
 	</servlet>
-	 <servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>Controller</servlet-name>
 		<url-pattern>*.coin</url-pattern>
 	</servlet-mapping>
-	
-	
-	 <servlet>
+
+
+	<servlet>
 		<servlet-name>com_Controller</servlet-name>
 		<servlet-class>Com_controll.Controller</servlet-class>
 		<init-param>
@@ -48,12 +48,12 @@
 			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
 		</init-param>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>com_Controller</servlet-name>
 		<url-pattern>*.company</url-pattern>
-	</servlet-mapping> 
-	
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>cloud_Controller</servlet-name>
 		<servlet-class>cloudaction.CloudController</servlet-class>
@@ -62,12 +62,12 @@
 			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
 		</init-param>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>cloud_Controller</servlet-name>
 		<url-pattern>*.cloud</url-pattern>
-	</servlet-mapping> 
-	
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>admin_Controller</servlet-name>
 		<servlet-class>com_complete.Complete_Controller</servlet-class>
@@ -76,11 +76,35 @@
 			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\admin_accept_com.properties</param-value>
 		</init-param>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>admin_Controller</servlet-name>
 		<url-pattern>*.admin</url-pattern>
 	</servlet-mapping>
-	
-	
+
+	<servlet>
+		<servlet-name>ControllerUsingURINotice</servlet-name>
+		<servlet-class>notice.ControllerUsingURINotice</servlet-class>
+		<init-param>
+			<param-name>propertyConfigNotice</param-name>
+			<param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ControllerUsingURINotice</servlet-name>
+		<url-pattern>*.notice</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>tiles</servlet-name>
+		<servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
+		<init-param>
+			<param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+			<param-value>/WEB-INF/tiles-home.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+
 </web-app>

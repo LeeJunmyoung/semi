@@ -48,8 +48,9 @@ text-align: center;}
 		<c:forEach items="${cloudList}" var="cloudlist">
 				<li style="display: inline;">
 					<div style="width: 150px; display: inline-block;">
-						<input type="checkbox" value="${cloudlist.file_num}">
-						<div class="file"><img src="../cloudview/images/file.png" width="150px"></div>
+						<input type="checkbox" id="${cloudlist.file_num}">
+						<label for="${cloudlist.file_num}">
+						<div class="file"><img src="../images/file.png" width="150px"></div>
 						
 						<div class="file">${cloudlist.file_name}</div>
 						<div class="file">${cloudlist.file_uploader}</div>
@@ -58,6 +59,7 @@ text-align: center;}
 						<div class="file">파일 크기:${file_size}byte</div>
 						
 						<div class="file">${cloudlist.file_date}</div>
+						</label>
 					</div>
 				</li>
 		</c:forEach>

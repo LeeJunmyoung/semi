@@ -14,7 +14,7 @@ public class CloudController extends HttpServlet{
 	private Map commandMap = new HashMap();
 
 	public void init(ServletConfig config) throws ServletException {
-		String props = config.getInitParameter("propertyConfig");
+		String props = config.getInitParameter("cloud_Controller");
 		Properties pr = new Properties();
 		FileInputStream f = null;
 

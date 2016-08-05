@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import clouddb.CloudDBBean;
 import clouddb.CloudDataBean;
-import clouddb.LogOnDBBean;
 
 public class CloudForm implements CommandActionCloud{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable{

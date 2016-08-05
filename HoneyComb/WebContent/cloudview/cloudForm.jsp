@@ -15,9 +15,9 @@ $(document).bind("contextmenu", function(event) {
     };
     
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
-    "<a href='javascript:fileUploader()'<p>업로드</p></a>"+
+    "<a href='javascript:fileUploader()'><p>업로드</p></a>"+
     "<p>다운로드</p>"+
-    "<p>폴더 만들기</p>"+
+    "<a href = 'javascript:createfolder()'><p>폴더 만들기</p></a>"+
     "<p>공유</p>"+    
     +"</div>")
         .appendTo("div.cloudForm")

@@ -192,8 +192,6 @@ public class HoneyCombDBBean {
 					com_num = rs.getInt("com_num");
 					tct.setCom_name(com_name);
 					tct.setCom_num(com_num);
-					System.out.println("com_permissionList com_name:"+com_name);
-					System.out.println("com_permissionList com_num:"+com_num);
 					complAllList.add(tct);
 					
 				}while(rs.next());
@@ -233,11 +231,9 @@ public class HoneyCombDBBean {
 		
 		try {
 			conn = getConnection();
-			System.out.println("com_permission com_num :::" + com_num);
 			
 			pstmt = conn.prepareStatement("select com_name, com_add, com_phone, com_aff from temp_com where com_num = ?");
 			pstmt.setInt(1, com_num);
-			System.out.println("111 com_num:::" + com_num);
 			rs = pstmt.executeQuery();
 			
 			completeList = new ArrayList();
@@ -247,16 +243,9 @@ public class HoneyCombDBBean {
 				
 				
 				comp.setCom_name(rs.getString("com_name"));
-				System.out.println(comp.getCom_name());
 				comp.setCom_add(rs.getString("com_add"));
-				System.out.println(comp.getCom_add());
 				comp.setCom_phone(rs.getString("com_phone"));
-				System.out.println(comp.getCom_phone());
 				comp.setCom_aff(rs.getString("com_aff"));				
-				System.out.println(comp.getCom_aff());
-				
-				
-				System.out.println("실행됌");
 				completeList.add(comp);
 				
 
@@ -337,7 +326,7 @@ public class HoneyCombDBBean {
 		// complete_com.jsp���� ���� ��û��
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		int x = -1; // delete���� Ȯ��
+		int x = 0; // delete���� Ȯ��
 		
 		try {
 			conn = getConnection();
@@ -347,6 +336,7 @@ public class HoneyCombDBBean {
 			pstmt.executeUpdate();
 			x = 1;
 		} catch (SQLException ex) {
+			x = 0;
 			ex.printStackTrace();
 		} finally {
 			if (pstmt != null)

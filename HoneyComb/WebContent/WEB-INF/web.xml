@@ -87,7 +87,7 @@
 		<servlet-class>notice.ControllerUsingURINotice</servlet-class>
 		<init-param>
 			<param-name>propertyConfigNotice</param-name>
-			<param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
+			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
 		</init-param>
 	</servlet>
 

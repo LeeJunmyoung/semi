@@ -171,25 +171,31 @@ public class HoneyCombDBBean {
 	}
 	
 	public List com_permissionList() throws Exception {
-		// ����� ��Ͻ�ûList �� (ȸ���ӿ�)
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List complAllList = null;
-		// permission_com���̺��� ��� �����͸� ������ List
-		String com_name="";
+		String com_name = "";
+		int temp_num = 0;
+		Temp_Company_table tct = null;
 		try {
 			conn = getConnection();
 			
-			pstmt = conn.prepareStatement("select com_name from complete_com");
+			pstmt = conn.prepareStatement("select * from temp_com");
 			rs = pstmt.executeQuery();
 			complAllList = new ArrayList();
 			if (rs.next()) {
 				do{
-				com_name= rs.getString("com_name");
-				complAllList.add(com_name);
-				
-				
+					tct = new Temp_Company_table();
+					com_name= rs.getString("com_name");
+					temp_num = rs.getInt("com_num");
+					tct.setCom_name(com_name);
+					tct.setTemp_num(temp_num);
+					System.out.println("com_name:"+com_name);
+					System.out.println("temp_num:"+temp_num);
+					complAllList.add(tct);
+					
 				}while(rs.next());
 			}
 			

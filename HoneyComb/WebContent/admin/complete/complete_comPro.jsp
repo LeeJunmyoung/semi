@@ -11,22 +11,22 @@
 		<form>
 			<h3>선택된 사업장 정보</h3>
 			<table width="400" border="1" cellpadding="1" cellspacing="0">
-				<c:forEach var="comp" items="comList">
+				<c:forEach var="comp" items="${comList}">
 					<tr>
 						<td align="center" width="100">사업장명</td>
-						<td width="300">${ com_name }</td>
+						<td width="300">${comp.com_name}</td>
 					</tr>
 					<tr>
 						<td align="center" width="100">주소</td>
-						<td width="300">${ com_add }</td>
+						<td width="300">${comp.com_add}</td>
 					</tr>
 					<tr>
 						<td align="center" width="100">사업장계열</td>
-						<td width="300">${ com_aff }</td>
+						<td width="300">${comp.com_aff}</td>
 					</tr>
 					<tr>
 						<td align="center" width="100">전화번호</td>
-						<td width="300">${ com_phone }</td>
+						<td width="300">${comp.com_phone}</td>
 					</tr>
 				</c:forEach>
 			</table>

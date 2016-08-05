@@ -28,9 +28,9 @@
 <script>
 	function listCheck(form) {
 
-		var name = form.value;
+		var num = form.value;
 
-		url = "complete_comPro.do?com_name=" + name;
+		url = "complete_comPro.admin?com_num=" + num;
 		window
 				.open(
 						url,
@@ -77,7 +77,7 @@
 						<c:forEach var="compl" items="${comList}">
 							<tr>
 								<td><input type="checkbox" name="com_name"
-									onclick="listCheck(this)" value="${compl.temp_num}">${compl.com_name}</td>
+									onclick="listCheck(this)" value="${compl.com_num}">${compl.com_name}</td>
 							</tr>
 						</c:forEach>
 					</c:if>

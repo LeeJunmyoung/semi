@@ -177,7 +177,7 @@ public class HoneyCombDBBean {
 		ResultSet rs = null;
 		List complAllList = null;
 		String com_name = "";
-		int temp_num = 0;
+		int com_num = 0;
 		Temp_Company_table tct = null;
 		try {
 			conn = getConnection();
@@ -189,11 +189,11 @@ public class HoneyCombDBBean {
 				do{
 					tct = new Temp_Company_table();
 					com_name= rs.getString("com_name");
-					temp_num = rs.getInt("com_num");
+					com_num = rs.getInt("com_num");
 					tct.setCom_name(com_name);
-					tct.setTemp_num(temp_num);
-					System.out.println("com_name:"+com_name);
-					System.out.println("temp_num:"+temp_num);
+					tct.setCom_num(com_num);
+					System.out.println("com_permissionList com_name:"+com_name);
+					System.out.println("com_permissionList com_num:"+com_num);
 					complAllList.add(tct);
 					
 				}while(rs.next());
@@ -223,32 +223,43 @@ public class HoneyCombDBBean {
 		return complAllList;
 	}
 
-	public List com_permission(String com_name) throws Exception {
-		// ����� ��Ͻ�ûList �� href (ȸ���ӿ�)
+	public List com_permission(int com_num) throws Exception {
+		// 사업장 신청목록의 checkbox선택시 실행
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		HoneyCombDataBean comp = null;
+		HoneyCombDataBean comp = new HoneyCombDataBean();
 		List completeList = null;
-		// ������ com_name�� ��� �����͸� ����
 		
 		try {
 			conn = getConnection();
+			System.out.println("com_permission com_num :::" + com_num);
 			
-			pstmt = conn.prepareStatement("select com_num from complete_com where com_name = ?");
-			pstmt.setString(1, com_name);
+			pstmt = conn.prepareStatement("select com_name, com_add, com_phone, com_aff from temp_com where com_num = ?");
+			pstmt.setInt(1, com_num);
+			System.out.println("111 com_num:::" + com_num);
 			rs = pstmt.executeQuery();
-			// 
+			
+			completeList = new ArrayList();
 			
 			if (rs.next()) {
+		
 				
-				completeList = new ArrayList();
+				
 				comp.setCom_name(rs.getString("com_name"));
+				System.out.println(comp.getCom_name());
 				comp.setCom_add(rs.getString("com_add"));
+				System.out.println(comp.getCom_add());
 				comp.setCom_phone(rs.getString("com_phone"));
-				comp.setCom_aff(rs.getString("com_aff"));
+				System.out.println(comp.getCom_phone());
+				comp.setCom_aff(rs.getString("com_aff"));				
+				System.out.println(comp.getCom_aff());
 				
+				
+				System.out.println("실행됌");
 				completeList.add(comp);
+				
+
 			}
 			
 		} catch (SQLException ex) {

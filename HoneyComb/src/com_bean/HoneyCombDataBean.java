@@ -1,21 +1,12 @@
 package com_bean;
 
 public class HoneyCombDataBean {
-	private int com_num; // È¸»ç¹øÈ£
-	private String com_name; // È¸»ç¸í
-	private int com_dept_num; // ºÎ¼­¹øÈ£
-	private String com_dept_name; // ºÎ¼­¸í
-	private int com_pos_num; // Á÷À§¹øÈ£
-	private String com_pos_name; // Á÷À§¸í
-	private String com_aff; // È¸»ç°è¿­
-	private String com_add; // È¸»çÁÖ¼Ò(Ãß°¡)
-	private String com_phone; // È¸»çÀüÈ­¹øÈ£
-	
-	private String mem_num;
-	private String mem_name;
-	private String email; // id
-	private String passwd;
-	private String phone_num;
+	// temp_com
+	private int com_num; // È¸ï¿½ï¿½ï¿½È£
+	private String com_name; // È¸ï¿½ï¿½ï¿½
+	private String com_aff; // È¸ï¿½ï¿½è¿­
+	private String com_add; // È¸ï¿½ï¿½ï¿½Ö¼ï¿½(ï¿½ß°ï¿½)
+	private String com_phone; // È¸ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½È£
 
 	public int getCom_num() {
 		return com_num;
@@ -31,38 +22,6 @@ public class HoneyCombDataBean {
 
 	public void setCom_name(String com_name) {
 		this.com_name = com_name;
-	}
-
-	public int getCom_dept_num() {
-		return com_dept_num;
-	}
-
-	public void setCom_dept_num(int com_dept_num) {
-		this.com_dept_num = com_dept_num;
-	}
-
-	public String getCom_dept_name() {
-		return com_dept_name;
-	}
-
-	public void setCom_dept_name(String com_dept_name) {
-		this.com_dept_name = com_dept_name;
-	}
-
-	public int getCom_pos_num() {
-		return com_pos_num;
-	}
-
-	public void setCom_pos_num(int com_pos_num) {
-		this.com_pos_num = com_pos_num;
-	}
-
-	public String getCom_pos_name() {
-		return com_pos_name;
-	}
-
-	public void setCom_pos_name(String com_pos_name) {
-		this.com_pos_name = com_pos_name;
 	}
 
 	public String getCom_aff() {

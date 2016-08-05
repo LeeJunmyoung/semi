@@ -333,7 +333,7 @@ public class HoneyCombDBBean {
 		 return x;
 	}
 	
-	public int deleteComplete(String com_name) throws Exception {
+	public int deleteComplete(int com_num) throws Exception {
 		// complete_com.jsp���� ���� ��û��
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -342,8 +342,8 @@ public class HoneyCombDBBean {
 		try {
 			conn = getConnection();
 			
-			pstmt = conn.prepareStatement("delete from complete_com where com_name = ?");
-			pstmt.setString(1, com_name);
+			pstmt = conn.prepareStatement("delete from complete_com where com_num = ?");
+			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
 			x = 1;
 		} catch (SQLException ex) {

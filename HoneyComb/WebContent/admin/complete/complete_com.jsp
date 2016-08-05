@@ -26,27 +26,29 @@
 </script>
 
 <script>
-	function listCheck(form) {
+	function listCheck(come_num) {
 
-		var num = form.value;
-
+		var num = come_num;
+		
 		url = "complete_comPro.admin?com_num=" + num;
 		window
 				.open(
 						url,
 						"post",
 						"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
-
+ 
 	}
 
 	function del() {
 		<c:forEach var="compl" items="${comList}">
-		if ($("input[name=com_name]").prop("checked", true)) {
+		
+		if ($("#company").prop("checked")) {
+			
 
 		}
 		</c:forEach>
 
-		url = "complete_comdelPro.jsp";
+		url = "complete_comdel.admin?com_num"+num;
 
 		window
 				.open(
@@ -76,8 +78,8 @@
 					<c:if test="${ !empty comList }">
 						<c:forEach var="compl" items="${comList}">
 							<tr>
-								<td><input type="checkbox" name="com_name"
-									onclick="listCheck(this)" value="${compl.com_num}">${compl.com_name}</td>
+								<td><input type="checkbox" id="company" name="com_name" value="${compl.com_num}">
+								<a onclick="listCheck(${compl.com_num})" ">${compl.com_name}</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>

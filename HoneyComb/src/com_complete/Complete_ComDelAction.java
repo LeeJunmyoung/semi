@@ -13,11 +13,12 @@ public class Complete_ComDelAction implements CommandAction {
 		String com_name = request.getParameter("com_name");
 		
 		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
-		int check = dbPro.deleteComplete(com_name);
 		
-		if (check == 1) {
-			return "complete_comdel.jsp";
-		}
+//		int check = dbPro.deleteComplete(com_name);
+		
+//		if (check == 1) {
+//			return "complete_comdel.jsp";
+//		}
 		
 		return "complete_com.jsp";
 	}

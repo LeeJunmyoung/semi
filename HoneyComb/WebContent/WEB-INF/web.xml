@@ -50,8 +50,8 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>cloud_Controller</servlet-name>
-		<url-pattern>*.cloud</url-pattern>
+		<servlet-name>com_Controller</servlet-name>
+		<url-pattern>*.company</url-pattern>
 	</servlet-mapping> 
 	
 	<servlet>
@@ -59,7 +59,7 @@
 		<servlet-class>cloudaction.CloudController</servlet-class>
 		<init-param>
 			<param-name>com_Controller</param-name>
-			<param-value>C:\Users\Administrator\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
+			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
 		</init-param>
 	</servlet>
 	

@@ -22,7 +22,8 @@
 						<input type="checkbox" value="${cloudlist.file_num}">
 						<div>이곳은 파일그림입니다</div>
 						
-						<div>올린사람:${cloudlist.file_name}</div>
+						<div>파일명:${cloudlist.file_name}</div>
+						<div>올린사람:${cloudlist.file_uploader}</div>
 							<!-- 파일사이즈 byte 로 포맷 -->
 							<fmt:parseNumber value="${cloudlist.file_size/1024}" integerOnly="true" var="file_size"/>
 						<div>파일 크기:${file_size}byte</div>

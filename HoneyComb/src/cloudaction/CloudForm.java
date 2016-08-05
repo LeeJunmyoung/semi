@@ -12,16 +12,16 @@ import clouddb.CloudDataBean;
 
 public class CloudForm implements CommandActionCloud{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable{
-		System.out.println("¿©±â±îÁø ¿È?");
+		System.out.println("ì—¬ê¸°ê¹Œì§€ ì˜¤ë‚˜??");
 		CloudDBBean cloud = CloudDBBean.getInstance();
 		CloudDataBean list = new CloudDataBean();
 		List cloudList = new ArrayList();
 		
 		HttpSession session = request.getSession();
-		/*comnum session ?„¤? •test*/
-		System.out.println("cloudform.java com_num?ÁÖ±â");
+		/*comnum session ?ï¿½ï¿½?ï¿½ï¿½test*/
+		System.out.println("cloudform.java com_num?ï¿½Ö±ï¿½");
 		session.setAttribute("com_num", "44");
-		/*comnum session ?„¤? •test*/
+		/*comnum session ?ï¿½ï¿½?ï¿½ï¿½test*/
 		
 		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
 		

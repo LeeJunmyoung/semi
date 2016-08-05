@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<form action="/HoneyComb/cloud/fileUploader.coin"  method="post" enctype="multipart/form-data">
+<form action="/HoneyComb/cloud/fileUploader.cloud"  method="post" enctype="multipart/form-data">
 	업로드 파일을 선택해주세요<br>
 	<input type="file" name="uploadFile">
 	<input type="submit" name="upload" value="업로드">

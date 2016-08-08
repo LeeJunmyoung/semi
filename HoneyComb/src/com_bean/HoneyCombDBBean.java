@@ -222,7 +222,7 @@ public class HoneyCombDBBean {
 	}
 
 	public List com_permission(int com_num) throws Exception {
-		// 사업장 신청목록의 checkbox선택시 실행
+		// 사업장 신청목록 사업장 이름을 선택시 실행
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -322,21 +322,30 @@ public class HoneyCombDBBean {
 		 return x;
 	}
 	
-	public int deleteComplete(int com_num) throws Exception {
+	public List deleteComplete(int com_num) throws Exception {
 		// complete_com.jsp���� ���� ��û��
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		int x = 0; // delete���� Ȯ��
+		ResultSet rs = null;
+		HoneyCombDataBean comp = new HoneyCombDataBean();
+		List complAllList = null;
+		String com_name = "";
+		Temp_Company_table tct = null;
 		
 		try {
 			conn = getConnection();
 			
-			pstmt = conn.prepareStatement("delete from complete_com where com_num = ?");
+			pstmt = conn.prepareStatement("delete from temp_com where com_num = ?");
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
-			x = 1;
+			complAllList = new ArrayList();
+			System.out.println("delete 실행");
+			
+			pstmt = conn.prepareStatement("select * from temp_com");
+			rs = pstmt.executeQuery();
+			complAllList = new ArrayList();
+			
 		} catch (SQLException ex) {
-			x = 0;
 			ex.printStackTrace();
 		} finally {
 			if (pstmt != null)
@@ -349,9 +358,14 @@ public class HoneyCombDBBean {
 					conn.close();
 				} catch (SQLException ex) {
 				}
+			if (rs != null){
+				try{
+					rs.close();
+				}catch (SQLException ex) {
+				}
+			}	
 		}
-		
-		return x;
+		return complAllList;
 
 	}
 	

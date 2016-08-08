@@ -38,70 +38,52 @@
  
 	}
 
-	function del(come_num) {
+	 function del(come_num) {;
 		var num = come_num;
-		/* <c:forEach var="compl" items="${comList}"> */
-		alert(come_num);
 		
-		if ($("#delete").prop("checked",true)) {
-			url = "complete_comDel.admin?com_num" + num;
+		
+		url = "complete_comDel.admin?com_num=" + num;
 
-			window
+			  window
 					.open(
 							url,
 							"post",
-							"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
-			
-
-		}else{
-		alert("체크된 사업장이 없습니다.");
-		}
-		/* </c:forEach> */
-
-/* 		url = "complete_comdel.admin?com_num"+num;
-
-		window
-				.open(
-						url,
-						"post",
-						"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); */
-	}
+							"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
+			  
+	} 
 </script>
 </head>
 <body bgcolor="<%=bodyback_c%>">
 
-	
-		<form name="wtf">
-			<h3>사업장 신청 목록</h3>
-			<table width="400" border="1" cellpadding="1" cellspacing="0">
-				<tbody>
-					<tr>
-						<td align="center">AllSelect<input id="chkall"
-							type="checkbox">
-						</td>
-					</tr>
-					<c:if test="${ empty comList }">
-						<tr>
-							<td align="center">신청한 사업장이 없습니다</td>
-						</tr>
-					</c:if>
-					<c:if test="${ !empty comList }">
-						<c:forEach var="compl" items="${comList}">
-							<tr>
-								<td><input type="checkbox" id="company">
-								<a onclick="listCheck(${compl.com_num})">${compl.com_name}</a></td>
-							</tr>
-						</c:forEach>
-					</c:if>
-					<tr>
-						<td align="center"><input type="button" id="delete"
-							value="선택삭제" onclick="del(${compl.com_num})"> <input type="submit"
-							value="선택등록"></td>
-					</tr>
-				</tbody>
-			</table>
 
-		</form>
+	<form name="wtf">
+		<h3>사업장 신청 목록</h3>
+		<table width="400" border="1" cellpadding="1" cellspacing="0">
+			<tbody>
+				<tr>
+					<td align="center">AllSelect<input id="chkall" type="checkbox">
+					</td>
+				</tr>
+				<c:if test="${ empty comList }">
+					<tr>
+						<td align="center">신청한 사업장이 없습니다</td>
+					</tr>
+				</c:if>
+				<c:if test="${ !empty comList }">
+					<c:forEach var="compl" items="${comList}">
+						<tr>
+							<td><input type="checkbox" id="company"> <a onclick="listCheck(${compl.com_num})">${compl.com_name}</a>
+								<input type="button" id="delete" value="삭제" onclick="del(${compl.com_num})"></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<tr>
+						<td align="center"><input type="submit" value="등록"></td>
+						</tr>
+			</tbody>
+		</table>
+
+	</form>
 
 
 </body>

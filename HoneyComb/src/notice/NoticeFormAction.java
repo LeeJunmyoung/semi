@@ -7,4 +7,4 @@ public interface NoticeFormAction {
 
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable;
 
-} // public interface CommandAction end
+} // public interface NoticeFormAction end

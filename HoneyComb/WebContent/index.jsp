@@ -9,10 +9,10 @@
 </head>
 <body>
 	<%
-		/* response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); */
+		 response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); 
 		/* response.sendRedirect("/HoneyComb/notice/noticeMain.notice"); */
-		response.sendRedirect("/HoneyComb/proMgr/proMgrMain.pro");
+	/* 	response.sendRedirect("/HoneyComb/proMgr/proMgrMain.pro"); */
 	%>
-
+선화님의 심기를 건들지 마라
 </body>
 </html>

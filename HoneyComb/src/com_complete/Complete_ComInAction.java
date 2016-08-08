@@ -1,5 +1,7 @@
 package com_complete;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,16 +13,16 @@ public class Complete_ComInAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
 		
-		String com_name = request.getParameter("com_name");
-		
+		System.out.println("InAction 실행1");
+		int com_num = Integer.parseInt(request.getParameter("com_num"));
 		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
-		int x = dbPro.insertComplete(com_name);
+		List comList = null;
+		comList = dbPro.insertComplete(com_num);
+
+		request.setAttribute("comList", comList);
+		System.out.println("InAction 실행2");
 		
-		if (x == 1) {
-			return "complete_comIn.jsp";
-		}
-		
-		return "complete_com.jsp";
+		return "/admin/complete/complete_comIn.jsp";
 		
 	}
 

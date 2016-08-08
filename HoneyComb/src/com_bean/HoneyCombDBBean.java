@@ -275,28 +275,31 @@ public class HoneyCombDBBean {
 		return completeList;
 	}
 	
-	public int insertComplete(String com_name) throws Exception {
-		// complete_com.jsp���� ��� ��û��
-		// complete���̺� delete company���̺� insert
+	public List insertComplete(int com_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int x = -1;
+		HoneyCombDataBean comp = new HoneyCombDataBean();
+		List complAllList = null;
+		Temp_Company_table tct = null;
 		
 		try {
 			conn = getConnection();
 			
-			pstmt = conn.prepareStatement("insert into company select com_num, com_name, com_aff, com_add, com_phone from complete_com where = ?");
-			// com_name�� ��� �����͸� company�� ����
-			pstmt.setString(1, com_name);
+			pstmt = conn.prepareStatement("insert into complete_com select * from temp_com where com_num = ?");
+			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
+			System.out.println("submit중 complete_com 테이블에 insert실행");
 			
-			pstmt = conn.prepareStatement("delete from complete_com where com_name = ?");
-			// com_name���� �˻��� �����͸� complete_com delete
-			pstmt.setString(1, com_name);
+			pstmt = conn.prepareStatement("delete from temp_com where com_num = ?");
+			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
+			System.out.println("submit중 temp_com 테이블에 delete실행");
 			
-			x = 1; // ����
+//			pstmt = conn.prepareStatement("select * from temp_com");
+//			rs = pstmt.executeQuery();
+//			complAllList = new ArrayList();
+//			System.out.println("submit중 temp_com 테이블에 delete실행 후 temp_com 테이블 검색");
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -319,7 +322,7 @@ public class HoneyCombDBBean {
 
 		}
 		
-		 return x;
+		 return complAllList;
 	}
 	
 	public List deleteComplete(int com_num) throws Exception {

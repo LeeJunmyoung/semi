@@ -51,6 +51,22 @@
 							"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
 			  
 	} 
+	 
+	 function submitCheck(come_num){;
+	 var num = come_num;
+	 /* if($("#chkall").prop("checked",true)){ */
+	 
+	 url = "complete_comIn.admin?com_num=" + num;
+	 window
+		.open(
+				url,
+				"post",
+				"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
+	 /* }else{
+		 alert("등록할 사업장을 선택해주세요.");
+	 } */
+	 }
+	 
 </script>
 </head>
 <body bgcolor="<%=bodyback_c%>">
@@ -75,11 +91,12 @@
 							<td><input type="checkbox" id="company"> <a onclick="listCheck(${compl.com_num})">${compl.com_name}</a>
 								<input type="button" id="delete" value="삭제" onclick="del(${compl.com_num})"></td>
 						</tr>
-					</c:forEach>
-				</c:if>
+
 				<tr>
-						<td align="center"><input type="submit" value="등록"></td>
+						<td align="center"><input type="submit" id="submit" value="등록" onclick="submitCheck(${compl.com_num})"></td>
 						</tr>
+											</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 

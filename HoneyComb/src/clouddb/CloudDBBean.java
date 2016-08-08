@@ -34,8 +34,8 @@ public class CloudDBBean {
 			
 			conn = getConnection();
 			
-			if(folder == null){//메인일경우
-			pstmt =conn.prepareStatement("select * from cloud where com_num = ? order by file_path desc");
+			if(folder == ""){//메인일경우
+			pstmt =conn.prepareStatement("select * from cloud where com_num = ? and folder is null order by file_path desc");
 			pstmt.setInt(1, com_num);
 			}else{//폴더 안에 들어올 경우
 			pstmt = conn.prepareStatement("select * from cloud where com_num =? and folder = ? order by file_path desc");
@@ -76,11 +76,12 @@ public class CloudDBBean {
 	private CloudDataBean makeCloudListResultSet(ResultSet rs) throws SQLException{
 		CloudDataBean cloud = new CloudDataBean();
 		cloud.setFile_num(rs.getInt(1));
-		cloud.setFile_name(rs.getString(2));
 		cloud.setFile_path(rs.getString(3));
+		cloud.setFile_name(rs.getString(2));
 		cloud.setFile_uploader(rs.getString(4));
 		cloud.setFile_size(rs.getInt(5));
 		cloud.setFile_date(rs.getDate(6));
+		cloud.setFolder(rs.getString(8));
 		
 		return cloud;
 		

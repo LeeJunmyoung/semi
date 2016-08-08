@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -17,9 +18,9 @@ $(document).bind("contextmenu", function(event) {
     };
   
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
-    "<a href="+"javascript:fileUploader('${folder}')"+"><p>업로드</p></a>"+
+    "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
     "<p>다운로드</p>"+
-    "<a href = "+"javascript:createfolder('${folder}')"+"><p>폴더 만들기</p></a>"+    
+    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>${param.folder}폴더 만들기</p></a>"+    
     "<p>공유</p>"+    
     +"</div>")
         .appendTo("div.cloudForm")
@@ -38,6 +39,7 @@ text-align: center;}
 </style>
 </head>
 <body>
+
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${folder}')">
 	<input type="button" name="download" value="다운로드">
 	<form name="searchform" action="">
@@ -49,7 +51,7 @@ text-align: center;}
 		<c:forEach items="${cloudList}" var="cloudlist">
 		
 				<li style="display: inline;">
-					<div style="width: 150px; display: inline-block;">
+					<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">
 						<input type="checkbox" id="${cloudlist.file_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>

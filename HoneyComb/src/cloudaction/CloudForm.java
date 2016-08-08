@@ -21,20 +21,21 @@ public class CloudForm implements CommandActionCloud{
 		
 		/*임시설정 com_num, folder*/
 		session.setAttribute("com_num", "1");
-		request.setAttribute("folder", "test|");
 		/*임시설정 끝*/
 		
 		
 		
 		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
-		String folder = (String)request.getAttribute("folder");
-		
+		String folder = (String)request.getParameter("folder");
+		if (folder ==null){
+			folder = "";
+		}
 		
 		cloudList = cloud.cloudList(com_num, folder);
 		request.setAttribute("cloudList", cloudList);
 				
 		
-		return "/cloudview/cloudForm.jsp";
+		return "/cloudview/cloudForm.jsp?folder="+folder;
 	}
 
 }

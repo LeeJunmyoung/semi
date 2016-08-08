@@ -59,6 +59,9 @@ public class CloudDataBean {
 		return folder;
 	}
 	public void setFolder(String folder) {
+		if(folder == null){
+			this.folder = "";
+		}else		
 		this.folder = folder;
 	}
 	

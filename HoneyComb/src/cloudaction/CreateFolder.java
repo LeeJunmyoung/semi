@@ -32,10 +32,7 @@ public class CreateFolder implements CommandActionCloud{
 		//파일 업로드 한사람 받아오기
 		String file_uploader = (String)session.getAttribute("name");
 		//cloudPro에 넣기
-		System.out.println("폴더:"+folder);
-		System.out.println("폴더명:"+file_name);
-		System.out.println("컴넘:"+com_num);
-		System.out.println("이름"+file_uploader);
+
 		
 		
 		cloudPro.setFolder(folder);

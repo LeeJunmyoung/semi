@@ -48,7 +48,7 @@ public class NoticeMoreAction implements NoticeFormAction {
 		request.setAttribute("number", new Integer(number));
 		request.setAttribute("articleList", articleList);
 
-		return "/notice/noticeMore.jsp";
+		return "/page_layout/notice/notice_home.jsp";
 
 	} // String requestPro end
 

@@ -26,7 +26,7 @@ public class Com_check implements CommandAction{
 			
 			}
 		
-		return "/page_layout/home.jsp";
+		return "/page_layout/temp_home.jsp";
 	}
 
 }

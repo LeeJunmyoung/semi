@@ -36,17 +36,17 @@
 	
 </script>
 </head>
-<body>
-
+<body >
+<div width="400" height="150">
 	<b>글목록(전체 글:${count})</b>
 
-	<div align="center">
-		<a href="/semi/notice/noticeMore.notice">더보기</a>
+	<div align="right">
+		<a href="/HoneyComb/notice/noticeMore.notice">더보기</a>
 		<a onclick="writeView()">공지작성</a>
 	</div>
 
 	<c:if test="${count == 0}">
-		<table width="700" border="1" cellpadding="0" cellspacing="0">
+		<table border="1" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="center">공지 글이 없습니다.</td>
 			</tr>
@@ -54,27 +54,27 @@
 	</c:if>
 
 	<c:if test="${count > 0}">
-		<table border="1" width="700" cellpadding="0" cellspacing="0">
-			<tr height="30">
-				<td align="center" width="250">제 목</td>
-				<td align="center" width="100">작성자</td>
-				<td align="center" width="150">작성일</td>
+		<table border="1"  cellpadding="0" cellspacing="0" id="notice_table">
+			<tr >
+				<td align="center" >제 목</td>
+				<td align="center" >작성자</td>
+				<td align="center" >작성일</td>
 			</tr>
 
 			<c:forEach var="article" items="${articleList}">
-				<tr height="30" onclick="noticeRowView(${article.notice_num})">
-					<td width="250">
+				<tr  onclick="noticeRowView(${article.notice_num})">
+					<td>
 					<%-- new 표시 setting --%>
 						<c:if test="${article.isNew == 0}">
 							<img src="../images/hot.gif">
 						</c:if>
 						<div align="right">${article.notice_title}</div></td>
-					<td align="center" width="100">${article.notice_member}</td>
-					<td align="center" width="150">${article.notice_date}</td>
+					<td align="center" >${article.notice_member}</td>
+					<td align="center" >${article.notice_date}</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</c:if>
-
+</div>
 </body>
 </html>

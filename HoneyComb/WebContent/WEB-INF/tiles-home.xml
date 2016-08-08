@@ -6,14 +6,21 @@
 <!-- 템플릿 layout 내용 설정 -->
 <tiles-definitions>
 
-	<definition name="home" template="/page_layout/layout.jsp" preparer="page_menu.MenuViewPreparer">
-		<put-attribute name="title" value="HONEYCOMB" />
-		<put-attribute name="header" value="/page_layout/header.jsp" />
-		<put-attribute name="menu" value="/page_layout/menu.jsp" />
-		<put-attribute name="body" value="/page_layout/main_body.jsp" />
-		<put-attribute name="footer" value="/page_layout/footer.jsp" />
-	</definition>
+   <definition name="home" template="/page_layout/layout.jsp" preparer="page_menu.MenuViewPreparer">
+      <put-attribute name="title" value="HONEYCOMB" />
+      <put-attribute name="header" value="/page_layout/header.jsp" />
+      <put-attribute name="menu" value="/page_layout/menu.jsp" />
+      <put-attribute name="body" value="/page_layout/main_body.jsp" />
+      <put-attribute name="footer" value="/page_layout/footer.jsp" />
+   </definition>
+   
+   
+   
+   <definition name="notice" template="/page_layout/notice/notice_layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/notice/notice_body.jsp" />
+
+   </definition> 
+   
+   
 
 </tiles-definitions>
-
-

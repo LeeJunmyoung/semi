@@ -35,17 +35,16 @@ public class CloudDBBean {
 			conn = getConnection();
 			
 			if(folder == null){//메인일경우
-			pstmt =conn.prepareStatement("select * from cloud where com_num = ?");
+			pstmt =conn.prepareStatement("select * from cloud where com_num = ? order by file_path desc");
 			pstmt.setInt(1, com_num);
 			}else{//폴더 안에 들어올 경우
-			pstmt = conn.prepareStatement("select * from cloud where com_num =? and folder = ?");
+			pstmt = conn.prepareStatement("select * from cloud where com_num =? and folder = ? order by file_path desc");
 			pstmt.setInt(1, com_num);
 			pstmt.setString(2, folder);
 			}
 			rs = pstmt.executeQuery();
 			
 			if(!rs.next()){
-				
 				return Collections.emptyList();
 			}
 			List<CloudDataBean> cloudList = new ArrayList<CloudDataBean>();
@@ -86,18 +85,23 @@ public class CloudDBBean {
 		return cloud;
 		
 	}
-public void cloudInsert(CloudDataBean cloudDB)throws SQLException{
+public void cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		try{
 	
-			conn = getConnection();
-			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?)");
+			conn = getConnection();			
+			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?)");
 			pstmt.setString(1, cloudDB.getFile_name());
 			pstmt.setString(2, cloudDB.getFile_path());
 			pstmt.setString(3, cloudDB.getFile_uploader());
 			pstmt.setString(4, String.valueOf(cloudDB.getFile_size()));
 			pstmt.setInt(5, cloudDB.getCom_num());
+			if(folder == null){
+				pstmt.setString(6, "");
+			}else{
+				pstmt.setString(6, folder);
+			}
 			
 			pstmt.executeUpdate();
 			

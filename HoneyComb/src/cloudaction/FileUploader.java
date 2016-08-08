@@ -13,57 +13,57 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import clouddb.CloudDBBean;
 import clouddb.CloudDataBean;
 
-
 public class FileUploader implements CommandActionCloud{
 	
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)throws Throwable{
 		if (request.getParameter("upload")==null){
 			CloudDataBean cloudDB = new CloudDataBean();
 			CloudDBBean cloud = CloudDBBean.getInstance();
-			System.out.println("�뿬湲곌퉴吏��샂");
 			
 			String savefilepath = "E://cloud//";
 			HttpSession session = request.getSession();
-			//�엫�떆濡� �꽭�뀡二쇨린
+			//占쎌뿫占쎈뻻嚥∽옙 占쎄쉭占쎈�▽틠�눊由�
 			session.setAttribute("mem_num", "11");
-			session.setAttribute("com_num", "44");
+			session.setAttribute("com_num", "1");
 			session.setAttribute("name", "tester");
-			//�걹
+			//占쎄국
 			MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*100,"utf-8", new DefaultFileRenamePolicy());
-			// (�슂泥�媛앹껜, �뙆�씪�씠 �벐�뿬吏� 寃쎈줈, �뙆�씪�쓽 理쒕��겕湲�, �씤肄붾뵫諛⑹떇, �뙆�씪紐낆씠 �씠誘� �엳�쓣 寃쎌슦 '�뙆�씪紐�+1')
-			//�뙆�씪寃쎈줈 媛��졇�삤湲�
+			// (占쎌뒄筌ｏ옙揶쏆빘猿�, 占쎈솁占쎌뵬占쎌뵠 占쎈쾺占쎈연筌욑옙 野껋럥以�, 占쎈솁占쎌뵬占쎌벥 筌ㅼ뮆占쏙옙寃뺞묾占�, 占쎌뵥�굜遺얜뎃獄쎻뫗�뻼, 占쎈솁占쎌뵬筌뤿굞�뵠 占쎌뵠沃섓옙 占쎌뿳占쎌뱽 野껋럩�뒭 '占쎈솁占쎌뵬筌륅옙+1')
+			//占쎈솁占쎌뵬野껋럥以� 揶쏉옙占쎌죬占쎌궎疫뀐옙
 			File file = mr.getFile("uploadFile");
 			String filename = String.valueOf(file);
-			//�뙆�씪寃쎈줈 媛��졇�삤湲곕걹
-			//�깉濡� 諛붽� �뙆�씪紐� \3E(<)(�궇吏�+�쉶�궗踰덊샇+�삱由곗궗�엺�씠由�_�뙆�씪紐�+�궃�닔1~9)
+			//占쎈솁占쎌뵬野껋럥以� 揶쏉옙占쎌죬占쎌궎疫꿸퀡嫄�
+			//占쎄퉱嚥∽옙 獄쏅떽占� 占쎈솁占쎌뵬筌륅옙 \3E(<)(占쎄텊筌욑옙+占쎌돳占쎄텢甕곕뜇�깈+占쎌궞�뵳怨쀪텢占쎌뿺占쎌뵠�뵳占�_占쎈솁占쎌뵬筌륅옙+占쎄텆占쎈땾1~9)
 			CreateFilePath createfilePath =  CreateFilePath.getInstance();
 			String oldPath = filename.replace("\\", "/");
 			System.out.println(oldPath);
 			cloudDB = tempInsert(cloudDB, request);
 			cloudDB = createfilePath.FilePath(cloudDB, oldPath);
 			System.out.println(cloudDB.getFile_path());
-			//諛붽��뙆�씪紐낅걹
-			//�씠誘몄��옣�맂 �솗�옣�옄 �씠�쇅�쓽 �씠由� 媛��졇�삤湲�
+			//獄쏅떽占쏙옙�솁占쎌뵬筌뤿굝嫄�
+			//占쎌뵠沃섎챷占쏙옙�삢占쎈쭆 占쎌넇占쎌삢占쎌쁽 占쎌뵠占쎌뇚占쎌벥 占쎌뵠�뵳占� 揶쏉옙占쎌죬占쎌궎疫뀐옙
 			String newfilename = cloudDB.getFile_path();
 			int i = 0;
 			i = filename.lastIndexOf(".");
 			String realFileName = newfilename+filename.substring(i,filename.length());
-			//�씠誘몄��옣�맂 �솗�옣�옄 �씠�쇅�쓽 �씠由� 媛��졇�삤湲� �걹
-			//�뙆�씪 �씠由� 諛붽씀湲�
+			//占쎌뵠沃섎챷占쏙옙�삢占쎈쭆 占쎌넇占쎌삢占쎌쁽 占쎌뵠占쎌뇚占쎌벥 占쎌뵠�뵳占� 揶쏉옙占쎌죬占쎌궎疫뀐옙 占쎄국
+			//占쎈솁占쎌뵬 占쎌뵠�뵳占� 獄쏅떽��疫뀐옙
 			File oldfile = new File(filename);
 			File newfile = new File(savefilepath+realFileName);
 			oldfile.renameTo(newfile);
-			//�뙆�씪�씠由꾨컮袁멸린�걹
-			//�뙆�씪寃쎈줈 ���옣
+			//占쎈솁占쎌뵬占쎌뵠�뵳袁⑥뺍熬곷㈇由곤옙嫄�
+			//占쎈솁占쎌뵬野껋럥以� 占쏙옙占쎌삢
 			String file_path = String.valueOf(newfile);
-			//�뙆�씪寃쎈줈���옣�걹
-			//�겢�씪�슦�뱶db�뿉 ���옣
-			//�뜲�씠�꽣 �뀑�똿(com_num, name �� tempInsert�뿉�꽌 吏��젙, file_name �� createFilePath.java�뿉�꽌 吏��젙)
+			//占쎈솁占쎌뵬野껋럥以덌옙占쏙옙�삢占쎄국
+			//占쎄깻占쎌뵬占쎌뒭占쎈굡db占쎈퓠 占쏙옙占쎌삢
+			//占쎈쑓占쎌뵠占쎄숲 占쎈�묕옙�샒(com_num, name 占쏙옙 tempInsert占쎈퓠占쎄퐣 筌욑옙占쎌젟, file_name 占쏙옙 createFilePath.java占쎈퓠占쎄퐣 筌욑옙占쎌젟)
 			cloudDB.setFile_size((int)newfile.length());
 			cloudDB.setFile_path(file_path);
-			//�뜲�씠�꽣 �뀑�똿 �걹
+			//占쎈쑓占쎌뵠占쎄숲 占쎈�묕옙�샒 占쎄국
 			//DB insert
-			cloud.cloudInsert(cloudDB);
+			String folder = request.getParameter("folder");
+			cloud.cloudInsert(cloudDB, folder);
+		
 			}
 		return "/cloudview/uploadForm.jsp";
 	}
@@ -75,7 +75,7 @@ public class FileUploader implements CommandActionCloud{
 		cloudDB.setFile_uploader(name);
 		return cloudDB;
 	}
-
 }
-/*?占쏙옙占�?(xxxxxx)com_num(xxxx), mem_num(xxxxxx), file踰덊샇(xxxxxx)
-?占쏙옙?占쏙옙 占�??占쏙옙 ?占쏙옙?占쏙옙?占쏙옙占�? ?占쏙옙占�?(milli)*/
+
+/*?�뜝�룞�삕�뜝占�?(xxxxxx)com_num(xxxx), mem_num(xxxxxx), file甕곕뜇�깈(xxxxxx)
+?�뜝�룞�삕?�뜝�룞�삕 �뜝占�??�뜝�룞�삕 ?�뜝�룞�삕?�뜝�룞�삕?�뜝�룞�삕�뜝占�? ?�뜝�룞�삕�뜝占�?(milli)*/

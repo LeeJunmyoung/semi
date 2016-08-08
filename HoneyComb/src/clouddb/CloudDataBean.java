@@ -28,11 +28,6 @@ public class CloudDataBean {
 		return file_path;
 	}
 	public void setFile_path(String file_path) {
-		System.out.println("filename ::"+file_name);
-		System.out.println("filepath:::"+file_path);
-		System.out.println("fileuploader:::"+file_uploader);
-		System.out.println("filesize:::"+file_size);
-		
 		this.file_path = file_path;
 	}
 	public String getFile_uploader() {

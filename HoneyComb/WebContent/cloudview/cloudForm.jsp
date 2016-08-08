@@ -38,7 +38,8 @@ text-align: center;}
 </head>
 
 <body>
-	<input type="button"name="upload" value="업로드" onclick='return fileUploader()'>
+	
+	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${folder}')">
 	<input type="button" name="download" value="다운로드">
 	<form name="searchform" action="">
 		<input type="text" name="search">
@@ -53,23 +54,20 @@ text-align: center;}
 						<input type="checkbox" id="${cloudlist.file_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>
-						<c:when test="!${fn:substring(cloudlist.file_path,(fn:length(cloudlist.file_path)-1),fn:length(cloudlist.file_path))} == '|'">
+						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!='|'}">
 						<div class="file"><img src="../images/file.png" width="150px"></div>
 						</c:when>
 						<c:otherwise>
 						<div class="file"><img src="../images/folder.png" width="150px"></div>
 						</c:otherwise>
 						</c:choose>
-						
 						<div class="file">${cloudlist.file_name}</div>
 						<div class="file">${cloudlist.file_uploader}</div>
 							<!-- 파일사이즈 byte 로 포맷 -->
 							<fmt:parseNumber value="${cloudlist.file_size/1024}" integerOnly="true" var="file_size"/>
 						<div class="file">파일 크기:${file_size}byte</div>
 		
-						<div class="file">${cloudlist.file_date}</div>
-						<div>파일경로:${cloudlist.file_path}</div>
-						
+						<div class="file">${cloudlist.file_date}</div>						
 						
 						</label>
 					</div>

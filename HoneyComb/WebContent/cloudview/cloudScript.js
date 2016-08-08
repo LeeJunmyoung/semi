@@ -5,8 +5,8 @@ function fileUploader(folder){
 			+ "scrollbars=no,resizable=no,width=550, height=200");
 }
 
-function createfolder(){
-	url="/HoneyComb/cloudview/createfolder.jsp";
+function createfolder(folder){
+	url="/HoneyComb/cloudview/createfolder.jsp?folder="+folder;
 	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,"
 			+ "scrollbars=no,resizable=no,width=550, height=200");
 	

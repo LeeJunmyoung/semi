@@ -9,16 +9,17 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="/HoneyComb/cloudview/cloudScript.js"  type="text/javascript"></script>
 <script>
+
 $(document).bind("contextmenu", function(event) { 
     event.preventDefault();
     if($("div.cloud_menu")!= null){
     	$("div.cloud_menu").hide();
     };
-    
+  
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
-    "<a href='javascript:fileUploader()'><p>업로드</p></a>"+
+    "<a href="+"javascript:fileUploader('${folder}')"+"><p>업로드</p></a>"+
     "<p>다운로드</p>"+
-    "<a href = 'javascript:createfolder()'><p>폴더 만들기</p></a>"+
+    "<a href = "+"javascript:createfolder('${folder}')"+"><p>폴더 만들기</p></a>"+    
     "<p>공유</p>"+    
     +"</div>")
         .appendTo("div.cloudForm")
@@ -36,9 +37,7 @@ text-align: center;}
 
 </style>
 </head>
-
 <body>
-	
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${folder}')">
 	<input type="button" name="download" value="다운로드">
 	<form name="searchform" action="">
@@ -54,7 +53,7 @@ text-align: center;}
 						<input type="checkbox" id="${cloudlist.file_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>
-						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!='|'}">
+						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
 						<div class="file"><img src="../images/file.png" width="150px"></div>
 						</c:when>
 						<c:otherwise>

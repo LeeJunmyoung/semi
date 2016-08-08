@@ -11,6 +11,7 @@ public class CloudDataBean {
 	private int file_size;
 	private Date file_date;
 	private int com_num;
+	private String folder;
 	
 	public int getFile_num() {
 		return file_num;
@@ -53,6 +54,12 @@ public class CloudDataBean {
 	}
 	public void setCom_num(int com_num) {
 		this.com_num = com_num;
+	}
+	public String getFolder() {
+		return folder;
+	}
+	public void setFolder(String folder) {
+		this.folder = folder;
 	}
 	
 	

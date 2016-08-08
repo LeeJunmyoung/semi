@@ -104,7 +104,7 @@ public void cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException
 			}
 			
 			pstmt.executeUpdate();
-			
+			conn.commit();
 			
 		}catch (Exception ex) {
 			ex.printStackTrace();
@@ -122,6 +122,39 @@ public void cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException
 		}
 		
 	}
+
+public void createFolder(CloudDataBean cloudPro)throws SQLException{
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	try{
+
+		conn = getConnection();			
+		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?)");
+		//폴더첫번째로 만들기
+		pstmt.setString(1, cloudPro.getFile_name());
+		pstmt.setString(2,cloudPro.getFile_uploader());
+		pstmt.setInt(3,cloudPro.getCom_num());
+		pstmt.setString(4,cloudPro.getFolder());
+		
+		pstmt.executeUpdate();
+		conn.commit();
+		
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+	}
 	
+}
+
 	
 }

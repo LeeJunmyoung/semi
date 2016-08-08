@@ -12,22 +12,25 @@ import clouddb.CloudDataBean;
 
 public class CloudForm implements CommandActionCloud{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable{
-		System.out.println("ì—¬ê¸°ê¹Œì§€ ì˜¤ë‚˜??");
+		
 		CloudDBBean cloud = CloudDBBean.getInstance();
 		CloudDataBean list = new CloudDataBean();
 		List cloudList = new ArrayList();
 		
 		HttpSession session = request.getSession();
-		/*comnum session ?ï¿½ï¿½?ï¿½ï¿½test*/
-		System.out.println("cloudform.java com_num?ï¿½Ö±ï¿½");
-		session.setAttribute("com_num", "44");
-		/*comnum session ?ï¿½ï¿½?ï¿½ï¿½test*/
+		
+		/*ÀÓ½Ã¼³Á¤ com_num, folder*/
+		session.setAttribute("com_num", "1");
+		request.setAttribute("folder", "test|");
+		/*ÀÓ½Ã¼³Á¤ ³¡*/
+		
+		
 		
 		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
+		String folder = (String)request.getAttribute("folder");
 		
 		
-		
-		cloudList = cloud.cloudList(com_num);
+		cloudList = cloud.cloudList(com_num, folder);
 		request.setAttribute("cloudList", cloudList);
 				
 		

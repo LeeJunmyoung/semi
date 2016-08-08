@@ -25,7 +25,7 @@ public class CloudDBBean {
 		return DriverManager.getConnection(jdbcDriver);
 	}
 	
-	public List<CloudDataBean> cloudList(int com_num)throws SQLException{
+	public List<CloudDataBean> cloudList(int com_num, String folder)throws SQLException{
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -33,9 +33,15 @@ public class CloudDBBean {
 		try{
 			
 			conn = getConnection();
+			
+			if(folder == null){//메인일경우
 			pstmt =conn.prepareStatement("select * from cloud where com_num = ?");
 			pstmt.setInt(1, com_num);
-			
+			}else{//폴더 안에 들어올 경우
+			pstmt = conn.prepareStatement("select * from cloud where com_num =? and folder = ?");
+			pstmt.setInt(1, com_num);
+			pstmt.setString(2, folder);
+			}
 			rs = pstmt.executeQuery();
 			
 			if(!rs.next()){

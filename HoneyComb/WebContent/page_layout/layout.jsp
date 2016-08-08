@@ -5,7 +5,8 @@
 <html>
 <head>
 <title><tiles:getAsString name="title" /></title>
-<link href="/HoneyComb/page_layout/home.css" rel="stylesheet" type="text/css" />
+<link href="/HoneyComb/page_layout/home.css" rel="stylesheet"
+	type="text/css" />
 
 </head>
 <body>

@@ -1,4 +1,4 @@
-package notice;
+package page_layout;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,14 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ControllerUsingURINotice extends HttpServlet {
+public class ControllerUsingURIPage extends HttpServlet {
 
 	private Map commandMap = new HashMap();
 
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("ControllerUsingURINotice");
+		
+		System.out.println("ControllerUsingURIPage");
 
-		String props = config.getInitParameter("propertyConfigNotice");
+		String props = config.getInitParameter("propertyConfigPage");
 
 		Properties pr = new Properties();
 		FileInputStream f = null;
@@ -80,7 +81,7 @@ public class ControllerUsingURINotice extends HttpServlet {
 			throws ServletException, IOException {
 
 		String view = null;
-		NoticeFormAction com = null;
+		PageFormAction com = null;
 
 		try {
 
@@ -91,7 +92,7 @@ public class ControllerUsingURINotice extends HttpServlet {
 				System.out.println("command ::: " + command);
 			}
 
-			com = (NoticeFormAction) commandMap.get(command);
+			com = (PageFormAction) commandMap.get(command);
 
 			System.out.println("com ::: " + com);
 

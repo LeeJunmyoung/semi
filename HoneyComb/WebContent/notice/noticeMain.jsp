@@ -38,14 +38,14 @@
 </head>
 <body >
 <div width="400" height="150">
-	<b>글목록(전체 글:${count})</b>
+	<b>글목록(전체 글:${notice_count})</b>
 
 	<div align="right">
 		<a href="/HoneyComb/notice/noticeMore.notice">더보기</a>
 		<a onclick="writeView()">공지작성</a>
 	</div>
 
-	<c:if test="${count == 0}">
+	<c:if test="${notice_count == 0}">
 		<table border="1" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="center">공지 글이 없습니다.</td>
@@ -53,7 +53,7 @@
 		</table>
 	</c:if>
 
-	<c:if test="${count > 0}">
+	<c:if test="${notice_count > 0}">
 		<table border="1"  cellpadding="0" cellspacing="0" id="notice_table">
 			<tr >
 				<td align="center" >제 목</td>

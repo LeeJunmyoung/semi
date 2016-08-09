@@ -50,9 +50,9 @@ dl dd {
 
 	<div align="center">
 
-		<b>글목록(전체 글:${count})</b>
+		<b>글목록(전체 글:${notice_count})</b>
 
-		<c:if test="${count == 0}">
+		<c:if test="${notice_count == 0}">
 			<table width="700" border="1" cellpadding="0" cellspacing="0">
 				<tr>
 					<td align="center">공지 글이 없습니다.</td>
@@ -60,7 +60,7 @@ dl dd {
 			</table>
 		</c:if>
 
-		<c:if test="${count > 0}">
+		<c:if test="${notice_count > 0}">
 
 			<div>
 				<span width="250">제 목</span>
@@ -113,7 +113,7 @@ dl dd {
 
 		</c:if>
 
-		<c:if test="${count > 0}">
+		<c:if test="${notice_count > 0}">
 
 			<c:set var="pageCount" value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
 

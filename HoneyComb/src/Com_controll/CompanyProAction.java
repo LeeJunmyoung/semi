@@ -24,12 +24,7 @@ public class CompanyProAction implements CommandAction {
 			   com_phone = com_phone + request.getParameter("com_phone2");
 			   com_phone = com_phone + request.getParameter("com_phone3");
 		String com_aff = request.getParameter("com_aff");
-		
-		System.out.println("com_name:::" + com_name);
-		System.out.println("com_add:::" + com_add);
-		System.out.println("com_phone:::" + com_phone);
-		System.out.println("com_aff:::" + com_aff);
-		
+	
 		
 		comList = dbPro.insert_temp_Company(com_name, com_add, com_phone, com_aff);
 

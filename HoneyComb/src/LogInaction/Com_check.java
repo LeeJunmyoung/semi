@@ -3,6 +3,9 @@ package LogInaction;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import LogInDB.LogOnDBBean;
+import LogInDB.LogOnDataBean;
+
 public class Com_check implements CommandAction{
 
 	@Override
@@ -10,7 +13,7 @@ public class Com_check implements CommandAction{
 		// TODO Auto-generated method stub
 		String email  =(String) request.getSession().getAttribute("email");
 		int com_num = (int)request.getSession().getAttribute("com_num");
-	System.out.println(com_num);
+		int mem_num =(int)request.getSession().getAttribute("mem_num");
 		if(email.equals("admin@admin.com")){
 			return "/admin/admin_main.jsp";
 		}
@@ -25,6 +28,24 @@ public class Com_check implements CommandAction{
 			}
 			
 			}
+		
+
+LogOnDBBean ldbb = LogOnDBBean.getInstance();
+LogOnDataBean Logindata = new LogOnDataBean();
+
+Logindata = ldbb.User_Inform(mem_num);
+
+
+request.getSession().setAttribute("mem_num", Logindata.getMem_num());
+request.getSession().setAttribute("com_num", Logindata.getCom_num());
+request.getSession().setAttribute("com_dept_num", Logindata.getCom_dept_num());
+request.getSession().setAttribute("com_pos_num", Logindata.getCom_pos_num());
+request.getSession().setAttribute("name", Logindata.getName());
+request.getSession().setAttribute("phone_num", Logindata.getPhone_num());
+request.getSession().setAttribute("com_name", Logindata.getCom_name());
+request.getSession().setAttribute("com_dept_name", Logindata.getCom_dept_name());
+request.getSession().setAttribute("com_pos_name", Logindata.getCom_pos_name());
+
 		
 		return "/page_layout/temp_home.jsp";
 	}

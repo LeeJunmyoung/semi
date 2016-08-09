@@ -16,10 +16,6 @@ public class CompanyFindProAction implements CommandAction {
 		String com_dept_name = request.getParameter("com_dept_name");
 		String com_pos_name = request.getParameter("com_pos_name");
 		
-		System.out.println("com_name::::::::::" + com_name);
-		System.out.println("com_dept_name::::::::::" + com_dept_name);
-		System.out.println("com_pos_name::::::::::" + com_pos_name);
-		
 		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
 		dbPro.com_select_person(com_name, com_dept_name, com_pos_name);
 		

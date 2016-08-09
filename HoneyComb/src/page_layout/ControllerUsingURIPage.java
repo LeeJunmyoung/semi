@@ -20,7 +20,7 @@ public class ControllerUsingURIPage extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		
-		System.out.println("ControllerUsingURIPage");
+		
 
 		String props = config.getInitParameter("propertyConfigPage");
 
@@ -89,12 +89,10 @@ public class ControllerUsingURIPage extends HttpServlet {
 
 			if (command.indexOf(request.getContextPath()) == 0) {
 				command = command.substring(request.getContextPath().length());
-				System.out.println("command ::: " + command);
+				
 			}
 
 			com = (PageFormAction) commandMap.get(command);
-
-			System.out.println("com ::: " + com);
 
 			view = com.requestPro(request, response);
 

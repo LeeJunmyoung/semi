@@ -12,7 +12,7 @@
 
 		<tiles:importAttribute name="userMenus" />
 		<c:forEach var="menu" items="${userMenus}">
-			<li><a href="#">${menu.name}</a></li>
+			<li><a href="${menu.link}">${menu.name}</a></li>
 		</c:forEach>
 
 	</ul>

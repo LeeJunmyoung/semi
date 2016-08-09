@@ -21,11 +21,11 @@
 </form>
 <div id="clicktext">
 	<span>
-		<a href="/HoneyComb/coin/FindEmail.coin">find Email</a>
+		<a href="/HoneyComb/view/findEmail.jsp">find Email</a>
 	</span>
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<span>
-		<a href="/HoneyComb/coin/FindPasswd.coin">find Password</a>
+		<a href="/HoneyComb/view/findPasswd.jsp">find Password</a>
 	</span>
 </div>
 </body>

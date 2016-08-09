@@ -1,4 +1,4 @@
-package chatting_Controll;
+package option_controll;
 
 import java.util.ArrayList;
 
@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import LogInDB.LogOnDataBean;
 
-public class Invite_form implements CommandAction_Chatting{
+public class Option_View_Temp_Member implements Option_CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
 		int com_num = (int)request.getSession().getAttribute("com_num");
-		ArrayList<LogOnDataBean> list = new ArrayList<>();
+		OptionDBBean odb = OptionDBBean.getInstance();
+		ArrayList list = new ArrayList<LogOnDataBean>();
 		
-		Chatting_DBBean chatdb = Chatting_DBBean.getInstance();
-		list = chatdb.view_Com_Member(com_num);
 		
-		request.setAttribute("chat_members", list);
+		list =  odb.view_temp_member(com_num);
 		
-		return "/Chatting/Invite_form.jsp";
+		request.setAttribute("temp_member", list);
+		
+		return "/Option_user/company_accept_member.jsp";
 	}
 
 }

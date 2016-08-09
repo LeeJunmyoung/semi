@@ -11,11 +11,11 @@
 	
 
 		<div id="buttoncheck">
-			<a href="/HoneyComb/coin/signIn.coin">
-			<input type="button"value="무료로가입하기" onclick="/HoneyComb/coin/signIn.coin" /></a>
+			<a href="/HoneyComb/view/signIn.jsp">
+			<input type="button"value="무료로가입하기"/></a>
 		</div>
 		<div id="clicktext">
-		<a href="/HoneyComb/coin/login.coin">login</a>
+		<a href="/HoneyComb/view/logIn.jsp">login</a>
 		</div>
 
 	

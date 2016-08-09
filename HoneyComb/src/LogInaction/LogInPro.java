@@ -18,7 +18,7 @@ public class LogInPro implements CommandAction{
 		
 		String email=request.getParameter("email");
 		String passwd=request.getParameter("passwd");
-		System.out.println("email"+email);
+		
 		
 		Vector member = dbPro.Checkmembers(email, passwd);
 	
@@ -32,9 +32,9 @@ public class LogInPro implements CommandAction{
 			session.setAttribute("name", member.get(4));
 			session.setAttribute("email", email);
 			session.setAttribute("phone_num", member.get(5));
-			session.setAttribute("com_name", member.get(6));
+			/*session.setAttribute("com_name", member.get(6));
 			session.setAttribute("com_dept_name", member.get(7));
-			session.setAttribute("com_pos_name", member.get(8));
+			session.setAttribute("com_pos_name", member.get(8));*/
 		}
 		 
 		return "/index.jsp";

@@ -19,7 +19,7 @@ public class ControllerUsingURINotice extends HttpServlet {
 	private Map commandMap = new HashMap();
 
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("ControllerUsingURINotice");
+		
 
 		String props = config.getInitParameter("propertyConfigNotice");
 
@@ -88,12 +88,12 @@ public class ControllerUsingURINotice extends HttpServlet {
 
 			if (command.indexOf(request.getContextPath()) == 0) {
 				command = command.substring(request.getContextPath().length());
-				System.out.println("command ::: " + command);
+			
 			}
 
 			com = (NoticeFormAction) commandMap.get(command);
 
-			System.out.println("com ::: " + com);
+
 
 			view = com.requestPro(request, response);
 

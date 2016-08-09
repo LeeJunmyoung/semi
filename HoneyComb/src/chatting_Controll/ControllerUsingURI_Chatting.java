@@ -63,7 +63,7 @@ public class ControllerUsingURI_Chatting extends HttpServlet{
 			
 			if(command.indexOf(request.getContextPath()) == 0){
 				command = command.substring(request.getContextPath().length());
-				System.out.println(command);
+				
 			}
 			com = (CommandAction_Chatting)commandMap.get(command);
 			view = com.requestPro(request, response);

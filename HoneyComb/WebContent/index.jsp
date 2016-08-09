@@ -9,9 +9,9 @@
 </head>
 <body>
 	<%
-		/* response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); */
+		 response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); 
 		/* response.sendRedirect("/HoneyComb/notice/noticeMain.notice"); */
-		response.sendRedirect("/HoneyComb/proMgr/proMgrMore.pro");
+	
 	%>
 </body>
 </html>

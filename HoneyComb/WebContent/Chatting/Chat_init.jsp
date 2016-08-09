@@ -14,6 +14,7 @@ function invite_Member() {
 </script>
 
 <body>
+<%=request.getSession().getAttribute("com_num") %>
 이야이야호 ^오^
 <div><input type = "button" value="+" onclick="invite_Member()">
 </div>

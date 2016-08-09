@@ -35,35 +35,7 @@
 
 											},
 											height : 'auto',
-											eventClick : function(event) {
-												if ('${count}' > 0) {
-													if (event.title) {
-														
-														var start = datetoHtml(event.start);
-														if(event.end==null){
-															event.end=Number(event.start+86400000);
-														}
-														var end = datetoHtml(Number(event.end)-86400000);
-														
-														var url = "curd_cal_page.jsp?num="+event.number+"&title="
-																+ event.title
-																+ "&start="
-																+ start
-																+ "&end="
-																+ end
-																+ "&contents="
-																+ event.Contents;
-
-														open(
-																url,
-																"confirm",
-																"toolbar=no,location=no,status=no,menubar=no,"
-																		+ "scrollbars=no,resizable=no,width=550,height=400");
-
-													}
-
-												}
-											}
+										
 										
 
 										});
@@ -106,24 +78,7 @@
 							}
 
 						}
-						function datetoHtml(time) {
 						
-							var time_temp;//13자리
-							var date = new Date(time);
-							
-							time_temp=(Number(date.getYear())+1900)+"-";
-							if(date.getMonth()<10){
-								time_temp=time_temp+"0";
-							}
-							time_temp=time_temp+(Number(date.getMonth())+1)+"-";
-							if(date.getDate()<10){
-								time_temp=time_temp+"0";
-							}
-							time_temp=time_temp+date.getDate();
-							//alert(time_temp);
-							return time_temp;
-
-						}
 
 					});
 	

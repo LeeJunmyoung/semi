@@ -15,7 +15,7 @@ public class Company_Temp_Join implements CommandAction{
 		request.setCharacterEncoding("UTF-8");
 		HoneyCombDBBean hcdbb = HoneyCombDBBean.getInstance();
 		
-		System.out.println("Company_Temp_Join");
+		
 		int com_num = Integer.parseInt(request.getParameter("com_num"));
 		String com_name = request.getParameter("com_name");
 		int com_dept_num =  Integer.parseInt(request.getParameter("com_dept_num"));
@@ -23,13 +23,10 @@ public class Company_Temp_Join implements CommandAction{
 		String email = (String) request.getSession().getAttribute("email");
 		/*String email = "ss@ss.com";*/
 		
-		System.out.println("Company_Temp_Join com_num:::" + com_num);
-		System.out.println("Company_Temp_Join com_name:::" + com_name);
-		System.out.println("Company_Temp_Join com_dept_name:::" + com_dept_num);
-		System.out.println("Company_Temp_Join com_pos_name:::" + com_pos_name);
-		
 		
 		com_num = hcdbb.temp_Insert_company_to_person(com_num, com_name, com_dept_num, com_pos_name, email);
+		
+		com_num = (0-com_num);
 		request.getSession().setAttribute("com_num", com_num);
 		
 		return "/view/comCheck.jsp";

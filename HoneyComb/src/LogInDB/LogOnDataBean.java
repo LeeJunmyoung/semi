@@ -12,6 +12,30 @@ public class LogOnDataBean {
 	private int com_dept_num;
 	private int com_pos_num;
 	
+	private String com_name;
+	private String com_dept_name;
+	private String com_pos_name;
+	public String getCom_name() {
+		return com_name;
+	}
+	public void setCom_name(String com_name) {
+		this.com_name = com_name;
+	}
+	public String getCom_dept_name() {
+		return com_dept_name;
+	}
+	public void setCom_dept_name(String com_dept_name) {
+		this.com_dept_name = com_dept_name;
+	}
+	public String getCom_pos_name() {
+		return com_pos_name;
+	}
+	public void setCom_pos_name(String com_pos_name) {
+		this.com_pos_name = com_pos_name;
+	}
+	
+	
+	
 	public int getMem_num() {
 		return mem_num;
 	}

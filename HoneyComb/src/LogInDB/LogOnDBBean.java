@@ -211,4 +211,54 @@ public class LogOnDBBean {
 	}
 	
 	
+	public LogOnDataBean User_Inform(int mem_num){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		LogOnDataBean lodb = null;
+		try{
+			conn = getConnection();
+			pstmt=conn.prepareStatement("select mem_num, com_num, com_dept_num, com_pos_num,name,phone_num,com_name,com_dept_name,com_pos_name from members where mem_num=?");
+			pstmt.setInt(1, mem_num);
+			
+			rs = pstmt.executeQuery();
+		
+		if(rs.next()){
+			lodb = new LogOnDataBean();
+			
+			lodb.setMem_num(rs.getInt(1));
+			lodb.setCom_num(rs.getInt(2));
+			lodb.setCom_dept_num(rs.getInt(3));
+			lodb.setCom_pos_num(rs.getInt(4));
+			lodb.setName(rs.getString("name"));
+			lodb.setPhone_num(String.valueOf(rs.getInt("phone_num")));
+			lodb.setCom_name(rs.getString("com_name"));
+			lodb.setCom_dept_name(rs.getString("com_dept_name"));
+			lodb.setCom_pos_name(rs.getString("com_pos_name"));
+	
+			
+		}
+		
+				
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+		}
+	
+		
+		return lodb;
+	}
+	
+	
 }

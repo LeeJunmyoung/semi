@@ -14,10 +14,11 @@ public class MenuViewPreparer implements ViewPreparer {
 	public void execute(TilesRequestContext tilesContext, AttributeContext attrContext) {
 
 		List<MenuItem> userMenus = new ArrayList<MenuItem>();
-		userMenus.add(new MenuItem("menu1", "link1"));
-		userMenus.add(new MenuItem("menu2", "link2"));
-		userMenus.add(new MenuItem("menu3", "link3"));
+		userMenus.add(new MenuItem("message", "/HoneyComb/Chatting/Chat_init.jsp"));
 		
+		userMenus.add(new MenuItem("cloud", "#"));
+		userMenus.add(new MenuItem("option", "/HoneyComb/Option_user/option_main.jsp"));
+		userMenus.add(new MenuItem("log out", "#"));
 		attrContext.putAttribute("userMenus", new Attribute(userMenus), true);
 
 	}

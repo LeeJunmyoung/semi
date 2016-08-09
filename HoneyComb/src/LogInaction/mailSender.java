@@ -11,32 +11,33 @@ import javax.mail.internet.MimeMessage;
 public class mailSender {
 
 	public int emailSender(String mail) throws MessagingException{
-        // ¸ŞÀÏ °ü·Ã Á¤º¸
+        // ë©”ì¼ ê´€ë ¨ ì •ë³´
+		
         String host = "smtp.gmail.com";
         String username = "honeycomb0727@gmail.com";
         String password = "honeycombo123";
-        //·£´ı ÇÔ¼ö i(ÀÎÁõ¹øÈ£)
+        //ëœë¤ í•¨ìˆ˜ i(ì¸ì¦ë²ˆí˜¸)
         int i = (int)(Math.random()*999999)+1;
-        // ¸ŞÀÏ ³»¿ë
-        String recipient = mail;//ÀÌ¸ŞÀÏÁÖ¼Ò
-        String subject = "Áö¸ŞÀÏÀ» »ç¿ëÇÑ ¹ß¼Û Å×½ºÆ®ÀÔ´Ï´Ù."; //³»¿ë
+        // ë©”ì¼ ë‚´ìš©
+        String recipient = mail;//ì´ë©”ì¼ì£¼ì†Œ
+        String subject = "ì§€ë©”ì¼ì„ ì‚¬ìš©í•œ ë°œì†¡ í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤."; //ë‚´ìš©
         String j = String.valueOf(i);
-        String body = "ÀÌ°ÍÀº ´ç½ÅÀÇ ÀÌ¸ŞÀÏ¿¡ ¸Â´Â ÀÎÁõ¹øÈ£¸¦ Ã£±â À§ÇÑ ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù \n ÀÎÁõ¹øÈ£ "+j+"¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä";	
+        String body = "ì´ê²ƒì€ ë‹¹ì‹ ì˜ ì´ë©”ì¼ì— ë§ëŠ” ì¸ì¦ë²ˆí˜¸ë¥¼ ì°¾ê¸° ìœ„í•œ ì´ë©”ì¼ ì…ë‹ˆë‹¤ \n ì¸ì¦ë²ˆí˜¸ "+j+"ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”";	
          System.out.println(i);
-        //properties ¼³Á¤
+        //properties ì„¤ì •
         Properties props = new Properties();
         props.put("mail.smtps.auth", "true");
-        // ¸ŞÀÏ ¼¼¼Ç
+        // ë©”ì¼ ì„¸ì…˜
         Session session = Session.getDefaultInstance(props);
         MimeMessage msg = new MimeMessage(session);
  
-        // ¸ŞÀÏ °ü·Ã
+        // ë©”ì¼ ê´€ë ¨
         msg.setSubject(subject);
         msg.setText(body);
         msg.setFrom(new InternetAddress(username));
         msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
  
-        // ¹ß¼Û Ã³¸®
+        // ë°œì†¡ ì²˜ë¦¬
         Transport transport = session.getTransport("smtps");
         transport.connect(host, username, password);
         transport.sendMessage(msg, msg.getAllRecipients());

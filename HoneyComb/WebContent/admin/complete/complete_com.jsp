@@ -7,7 +7,7 @@
 <title>사업장 승인폼</title>
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script>
+<!-- <script>
 	$(document).ready(function() {
 		//최상단 체크박스 클릭
 		$("#chkall").click(function() {
@@ -23,7 +23,7 @@
 		});
 
 	});
-</script>
+</script> -->
 
 <script>
 	function listCheck(come_num) {;
@@ -76,10 +76,10 @@
 		<h3>사업장 신청 목록</h3>
 		<table width="400" border="1" cellpadding="1" cellspacing="0">
 			<tbody>
-				<tr>
+				<!-- <tr>
 					<td align="center">AllSelect<input id="chkall" type="checkbox">
 					</td>
-				</tr>
+				</tr> -->
 				<c:if test="${ empty comList }">
 					<tr>
 						<td align="center">신청한 사업장이 없습니다</td>
@@ -88,14 +88,15 @@
 				<c:if test="${ !empty comList }">
 					<c:forEach var="compl" items="${comList}">
 						<tr>
-							<td><input type="checkbox" id="company"> <a onclick="listCheck(${compl.com_num})">${compl.com_name}</a>
-								<input type="button" id="delete" value="삭제" onclick="del(${compl.com_num})"></td>
+							<td>
+							<!-- <input type="checkbox" id="company">  -->
+							<a onclick="listCheck(${compl.com_num})">${compl.com_name}</a> <input
+								type="submit" id="submit" value="등록"
+								onclick="submitCheck(${compl.com_num})"> <input
+								type="button" id="delete" value="삭제"
+								onclick="del(${compl.com_num})"></td>
 						</tr>
-
-				<tr>
-						<td align="center"><input type="submit" id="submit" value="등록" onclick="submitCheck(${compl.com_num})"></td>
-						</tr>
-											</c:forEach>
+					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>

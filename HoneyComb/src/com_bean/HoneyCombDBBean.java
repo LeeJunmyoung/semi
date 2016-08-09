@@ -296,11 +296,6 @@ public class HoneyCombDBBean {
 			pstmt.executeUpdate();
 			System.out.println("submit중 temp_com 테이블에 delete실행");
 			
-//			pstmt = conn.prepareStatement("select * from temp_com");
-//			rs = pstmt.executeQuery();
-//			complAllList = new ArrayList();
-//			System.out.println("submit중 temp_com 테이블에 delete실행 후 temp_com 테이블 검색");
-			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {

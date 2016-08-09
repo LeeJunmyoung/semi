@@ -13,15 +13,17 @@ public class NoticeMainAction implements NoticeFormAction {
 
 		int rowSize = 5; // 한 페이지의 글 갯수
 		int count = 0; // 전체 글 갯수
+		int com_num = (int) request.getSession().getAttribute("com_num"); // 회사 번호
+		
 
 		List articleList = null;
 		NoticeDBBean dbPro = NoticeDBBean.getInstance(); // DB처리
-		count = dbPro.getArticleCount(); // row 갯수 호출
+		count = dbPro.getArticleCount(com_num); // row 갯수 호출
 
 		if (count > 0) {
 
 			// 현재 페이지에 해당하는 글 목록
-			articleList = dbPro.getArticles(-1, rowSize);
+			articleList = dbPro.getArticles(com_num, -1, rowSize);
 			
 		} else {
 			articleList = Collections.EMPTY_LIST;

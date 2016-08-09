@@ -78,7 +78,7 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String view = null;
-		CommandAction com = null;
+		Layout_CommandAction com = null;
 
 		try {
 			String command = request.getRequestURI();
@@ -90,7 +90,7 @@ public class Controller extends HttpServlet {
 			
 			
 			
-			com = (CommandAction) commandMap.get(command);
+			com = (Layout_CommandAction) commandMap.get(command);
 			view = com.requestPro(request, response);
 		} catch (Throwable e) {
 			throw new ServletException(e);

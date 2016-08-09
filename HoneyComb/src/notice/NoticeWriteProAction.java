@@ -15,15 +15,16 @@ public class NoticeWriteProAction implements NoticeFormAction {
 		NoticeDataBean article = new NoticeDataBean();
 		article.setNotice_title(request.getParameter("notice_title"));
 		article.setNotice_content(request.getParameter("notice_content"));
-		article.setNotice_member("suna"); // 사용자 정보(이름) 속성 값
+		article.setNotice_member((String) request.getSession().getAttribute("name"));
+		article.setCom_num((int) request.getSession().getAttribute("com_num"));
 		article.setNotice_date(new Timestamp(System.currentTimeMillis()));
- 
+
 		NoticeDBBean dbPro = NoticeDBBean.getInstance();
 		int count = dbPro.insertArticle(article); // 삽입된 row 갯수 호출
-		
+
 		boolean onloadCheck = false;
-		
-		if(count > 0) {
+
+		if (count > 0) {
 			onloadCheck = true; // reflash 여부 결정
 		}
 

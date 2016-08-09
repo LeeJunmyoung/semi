@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import cal_Controll.Cal_DBBean;
 import notice.NoticeDBBean;
 
-public class Home_Frame implements CommandAction{
+public class Home_Frame implements Layout_CommandAction{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
@@ -54,12 +54,12 @@ public class Home_Frame implements CommandAction{
 
 		List articleList = null;
 		NoticeDBBean dbPro = NoticeDBBean.getInstance(); // DB처리
-		count = dbPro.getArticleCount(); // row 갯수 호출
+		count = dbPro.getArticleCount(com_num); // row 갯수 호출
 
 		if (count > 0) {
 
 			// 현재 페이지에 해당하는 글 목록
-			articleList = dbPro.getArticles(-1, rowSize);
+			articleList = dbPro.getArticles(com_num, -1, rowSize);
 			
 		} else {
 			articleList = Collections.EMPTY_LIST;

@@ -25,7 +25,7 @@ public class NoticeDBBean {
 	}
 
 	// 전체 db에 입력된 행의 수
-	public int getArticleCount() throws Exception {
+	public int getArticleCount(int com_num) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -37,7 +37,8 @@ public class NoticeDBBean {
 
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select count(*) from notice");
+			pstmt = conn.prepareStatement("select count(*) from notice where com_num=?");
+			pstmt.setInt(1, com_num);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -73,7 +74,7 @@ public class NoticeDBBean {
 	} // getArticleCount() end
 
 	// paging, db로 부터 여러 행 목록 호출
-	public List getArticles(int start, int end) throws Exception {
+	public List getArticles(int com_num, int start, int end) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -90,11 +91,12 @@ public class NoticeDBBean {
 
 				sql = "select notice_num,notice_title,notice_content,notice_member,notice_date,r from (";
 				sql += "select  notice_num,notice_title,notice_content,notice_member,notice_date,rownum r from (";
-				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice order by notice_num desc)) ";
+				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice where com_num=? order by notice_num desc)) ";
 				sql += "where rownum<=?";
 
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, end);
+				pstmt.setInt(1, com_num);
+				pstmt.setInt(2, end);
 
 				rs = pstmt.executeQuery();
 
@@ -102,12 +104,13 @@ public class NoticeDBBean {
 
 				sql = "select notice_num,notice_title,notice_content,notice_member,notice_date,r from (";
 				sql += "select  notice_num,notice_title,notice_content,notice_member,notice_date,rownum r from (";
-				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice order by notice_num desc)) ";
+				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice where com_num=? order by notice_num desc)) ";
 				sql += "where r>=? and r<=?";
 
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, start);
-				pstmt.setInt(2, end);
+				pstmt.setInt(1, com_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
 
 				rs = pstmt.executeQuery();
 
@@ -254,14 +257,15 @@ public class NoticeDBBean {
 
 			// 공지 삽입
 			sql = "insert into ";
-			sql += "notice(notice_num,notice_title,notice_content,notice_member,notice_date) ";
-			sql += "values(notice_num.NEXTVAL,?,?,?,?)";
+			sql += "notice(notice_num,notice_title,notice_content,notice_member,notice_date,com_num) ";
+			sql += "values(notice_num.NEXTVAL,?,?,?,?,?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, article.getNotice_title());
 			pstmt.setString(2, article.getNotice_content());
 			pstmt.setString(3, article.getNotice_member());
 			pstmt.setTimestamp(4, article.getNotice_date());
+			pstmt.setInt(5, article.getCom_num());
 
 			count = pstmt.executeUpdate();
 

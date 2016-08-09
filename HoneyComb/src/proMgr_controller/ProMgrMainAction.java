@@ -8,7 +8,6 @@ public class ProMgrMainAction implements ProMgrFormAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		// 수정이는 나빴다
 		
 		return "/proMgr/proMgrMain.jsp";
 		

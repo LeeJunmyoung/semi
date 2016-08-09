@@ -12,6 +12,7 @@ public class NoticeMoreAction implements NoticeFormAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
 		String pageNum = request.getParameter("pageNum"); // 해당 페이지 번호
+		int com_num = (int) request.getSession().getAttribute("com_num"); // 회사 번호
 
 		if (pageNum == null) {
 			pageNum = "1";
@@ -28,11 +29,11 @@ public class NoticeMoreAction implements NoticeFormAction {
 
 		List articleList = null;
 		NoticeDBBean dbPro = NoticeDBBean.getInstance(); // DB처리
-		count = dbPro.getArticleCount(); // row 갯수 호출
+		count = dbPro.getArticleCount(com_num); // row 갯수 호출
 
 		if (count > 0) {
 			// 현재 페이지에 해당하는 글 목록
-			articleList = dbPro.getArticles(startRow, endRow);
+			articleList = dbPro.getArticles(com_num, startRow, endRow);
 		} else {
 			articleList = Collections.EMPTY_LIST;
 		}

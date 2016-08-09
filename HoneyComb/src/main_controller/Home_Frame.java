@@ -17,28 +17,22 @@ public class Home_Frame implements CommandAction{
 		// TODO Auto-generated method stub
 		
 		int mem_num = (int) request.getSession().getAttribute("mem_num");
-
 	
 		int com_num =(int) request.getSession().getAttribute("com_num");
 
 		int com_dept_num = (int) request.getSession().getAttribute("com_dept_num");
 
 		int com_pos_num = (int) request.getSession().getAttribute("com_pos_num");
-
 		
-		String name = (String) request.getSession().getAttribute("name");
-	
+		String name = (String) request.getSession().getAttribute("name");	
 		
 		String email = (String) request.getSession().getAttribute("email");
-
 		
 		int phone_num = (int) request.getSession().getAttribute("phone_num");
-
 		
 		String com_name =  (String) request.getSession().getAttribute("com_name");
 
-		String com_dept_name =  (String) request.getSession().getAttribute("com_dept_name");
-	
+		String com_dept_name =  (String) request.getSession().getAttribute("com_dept_name");	
 		
 		String com_pos_name =  (String) request.getSession().getAttribute("com_pos_name");
 	

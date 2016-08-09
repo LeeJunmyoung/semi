@@ -5,10 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>notice more</title>
+<title>proMgr more</title>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
-
 	$(function() { // list event
 		$("dd:not(:first)").css("display", "none");
 		$("dl dt").click(function() {
@@ -18,7 +17,6 @@
 			}
 		});
 	});
-	
 </script>
 
 <style type="text/css">
@@ -50,64 +48,49 @@ dl dd {
 
 	<div align="center">
 
-		<b>글목록(전체 글:${count})</b>
+		<b>프로젝트 목록(전체 프로젝트:${count})</b>
 
 		<c:if test="${count == 0}">
-			<table width="700" border="1" cellpadding="0" cellspacing="0">
-				<tr>
-					<td align="center">공지 글이 없습니다.</td>
-				</tr>
-			</table>
+			<div align="center">프로젝트가 없습니다.</div>
 		</c:if>
 
 		<c:if test="${count > 0}">
 
 			<div>
-				<span width="250">제 목</span>
-				<span width="100">작성자</span>
-				<span width="150">작성일</span>
+				<span width="250">프로젝트 명 : </span> <span width="100">(프로젝트 명)</span>
 			</div>
 
 			<div id="container">
 
 				<dl>
 
+					<!-- 프로젝트 전체 리스트 -->
 					<c:forEach var="article" items="${articleList}">
 
 						<dt>
 							<div>
-								<span>
-									<c:if test="${article.isNew == 0}">
-									<%-- new 표시 setting --%>
-										<img src="../images/hot.gif">
-									</c:if>
-									${article.notice_title}
-								</span>
-								<span>${article.notice_member}</span>
-								<span>${article.notice_date}</span>
+								<span>(프로젝트 명)</span>
 							</div>
 						</dt>
 
 						<dd>
-							<div>
-								<span>작성자</span>
-								<span>${article.notice_member}</span>
-								<span>작성일</span>
-								<span>${article.notice_date}</span>
-							</div>
-							<div>
-								<span>글제목</span>
-								<span>${article.notice_title}</span>
-							</div>
-							<div>
-								<span>글내용</span>
-								<span>${article.notice_content}</span>
-							</div>
+							<div>참여자 : (참여자 명단)</div>
+							<div>시작일 : (프로젝트 생성 일)</div>
+							<div>내용 : (프로젝트 내용)</div>
+							<div>진행 상황 항목 : (checklist 기능)</div>
+							<div>comment : (댓글 달기 기능)</div>
 						</dd>
 
 					</c:forEach>
 
 				</dl>
+
+				<div id="editor">
+					<input type="button" value="member" /> <input type="button"
+						value="checklist" /> <input type="button" value="file" />
+				</div>
+
+				<div id="commentFrom">(comment 기능)</div>
 
 			</div>
 
@@ -115,9 +98,11 @@ dl dd {
 
 		<c:if test="${count > 0}">
 
-			<c:set var="pageCount" value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
+			<c:set var="pageCount"
+				value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
 
-			<fmt:parseNumber var="result" value="${currentPage / pageSize}" integerOnly="true" />
+			<fmt:parseNumber var="result" value="${currentPage / pageSize}"
+				integerOnly="true" />
 
 			<c:set var="startPage" value="${result * pageSize + 1}" />
 
@@ -129,15 +114,16 @@ dl dd {
 
 			<c:if test="${startPage > pageSize}">
 				<a
-					href="/HoneyComb/notice/noticeMore.notice?pageNum=${startPage - pageSize}">[이전]</a>
+					href="/HoneyComb/proMgr/proMgrMore.pro?pageNum=${startPage - pageSize}">[이전]</a>
 			</c:if>
 
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/HoneyComb/notice/noticeMore.notice?pageNum=${i}">[${i}]</a>
+				<a href="/HoneyComb/proMgr/proMgrMore.pro?pageNum=${i}">[${i}]</a>
 			</c:forEach>
 
 			<c:if test="${endPage < pageCount}">
-				<a href="/HoneyComb/notice/noticeMore.notice?pageNum=${startPage + pageSize}">[다음]</a>
+				<a
+					href="/HoneyComb/proMgr/proMgrMore.pro?pageNum=${startPage + pageSize}">[다음]</a>
 			</c:if>
 
 		</c:if>

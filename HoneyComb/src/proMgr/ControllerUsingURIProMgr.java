@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import proMgr_controller.proMgrFormAction;
+import proMgr_controller.ProMgrFormAction;
 
 
 
@@ -89,7 +89,7 @@ public class ControllerUsingURIProMgr extends HttpServlet {
 			throws ServletException, IOException {
 
 		String view = null;
-		proMgrFormAction com = null;
+		ProMgrFormAction com = null;
 
 		try {
 
@@ -100,7 +100,7 @@ public class ControllerUsingURIProMgr extends HttpServlet {
 				System.out.println("command ::: " + command);
 			}
 
-			com = (proMgrFormAction) commandMap.get(command);
+			com = (ProMgrFormAction) commandMap.get(command);
 
 			System.out.println("com ::: " + com);
 

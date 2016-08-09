@@ -11,7 +11,7 @@
 	<c:if test="${count==1}">
 	<%-- insert 후 main reflash, write 화면 종료 --%>
 		<script>
-			window.opener.top.location.href="/semi/notice/noticeMain.notice"
+			window.opener.top.location.href="/HoneyComb/notice/noticeMain.notice"
 			window.close()
 		</script>
 		

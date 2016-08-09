@@ -21,6 +21,9 @@
 
    </definition> 
    
-   
+     <definition name="calendar" template="/page_layout/Calendar/Calendar_layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Calendar/Calendar_body.jsp" />
+
+   </definition> 
 
 </tiles-definitions>

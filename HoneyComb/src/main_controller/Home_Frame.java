@@ -1,11 +1,13 @@
 package main_controller;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cal_Controll.Cal_DBBean;
 import notice.NoticeDBBean;
 
 public class Home_Frame implements CommandAction{
@@ -14,7 +16,44 @@ public class Home_Frame implements CommandAction{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
 		
-		System.out.println("실행함");
+		int mem_num = (int) request.getSession().getAttribute("mem_num");
+
+	
+		int com_num =(int) request.getSession().getAttribute("com_num");
+
+		int com_dept_num = (int) request.getSession().getAttribute("com_dept_num");
+
+		int com_pos_num = (int) request.getSession().getAttribute("com_pos_num");
+
+		
+		String name = (String) request.getSession().getAttribute("name");
+	
+		
+		String email = (String) request.getSession().getAttribute("email");
+
+		
+		int phone_num = (int) request.getSession().getAttribute("phone_num");
+
+		
+		String com_name =  (String) request.getSession().getAttribute("com_name");
+
+		String com_dept_name =  (String) request.getSession().getAttribute("com_dept_name");
+	
+		
+		String com_pos_name =  (String) request.getSession().getAttribute("com_pos_name");
+	
+		
+		
+		
+		
+	
+		
+		
+	
+		
+		
+		
+		
 
 		int rowSize = 5; // 한 페이지의 글 갯수
 		int count = 0; // 전체 글 갯수
@@ -37,13 +76,21 @@ public class Home_Frame implements CommandAction{
 		request.getSession().setAttribute("articleList", articleList);
 
 		
+		/*위에 공지사항 받는 부분 */
+		
+		Date date = new Date();
+		int month = date.getMonth()+1;
 		
 		
+		Cal_DBBean caldbb = Cal_DBBean.getInstance();
+		List totalCal = null;
+		totalCal = caldbb.viewCal(mem_num);
+		if (totalCal != null) {
+			request.getSession().setAttribute("total", totalCal);
+			request.getSession().setAttribute("count", Integer.valueOf(totalCal.size()));
+		}
 		
-		
-		
-		
-		
+		/*일정 받는 부분 */
 		
 		
 		return "/page_layout/home.jsp";

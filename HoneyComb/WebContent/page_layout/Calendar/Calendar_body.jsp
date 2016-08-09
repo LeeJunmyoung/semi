@@ -6,15 +6,10 @@
 <link href="/HoneyComb/page_layout/home.css" rel="stylesheet" type="text/css" />
 <body>
 
-<div id = "main_notice">
- <jsp:include page="/notice/noticeMain.jsp"></jsp:include>
-</div>
-<div id = "main_project_manage">
-
-</div>
 <div id = "main_cal">
-<jsp:include page="/Calendar/cal_user_main.jsp"></jsp:include>
+ <jsp:include page="/Calendar/cal_main.jsp"></jsp:include>
 </div>
+
 </body>
 </html>
 

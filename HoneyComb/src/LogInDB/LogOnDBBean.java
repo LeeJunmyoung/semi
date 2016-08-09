@@ -69,7 +69,7 @@ public class LogOnDBBean {
 		Vector member = new Vector();
 		try{
 			conn = getConnection();
-			pstmt=conn.prepareStatement("select mem_num, com_num, com_dept_num, com_pos_num,name from members where email=? and passwd=?");
+			pstmt=conn.prepareStatement("select mem_num, com_num, com_dept_num, com_pos_num,name,phone_num,com_name,com_dept_name,com_pos_name from members where email=? and passwd=?");
 			pstmt.setString(1, email);
 			pstmt.setString(2, passwd);
 			rs = pstmt.executeQuery();
@@ -82,7 +82,12 @@ public class LogOnDBBean {
 			member.addElement(rs.getInt(3));
 			member.addElement(rs.getInt(4));
 			member.addElement(rs.getString("name"));
-			
+	
+			/*아래 추가됌*/
+			member.addElement(rs.getInt("phone_num"));
+			member.addElement(rs.getString("com_name"));
+			member.addElement(rs.getString("com_dept_name"));
+			member.addElement(rs.getString("com_pos_name"));
 		}
 		
 				

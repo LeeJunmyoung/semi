@@ -403,30 +403,43 @@ public class HoneyCombDBBean {
 	}
 	
 	
-	public int temp_Insert_company_to_person(int com_num,String com_name,String com_dept_name,String com_pos_name,String email) throws Exception{
+public int temp_Insert_company_to_person(int com_num, String com_name, int com_dept_num, String com_pos_name, String email) throws Exception{
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		HoneyCombDataBean com = null;
-		int num = 0-com_num;
-		String name = com_name;
-		String dept = com_dept_name;
-		String pos = com_pos_name;
-		String id = email;
 		String sql= "";
+		int com_pos_num = -1;
+		String[] com_dept_name = {"총무", "경리(회계)", "경영", "인사", "재경", "고객만족", "구매", "관리", "기술지원", "기획", "비서", "생산", "etc"};
+		System.out.println("com_pos_name" + com_pos_name);
+		switch(com_pos_name) { // 사원급 : 2 , 임원급 : 1 , 관리자 : 0
+		case "사원":
+		case "대리":
+			com_pos_num = 2;
+			break;
+		case "팀장":
+		case "부장":
+		case "과장":
+		case "사장":
+			com_pos_num = 1;
+			break;
+		}
 		
-		
+		System.out.println("temp_Insert_company_to_person com_pos_num:::" + com_pos_num);
 		
 		try {
 			conn = getConnection();
-			sql = "update members set com_name = ?, com_dept_name = ? , com_pos_name = ? , com_num = ? where email = ? ";
+			sql = "update members set com_name = ?, com_dept_name = ?, com_dept_num = ?, com_pos_name = ?, com_pos_num = ?, com_num = ? where email = ? ";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, dept);
-			pstmt.setString(3, pos);
-			pstmt.setInt(4, num);
-			pstmt.setString(5, id);
+			pstmt.setString(1, com_name);
+			pstmt.setString(2, com_dept_name[com_dept_num]);
+			pstmt.setInt(3, 0-com_dept_num);
+			pstmt.setString(4, com_pos_name);
+			pstmt.setInt(5, 0-com_pos_num);
+			pstmt.setInt(6, 0-com_num);
+			pstmt.setString(7, email);
+			System.out.println("temp_Insert_company_to_person");
 			
 			pstmt.executeUpdate();
 		} catch (SQLException ex) {
@@ -449,9 +462,7 @@ public class HoneyCombDBBean {
 				}
 
 		}
-		return num;
-		
+		return com_num;
 		
 	}
-
-}
+	}

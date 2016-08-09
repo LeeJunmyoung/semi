@@ -45,8 +45,8 @@ public class CreateFilePath {
 		j = oldPath.lastIndexOf("/");
 		String tempFilePath = oldPath.substring(0,i);
 		oldFile = tempFilePath.substring(j+1,tempFilePath.length());
-		System.out.println(tempFilePath);
-		System.out.println(oldFile);
+
+
 		//(?‚ ì§?+?šŒ?‚¬ë²ˆí˜¸+?˜¬ë¦°ì‚¬?Œ?´ë¦?_?ŒŒ?¼ëª?+?‚œ?ˆ˜1~9)
 		//?´ë¦?
 		 String name = cloudDB.getFile_uploader();

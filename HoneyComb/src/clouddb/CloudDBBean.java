@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.catalina.connector.Request;
+
 public class CloudDBBean {
 	private static CloudDBBean instance = new CloudDBBean();
 
@@ -86,11 +88,17 @@ public class CloudDBBean {
 		return cloud;
 		
 	}
-public void cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
+public int cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		try{
-	
+			//중복체크 하는 기능
+			cloudDB.setFolder(folder);
+			int file = checkFolder(cloudDB);
+			if (file == 0 ){
+				return 0;
+			}
+			//중복체크 기능 끝
 			conn = getConnection();			
 			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?)");
 			pstmt.setString(1, cloudDB.getFile_name());
@@ -121,7 +129,7 @@ public void cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException
 				} catch (SQLException ex) {
 				}
 		}
-		
+		return 1;
 	}
 
 public void createFolder(CloudDataBean cloudPro)throws SQLException{
@@ -157,5 +165,48 @@ public void createFolder(CloudDataBean cloudPro)throws SQLException{
 	
 }
 
+public int checkFolder(CloudDataBean cloudPro)throws SQLException{
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	try{
+
+		conn = getConnection();		
+		ResultSet rs = null;
+		
+		String folder = cloudPro.getFolder();
+		String file_name = cloudPro.getFile_name();
+	
+		if (folder == ""){
+			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null");
+			pstmt.setString(1, file_name);
+		}else{
+		pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ?");
+		pstmt.setString(1, file_name);
+		pstmt.setString(2, folder);
+		}
+		
+		
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			return 0;
+		}
+		
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+		
+	}
+	return 1;
+}
 	
 }

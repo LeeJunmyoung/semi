@@ -21,3 +21,8 @@ function movefolder(folder, name){
 function refresh(){
 window.opener.location.reload();
 }
+
+function test(){
+	alert(file_name.val())
+	
+}

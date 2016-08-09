@@ -39,8 +39,13 @@ public class CreateFolder implements CommandActionCloud{
 		cloudPro.setFile_name(file_name);
 		cloudPro.setCom_num(com_num);
 		cloudPro.setFile_uploader(file_uploader);
-		
-		
+		//중복기능 확인
+		int folder_check = cloud.checkFolder(cloudPro);
+		if(folder_check == 0){
+			return"/cloudview/createfolder.jsp?name="+file_name;
+		}
+		//중복기능 확인 끝
+	
 		cloud.createFolder(cloudPro);
 		return "/cloudview/createfolder.jsp";
 	}

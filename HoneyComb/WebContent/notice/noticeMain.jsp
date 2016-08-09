@@ -17,7 +17,7 @@
 <script>
     
 	function noticeRowView(rowNum) { // 공지 정보 보기
-		url = "/semi/notice/noticeContent.notice?num="+rowNum;
+		url = "/HoneyComb/notice/noticeContent.notice?num="+rowNum;
 		window.open(
 						url,
 						"post",
@@ -26,7 +26,7 @@
 	}
 	
 	function writeView() { // 공지 작성
-		url = "/semi/notice/noticeWriteForm.notice";
+		url = "/HoneyComb/notice/noticeWriteForm.notice";
 		window.open(
 						url,
 						"post",

@@ -45,12 +45,15 @@ public class OptionDBBean {
 				
 				do{
 					ldb = new LogOnDataBean();
+					ldb.setMem_num(rs.getInt("mem_num"));
+					ldb.setName(rs.getString("name"));	
+					ldb.setEmail(rs.getString("email"));
+					ldb.setPhone_num(String.valueOf(rs.getInt("phone_num")));
 					ldb.setCom_dept_name(rs.getString("com_dept_name"));
+					ldb.setCom_dept_num(rs.getInt("com_dept_num"));
 					ldb.setCom_pos_name(rs.getString("com_pos_name"));
-					ldb.setName(rs.getString("name"));
-					System.out.println("com_dept_name: "+rs.getString("com_dept_name"));
-					System.out.println("com_pos_name: "+rs.getString("com_pos_name"));
-					System.out.println("name: "+rs.getString("name"));
+					ldb.setCom_pos_num(rs.getInt("com_pos_num"));
+					
 					list.add(ldb);
 				}while(rs.next());
 				
@@ -87,8 +90,43 @@ public class OptionDBBean {
 	
 	
 	
-	public void accept_member(int com_num) {
+	public void accept_member(int com_num,int mem_num,int com_dept_num,int com_pos_num) {
 		//멤버 승인시 작동 할거 작성 !!
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("update members set com_num = ? , com_dept_num = ? , com_pos_num = ?  where mem_num = ?");
+			pstmt.setInt(1, com_num);
+			pstmt.setInt(2, com_dept_num);
+			pstmt.setInt(3, com_pos_num);
+			pstmt.setInt(4, mem_num);
+			pstmt.executeUpdate();
+			
+				
+			
+			
+			
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+		
 	}
 	
 	

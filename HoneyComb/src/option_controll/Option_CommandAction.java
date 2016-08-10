@@ -5,5 +5,5 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface Option_CommandAction {
-	String requestPro(HttpServletRequest arg0, HttpServletResponse arg1) throws Throwable;
+	String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable;
 }

@@ -50,7 +50,6 @@ public class CreateFilePath {
 		}
 		oldFile = tempFilePath.substring(j+1,tempFilePath.length());
 
-		
 		String name = cloudDB.getFile_uploader();
 		
 		file_Path = day+com+name+"_"+oldFile+"_"+Val;

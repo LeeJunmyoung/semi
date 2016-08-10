@@ -28,7 +28,7 @@ $(document).bind("contextmenu", function(event) {
 }).bind("click", function(event) {
     $("div.cloud_menu").hide();
 });
-
+		
 </script>
 <title>Insert title here</title>
 <style type="text/css">

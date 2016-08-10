@@ -16,8 +16,8 @@
 
 <title>Insert title here</title>
 </head>
-<body onload="refresh()">
-<form action="/HoneyComb/cloud/createFolder.cloud" method="post">
+<body>
+<form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('foldername')">
 <input type="text" name="foldername">
 <input type="hidden" value="${param.name}" id="foldercheck">
 <input type="hidden" value="${param.folder}" name="folder">

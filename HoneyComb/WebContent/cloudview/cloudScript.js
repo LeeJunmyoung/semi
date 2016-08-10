@@ -26,3 +26,12 @@ function test(){
 	alert(file_name.val())
 	
 }
+function emptyck(value){
+	var item = document.getElementById(value).value;
+	
+	if(item  == null||item == ""){
+		alert("빈 공간을 업로드할 수 없습니다.");
+		return false;
+	}
+	
+}

@@ -5,15 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script src="/HoneyComb/cloudview/cloudScript.js"  type="text/javascript"></script>
 <title>Insert title here</title>
 </head>
 <body>
 중복::${param.dupli}
 파일경로:: ${file_path}
 새로운 파일이름을 입력해주세요
-<form action="/HoneyComb/cloud/cloudRenameItem.cloud" method="post">
+<form action="/HoneyComb/cloud/cloudRenameItem.cloud" method="post" onsubmit="emptyck('itemName')">
 	새로운 파일이름을 입력해주세요<br>
-	<input type="text" name="itemName">
+	<input type="text" name="itemName" id="itemName">
 	<input type="submit" value="확인">
 	
 

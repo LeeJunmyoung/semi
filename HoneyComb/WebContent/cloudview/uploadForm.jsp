@@ -8,23 +8,25 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
  $(function(){
+	
 	if(	$('#filecheck').val() != ""){
 		alert("'"+'${param.filecheck}'+"'"+"은 이미 있는 파일입니다. 다른 파일명을 입력해 주세요");
 		var url = "/HoneyComb/cloudview/changeFilename.jsp?dupli=y";
 		$(location).attr('href',url);
 	}
+	$(window).unload( function () { alert("Bye now!"); } );
 })
 </script>
 
 <title>Insert title here</title>
 </head>
-<body onload="refresh()">
-<form  action="/HoneyComb/cloud/fileUploader.cloud?folder=${param.folder}"  method="post" enctype="multipart/form-data" id="myform">
+<body>
+<form  action="/HoneyComb/cloud/fileUploader.cloud?folder=${param.folder}"  method="post" enctype="multipart/form-data" onsubmit="return emptyck('uploadfile')">
 	업로드 파일을 선택해주세요<br>
 	
 	<input type="hidden" value="${param.filecheck}" id="filecheck">
-	<input type="file" name="uploadFile"><br>	
-	<input type="submit" name="upload" value="업로드">
+	<input type="file" name="uploadFile" id="uploadfile"><br>	
+	<input type="submit" name="upload" value="업로드" id="button">
 </form>
 </body>
 </html>

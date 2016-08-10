@@ -1,12 +1,12 @@
 package com_bean;
 
 public class HoneyCombDataBean {
-	// temp_com
-	private int com_num; // ȸ���ȣ
-	private String com_name; // ȸ���
-	private String com_aff; // ȸ��迭
-	private String com_add; // ȸ���ּ�(�߰�)
-	private String com_phone; // ȸ����ȭ��ȣ
+	
+	private int com_num;
+	private String com_name;
+	private String com_aff;
+	private String com_add;
+	private String com_phone;
 
 	public int getCom_num() {
 		return com_num;

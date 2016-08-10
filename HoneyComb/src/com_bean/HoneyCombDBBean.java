@@ -27,7 +27,7 @@ public class HoneyCombDBBean {
 	}
 
 	public List insert_temp_Company(String com_name, String com_add, String com_phone, String com_aff) throws Exception {
-		// companyForm���� ��Ͻ� ���� (����� ���) �ӽ����̺�� �ٲ����
+		// companyForm
 		HoneyCombDataBean com = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -43,12 +43,11 @@ public class HoneyCombDBBean {
 			pstmt.setString(3, com_phone);
 			pstmt.setString(4, com_aff);
 			pstmt.executeUpdate();
-			// ����� ��Ͻ�û ������ complete_com�� insert
+			//complete_com�� insert
 
 			pstmt = conn.prepareStatement("select com_name, com_add, com_phone, com_aff from temp_com where com_name = ?");
 			pstmt.setString(1, com_name);
 			rs = pstmt.executeQuery();
-			// ��û ����Ʈ��� �ۼ�
 
 			if (rs.next()) {
 				comList = new ArrayList();
@@ -88,7 +87,6 @@ public class HoneyCombDBBean {
 	}
 
 	public Vector<HoneyCombDataBean> com_Search(String com_name) throws Exception {
-		// �������� �˻��ϰ� ����Ʈ�� ������
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -136,8 +134,6 @@ public class HoneyCombDBBean {
 	}
 	
 	public void com_select_person(String com_name, String com_dept_name, String com_pos_name) throws Exception {
-		// ������, �μ�, ���� ��Ͻ�û (���)
-		//===================================================
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -289,12 +285,10 @@ public class HoneyCombDBBean {
 			pstmt = conn.prepareStatement("insert into complete_com select * from temp_com where com_num = ?");
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
-			System.out.println("submit중 complete_com 테이블에 insert실행");
 			
 			pstmt = conn.prepareStatement("delete from temp_com where com_num = ?");
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
-			System.out.println("submit중 temp_com 테이블에 delete실행");
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -321,7 +315,7 @@ public class HoneyCombDBBean {
 	}
 	
 	public List deleteComplete(int com_num) throws Exception {
-		// complete_com.jsp���� ���� ��û��
+		// complete_com.jsp
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -337,7 +331,6 @@ public class HoneyCombDBBean {
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
 			complAllList = new ArrayList();
-			System.out.println("delete 실행");
 			
 			pstmt = conn.prepareStatement("select * from temp_com");
 			rs = pstmt.executeQuery();
@@ -368,8 +361,6 @@ public class HoneyCombDBBean {
 	}
 	
 	public void mem_Permission(String com_name, String com_dept_name, String com_pos_name) throws Exception {
-		// ȸ�� ��Ͻ�ûList �� (���)
-		//===================================================
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -403,66 +394,66 @@ public class HoneyCombDBBean {
 	}
 	
 	
-public int temp_Insert_company_to_person(int com_num, String com_name, int com_dept_num, String com_pos_name, String email) throws Exception{
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		HoneyCombDataBean com = null;
-		String sql= "";
-		int com_pos_num = -1;
-		String[] com_dept_name = {"총무", "경리(회계)", "경영", "인사", "재경", "고객만족", "구매", "관리", "기술지원", "기획", "비서", "생산", "etc"};
-		System.out.println("com_pos_name" + com_pos_name);
-		switch(com_pos_name) { // 사원급 : 2 , 임원급 : 1 , 관리자 : 0
-		case "사원":
-		case "대리":
-			com_pos_num = 2;
-			break;
-		case "팀장":
-		case "부장":
-		case "과장":
-		case "사장":
-			com_pos_num = 1;
-			break;
-		}
-		
-		System.out.println("temp_Insert_company_to_person com_pos_num:::" + com_pos_num);
-		
-		try {
-			conn = getConnection();
-			sql = "update members set com_name = ?, com_dept_name = ?, com_dept_num = ?, com_pos_name = ?, com_pos_num = ?, com_num = ? where email = ? ";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, com_name);
-			pstmt.setString(2, com_dept_name[com_dept_num]);
-			pstmt.setInt(3, 0-com_dept_num);
-			pstmt.setString(4, com_pos_name);
-			pstmt.setInt(5, 0-com_pos_num);
-			pstmt.setInt(6, 0-com_num);
-			pstmt.setString(7, email);
-			System.out.println("temp_Insert_company_to_person");
-			
-			pstmt.executeUpdate();
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException ex) {
-				}
+	   public int temp_Insert_company_to_person(int com_num, String com_name, int com_dept_num, String com_pos_name,
+		         String email) throws Exception {
 
-		}
-		return com_num;
-		
-	}
+		      Connection conn = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs = null;
+		      HoneyCombDataBean com = null;
+		      String sql = "";
+		      int com_pos_num = -1;
+		      String[] com_dept_name = { "총무", "경리(회계)", "경영", "인사", "재경", "고객만족", "구매", "관리", "기술지원", "기획", "비서", "생산", "etc" };
+		      
+		      switch (com_pos_name) { // 사원급 : 3 , 임원급 : 2 , 대표 : 1 , 관리자 : 0
+		      case "사원":
+		      case "대리":
+		         com_pos_num = 3;
+		         break;
+		      case "팀장":
+		      case "부장":
+		      case "과장":
+		         com_pos_num = 2;
+		         break;
+		      }
+
+		      System.out.println("temp_Insert_company_to_person com_pos_num:::" + com_pos_num);
+
+		      try {
+		         conn = getConnection();
+		         sql = "update members set com_name = ?, com_dept_name = ?, com_dept_num = ?, com_pos_name = ?, com_pos_num = ?, com_num = ? where email = ? ";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, com_name);
+		         pstmt.setString(2, com_dept_name[com_dept_num]);
+		         pstmt.setInt(3, 0 - com_dept_num);
+		         pstmt.setString(4, com_pos_name);
+		         pstmt.setInt(5, 0 - com_pos_num);
+		         pstmt.setInt(6, 0 - com_num);
+		         pstmt.setString(7, email);
+		         System.out.println("temp_Insert_company_to_person");
+
+		         pstmt.executeUpdate();
+		      } catch (SQLException ex) {
+		         ex.printStackTrace();
+		      } finally {
+		         if (rs != null)
+		            try {
+		               rs.close();
+		            } catch (SQLException ex) {
+		            }
+		         if (pstmt != null)
+		            try {
+		               pstmt.close();
+		            } catch (SQLException ex) {
+		            }
+		         if (conn != null)
+		            try {
+		               conn.close();
+		            } catch (SQLException ex) {
+		            }
+
+		      }
+		      return com_num;
+
+		   }
 	}

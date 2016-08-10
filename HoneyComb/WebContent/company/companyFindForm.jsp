@@ -71,7 +71,6 @@
 						<option value="팀장">팀장</option>
 						<option value="부장">부장</option>
 						<option value="과장">과장</option>
-						<option value="사장">사장</option>
 					</select><br><br>
 					<input type="submit" value="등록하기">
 			</form>

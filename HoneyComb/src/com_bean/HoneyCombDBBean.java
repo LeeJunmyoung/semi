@@ -26,7 +26,7 @@ public class HoneyCombDBBean {
 		return DriverManager.getConnection(jdbcDriver);
 	}
 
-	public List insert_temp_Company(String com_name, String com_add, String com_phone, String com_aff) throws Exception {
+	public List insert_temp_Company(int mem_num,String com_name, String com_add, String com_phone, String com_aff) throws Exception {
 		// companyForm
 		HoneyCombDataBean com = null;
 		Connection conn = null;
@@ -45,22 +45,26 @@ public class HoneyCombDBBean {
 			pstmt.executeUpdate();
 			//complete_com�� insert
 
-			pstmt = conn.prepareStatement("select com_name, com_add, com_phone, com_aff from temp_com where com_name = ?");
+			pstmt = conn.prepareStatement("select com_num,com_name, com_add, com_phone, com_aff from temp_com where com_name = ?");
 			pstmt.setString(1, com_name);
 			rs = pstmt.executeQuery();
-
+			com = new HoneyCombDataBean();
 			if (rs.next()) {
 				comList = new ArrayList();
-				com = new HoneyCombDataBean();
+				com.setCom_num(rs.getInt("com_num"));
 				com.setCom_name(rs.getString("com_name"));
 				com.setCom_add(rs.getString("com_add"));
 				com.setCom_phone(rs.getString("com_phone"));
 				com.setCom_aff(rs.getString("com_aff"));
-
 				comList.add(com);
 
 			}
-
+			
+			pstmt = conn.prepareStatement("update members set com_num = ? where mem_num = ? ");
+			pstmt.setInt(1, (0-com.getCom_num()));
+			pstmt.setInt(2, mem_num);
+			pstmt.executeUpdate();
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -281,7 +285,7 @@ public class HoneyCombDBBean {
 		
 		try {
 			conn = getConnection();
-			
+			System.out.println("com_num : " + com_num);
 			pstmt = conn.prepareStatement("insert into complete_com select * from temp_com where com_num = ?");
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
@@ -290,9 +294,16 @@ public class HoneyCombDBBean {
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
 			
-			pstmt = conn.prepareStatement("insert into members select com_pose_num,com_pose_name where com_num = ?");
+			int temp_com_num = 0;
+			
+			temp_com_num = (temp_com_num-com_num);
+			
+			pstmt = conn.prepareStatement("update members set com_pos_num = 1 ,com_pos_name = '사장' , com_num = ? where com_num = ?");
 			pstmt.setInt(1, com_num);
+			pstmt.setInt(2, temp_com_num);
+		
 			pstmt.executeUpdate();
+			System.out.println("submit중 update실행");
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();

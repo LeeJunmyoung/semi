@@ -18,6 +18,7 @@ public class CompanyProAction implements CommandAction {
 		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
 		request.setCharacterEncoding("UTF-8");
 		
+		int mem_num = (int)request.getSession().getAttribute("mem_num");
 		String com_name = request.getParameter("com_name");
 		String com_add = request.getParameter("com_add");
 		String com_phone = request.getParameter("com_phone1");
@@ -26,7 +27,7 @@ public class CompanyProAction implements CommandAction {
 		String com_aff = request.getParameter("com_aff");
 	
 		
-		comList = dbPro.insert_temp_Company(com_name, com_add, com_phone, com_aff);
+		comList = dbPro.insert_temp_Company(mem_num,com_name, com_add, com_phone, com_aff);
 
 		
 		

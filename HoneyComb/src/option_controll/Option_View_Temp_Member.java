@@ -13,11 +13,11 @@ public class Option_View_Temp_Member implements Option_CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
 		int com_num = (int)request.getSession().getAttribute("com_num");
-		OptionDBBean odb = OptionDBBean.getInstance();
+		OptionDBBean odbb = OptionDBBean.getInstance();
 		ArrayList list = new ArrayList<LogOnDataBean>();
 		
 		
-		list =  odb.view_temp_member(com_num);
+		list =  odbb.view_temp_member(com_num);
 		
 		request.setAttribute("temp_member", list);
 		

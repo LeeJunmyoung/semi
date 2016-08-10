@@ -2,9 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>test2</title>
 </head>
+<script type="text/javascript">
+
+opener.location.reload(); 
+window.close(); 
+
+
+</script>
 <body>
-수락됌
+
 </body>
 </html>

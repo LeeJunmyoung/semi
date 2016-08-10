@@ -15,7 +15,6 @@ public class NoticeMainAction implements NoticeFormAction {
 		int notice_count = 0; // 전체 글 갯수
 		int com_num = (int) request.getSession().getAttribute("com_num"); // 회사 번호
 		
-
 		List articleList = null;
 		NoticeDBBean dbPro = NoticeDBBean.getInstance(); // DB처리
 		notice_count = dbPro.getArticleCount(com_num); // row 갯수 호출

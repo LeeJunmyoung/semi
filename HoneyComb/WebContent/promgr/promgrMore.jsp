@@ -3,9 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
+
+<c:if test="${promgr_onloadCheck}">
+	<%-- reflash 설정 --%>
+	<script>
+		window.location.reload(true);
+	</script>
+</c:if>
+
 <html>
 <head>
-<title>proMgr more</title>
+<title>promgr more</title>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
 	$(function() { // list event
@@ -17,6 +25,15 @@
 			}
 		});
 	});
+
+	function writeProject() { // 프로젝트 생성
+		url = "/HoneyComb/promgr/promgrWriteForm.promgr";
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
 </script>
 
 <style type="text/css">
@@ -48,19 +65,19 @@ dl dd {
 
 	<div align="center">
 
-		<b>프로젝트 목록(전체 프로젝트:${count})</b>
+		<b>프로젝트 목록 (전체 프로젝트 : ${promgr_count})</b>
 
-		<c:if test="${count == 0}">
+		<div align="right">
+			<a onclick="writeProject()">프로젝트 생성</a>
+		</div>
+
+		<c:if test="${promgr_count == 0}">
 			<div align="center">프로젝트가 없습니다.</div>
 		</c:if>
 
-		<c:if test="${count > 0}">
+		<c:if test="${promgr_count > 0}">
 
-			<div>
-				<span width="250">프로젝트 명 : </span> <span width="100">(프로젝트 명)</span>
-			</div>
-
-			<div id="container">
+			<div id="container" align="center">
 
 				<dl>
 
@@ -68,38 +85,36 @@ dl dd {
 					<c:forEach var="article" items="${articleList}">
 
 						<dt>
-							<div>
-								<span>(프로젝트 명)</span>
-							</div>
+							<div>프로젝트 명 : ${article.promgr_name}</div>
 						</dt>
 
 						<dd>
 							<div>참여자 : (참여자 명단)</div>
-							<div>시작일 : (프로젝트 생성 일)</div>
-							<div>내용 : (프로젝트 내용)</div>
+							<div>시작일 : ${article.promgr_date}</div>
+							<div>내용 : ${article.promgr_content}</div>
 							<div>진행 상황 항목 : (checklist 기능)</div>
-							<div>comment : (댓글 달기 기능)</div>
+							
+							<div id="commentFrom">(comment 기능)</div>
 						</dd>
 
 					</c:forEach>
 
 				</dl>
 
-				<div id="editor">
-					<input type="button" value="member" /> <input type="button"
-						value="checklist" /> <input type="button" value="file" />
+				<div id="editor" align="rigth">
+					<input type="button" value="member" /> <br />
+					<input type="button" value="checklist" /> <br />
+					<input type="button" value="file" />
 				</div>
-
-				<div id="commentFrom">(comment 기능)</div>
 
 			</div>
 
 		</c:if>
 
-		<c:if test="${count > 0}">
+		<c:if test="${promgr_count > 0}">
 
 			<c:set var="pageCount"
-				value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
+				value="${promgr_count / pageSize + ( promgr_count % pageSize == 0 ? 0 : 1)}" />
 
 			<fmt:parseNumber var="result" value="${currentPage / pageSize}"
 				integerOnly="true" />
@@ -113,17 +128,15 @@ dl dd {
 			</c:if>
 
 			<c:if test="${startPage > pageSize}">
-				<a
-					href="/HoneyComb/proMgr/proMgrMore.pro?pageNum=${startPage - pageSize}">[이전]</a>
+				<a href="/HoneyComb/promgr/promgrMore.promgr?pageNum=${startPage - pageSize}">[이전]</a>
 			</c:if>
 
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/HoneyComb/proMgr/proMgrMore.pro?pageNum=${i}">[${i}]</a>
+				<a href="/HoneyComb/promgr/promgrMore.promgr?pageNum=${i}">[${i}]</a>
 			</c:forEach>
 
 			<c:if test="${endPage < pageCount}">
-				<a
-					href="/HoneyComb/proMgr/proMgrMore.pro?pageNum=${startPage + pageSize}">[다음]</a>
+				<a href="/HoneyComb/promgr/promgrMore.promgr?pageNum=${startPage + pageSize}">[다음]</a>
 			</c:if>
 
 		</c:if>

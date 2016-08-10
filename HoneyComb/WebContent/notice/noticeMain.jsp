@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 
-<c:if test="${onloadCheck}"> 
+<c:if test="${notice_onloadCheck}"> 
 <%-- reflash 설정 --%>
 	<script>
 		window.location.reload(true);

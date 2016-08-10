@@ -7,15 +7,15 @@
 <title>write check</title>
 </head>
 <body>
-	
-	<c:if test="${notice_insert_count==1}">
-	<%-- insert 후 main reflash, write 화면 종료 --%>
+
+	<c:if test="${promgr_insert_count==1}">
+		<%-- insert 후 main reflash, write 화면 종료 --%>
 		<script>
-			window.opener.top.location.href="/HoneyComb/notice/noticeMain.notice"
+			window.opener.top.location.href = "/HoneyComb/promgr/promgrMore.promgr"
 			window.close()
 		</script>
-		
+
 	</c:if>
-	
+
 </body>
 </html>

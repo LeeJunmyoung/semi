@@ -1,32 +1,31 @@
-package proMgr;
+package promgr;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProMgrDBBean {
-
-	private static ProMgrDBBean instance = new ProMgrDBBean();
+public class PromgrDBBean {
+	
+	private static PromgrDBBean instance = new PromgrDBBean();
 
 	private Connection getConnection() throws Exception {
 
 		String jdbcDriver = "jdbc:apache:commons:dbcp:/pool";
-
+		
 		return DriverManager.getConnection(jdbcDriver);
 
 	} // getConnection() end
 
-	public static ProMgrDBBean getInstance() {
+	public static PromgrDBBean getInstance() {
 		return instance;
 	}
 
 	// 전체 db에 입력된 행의 수
-	public int getArticleCount() throws Exception {
+	public int getArticleCount(int com_num) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -38,7 +37,8 @@ public class ProMgrDBBean {
 
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select count(*) from notice");
+			pstmt = conn.prepareStatement("select count(*) from promgr where com_num=?");
+			pstmt.setInt(1, com_num);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -74,12 +74,11 @@ public class ProMgrDBBean {
 	} // getArticleCount() end
 
 	// paging, db로 부터 여러 행 목록 호출
-	public List getArticles(int start, int end) throws Exception {
+	public List getArticles(int com_num, int start, int end) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ResultSet rs_isNew = null;
 		List articleList = null;
 		String sql = null;
 
@@ -89,26 +88,28 @@ public class ProMgrDBBean {
 
 			if (start == -1) { // main 화면에서 보여지는 list sql
 
-				sql = "select notice_num,notice_title,notice_content,notice_member,notice_date,r from (";
-				sql += "select  notice_num,notice_title,notice_content,notice_member,notice_date,rownum r from (";
-				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice order by notice_num desc)) ";
-				sql += "where rownum<=?";
+				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,r from (";
+				sql += "select  promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,rownum r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num from promgr where com_num=? order by promgr_num desc)) ";
+				sql += "where r<=?";
 
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, end);
+				pstmt.setInt(1, com_num);
+				pstmt.setInt(2, end);
 
 				rs = pstmt.executeQuery();
 
 			} else { // more 화면에서 보여지는 list sql
 
-				sql = "select notice_num,notice_title,notice_content,notice_member,notice_date,r from (";
-				sql += "select  notice_num,notice_title,notice_content,notice_member,notice_date,rownum r from (";
-				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice order by notice_num desc)) ";
+				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,rownum r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num from promgr where com_num=? order by promgr_num desc)) ";
 				sql += "where r>=? and r<=?";
 
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, start);
-				pstmt.setInt(2, end);
+				pstmt.setInt(1, com_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
 
 				rs = pstmt.executeQuery();
 
@@ -120,35 +121,19 @@ public class ProMgrDBBean {
 
 				do {
 
-					ProMgrDataBean article = new ProMgrDataBean();
-
-					// article.setNotice_num(rs.getInt("notice_num"));
-					// article.setNotice_title(rs.getString("notice_title"));
-					// article.setNotice_content(rs.getString("notice_content"));
-					// article.setNotice_member(rs.getString("notice_member"));
-					// article.setNotice_date(rs.getTimestamp("notice_date"));
-
-					// 공지사항 등록 시 일정 시간동안 기호 표시 여부 설정
-					// extract() : 날짜의 일부분만 추출하는 sql function
-					sql = "select extract(day from systimestamp-tm) ingDay from (";
-					sql += "select to_timestamp((select notice_date from notice where notice_num=?)";
-					sql += ", 'yy/mm/dd hh24:mi:ss.ff') tm from dual)";
-
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, rs.getInt("notice_num"));
-
-					rs_isNew = pstmt.executeQuery();
-
-					if (rs_isNew.next()) {
-
-						if (rs_isNew.getInt("ingDay") < 1) {
-							// article.setIsNew(0);
-						} else {
-							// article.setIsNew(-1);
-						}
-
-					}
-
+					PromgrDataBean article = new PromgrDataBean();
+					
+					article.setPromgr_num(rs.getInt("promgr_num"));
+					article.setPromgr_name(rs.getString("promgr_name"));
+					article.setPromgr_content(rs.getString("promgr_content"));
+					article.setPromgr_date(rs.getTimestamp("promgr_date"));
+					article.setMem_num(rs.getString("mem_num"));
+					article.setFile_num(rs.getString("file_num"));
+					article.setChecklist_title_num(rs.getString("checklist_title_num"));
+					article.setChecklist_item_num(rs.getString("checklist_item_num"));
+					article.setComment_num(rs.getString("comment_num"));
+					article.setCom_num(rs.getInt("com_num"));
+					
 					articleList.add(article);
 
 				} while (rs.next());
@@ -184,29 +169,35 @@ public class ProMgrDBBean {
 	} // List getArticles(int endRow) end
 
 	// db로 부터 목록의 한 항목의 데이터를 호출
-	public ProMgrDataBean getArticle(int rowNum) throws Exception {
+	public PromgrDataBean getArticle(int rowNum) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ProMgrDataBean article = null;
+		PromgrDataBean article = null;
 
 		try {
 
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select * from notice where notice_num=?");
+			pstmt = conn.prepareStatement("select * from promgr where promgr_num=?");
 			pstmt.setInt(1, rowNum);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 
-				article = new ProMgrDataBean();
-				// article.setNotice_num(rs.getInt("notice_num"));
-				// article.setNotice_title(rs.getString("notice_title"));
-				// article.setNotice_content(rs.getString("notice_content"));
-				// article.setNotice_member(rs.getString("notice_member"));
-				// article.setNotice_date(rs.getTimestamp("notice_date"));
+				article = new PromgrDataBean();
+				
+				article.setPromgr_num(rs.getInt("promgr_num"));
+				article.setPromgr_name(rs.getString("promgr_name"));
+				article.setPromgr_content(rs.getString("promgr_content"));
+				article.setPromgr_date(rs.getTimestamp("promgr_date"));
+				article.setMem_num(rs.getString("mem_num"));
+				article.setFile_num(rs.getString("file_num"));
+				article.setChecklist_title_num(rs.getString("checklist_title_num"));
+				article.setChecklist_item_num(rs.getString("checklist_item_num"));
+				article.setComment_num(rs.getString("comment_num"));
+				article.setCom_num(rs.getInt("com_num"));
 
 			}
 
@@ -238,8 +229,8 @@ public class ProMgrDBBean {
 
 	} // NoticeDataBean getArticle(int rowNum) end
 
-	// 공지 작성 (관리자, 임원)
-	public int insertArticle(ProMgrDataBean article) throws Exception {
+	// 프로젝트 메니저 생성
+	public int insertArticle(PromgrDataBean article) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -252,17 +243,17 @@ public class ProMgrDBBean {
 		try {
 
 			conn = getConnection();
-
-			// 공지 삽입
+			
 			sql = "insert into ";
-			sql += "notice(notice_num,notice_title,notice_content,notice_member,notice_date) ";
-			sql += "values(notice_num.NEXTVAL,?,?,?,?)";
-
+			sql += "promgr(promgr_num,promgr_name,promgr_content,promgr_date,mem_num,com_num) ";
+			sql += "values(promgr_num.NEXTVAL,?,?,?,?,?)";
+			
 			pstmt = conn.prepareStatement(sql);
-			// pstmt.setString(1, article.getNotice_title());
-			// pstmt.setString(2, article.getNotice_content());
-			// pstmt.setString(3, article.getNotice_member());
-			// pstmt.setTimestamp(4, article.getNotice_date());
+			pstmt.setString(1, article.getPromgr_name());
+			pstmt.setString(2, article.getPromgr_content());
+			pstmt.setTimestamp(3, article.getPromgr_date());
+			pstmt.setString(4, article.getMem_num());
+			pstmt.setInt(5, article.getCom_num());
 
 			count = pstmt.executeUpdate();
 

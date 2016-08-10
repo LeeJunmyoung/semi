@@ -92,7 +92,7 @@ public class NoticeDBBean {
 				sql = "select notice_num,notice_title,notice_content,notice_member,notice_date,r from (";
 				sql += "select  notice_num,notice_title,notice_content,notice_member,notice_date,rownum r from (";
 				sql += "select notice_num,notice_title,notice_content,notice_member,notice_date from notice where com_num=? order by notice_num desc)) ";
-				sql += "where rownum<=?";
+				sql += "where r<=?";
 
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, com_num);

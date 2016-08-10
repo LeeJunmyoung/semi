@@ -1,4 +1,4 @@
-package proMgr;
+package promgr;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,19 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import proMgr_controller.ProMgrFormAction;
-
-
-
-public class ControllerUsingURIProMgr extends HttpServlet {
+public class ControllerUsingURIPromgr extends HttpServlet {
 
 	private Map commandMap = new HashMap();
 
 	public void init(ServletConfig config) throws ServletException {
 
-		String props = config.getInitParameter("propertyConfigProMgr");
-		
-		System.out.println("props ::: " + props);
+		String props = config.getInitParameter("propertyConfigPromgr");
 
 		Properties pr = new Properties();
 		FileInputStream f = null;
@@ -50,19 +44,15 @@ public class ControllerUsingURIProMgr extends HttpServlet {
 
 		while (keyIter.hasNext()) {
 			String command = (String) keyIter.next();
-			
-			System.out.println( "command ::: " + command);
-			
+
 			String className = pr.getProperty(command);
 
 			try {
 
 				Class commandClass = Class.forName(className);
 				Object commandInstance = commandClass.newInstance();
-				
+
 				commandMap.put(command, commandInstance);
-				
-				System.out.println("commandMap.put("+commandClass+", "+commandInstance+") ::: " + commandMap.get(command));
 
 			} catch (ClassNotFoundException e) {
 				throw new ServletException(e);
@@ -89,7 +79,7 @@ public class ControllerUsingURIProMgr extends HttpServlet {
 			throws ServletException, IOException {
 
 		String view = null;
-		ProMgrFormAction com = null;
+		PromgrFormAction com = null;
 
 		try {
 
@@ -100,7 +90,7 @@ public class ControllerUsingURIProMgr extends HttpServlet {
 				System.out.println("command ::: " + command);
 			}
 
-			com = (ProMgrFormAction) commandMap.get(command);
+			com = (PromgrFormAction) commandMap.get(command);
 
 			System.out.println("com ::: " + com);
 

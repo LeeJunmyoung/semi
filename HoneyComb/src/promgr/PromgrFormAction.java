@@ -1,10 +1,10 @@
-package proMgr_controller;
+package promgr;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public interface ProMgrFormAction {
+public interface PromgrFormAction {
 
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable;
 
-} // public interface CommandAction end
+} // public interface PromgrFormAction end

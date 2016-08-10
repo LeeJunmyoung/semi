@@ -28,7 +28,18 @@ $(document).bind("contextmenu", function(event) {
 }).bind("click", function(event) {
     $("div.cloud_menu").hide();
 });
-		
+
+$(function(){
+	$('#download').click(function(){
+		$("input[name=itemBox]:checked").each(function(){
+			 alert($(this).data('filename'));
+			 alert($(this).data('file_path'));
+			var fileVal = new Array();
+			fileVal.push($(this).val());
+			console.log(fileVal[1]);
+		})
+	})
+})
 </script>
 <title>Insert title here</title>
 <style type="text/css">
@@ -41,7 +52,7 @@ text-align: center;}
 <body>
 
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${folder}')">
-	<input type="button" name="download" value="다운로드">
+	<input type="button" name="download" value="다운로드" id="download">
 	<form name="searchform" action="">
 		<input type="text" name="search">
 		<input type="button" name="searchbutton" value="검색">
@@ -52,7 +63,7 @@ text-align: center;}
 		
 				<li style="display: inline;">
 					<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">
-						<input type="checkbox" id="${cloudlist.file_num}">
+						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-filename="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">

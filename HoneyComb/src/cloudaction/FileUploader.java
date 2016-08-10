@@ -22,7 +22,7 @@ public class FileUploader implements CommandActionCloud{
 			CloudDataBean cloudDB = new CloudDataBean();
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
-			String savefilepath = "E://cloud//";
+			String savefilepath = "D://cloud//";
 			HttpSession session = request.getSession();
 						
 			//세션입시설정

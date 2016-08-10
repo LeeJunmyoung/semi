@@ -1,4 +1,4 @@
-//���� ������ִ±��
+//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙獵짹占쏙옙
 package cloudaction;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,22 +16,22 @@ public class CreateFolder implements CommandActionCloud{
 		CloudDataBean cloudPro = new CloudDataBean();
 		HttpSession session  =  request.getSession();
 		request.setCharacterEncoding("utf-8");
-		//�ӽü���
+		//占쌈시쇽옙占쏙옙
 		session.setAttribute("com_num", "1");
 		session.setAttribute("name", "tester");
-		//�ӽü��� ��
+		//占쌈시쇽옙占쏙옙 占쏙옙
 		
 		
 		
-		//���� ���� �޾ƿ���
+		//占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨아울옙占쏙옙
 		String folder = (String)request.getParameter("folder");
-		//������ �޾ƿ���
+		//占쏙옙占쏙옙占쏙옙 占쌨아울옙占쏙옙
 		String file_name = (String)request.getParameter("foldername");
-		//com_num �޾ƿ���
+		//com_num 占쌨아울옙占쏙옙
 		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
-		//���� ���ε� �ѻ�� �޾ƿ���
+		//占쏙옙占쏙옙 占쏙옙占싸듸옙 占싼삼옙占� 占쌨아울옙占쏙옙
 		String file_uploader = (String)session.getAttribute("name");
-		//cloudPro�� �ֱ�
+		//cloudPro占쏙옙 占쌍깍옙
 
 		
 		
@@ -39,12 +39,12 @@ public class CreateFolder implements CommandActionCloud{
 		cloudPro.setFile_name(file_name);
 		cloudPro.setCom_num(com_num);
 		cloudPro.setFile_uploader(file_uploader);
-		//�ߺ���� Ȯ��
+		//占쌩븝옙占쏙옙占� 확占쏙옙
 		int folder_check = cloud.checkFolder(cloudPro);
 		if(folder_check == 0){
 			return"/cloudview/createfolder.jsp?name="+file_name;
 		}
-		//�ߺ���� Ȯ�� ��
+		//占쌩븝옙占쏙옙占� 확占쏙옙 占쏙옙
 	
 		cloud.createFolder(cloudPro);
 		return "/cloudview/createfolder.jsp";

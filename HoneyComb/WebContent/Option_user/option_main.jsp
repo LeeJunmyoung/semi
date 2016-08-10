@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<input type = "button" value="현재원" onclick="href.location='#'"/>
+<input type = "button" value="현재원" onclick="location.href='/HoneyComb/Option_user/option_check.jsp'"/>
 <c:if test="${com_pos_num==3 }">
 <input type = "button" value="가입승인" onclick="location.href='/HoneyComb/Option_user/company_accept_member.option'"/>
 </c:if>

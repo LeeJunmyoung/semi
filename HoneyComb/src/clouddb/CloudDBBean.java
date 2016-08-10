@@ -36,10 +36,10 @@ public class CloudDBBean {
 			
 			conn = getConnection();
 			
-			if(folder == ""){//¸ŞÀÎÀÏ°æ¿ì
+			if(folder == ""){//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½
 			pstmt =conn.prepareStatement("select * from cloud where com_num = ? and folder is null order by file_path desc");
 			pstmt.setInt(1, com_num);
-			}else{//Æú´õ ¾È¿¡ µé¾î¿Ã °æ¿ì
+			}else{//ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			pstmt = conn.prepareStatement("select * from cloud where com_num =? and folder = ? order by file_path desc");
 			pstmt.setInt(1, com_num);
 			pstmt.setString(2, folder);
@@ -92,13 +92,11 @@ public int cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		try{
-			//Áßº¹Ã¼Å© ÇÏ´Â ±â´É
+			//ï¿½ßºï¿½Ã¼Å© ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 			cloudDB.setFolder(folder);
 			int file = checkFolder(cloudDB);
-			if (file == 0 ){
-				return 0;
-			}
-			//Áßº¹Ã¼Å© ±â´É ³¡
+			
+			//ï¿½ßºï¿½Ã¼Å© ï¿½ï¿½ï¿½ ï¿½ï¿½
 			conn = getConnection();			
 			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?)");
 			pstmt.setString(1, cloudDB.getFile_name());
@@ -114,7 +112,9 @@ public int cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
 			
 			pstmt.executeUpdate();
 			conn.commit();
-			
+			if (file == 0 ){
+				return 0;
+			}
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -129,6 +129,7 @@ public int cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
 				} catch (SQLException ex) {
 				}
 		}
+		
 		return 1;
 	}
 
@@ -139,7 +140,7 @@ public void createFolder(CloudDataBean cloudPro)throws SQLException{
 
 		conn = getConnection();			
 		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?)");
-		//Æú´õÃ¹¹øÂ°·Î ¸¸µé±â
+		//ï¿½ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½Â°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		pstmt.setString(1, cloudPro.getFile_name());
 		pstmt.setString(2,cloudPro.getFile_uploader());
 		pstmt.setInt(3,cloudPro.getCom_num());
@@ -208,5 +209,74 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 	}
 	return 1;
 }
+
+public void renameItem(String item, String itemName)throws SQLException{
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	try{
+
+		conn = getConnection();
+		
+		
+		//íŒŒì¼ ê²½ë¡œì¼ê²½ìš°
+		String file_path = item;
+		pstmt =conn.prepareStatement("update cloud set file_name = ? where file_path=?");
+		pstmt.setString(1, itemName);
+		pstmt.setString(2, file_path);
+		
+		
+		pstmt.executeUpdate();
+		conn.commit();
+		
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+	}
 	
+}
+
+public void deleteItem(String iteminfo)throws SQLException{
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	try{
+
+		conn = getConnection();
+		
+		
+		//íŒŒì¼ ê²½ë¡œì¼ê²½ìš°
+		String file_path = iteminfo;
+		pstmt =conn.prepareStatement("delete from cloud where file_path = ?");
+		pstmt.setString(1, file_path);
+
+		
+		
+		pstmt.executeUpdate();
+		conn.commit();
+		
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+	}
+	
+}
 }

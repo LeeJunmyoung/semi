@@ -1,4 +1,4 @@
-//Æú´õ ¸¸µé¾îÁÖ´Â±â´É
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â±ï¿½ï¿½
 package cloudaction;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,22 +16,22 @@ public class CreateFolder implements CommandActionCloud{
 		CloudDataBean cloudPro = new CloudDataBean();
 		HttpSession session  =  request.getSession();
 		request.setCharacterEncoding("utf-8");
-		//ÀÓ½Ã¼³Á¤
+		//ï¿½Ó½Ã¼ï¿½ï¿½ï¿½
 		session.setAttribute("com_num", "1");
 		session.setAttribute("name", "tester");
-		//ÀÓ½Ã¼³Á¤ ³¡
+		//ï¿½Ó½Ã¼ï¿½ï¿½ï¿½ ï¿½ï¿½
 		
 		
 		
-		//ÇöÀç Æú´õ ¹Þ¾Æ¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 		String folder = (String)request.getParameter("folder");
-		//Æú´õ¸í ¹Þ¾Æ¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 		String file_name = (String)request.getParameter("foldername");
-		//com_num ¹Þ¾Æ¿À±â
+		//com_num ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
-		//ÆÄÀÏ ¾÷·Îµå ÇÑ»ç¶÷ ¹Þ¾Æ¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ñ»ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 		String file_uploader = (String)session.getAttribute("name");
-		//cloudPro¿¡ ³Ö±â
+		//cloudProï¿½ï¿½ ï¿½Ö±ï¿½
 
 		
 		
@@ -39,12 +39,12 @@ public class CreateFolder implements CommandActionCloud{
 		cloudPro.setFile_name(file_name);
 		cloudPro.setCom_num(com_num);
 		cloudPro.setFile_uploader(file_uploader);
-		//Áßº¹±â´É È®ÀÎ
+		//ï¿½ßºï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		int folder_check = cloud.checkFolder(cloudPro);
 		if(folder_check == 0){
 			return"/cloudview/createfolder.jsp?name="+file_name;
 		}
-		//Áßº¹±â´É È®ÀÎ ³¡
+		//ï¿½ßºï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½
 	
 		cloud.createFolder(cloudPro);
 		return "/cloudview/createfolder.jsp";

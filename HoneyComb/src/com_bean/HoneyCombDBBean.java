@@ -274,7 +274,7 @@ public class HoneyCombDBBean {
 	public List insertComplete(int com_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet rs = null;// test
 		HoneyCombDataBean comp = new HoneyCombDataBean();
 		List complAllList = null;
 		Temp_Company_table tct = null;
@@ -287,6 +287,10 @@ public class HoneyCombDBBean {
 			pstmt.executeUpdate();
 			
 			pstmt = conn.prepareStatement("delete from temp_com where com_num = ?");
+			pstmt.setInt(1, com_num);
+			pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement("insert into members select com_pose_num,com_pose_name where com_num = ?");
 			pstmt.setInt(1, com_num);
 			pstmt.executeUpdate();
 			

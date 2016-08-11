@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import LogInDB.LogOnDataBean;
+import com_bean.HoneyCombDBBean;
 
 public class OptionDBBean {
 
@@ -127,6 +128,60 @@ public class OptionDBBean {
 
 		}
 		
+	}
+	
+	public List memberList(int com_num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List memlist = null;
+		LogOnDataBean ldb = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select name,email,phone_num,com_dept_name,com_pos_name from members where com_num = ? ");
+			pstmt.setInt(1, com_num);
+
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				memlist = new ArrayList<LogOnDataBean>();
+				
+				do{
+					ldb = new LogOnDataBean();
+					ldb.setName(rs.getString("name"));	
+					ldb.setEmail(rs.getString("email"));
+					ldb.setPhone_num(String.valueOf(rs.getInt("phone_num")));
+					ldb.setCom_dept_name(rs.getString("com_dept_name"));
+					ldb.setCom_pos_name(rs.getString("com_pos_name"));
+					
+					memlist.add(ldb);
+				}while(rs.next());
+				
+				
+			}
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return memlist;
 	}
 	
 	

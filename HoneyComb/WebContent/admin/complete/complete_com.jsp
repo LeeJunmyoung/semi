@@ -100,6 +100,9 @@
 				</c:if>
 			</tbody>
 		</table>
+		<tr>
+		<td align="center"><input type="button" value="back" onclick="history.go(-1)"></td>
+		</tr>
 
 	</form>
 

@@ -8,7 +8,8 @@
 관리자 페이지
 <p>
 	<tr>
-		<td><input type="button" value="현황 확인"></td>
+		<td><input type="button" value="현황 확인"
+				onClick="javascript:window.location='/HoneyComb/memCheck/memCheck_Main.mc'"></td>
 	</tr>
 	<p>
 		<tr>

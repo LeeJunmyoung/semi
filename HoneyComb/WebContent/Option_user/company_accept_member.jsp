@@ -14,7 +14,7 @@
 					<td>${member.com_dept_name}</td>
 					<td>${member.com_pos_name}</td>
 					<td>
-					<input type="button" value="승인" onclick="window.open('/HoneyComb/Option_user/accept_member.option?wait_mem_num=${member.mem_num}&wait_mem_dept_num=${member.com_dept_num}&wait_pos_num=${member.com_pos_num})">
+					<input type="button" value="승인" onclick="window.open('/HoneyComb/Option_user/accept_member.option?wait_mem_num=${member.mem_num}&wait_mem_dept_num=${member.com_dept_num}&wait_pos_num=${member.com_pos_num}')">
 					<input type="button" value="거절" onclick="location.href='#'"></td>
 				</tr>
 

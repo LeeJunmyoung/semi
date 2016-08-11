@@ -32,8 +32,8 @@
 		프로젝트 명 <input type="text" name="promgr_title" size="40" maxlength="50" /> <br>
 		프로젝트 내용 <textarea name="promgr_content" rows="15" cols="30"></textarea> <br>
 		
-		<input type="reset" value="reset"> 
-		<input type="submit" value="submit">
+		<input type="reset" value="reset"/> 
+		<input type="submit" value="submit"/>
 
 	</form>
 	

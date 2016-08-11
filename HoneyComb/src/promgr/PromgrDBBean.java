@@ -7,15 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
+
+import oracle.net.aso.s;
 
 public class PromgrDBBean {
-	
+
 	private static PromgrDBBean instance = new PromgrDBBean();
 
 	private Connection getConnection() throws Exception {
 
 		String jdbcDriver = "jdbc:apache:commons:dbcp:/pool";
-		
+
 		return DriverManager.getConnection(jdbcDriver);
 
 	} // getConnection() end
@@ -25,7 +28,7 @@ public class PromgrDBBean {
 	}
 
 	// 전체 db에 입력된 행의 수
-	public int getArticleCount(int com_num) throws Exception {
+	public int getArticleCount(int com_num, String mem_num) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -37,8 +40,10 @@ public class PromgrDBBean {
 
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select count(*) from promgr where com_num=?");
+			pstmt = conn.prepareStatement("select count(*) from promgr where com_num=? and mem_num like ?");
 			pstmt.setInt(1, com_num);
+			pstmt.setString(2, "%" + mem_num + "%");
+
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -74,7 +79,7 @@ public class PromgrDBBean {
 	} // getArticleCount() end
 
 	// paging, db로 부터 여러 행 목록 호출
-	public List getArticles(int com_num, int start, int end) throws Exception {
+	public List getArticles(int com_num, String mem_num, int start, int end) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -90,12 +95,14 @@ public class PromgrDBBean {
 
 				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,r from (";
 				sql += "select  promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,rownum r from (";
-				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num from promgr where com_num=? order by promgr_num desc)) ";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num from promgr ";
+				sql += "where com_num=? and mem_num like ? order by promgr_num desc)) ";
 				sql += "where r<=?";
 
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, com_num);
-				pstmt.setInt(2, end);
+				pstmt.setString(2, "%" + mem_num + "%");
+				pstmt.setInt(3, end);
 
 				rs = pstmt.executeQuery();
 
@@ -103,13 +110,15 @@ public class PromgrDBBean {
 
 				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,r from (";
 				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num,rownum r from (";
-				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num from promgr where com_num=? order by promgr_num desc)) ";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,checklist_title_num,checklist_item_num,comment_num,com_num from promgr ";
+				sql += "where com_num=? and mem_num like ? order by promgr_num desc)) ";
 				sql += "where r>=? and r<=?";
 
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, com_num);
-				pstmt.setInt(2, start);
-				pstmt.setInt(3, end);
+				pstmt.setString(2, "%" + mem_num + "%");
+				pstmt.setInt(3, start);
+				pstmt.setInt(4, end);
 
 				rs = pstmt.executeQuery();
 
@@ -122,7 +131,7 @@ public class PromgrDBBean {
 				do {
 
 					PromgrDataBean article = new PromgrDataBean();
-					
+
 					article.setPromgr_num(rs.getInt("promgr_num"));
 					article.setPromgr_name(rs.getString("promgr_name"));
 					article.setPromgr_content(rs.getString("promgr_content"));
@@ -133,7 +142,7 @@ public class PromgrDBBean {
 					article.setChecklist_item_num(rs.getString("checklist_item_num"));
 					article.setComment_num(rs.getString("comment_num"));
 					article.setCom_num(rs.getInt("com_num"));
-					
+
 					articleList.add(article);
 
 				} while (rs.next());
@@ -169,7 +178,7 @@ public class PromgrDBBean {
 	} // List getArticles(int endRow) end
 
 	// db로 부터 목록의 한 항목의 데이터를 호출
-	public PromgrDataBean getArticle(int rowNum) throws Exception {
+	public PromgrDataBean getArticle(int rowNum, String mem_num) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -180,14 +189,16 @@ public class PromgrDBBean {
 
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select * from promgr where promgr_num=?");
+			pstmt = conn.prepareStatement("select * from promgr where promgr_num=? and mem_num like ?");
 			pstmt.setInt(1, rowNum);
+			pstmt.setString(2, "%" + mem_num + "%");
+
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 
 				article = new PromgrDataBean();
-				
+
 				article.setPromgr_num(rs.getInt("promgr_num"));
 				article.setPromgr_name(rs.getString("promgr_name"));
 				article.setPromgr_content(rs.getString("promgr_content"));
@@ -243,11 +254,11 @@ public class PromgrDBBean {
 		try {
 
 			conn = getConnection();
-			
+
 			sql = "insert into ";
 			sql += "promgr(promgr_num,promgr_name,promgr_content,promgr_date,mem_num,com_num) ";
 			sql += "values(promgr_num.NEXTVAL,?,?,?,?,?)";
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, article.getPromgr_name());
 			pstmt.setString(2, article.getPromgr_content());
@@ -284,5 +295,104 @@ public class PromgrDBBean {
 		return count;
 
 	} // insertArticle(BoardDataBean article) end
+
+	// paging, db로 부터 여러 행 목록 호출
+	public List getDataList(int promgr_num, String token) throws Exception {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String item_all = null;
+		StringTokenizer stz = null;
+		int[] item_list = null;
+		List articleList = null;
+		String sql = null;
+
+		try {
+
+			conn = getConnection();
+
+			pstmt = conn.prepareStatement("select * from promgr where promgr_num= ? ");
+			pstmt.setInt(1, promgr_num);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				item_all = rs.getString(token);
+
+				stz = new StringTokenizer(item_all, "/");
+
+				int idx = 0;
+				item_list = new int[stz.countTokens()];
+
+				while (stz.hasMoreTokens()) {
+					item_list[idx] = Integer.parseInt(stz.nextToken());
+					idx++;
+				} // while (stz.hasMoreTokens()) end
+
+				if (token == "mem_num") {
+
+					for (int i = 0; i < item_list.length; i++) {
+
+						pstmt = conn.prepareStatement("select * from members where mem_num = ? ");
+						pstmt.setInt(1, item_list[i]);
+
+						rs = pstmt.executeQuery();
+
+						if (rs.next()) {
+
+							articleList = new ArrayList();
+
+							do {
+
+								MemberListDataBean article = new MemberListDataBean();
+								
+								article.setMem_num(rs.getInt("mem_num"));
+								article.setMem_name(rs.getString("name"));
+								article.setMem_email(rs.getString("email"));
+								article.setMem_dept(rs.getString("com_dept_name"));
+
+								articleList.add(article);
+
+							} while (rs.next());
+
+						} // members if (rs.next()) end
+
+					} // for end
+
+				} else if (token == "file_num") {
+
+				} // if (token == "mem_num") end
+
+			} // promgr if (rs.next()) end
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return articleList;
+
+	} // List getArticles(int endRow) end
 
 } // public class NoticeDBBean end

@@ -18,4 +18,4 @@
 		<% response.sendRedirect("/HoneyComb/cloud/cloudForm.cloud"); %>
 		</c:if>
 	</body>
-</html>
+</html> 

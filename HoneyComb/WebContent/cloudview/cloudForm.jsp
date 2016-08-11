@@ -22,7 +22,7 @@ $(document).bind("contextmenu", function(event) {
   
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
-    "<p>다운로드</p>"+
+    "<p id='download'>다운로드</p>"+
     "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+    
     "<p>공유</p>"+    
     +"</div>")
@@ -76,16 +76,18 @@ text-align: center;}
 	<div class="cloudForm">
 	<ul>
 		<c:forEach items="${cloudList}" var="cloudlist">
-		
 				<li style="display: inline;">
-					<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">
-						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
-						<label for="${cloudlist.file_num}">
+
 						<c:choose>
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
+						<div style="width: 150px; display: inline-block;">
+						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
+						<label for="${cloudlist.file_num}">
 						<div class="file"><img src="../images/file.png" width="150px"></div>
 						</c:when>
 						<c:otherwise>
+						<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">
+						
 						<div class="file"><img src="../images/folder.png" width="150px"></div>
 						</c:otherwise>
 						</c:choose>

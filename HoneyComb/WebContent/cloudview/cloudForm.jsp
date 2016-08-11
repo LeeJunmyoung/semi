@@ -13,6 +13,9 @@
 
 $(document).bind("contextmenu", function(event) { 
     event.preventDefault();
+    if(!$("input[name=itemBox]:checked").length == 0){
+    	$("input:checkbox[name=itemBox]").prop("checked",false);
+	}
     if($("div.cloud_menu")!= null){
     	$("div.cloud_menu").hide();
     };
@@ -31,14 +34,27 @@ $(document).bind("contextmenu", function(event) {
 
 $(function(){
 	$('#download').click(function(){
+		
+		var itemBox = document.getElementsByName("itemBox");
+		if($("input[name=itemBox]:checked").length == 0){
+			alert("false");
+			return false;
+		}
 		$("input[name=itemBox]:checked").each(function(){
-			 alert($(this).data('filename'));
-			 alert($(this).data('file_path'));
-			var fileVal = new Array();
-			fileVal.push($(this).val());
-			console.log(fileVal[1]);
-		})
+			var file_name = $(this).data('file_name');
+			var file_path = $(this).data('file_path');
+			alert(file_name)
+			var url="/HoneyComb/cloud/cloudDownItem.cloud?file_name="+file_name+"&file_path="+file_path;
+			$(location).attr('href',url);
+		});
 	})
+	
+	$("input[name=itemBox]").click(function(){
+		
+    	$("input:checkbox[name=itemBox]").prop("checked",false);
+    	$(this).prop("checked", true)
+		
+	});
 })
 </script>
 <title>Insert title here</title>
@@ -63,7 +79,7 @@ text-align: center;}
 		
 				<li style="display: inline;">
 					<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">
-						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-filename="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
+						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">

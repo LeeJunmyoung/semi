@@ -1,4 +1,4 @@
-<%@page import="java.net.URLDecoder"%>
+ <%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -19,7 +19,7 @@ $(document).bind("contextmenu", function(event) {
     if($("div.cloud_menu")!= null){
     	$("div.cloud_menu").hide();
     };
-  
+	if($("test"))
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
     "<p id='download'>다운로드</p>"+
@@ -29,7 +29,7 @@ $(document).bind("contextmenu", function(event) {
         .appendTo("div.cloudForm")
         .css({top: event.pageY + "px", left: event.pageX + "px"});
 }).bind("click", function(event) {
-    $("div.cloud_menu").hide();
+    $("div.cloud_menu").hide();  
 });
 
 $(function(){
@@ -67,7 +67,7 @@ text-align: center;}
 </head>
 <body>
 
-	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${folder}')">
+	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')">
 	<input type="button" name="download" value="다운로드" id="download">
 	<form name="searchform" action="">
 		<input type="text" name="search">
@@ -77,10 +77,10 @@ text-align: center;}
 	<ul>
 		<c:forEach items="${cloudList}" var="cloudlist">
 				<li style="display: inline;">
-
-						<c:choose>
+					<div style="width: 150px; display: inline-block;"id="test">
+						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
-						<div style="width: 150px; display: inline-block;">
+						
 						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
 						<label for="${cloudlist.file_num}">
 						<div class="file"><img src="../images/file.png" width="150px"></div>

@@ -11,6 +11,15 @@
 	if(	$('#foldercheck').val() != ""){
 		alert("'"+'${param.name}'+"'"+"은 이미 있는 폴더입니다. 다른 폴더명을 입력해 주세요");
 	}
+	if($('#uploadcheck').val() == 'done'){
+		var result = confirm('파일을 더 업로드하시겠습니까?')
+		if(result){
+			$('#uploadcheck').val('true');
+		}else{
+			window.opener.document.location.reload();
+			window.close();
+		}
+	}
 })
 </script>
 
@@ -19,6 +28,8 @@
 <body>
 <form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('foldername')">
 <input type="text" name="foldername">
+<input type="hidden" value="${param.uploadcheck}" id="uploadcheck">
+uploadcheck::${uploadcheck}
 <input type="hidden" value="${param.name}" id="foldercheck">
 <input type="hidden" value="${param.folder}" name="folder">
 <input type="submit" value="폴더 생성">

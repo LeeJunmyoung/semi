@@ -181,6 +181,7 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null");
 			pstmt.setString(1, file_name);
 		}else{
+			
 		pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ?");
 		pstmt.setString(1, file_name);
 		pstmt.setString(2, folder);

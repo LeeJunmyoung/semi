@@ -14,7 +14,16 @@
 		var url = "/HoneyComb/cloudview/changeFilename.jsp?dupli=y";
 		$(location).attr('href',url);
 	}
-	$(window).unload( function () { alert("Bye now!"); } );
+	if($('#uploadcheck').val() == 'done'){
+		var result = confirm('파일을 더 업로드하시겠습니까?')
+		if(result){
+			$('#uploadcheck').val('true');
+		}else{
+			window.opener.document.location.reload();
+			window.close();
+		}
+	}
+	
 })
 </script>
 
@@ -25,6 +34,8 @@
 	업로드 파일을 선택해주세요<br>
 	
 	<input type="hidden" value="${param.filecheck}" id="filecheck">
+	<input type="hidden" value="${param.upload}" id="uploadcheck">
+	업로드:: ${param.upload}
 	<input type="file" name="uploadFile" id="uploadfile"><br>	
 	<input type="submit" name="upload" value="업로드" id="button">
 </form>

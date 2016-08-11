@@ -22,7 +22,7 @@ public class FileUploader implements CommandActionCloud{
 			CloudDataBean cloudDB = new CloudDataBean();
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
-			String savefilepath = "E://cloud//";
+			String savefilepath = "D://cloud//";
 			HttpSession session = request.getSession();
 						
 			//세션입시설정
@@ -63,6 +63,7 @@ public class FileUploader implements CommandActionCloud{
 		
 			//DB insert
 			String folder = request.getParameter("folder");
+
 			int filecheck = cloud.cloudInsert(cloudDB, folder);
 			//이름바꿔줄 file_num session으로 저장
 			session.setAttribute("file_path", cloudDB.getFile_path());

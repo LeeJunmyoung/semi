@@ -1,5 +1,4 @@
 function fileUploader(folder){
-	folder = encodeURIComponent(folder);
 	url="/HoneyComb/cloud/fileUploader.cloud?upload=true&folder="+folder;
 	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=550, height=200");
 }

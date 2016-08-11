@@ -22,7 +22,12 @@ $('#insertKey').keyup(function(){
 			$('#keyCheck').text('');
 			$('#keyCheck').html("<style='color:green'>인증키가 일치합니다<style>")
 			$("#ok").removeAttr("disabled");
-		} else{
+		} 
+		if(key == ""){
+			$('#keyCheck').text('');
+			$('#keyCheck').html("")
+		}
+		else{
 			$('#keyCheck').text('');
 			$('#keyCheck').html("<style='color:red'>인증키가 일치하지 않습니다<style>")
 		}
@@ -34,12 +39,12 @@ $('#insertKey').keyup(function(){
 </head>
 
 <body>
-      <p> ${param.email}로 인증번호가 전송되었습니다.</p>   
-
-인증번호를 입력해주세요<input type="text" id="insertKey"/>
+      <p> ${param.email}로 인증번호가 전송되었습니다.</p>
+      
+      <input type="text" id="insertKey" placeholder="인증번호를 입력해주세요"/>
 <form name="myform">
 <input type="hidden" name="email" value="${param.email}">
-<div id="keyCheck">인증번호를 입력해주세요</div>
+<div id="keyCheck"></div>
 <input type="hidden" name="check" value="y"/>
 <p><input type="button" id="ok" value="확인" disabled="disabled" onclick="sendChildValue()"/>
 <input type="button" value="닫기" onclick="frameclose()"/></p>

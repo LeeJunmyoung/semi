@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript">
+history.clear();
+</script>
 </head>
 <body>
 	<%
 		 response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); 
 		/* response.sendRedirect("/HoneyComb/notice/noticeMain.notice"); */
-	
 	%>
 </body>
 </html>

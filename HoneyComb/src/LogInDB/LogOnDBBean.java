@@ -38,7 +38,7 @@ public class LogOnDBBean {
 			// DriverManager.getConnection(jdbc:apache:commons:dbcp:/pool);
 			pstmt = conn.prepareStatement("insert into MEMBERS (mem_num, name, email, passwd, phone_num)values (logon_seq.nextval,?,?,?,?)");
 			//�ʹ� insert��
-			pstmt.setString(1,member.getName());
+			pstmt.setString(1, member.getName());
 			pstmt.setString(2, member.getEmail());
 			pstmt.setString(3, member.getPasswd());
 			pstmt.setString(4, member.getPhone_num());

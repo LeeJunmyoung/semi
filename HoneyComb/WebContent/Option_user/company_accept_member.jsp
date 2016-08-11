@@ -26,6 +26,6 @@
 <h1>승인대기자가 없습니다 </h1>
 
 </c:if>
-
+<input type="button" value="back" onclick="history.go(-1)">
 </body>
 </html>

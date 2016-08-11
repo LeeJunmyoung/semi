@@ -13,10 +13,11 @@ public class Invite_form implements CommandAction_Chatting{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
 		int com_num = (int)request.getSession().getAttribute("com_num");
+		int mem_num = (int)request.getSession().getAttribute("mem_num");
 		ArrayList<LogOnDataBean> list = new ArrayList<>();
 		
 		Chatting_DBBean chatdb = Chatting_DBBean.getInstance();
-		list = chatdb.view_Com_Member(com_num);
+		list = chatdb.view_Com_Member(mem_num,com_num);
 		
 		request.setAttribute("chat_members", list);
 		

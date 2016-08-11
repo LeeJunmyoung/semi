@@ -42,17 +42,6 @@ public class Home_Frame implements Layout_CommandAction{
 	
 		
 		
-		System.out.println("com_num: "+com_num);
-		System.out.println("com_dept_num: "+com_dept_num);
-		System.out.println("comcom_pos_num_num: "+com_pos_num);
-		System.out.println("name: "+name);
-		System.out.println("email: "+email);
-		System.out.println("phone_num: "+phone_num);
-		System.out.println("com_name: "+com_name);
-		System.out.println("com_dept_name: "+com_dept_name);
-		System.out.println("com_pos_name: "+com_pos_name);
-		
-		
 
 		int rowSize = 5; // 한 페이지의 글 갯수
 		int count = 0; // 전체 글 갯수

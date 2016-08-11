@@ -18,7 +18,7 @@ public class MenuViewPreparer implements ViewPreparer {
 		
 		userMenus.add(new MenuItem("cloud", "#"));
 		userMenus.add(new MenuItem("option", "/HoneyComb/Option_user/option_main.jsp"));
-		userMenus.add(new MenuItem("log out", "#"));
+		
 		attrContext.putAttribute("userMenus", new Attribute(userMenus), true);
 
 	}

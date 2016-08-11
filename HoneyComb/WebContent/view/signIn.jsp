@@ -41,6 +41,43 @@ $('#passfunc').keyup(function(){
 	});
 });
 /* 패스워드 일치 확인끝 */
+
+
+
+
+
+
+
+function filter(){
+	if($('#phone1').val().length==3){
+	
+		$('#phone2').focus();
+	 
+	
+	return false;
+
+	}
+	if($('#phone2').val().length==4){
+		
+		$('#phone3').focus();
+	 
+	
+	return false;
+
+	}
+}
+
+
+function filter1(){
+	if($('#phone2').val().length==4){
+		
+		$('#phone3').focus();
+	 
+	
+	return false;
+
+	}
+}
 </script>
 <title>회원가입</title>
 </head>
@@ -63,9 +100,9 @@ $('#passfunc').keyup(function(){
     	
     <!-- 전화번호 입력창 -->
     <p><input type="text" placeholder="name" name="name"/></p>
-    <p><input type="text" placeholder="phone1" name="pnum1"/> - 
-       <input type="text" placeholder="phone2" name="pnum2"/> - 
-       <input type="text" placeholder="phone3" name="pnum3"/></p>
+    <p><input type="text" placeholder="phone1" name="pnum1" maxlength="3" id='phone1' onkeyup='{filter();return false}' onkeypress='javascript:if(event.keyCode==3){ filter(); return false;}' /> - 
+       <input type="text" placeholder="phone2" name="pnum2" maxlength="4" id='phone2' onkeyup='{filter1();return false}' onkeypress='javascript:if(event.keyCode==4){ filter1(); return false;}' /> - 
+       <input type="text" placeholder="phone3" name="pnum3" maxlength="4" id='phone3' /></p>
      <p>
      <input type="submit" value="회원가입" name="signin"/></p>
 </form>

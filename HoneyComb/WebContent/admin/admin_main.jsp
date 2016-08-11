@@ -18,10 +18,6 @@
 		</tr>
 	<p>
 		<tr>
-			<td><input type="button" value="리포트 확인"></td>
-		</tr>
-	<p>
-		<tr>
 			<td><input type="button" value="관리자 공지 보내기"></td>
 		</tr>
 </body>

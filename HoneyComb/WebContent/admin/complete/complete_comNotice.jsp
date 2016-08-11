@@ -1,11 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>write</title>
-
+<title>관리자 공지작성 폼</title>
 <script>
 	function writeSave() {
 
@@ -27,7 +25,7 @@
 </head>
 <body>
 
-	<form method="post" name="writeform" action="/HoneyComb/notice/noticeWritePro.notice" onsubmit="return writeSave()">
+	<form method="post" name="writeform" action="/HoneyComb/com_complete/complete_comNoticeAction.admin" onsubmit="return writeSave()">
 	
 		글제목 <input type="text" name="notice_title" size="40" maxlength="50" /> <br>
 		글내용 <textarea name="notice_content" rows="15" cols="30"></textarea> <br>

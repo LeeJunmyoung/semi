@@ -14,7 +14,7 @@
 		<c:forEach var="menu" items="${userMenus}">
 			<li><a href="${menu.link}">${menu.name}</a></li>
 		</c:forEach>
-
+		<li><a  href="/HoneyComb/Option_user/logout_page.jsp" >log out</a></li>
 	</ul>
 
 </body>

@@ -13,7 +13,7 @@
 	<form action="/HoneyComb/coin/MailCheck.coin" onsubmit="return checkEmail()" name="myform">
 		<input type="text" placeholder="email을 입력해주세요" name="email"> <input type="submit" value="확인">
 		<br> 
-		<div id="clicktext"><a href="frameclose()">닫기</a></div>
+		<div id="clicktext"><input type="button" onclick="window.close()" value="닫기"></div>
 	</form>
 
 

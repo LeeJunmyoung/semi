@@ -26,25 +26,28 @@ public class Chatting_DBBean {
 		String jdbcDriver = "jdbc:apache:commons:dbcp:/pool";
 		return DriverManager.getConnection(jdbcDriver);
 	}
-	
-	public ArrayList view_Com_Member(int com_num){
+	//회사 멤버 초대하기 위한 메서드
+	public ArrayList view_Com_Member(int mem_num, int com_num){
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		LogOnDataBean ldb = new LogOnDataBean();
+		LogOnDataBean ldb = null;
 		ArrayList<LogOnDataBean> list = null;
 		try {
 			conn = getConnection();
-			String sql ="select * from members where com_num = ?";
+			String sql ="select * from members where not mem_num = ? and com_num = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, com_num);
+			pstmt.setInt(1, mem_num);
+			pstmt.setInt(2, com_num);
 			rs = pstmt.executeQuery();
+			list = new ArrayList<>();
 			if(rs.next()){
 				
 				do{
-				list = new ArrayList<>();
+				ldb = new LogOnDataBean();
+				ldb.setMem_num(rs.getInt("mem_num"));
 				ldb.setName(rs.getString("name"));
 				ldb.setCom_dept_name(rs.getString("com_dept_name"));
 				ldb.setCom_pos_name(rs.getString("com_pos_name"));
@@ -65,6 +68,9 @@ public class Chatting_DBBean {
 		
 		return list;
 	}
+	
+
+	
 	
 	
 	

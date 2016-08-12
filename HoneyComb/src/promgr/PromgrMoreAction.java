@@ -12,10 +12,11 @@ public class PromgrMoreAction implements PromgrFormAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		
+
 		String pageNum = request.getParameter("pageNum"); // 해당 페이지 번호
 		int com_num = (int) request.getSession().getAttribute("com_num"); // 회사 번호
-		String mem_num = String.valueOf(request.getSession().getAttribute("mem_num")); // 회원 번호
+		String mem_num = String.valueOf(request.getSession().getAttribute("mem_num")); // 회원
+																						// 번호
 
 		if (pageNum == null) {
 			pageNum = "1";
@@ -41,7 +42,8 @@ public class PromgrMoreAction implements PromgrFormAction {
 			articleList = Collections.EMPTY_LIST;
 		}
 
-		number = promgr_count - (currentPage - 1) * pageSize; // 프로젝트 목록에 표시할 프로젝트 번호
+		// 프로젝트 목록에 표시할 프로젝트 번호
+		number = promgr_count - (currentPage - 1) * pageSize;
 
 		// 해당 view에서 사용할 속성
 		request.setAttribute("currentPage", new Integer(currentPage));
@@ -51,9 +53,9 @@ public class PromgrMoreAction implements PromgrFormAction {
 		request.setAttribute("pageSize", new Integer(pageSize));
 		request.setAttribute("number", new Integer(number));
 		request.setAttribute("articleList", articleList);
-		
+
 		return "/promgr/promgrMore.jsp";
-		
+
 	} // String requestPro end
-	
+
 } // class ProMgrMoreAction implements ProMgrFormAction end

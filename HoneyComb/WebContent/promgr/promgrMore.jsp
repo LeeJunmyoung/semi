@@ -105,7 +105,7 @@ dl dd {
 					<c:forEach var="article" items="${articleList}">
 
 						<dt>
-							<div>프로젝트 명 : ${article.promgr_name}</div>
+							<div>프로젝트 명 : ${article.promgr_name} (${article.promgr_num})</div>
 						</dt>
 
 						<dd>

@@ -2,11 +2,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
+
 <html>
 <head>
 <title>member editor</title>
 
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+
 <script>
+$(document) .ready(
+		function() {
+		$("#mem_search_result div").css('display','none');
+		});
+
+
+function filter(){
+	
+	if($('#mem_name_filter').val()==""){
+		$("#mem_search_result div").css('display','none');}			
+	else{
+		$("#mem_search_result div").css('display','none');
+		$("#mem_search_result div[name*='"+$('#mem_name_filter').val()+"']").css('display','');
+	}
+	
+	return false;
+	
+}	
+
 	function writeCheck() {
 		if (document.getElementById("mem_name").value == "") {
 			alert("참여자명을 입력하세요");
@@ -18,15 +41,29 @@
 
 	function addView() {
 		if (document.getElementById("add").checked == true) {
-			document.getElementById("member_search").hidden = false;
+			document.getElementById("mem_list").hidden = true;
+			document.getElementById("mem_search_input").hidden = false;
+			document.getElementById("mem_search_result").hidden = false;
 		}
 	}
 
 	function delView() {
 		if (document.getElementById("del").checked == true) {
-			document.getElementById("member_search").hidden = true;
+			document.getElementById("mem_list").hidden = false;
+			document.getElementById("mem_search_input").hidden = true;
+			document.getElementById("mem_search_result").hidden = true;
 		}
 	}
+	
+	function memberUpdate(promgr_num, actionChecked) { // 참여자 수정
+		
+		url = "/HoneyComb/promgr/promgrMemberEditorPro.promgr?promgr_num="+promgr_num+"&actionChecked="+actionChecked;
+		window.open(
+						url,
+						"post",
+						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
 </script>
 
 </head>
@@ -35,49 +72,46 @@
 
 	<div id="tab_editor">
 
-		add <input type="radio" id="add" name="tab_editor" onclick="addView()" checked="true" />
-		del <input type="radio" id="del" name="tab_editor" onclick="delView()" />
+		add <input type="radio" id="add" name="tab_editor" onchange="addView()" checked="true" />
+		del <input type="radio" id="del" name="tab_editor" onchange="delView()" />
 
 	</div>
 
-	<form id="member_search" method="post"
-		action="/HoneyComb/promgr/promgrMemberEditorPro.promgr"
-		onsubmit="return writeCheck()">
+	<div id="mem_search_input">
+	
+		참여자 명 : <input type="text" id="mem_name_filter"
+			onkeyup='{filter();return false}'
+			onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}' />
+			
+	</div>
 
-		<div>
-			참여자 명 : <input type="text" id="mem_name"/>
-			<input type="submit" value="찾기"/>
-		</div>
+	<div id="mem_search_result">
 
-	</form>
+		<c:forEach var="item" items="${ memberSearchList }">
 
-	<div id="mem_list">
-		<!-- 회원 번호 가져와서 이름 select해서 list화 -->
+			<div id="mem_search_item" name="${item.mem_name}">
+				<input type="checkbox" name="${item.mem_num}" /> ${item.mem_num} / ${item.mem_name} / ${item.mem_email} / ${item.mem_pos}
+			</div>
+
+		</c:forEach>
+
+		<input type="button" value="add" onclick="memberUpdate(${promgr_num}, '1')" />
+
+	</div>
+
+	<div id="mem_list" hidden="true">
 
 		<c:forEach var="item" items="${ memberList }">
 
-			<input type="checkbox">${item.mem_num}/${item.mem_name}</input>
-			<br />
+			<div>
+				<input type="checkbox" name="${item.mem_num}">${item.mem_num} / ${item.mem_name} / ${item.mem_email} / ${item.mem_pos}
+			</div>
 
 		</c:forEach>
+
+		<input type="button" value="delete" onclick="memberUpdate(${promgr_num}, '-1')" />
 
 	</div>
-
-	<c:if test="${ empty comList }">
-
-		<div id="search" align="center">검색된 결과가 없습니다</div>
-
-	</c:if>
-
-	<c:if test="${ !empty comList }">
-
-		<c:forEach var="search" items="${ comList }">
-		
-			${search.com_name}&nbsp; ${search.com_add}&nbsp; ${search.com_phone}&nbsp;
-			
-		</c:forEach>
-
-	</c:if>
 
 </body>
 

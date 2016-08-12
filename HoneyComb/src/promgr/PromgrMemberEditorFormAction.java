@@ -12,14 +12,17 @@ public class PromgrMemberEditorFormAction implements PromgrFormAction {
 
 		int promgr_num = Integer.parseInt(request.getParameter("promgr_num"));
 		
-		List memberList = null;
 		PromgrDBBean dbPro = PromgrDBBean.getInstance(); // DB처리
+		List memberList = dbPro.getMemberDataList(promgr_num);
+		List memberSearchList = dbPro.getMemberSearchList(promgr_num);
 		
-		memberList = dbPro.getDataList(promgr_num, "mem_num");
+		System.out.println(memberSearchList.size());
 		
 		// 해당 view에서 사용할 속성
+		request.setAttribute("promgr_num", promgr_num);
 		request.setAttribute("memberList", memberList);
-
+		request.setAttribute("memberSearchList", memberSearchList);
+		
 		return "/promgr/PromgrMemberEditorForm.jsp";
 
 	} // String requestPro end

@@ -7,7 +7,7 @@ public class MemberListDataBean {
 	private int mem_num; // 회원 번호
 	private String mem_name; // 회원 이름
 	private String mem_email; // 회원 이메일
-	private String mem_dept; // 회원 부서
+	private String mem_pos; // 회원 부서
 
 	public int getMem_num() {
 		return mem_num;
@@ -33,12 +33,12 @@ public class MemberListDataBean {
 		this.mem_email = mem_email;
 	}
 
-	public String getMem_dept() {
-		return mem_dept;
+	public String getMem_pos() {
+		return mem_pos;
 	}
 
-	public void setMem_dept(String mem_dept) {
-		this.mem_dept = mem_dept;
+	public void setMem_pos(String mem_pos) {
+		this.mem_pos = mem_pos;
 	}
 
 } // public class ProMgrDataBean end

@@ -14,6 +14,7 @@ public class Complete_ComNoticeAction implements CommandAction{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
 		request.setCharacterEncoding("utf-8");
+		System.out.println("Complete_ComNoticeAction 실행중");
 
 		NoticeDataBean article = new NoticeDataBean();article.setNotice_title(request.getParameter("notice_title"));
 		article.setNotice_content(request.getParameter("notice_content"));
@@ -29,12 +30,14 @@ public class Complete_ComNoticeAction implements CommandAction{
 		if (notice_insert_count > 0) {
 			onloadCheck = true; // reflash 여부 결정
 		}
-
+		
+		System.out.println("오심");
+		
 		// 해당 view에서 사용할 속성
 		request.setAttribute("notice_insert_count", notice_insert_count);
 		request.setAttribute("notice_onloadCheck", onloadCheck);
 
-		return "/notice/noticeWritePro.jsp";
+		return "/page_layout/home.jsp";
 	}
 
 }

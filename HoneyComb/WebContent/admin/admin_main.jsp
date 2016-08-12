@@ -18,7 +18,8 @@
 		</tr>
 	<p>
 		<tr>
-			<td><input type="button" value="관리자 공지 보내기"></td>
+			<td><input type="button" value="관리자 공지 보내기"
+			onClick="javascript:window.location='/HoneyComb/admin/complete/complete_comNotice.jsp'"></td>
 		</tr>
 </body>
 </html>

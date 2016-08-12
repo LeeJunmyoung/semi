@@ -10,29 +10,41 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="/HoneyComb/cloudview/cloudScript.js"  type="text/javascript"></script>
 <script>
-
+$(function(){
+	
 $(document).bind("contextmenu", function(event) { 
     event.preventDefault();
+    var data;
+    $('li').contextmenu(function(){
+		/* alert("thisindex::"+$('li').index(this)); */
+		/* $("li:eq("+index+")").find("input:checkbox[name=itemBox]").prop("checked",true);  */
+		var index = $('li').index(this);
+			  $("input:checkbox[name=itemBox]").prop("checked",false);  
+			$(this).find("input:checkbox[name=itemBox]").prop("checked",true); 
+			
+    });
+    
     if(!$("input[name=itemBox]:checked").length == 0){
-    	$("input:checkbox[name=itemBox]").prop("checked",false);
-	}
+    	
+	};   
+    
+	
     if($("div.cloud_menu")!= null){
     	$("div.cloud_menu").hide();
     };
 	if($("test"))
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
-    "<p id='download'>다운로드</p>"+
+    "<a href="+"javascript:download()"+"><p>다운로드</p></a>"+
     "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+    
     "<p>공유</p>"+    
     +"</div>")
         .appendTo("div.cloudForm")
         .css({top: event.pageY + "px", left: event.pageX + "px"});
 }).bind("click", function(event) {
-    $("div.cloud_menu").hide();  
+    $("div.cloud_menu").hide(); 
 });
-
-$(function(){
+	
 	$('#download').click(function(){
 		
 		var itemBox = document.getElementsByName("itemBox");
@@ -50,12 +62,12 @@ $(function(){
 	})
 	
 	$("input[name=itemBox]").click(function(){
-		
     	$("input:checkbox[name=itemBox]").prop("checked",false);
     	$(this).prop("checked", true)
 		
 	});
-})
+
+});
 </script>
 <title>Insert title here</title>
 <style type="text/css">
@@ -80,7 +92,7 @@ text-align: center;}
 					<div style="width: 150px; display: inline-block;"id="test">
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
-						
+
 						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
 						<label for="${cloudlist.file_num}">
 						<div class="file"><img src="../images/file.png" width="150px"></div>

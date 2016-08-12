@@ -43,7 +43,7 @@ public class CreateFolder implements CommandActionCloud{
 		int folder_check = cloud.checkFolder(cloudPro);
 		if(folder_check == 0){
 			return"/cloudview/createfolder.jsp?name="+file_name;
-		}
+		} 
 		//占쌩븝옙占쏙옙占� 확占쏙옙 占쏙옙
 	
 		cloud.createFolder(cloudPro);

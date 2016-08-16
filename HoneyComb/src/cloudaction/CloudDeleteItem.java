@@ -15,8 +15,18 @@ public class CloudDeleteItem implements CommandActionCloud{
 		HttpSession session = request.getSession();
 		CloudDBBean cloudDB = CloudDBBean.getInstance();
 		
+		
+		
+		
 		//file_path 받아오는 기능
 		String file_path = (String)session.getAttribute("file_path");
+		//세션에 없을 경우
+		String returnp = "/cloudview/changeFilename.jsp";
+		if(file_path == null){
+			file_path = request.getParameter("file_path");
+			returnp = "/cloudview/cloudindex.jsp";
+		}
+		System.out.println(file_path);
 		File f = new File(file_path);
 		f.delete();
 		
@@ -28,7 +38,7 @@ public class CloudDeleteItem implements CommandActionCloud{
 		session.removeAttribute("file_path");
 		
 		
-		return "/cloudview/changeFilename.jsp";
+		return returnp;
 	}
 
 }

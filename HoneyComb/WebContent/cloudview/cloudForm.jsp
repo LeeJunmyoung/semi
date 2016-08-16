@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="/HoneyComb/cloudview/cloudScript.js"  type="text/javascript"></script>
-<script>
+<script type="text/javascript">
 $(function(){
 	
 $(document).bind("contextmenu", function(event) { 
@@ -35,8 +35,9 @@ $(document).bind("contextmenu", function(event) {
 	if($("test"))
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
-    "<a href="+"javascript:download()"+"><p>다운로드</p></a>"+
-    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+    
+    "<a  href='javascript:download()'><p >다운로드</p></a>"+
+    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+ 
+    "<a href ="+"javascript:deleteitem()"+"><p>삭제</p> </a>"+
     "<p>공유</p>"+    
     +"</div>")
         .appendTo("div.cloudForm")
@@ -45,8 +46,8 @@ $(document).bind("contextmenu", function(event) {
     $("div.cloud_menu").hide(); 
 });
 	
-	$('#download').click(function(){
-		
+	 $('#download').click(function(){
+		alert("test");
 		var itemBox = document.getElementsByName("itemBox");
 		if($("input[name=itemBox]:checked").length == 0){
 			alert("false");
@@ -61,11 +62,6 @@ $(document).bind("contextmenu", function(event) {
 		});
 	})
 	
-	$("input[name=itemBox]").click(function(){
-    	$("input:checkbox[name=itemBox]").prop("checked",false);
-    	$(this).prop("checked", true)
-		
-	});
 
 });
 </script>
@@ -80,7 +76,7 @@ text-align: center;}
 <body>
 
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')">
-	<input type="button" name="download" value="다운로드" id="download">
+	<input type="button" name="download" value="다운로드" onclick="download()">
 	<form name="searchform" action="">
 		<input type="text" name="search">
 		<input type="button" name="searchbutton" value="검색">

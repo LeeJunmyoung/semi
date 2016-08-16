@@ -15,6 +15,7 @@
 		</c:if>
 	
 		<c:if test="${!empty mem_num}">
+		
 		<% response.sendRedirect("/HoneyComb/cloud/cloudForm.cloud"); %>
 		</c:if>
 	</body>

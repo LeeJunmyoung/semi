@@ -17,7 +17,6 @@ public class CloudRenameItem implements CommandActionCloud{
 		//변수받아옴
 		String itemName = (String)request.getParameter("itemName");
 		System.out.println("받아옴:"+itemName);
-		
 		cloudDB.renameItem(file_path, itemName);
 		session.removeAttribute("file_path");
 		

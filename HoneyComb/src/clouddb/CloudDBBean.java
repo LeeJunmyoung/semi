@@ -88,15 +88,15 @@ public class CloudDBBean {
 		return cloud;
 		
 	}
-public int cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
+public int cloudInsert(CloudDataBean cloudDB)throws SQLException{
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		try{
-			//�ߺ�üũ �ϴ� ���
-			cloudDB.setFolder(folder);
+			
+			
 			int file = checkFolder(cloudDB);
 			
-			//�ߺ�üũ ��� ��
+			
 			conn = getConnection();			
 			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?)");
 			pstmt.setString(1, cloudDB.getFile_name());
@@ -104,11 +104,7 @@ public int cloudInsert(CloudDataBean cloudDB, String folder)throws SQLException{
 			pstmt.setString(3, cloudDB.getFile_uploader());
 			pstmt.setString(4, String.valueOf(cloudDB.getFile_size()));
 			pstmt.setInt(5, cloudDB.getCom_num());
-			if(folder == null){
-				pstmt.setString(6, "");
-			}else{
-				pstmt.setString(6, folder);
-			}
+			pstmt.setString(6, cloudDB.getFolder());
 			
 			pstmt.executeUpdate();
 			conn.commit();
@@ -176,17 +172,30 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 		
 		String folder = cloudPro.getFolder();
 		String file_name = cloudPro.getFile_name();
-	
+		String file_path = cloudPro.getFile_path();
+		if(file_path == null){
 		if (folder == ""){
-			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null");
+			
+			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null and file_path is null");
 			pstmt.setString(1, file_name);
 		}else{
 			
-		pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ?");
+		pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ? and file_path is null");
 		pstmt.setString(1, file_name);
 		pstmt.setString(2, folder);
 		}
-		
+		} else{
+			if (folder == ""){
+				
+				pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null");
+				pstmt.setString(1, file_name);
+			}else{
+				
+			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ?");
+			pstmt.setString(1, file_name);
+			pstmt.setString(2, folder);
+			}
+		}
 		
 		rs = pstmt.executeQuery();
 		if(rs.next()){

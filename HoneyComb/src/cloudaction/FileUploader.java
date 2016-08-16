@@ -19,10 +19,16 @@ public class FileUploader implements CommandActionCloud{
 		
 		
 		if (request.getParameter("upload")==null){
+			//기본설정
+			String filename= null;//file_name에 입력될 값
+			String oldPath = null;//multipart 가 설정한 처 경로
+			String newPath = null;//바꿀Path
+			File file = null;
 			CloudDataBean cloudDB = new CloudDataBean();
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
-			String savefilepath = "D://cloud//";
+			//저장 기본경로
+			String savefilepath = "E://cloud//";
 			HttpSession session = request.getSession();
 						
 			//세션입시설정
@@ -31,60 +37,58 @@ public class FileUploader implements CommandActionCloud{
 			session.setAttribute("name", "tester");
 			//파일먼저 업로드
 			MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*100,"utf-8");
+			//기본경로 받기
+			file = mr.getFile("uploadFile");
+			String tempPath = String.valueOf(file);//바꿀 파일
+			oldPath = tempPath.replace("\\", "/");//escape 연산때문에 정리
 			
+			//작성한 파일이름
+			filename = mr.getParameter("filename");
+			//파일이름을 작성하지 않았을 경우
+			if(filename.length() == 0){
+				int i = oldPath.lastIndexOf('.');//확장자
+				int j = oldPath.lastIndexOf('/');//경로
+				String tempoldPath = oldPath.substring(0, i);//확장자 지우기
+				filename = tempoldPath.substring(j+1);//파일경로 지우기
+			}
 			
-			File file = mr.getFile("uploadFile");
-			String filename = String.valueOf(file);
-			
+			//파일경로 재설정
 			CreateFilePath createfilePath =  CreateFilePath.getInstance();
-			String oldPath = filename.replace("\\", "/");
-			cloudDB = tempInsert(cloudDB, request);
-			
-			
-			
-			cloudDB = createfilePath.FilePath(cloudDB, oldPath);
-			
-			String newfilename = cloudDB.getFile_path();
-			int i = 0;
-			i = filename.lastIndexOf(".");
-			String realFileName = newfilename;
-			if(i != -1){
-			realFileName = newfilename+filename.substring(i,filename.length());}
-			
-			File oldfile = new File(filename);
-			File newfile = new File(savefilepath+realFileName);
+			newPath = createfilePath.FilePath(oldPath,filename, request);
+					
+			//파일이름 변경
+			File oldfile = new File(oldPath);
+			File newfile = new File(newPath);
 			oldfile.renameTo(newfile);
 			
-			String file_path = String.valueOf(newfile);
-			
-			
+			//dataBean 에 저장
+				//session 불러오기
+				int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
+				String name = (String)session.getAttribute("name");
+				String folder = request.getParameter("folder");
+			cloudDB.setFile_name(filename);
+			cloudDB.setFile_path(newPath);
+			cloudDB.setFile_uploader(name);
 			cloudDB.setFile_size((int)newfile.length());
-			cloudDB.setFile_path(file_path);
+			cloudDB.setCom_num(com_num);
+			cloudDB.setFolder(folder);
+			//DBinsert
+			int filecheck = cloud.cloudInsert(cloudDB);
 		
-			//DB insert
-			String folder = request.getParameter("folder");
-
-			int filecheck = cloud.cloudInsert(cloudDB, folder);
+		
 			//이름바꿔줄 file_num session으로 저장
 			session.setAttribute("file_path", cloudDB.getFile_path());
 			
 			if(filecheck == 0){
 				return "/cloudview/uploadForm.jsp?filecheck="+cloudDB.getFile_name();
 			}else{
-				return "/cloudview/changeFilename.jsp";
+				return "/cloudview/uploadForm.jsp?upload=done";
 			}
 		
 			}
 		return "/cloudview/uploadForm.jsp";
 	}
-	private CloudDataBean tempInsert(CloudDataBean cloudDB, HttpServletRequest request){
-		HttpSession session = request.getSession();
-		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
-		String name = (String)session.getAttribute("name");
-		cloudDB.setCom_num(com_num);
-		cloudDB.setFile_uploader(name);
-		return cloudDB;
-	}
+
 }
 
 /*?占쎈쐻占쎈짗占쎌굲占쎈쐻�뜝占�?(xxxxxx)com_num(xxxx), mem_num(xxxxxx), file�뵓怨뺣쐡占쎄퉰(xxxxxx)

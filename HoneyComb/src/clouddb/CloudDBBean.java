@@ -187,13 +187,15 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 		} else{
 			if (folder == ""){
 				
-				pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null");
+				pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null and file_path = ?");
 				pstmt.setString(1, file_name);
+				pstmt.setString(2, file_path);
 			}else{
 				
-			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ?");
+			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ? and file_path = ?");
 			pstmt.setString(1, file_name);
 			pstmt.setString(2, folder);
+			pstmt.setString(3, file_path);
 			}
 		}
 		

@@ -7,7 +7,7 @@
 <title>채팅 멤버 추가</title>
 <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 <script type="text/javascript">
-
+$("input", opener.document).css("color","black");
 
 
 function filter(){
@@ -33,7 +33,7 @@ function filter(){
 	<br>
 <div id = "search_member">
 
-<form action="/HoneyComb/Chatting/Invite_member.chat"  method="post" onsubmit="#" >
+<form action="/HoneyComb/Chatting/Invite_member.chat"  method="post" >
 		<table border = "1px">
 		
 			<tr>

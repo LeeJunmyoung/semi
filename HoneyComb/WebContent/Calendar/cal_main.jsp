@@ -18,10 +18,8 @@
 <script src='/HoneyComb/Calendar/fullcalendar/fullcalendar.js'></script>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-<%boolean check = false;%>
+	$(document).ready(function() {
+				<%boolean check = false;%>
 						// page is now ready, initialize the calendar...
 						var total1;
 

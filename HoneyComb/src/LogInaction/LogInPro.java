@@ -30,8 +30,11 @@ public class LogInPro implements CommandAction{
 			session.setAttribute("com_dept_num", member.get(2));
 			session.setAttribute("com_pos_num", member.get(3));
 			session.setAttribute("name", member.get(4));
-			session.setAttribute("email", email);
 			session.setAttribute("phone_num", member.get(5));
+			
+			
+			session.setAttribute("email", email);
+			
 			/*session.setAttribute("com_name", member.get(6));
 			session.setAttribute("com_dept_name", member.get(7));
 			session.setAttribute("com_pos_name", member.get(8));*/

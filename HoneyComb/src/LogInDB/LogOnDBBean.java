@@ -84,10 +84,10 @@ public class LogOnDBBean {
 			member.addElement(rs.getString("name"));
 	
 			/*아래 추가됌*/
-			member.addElement(rs.getInt("phone_num"));
-			member.addElement(rs.getString("com_name"));
+			member.addElement(String.valueOf(rs.getString("phone_num")));
+			/*member.addElement(rs.getString("com_name"));
 			member.addElement(rs.getString("com_dept_name"));
-			member.addElement(rs.getString("com_pos_name"));
+			member.addElement(rs.getString("com_pos_name"));*/
 		}
 		
 				
@@ -102,6 +102,9 @@ public class LogOnDBBean {
 			if (conn != null)
 				try {
 					conn.close();
+				} catch (SQLException ex) {
+				}if(rs !=null)try {
+					rs.close();
 				} catch (SQLException ex) {
 				}
 		}
@@ -136,6 +139,9 @@ public class LogOnDBBean {
 			if (conn != null)
 				try {
 					conn.close();
+				} catch (SQLException ex) {
+				}if(rs !=null)try {
+					rs.close();
 				} catch (SQLException ex) {
 				}
 		}
@@ -172,6 +178,9 @@ public class LogOnDBBean {
 			if (conn != null)
 				try {
 					conn.close();
+				} catch (SQLException ex) {
+				}if(rs !=null)try {
+					rs.close();
 				} catch (SQLException ex) {
 				}
 		}
@@ -253,12 +262,17 @@ public class LogOnDBBean {
 				try {
 					conn.close();
 				} catch (SQLException ex) {
+				}if(rs !=null)try {
+					rs.close();
+				} catch (SQLException ex) {
 				}
 		}
 	
 		
 		return lodb;
 	}
+	
+	
 	
 	
 }

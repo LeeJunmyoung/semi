@@ -11,32 +11,24 @@
 	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 
 <script>
-$(document) .ready(
-		function() {
-		$("#mem_search_result div").css('display','none');
-		});
+	$(document).ready(function() {
+		$("#mem_search_result div").css('display', 'none');
+	});
 
+	function filter() {
 
-function filter(){
-	
-	if($('#mem_name_filter').val()==""){
-		$("#mem_search_result div").css('display','none');}			
-	else{
-		$("#mem_search_result div").css('display','none');
-		$("#mem_search_result div[name*='"+$('#mem_name_filter').val()+"']").css('display','');
-	}
-	
-	return false;
-	
-}	
-
-	function writeCheck() {
-		if (document.getElementById("mem_name").value == "") {
-			alert("참여자명을 입력하세요");
-			return false;
+		if ($('#mem_name_filter').val() == "") {
+			$("#mem_search_result div").css('display', 'none');
+		} else {
+			$("#mem_search_result div").css('display', 'none');
+			$(
+					"#mem_search_result div[name*='"
+							+ $('#mem_name_filter').val() + "']").css(
+					'display', '');
 		}
 
-		return true;
+		return false;
+
 	}
 
 	function addView() {
@@ -54,16 +46,6 @@ function filter(){
 			document.getElementById("mem_search_result").hidden = true;
 		}
 	}
-	
-	function memberUpdate(promgr_num, actionChecked) { // 참여자 수정
-		
-		url = "/HoneyComb/promgr/promgrMemberEditorPro.promgr?promgr_num="+promgr_num+"&actionChecked="+actionChecked;
-		window.open(
-						url,
-						"post",
-						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
-	}
-	
 </script>
 
 </head>
@@ -72,46 +54,52 @@ function filter(){
 
 	<div id="tab_editor">
 
-		add <input type="radio" id="add" name="tab_editor" onchange="addView()" checked="true" />
-		del <input type="radio" id="del" name="tab_editor" onchange="delView()" />
+		add <input type="radio" id="add" name="tab_editor"
+			onchange="addView()" checked="true" /> del <input type="radio"
+			id="del" name="tab_editor" onchange="delView()" />
 
 	</div>
 
 	<div id="mem_search_input">
-	
+
 		참여자 명 : <input type="text" id="mem_name_filter"
 			onkeyup='{filter();return false}'
 			onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}' />
-			
+
 	</div>
 
-	<div id="mem_search_result">
+	<form id="mem_search_result" name="mem_search_result" method="post"
+		action="/HoneyComb/promgr/promgrMemberEditorAdd.promgr?promgr_num=${promgr_num}">
 
 		<c:forEach var="item" items="${ memberSearchList }">
 
 			<div id="mem_search_item" name="${item.mem_name}">
-				<input type="checkbox" name="${item.mem_num}" /> ${item.mem_num} / ${item.mem_name} / ${item.mem_email} / ${item.mem_pos}
+				<input type="checkbox" name="mem_add" value="${item.mem_num}" />
+				${item.mem_num} / ${item.mem_name} / ${item.mem_email} /
+				${item.mem_pos}
 			</div>
 
 		</c:forEach>
 
-		<input type="button" value="add" onclick="memberUpdate(${promgr_num}, '1')" />
+		<input type="submit" value="add" />
 
-	</div>
+	</form>
 
-	<div id="mem_list" hidden="true">
+	<form id="mem_list" hidden="true" method="post"
+		action="/HoneyComb/promgr/promgrMemberEditorDel.promgr?promgr_num=${promgr_num}">
 
 		<c:forEach var="item" items="${ memberList }">
 
 			<div>
-				<input type="checkbox" name="${item.mem_num}">${item.mem_num} / ${item.mem_name} / ${item.mem_email} / ${item.mem_pos}
+				<input type="checkbox" name="mem_del" value="${item.mem_num}">${item.mem_num}
+				/ ${item.mem_name} / ${item.mem_email} / ${item.mem_pos}
 			</div>
 
 		</c:forEach>
 
-		<input type="button" value="delete" onclick="memberUpdate(${promgr_num}, '-1')" />
+		<input type="submit" value="del" />
 
-	</div>
+	</form>
 
 </body>
 

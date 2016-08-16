@@ -2,20 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
+<%@ page import="promgr.PromgrDBBean"%>
+<%@ page import="promgr.ChkListItemDataBean"%>
 
-<c:if test="${promgr_onloadCheck}">
-	<%-- reflash 설정 --%>
+<!DOCTYPE >
+
+<c:if test="${promgr_insert_count==0}">
 	<script>
-		window.location.reload(true);
-	</script>
+			alert("입력된 내용이 없습니다. 다시 입력해주세요.");
+			history.go(-1);
+		</script>
 </c:if>
 
 <html>
 <head>
 <title>promgr more</title>
 <script>
-	function writeProject() { // 프로젝트 생성
+
+	function writeProject() { // project 생성
 		url = "/HoneyComb/promgr/promgrWriteForm.promgr";
 		window
 				.open(
@@ -25,13 +29,33 @@
 	}
 	
 	function memberEditor(promgr_num) { // 참여자 관리
-		url = "/HoneyComb/promgr/promgrMemberEditorForm.promgr?promgr_num="+promgr_num;
+		url = "/HoneyComb/promgr/promgrMemberEditorForm.promgr?mem_num="+${my_mem_num}+"&promgr_num="+promgr_num;
 		window
 				.open(
 						url,
 						"post",
 						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
+	
+	function writeChkList(promgr_num) { // checklist 생성
+		url = "/HoneyComb/promgr/PromgrChkListWriteForm.promgr?promgr_num="+promgr_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function AddItem(promgr_num, title) { // checkitem 생성
+		
+		url = "/HoneyComb/promgr/PromgrChkListAddItemForm.promgr?promgr_num="+promgr_num+"&chklist_title="+title;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+		
 </script>
 
 <style type="text/css">
@@ -54,7 +78,7 @@ dl dt {
 dl dd {
 	border: 1px solid #7CADB6;
 	border-top: none;
-	height: 300px;
+	height: 500px;
 }
 
 #content {
@@ -105,25 +129,67 @@ dl dd {
 					<c:forEach var="article" items="${articleList}">
 
 						<dt>
-							<div>프로젝트 명 : ${article.promgr_name} (${article.promgr_num})</div>
+							<div>프로젝트 명 : ${article.promgr_name}
+								(${article.promgr_num})</div>
 						</dt>
 
 						<dd>
 							<div id="content">
 
 								<div id="content_view">
-									<div>참여자 : ${article.mem_num}</div>
+									<div>
+										참여자 :
+										<c:forEach var="mem_name" items="${article.mem_name_arr}">
+													${mem_name}
+												</c:forEach>
+
+									</div>
 									<div>시작일 : ${article.promgr_date}</div>
 									<div>내용 : ${article.promgr_content}</div>
-									<div>진행 상황 항목 : (checklist 기능)</div>
+									<div>
+										진행 상황 항목 : ${article.chklist_title_num}
+
+										<c:forEach var="title" items="${article.chklist_title_arr}">
+
+											<div id="${title}">
+
+												<div>${title}
+													<input type="button" value="del">
+												</div>
+
+												<div>[진행상황 그래프]</div>
+
+												<form method="post" name="chkItemform"
+													action="/HoneyComb/promgr/PromgrChkListAddItemAction.promgr?promgr_num=${article.promgr_num}&chklist_title=${title}"
+													onsubmit="return writeSave()">
+
+													<c:forEach var="item" items="${article.chklist_item_arr}">
+														<div>
+															<input type="checkbox" name="chkitem" /> ${item} <input
+																type="button" value="del" hidden="true">
+														</div>
+													</c:forEach>
+
+												</form>
+
+												<input type="button" value="add item"
+													onclick="AddItem(${article.promgr_num}, ${title})" />
+
+											</div>
+
+										</c:forEach>
+
+									</div>
+
 								</div>
 
 								<div id="content_editor">
-									<input type="button" value="member" onclick="memberEditor(${article.promgr_num})" /> <br />
-									<input type="button" value="checklist" /> <br />
-									<input type="button" value="file" />
+									<input type="button" value="member"
+										onclick="memberEditor(${article.promgr_num})" /> <br /> <input
+										type="button" value="checklist"
+										onclick="writeChkList(${article.promgr_num})" /> <br /> <input
+										type="button" value="file" />
 								</div>
-
 							</div>
 
 							<div id="content_comment"></div>
@@ -131,9 +197,7 @@ dl dd {
 						</dd>
 
 					</c:forEach>
-
 				</dl>
-
 			</div>
 
 		</c:if>

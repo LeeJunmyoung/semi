@@ -23,17 +23,10 @@ public class PromgrWriteProAction implements PromgrFormAction {
 		article.setCom_num((int) request.getSession().getAttribute("com_num"));
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();
-		int promgr_insert_count = dbPro.insertArticle(article); // 삽입된 row 갯수 호출
-
-		boolean promgr_onloadCheck = false;
-
-		if (promgr_insert_count > 0) {
-			promgr_onloadCheck = true; // reflash 여부 결정
-		}
+		int promgr_insert_count = dbPro.insertPromgr(article); // 삽입된 row 갯수 호출
 
 		// 해당 view에서 사용할 속성
 		request.setAttribute("promgr_insert_count", promgr_insert_count);
-		request.setAttribute("promgr_onloadCheck", promgr_onloadCheck);
 
 		return "/promgr/promgrWritePro.jsp";
 

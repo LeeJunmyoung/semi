@@ -87,13 +87,12 @@ public class ControllerUsingURIPromgr extends HttpServlet {
 
 			if (command.indexOf(request.getContextPath()) == 0) {
 				command = command.substring(request.getContextPath().length());
-				System.out.println("command ::: " + command);
 			}
 
 			com = (PromgrFormAction) commandMap.get(command);
 
-			System.out.println("com ::: " + com);
-
+			System.out.println("commandMap.get(command) ::: " + commandMap.get(command));
+			
 			view = com.requestPro(request, response);
 
 		} catch (Throwable e) {

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>write check</title>
+<title>insert check</title>
 </head>
 <body>
 

@@ -4,17 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>write check</title>
+<title>member check</title>
 </head>
 <body>
 
-	<c:if test="${promgr_insert_count==1}">
-		<%-- insert 후 main reflash, write 화면 종료 --%>
+	<c:if test="${promgr_update_count==1}">
+		<%-- update 후 main reflash, write 화면 종료 --%>
 		<script>
-			window.opener.top.location.href = "/HoneyComb/promgr/promgrMore.promgr"
-			window.close()
+			window.opener.top.location.reload(true);
+			window.close();
 		</script>
+	</c:if>
 
+	<c:if test="${promgr_update_count==0}">
+		<script>
+			alert("선택한 인원이 없습니다. 다시 선택하십시요.");
+			history.go(-1);
+		</script>
 	</c:if>
 
 </body>

@@ -8,10 +8,13 @@ public class PromgrDataBean {
 	private String promgr_name; // 프로젝트 이름
 	private String promgr_content; // 프로젝트 내용
 	private Timestamp promgr_date; // 프로젝트 생성 날짜
-	private String mem_num; // 프로젝트 참여자
+	private String mem_num; // 프로젝트 참여자 번호
+	private String[] mem_name_arr; // 프로젝트 참여자 이름
 	private String file_num; // 파일 번호
-	private String checklist_title_num; // 진행 상황 체트 제목 번호
-	private String checklist_item_num; // 진행 상황 체크 항목 번호
+	private String chklist_title_num; // 진행 상황 체트 제목 번호
+	private String[] chklist_title_arr; // 진행 상황 체크 제목 이름
+	private String chklist_item_num; // 진행 상황 체크 항목 번호
+	private String[] chklist_item_arr; // 진행 상황 체크 항목 이름
 	private String comment_num; // 댓글 번호
 	private int com_num; // 회사 번호
 
@@ -55,6 +58,14 @@ public class PromgrDataBean {
 		this.mem_num = mem_num;
 	}
 
+	public String[] getMem_name_arr() {
+		return mem_name_arr;
+	}
+
+	public void setMem_name_arr(String[] mem_name_arr) {
+		this.mem_name_arr = mem_name_arr;
+	}
+
 	public String getFile_num() {
 		return file_num;
 	}
@@ -63,20 +74,36 @@ public class PromgrDataBean {
 		this.file_num = file_num;
 	}
 
-	public String getChecklist_title_num() {
-		return checklist_title_num;
+	public String getChklist_title_num() {
+		return chklist_title_num;
 	}
 
-	public void setChecklist_title_num(String checklist_title_num) {
-		this.checklist_title_num = checklist_title_num;
+	public void setChklist_title_num(String chklist_title_num) {
+		this.chklist_title_num = chklist_title_num;
 	}
 
-	public String getChecklist_item_num() {
-		return checklist_item_num;
+	public String[] getChklist_title_arr() {
+		return chklist_title_arr;
 	}
 
-	public void setChecklist_item_num(String checklist_item_num) {
-		this.checklist_item_num = checklist_item_num;
+	public void setChklist_title_arr(String[] chklist_title_arr) {
+		this.chklist_title_arr = chklist_title_arr;
+	}
+
+	public String getChklist_item_num() {
+		return chklist_item_num;
+	}
+
+	public void setChklist_item_num(String chklist_item_num) {
+		this.chklist_item_num = chklist_item_num;
+	}
+
+	public String[] getChklist_item_arr() {
+		return chklist_item_arr;
+	}
+
+	public void setChklist_item_arr(String[] chklist_item_arr) {
+		this.chklist_item_arr = chklist_item_arr;
 	}
 
 	public String getComment_num() {

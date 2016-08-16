@@ -13,10 +13,9 @@ public class PromgrMoreAction implements PromgrFormAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-		String pageNum = request.getParameter("pageNum"); // 해당 페이지 번호
-		int com_num = (int) request.getSession().getAttribute("com_num"); // 회사 번호
-		String mem_num = String.valueOf(request.getSession().getAttribute("mem_num")); // 회원
-																						// 번호
+		String pageNum = request.getParameter("pageNum");
+		int com_num = (int) request.getSession().getAttribute("com_num");
+		int my_mem_num = (int) request.getSession().getAttribute("mem_num");
 
 		if (pageNum == null) {
 			pageNum = "1";
@@ -32,12 +31,13 @@ public class PromgrMoreAction implements PromgrFormAction {
 		int number = 0;
 
 		List articleList = null;
+		List mem_name_list = null;
 		PromgrDBBean dbPro = PromgrDBBean.getInstance(); // DB처리
-		promgr_count = dbPro.getArticleCount(com_num, mem_num); // row 갯수 호출
+		promgr_count = dbPro.getPromgrCount(com_num, my_mem_num); // row 갯수 호출
 
 		if (promgr_count > 0) {
 			// 현재 페이지에 해당하는 프로젝트 목록
-			articleList = dbPro.getArticles(com_num, mem_num, startRow, endRow);
+			articleList = dbPro.getPromgrList(com_num, my_mem_num, startRow, endRow);
 		} else {
 			articleList = Collections.EMPTY_LIST;
 		}
@@ -53,6 +53,7 @@ public class PromgrMoreAction implements PromgrFormAction {
 		request.setAttribute("pageSize", new Integer(pageSize));
 		request.setAttribute("number", new Integer(number));
 		request.setAttribute("articleList", articleList);
+		request.setAttribute("my_mem_num", my_mem_num);
 
 		return "/promgr/promgrMore.jsp";
 

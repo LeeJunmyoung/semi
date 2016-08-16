@@ -93,8 +93,6 @@ public class ControllerUsingURINotice extends HttpServlet {
 
 			com = (NoticeFormAction) commandMap.get(command);
 
-
-
 			view = com.requestPro(request, response);
 
 		} catch (Throwable e) {

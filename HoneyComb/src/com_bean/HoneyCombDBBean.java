@@ -276,13 +276,14 @@ public class HoneyCombDBBean {
 		return completeList;
 	}
 	
-	public List insertComplete(int com_num , String com_name) throws Exception {
+	public List insertComplete(int com_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;// test
 		HoneyCombDataBean comp = new HoneyCombDataBean();
 		List complAllList = null;
 		Temp_Company_table tct = null;
+		String com_name ="";
 		
 		try {
 			conn = getConnection();
@@ -299,13 +300,20 @@ public class HoneyCombDBBean {
 			
 			temp_com_num = (temp_com_num-com_num);
 			
-			pstmt = conn.prepareStatement("update members set com_name = ? , com_pos_num = 1 , com_pos_name = '사장' , com_num = ? where com_num = ?");
+			pstmt = conn.prepareStatement("select com_name from complete_com where com_num = ?");
+			pstmt.setInt(1, com_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				com_name = rs.getString(1);
+			}
+			
+			pstmt = conn.prepareStatement("update members set com_name = ?,com_pos_num = 1 , com_pos_name = '사장' , com_num = ? where com_num = ?");
 			pstmt.setString(1, com_name);
 			pstmt.setInt(2, com_num);
 			pstmt.setInt(3, temp_com_num);
 		
 			pstmt.executeUpdate();
-			System.out.println("submit중 update실행");
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();

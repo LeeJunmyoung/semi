@@ -22,14 +22,12 @@ $('#insertKey').keyup(function(){
 			$('#keyCheck').text('');
 			$('#keyCheck').html("<style='color:green'>인증키가 일치합니다<style>")
 			$("#ok").removeAttr("disabled");
-		} 
-		if(key == ""){
-			$('#keyCheck').text('');
-			$('#keyCheck').html("")
-		}
-		else{
+		}else{
 			$('#keyCheck').text('');
 			$('#keyCheck').html("<style='color:red'>인증키가 일치하지 않습니다<style>")
+		}if(key == ""){
+			$('#keyCheck').text('');
+			$('#keyCheck').html("")
 		}
 	
 }); 

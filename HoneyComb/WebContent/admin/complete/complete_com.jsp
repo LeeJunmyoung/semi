@@ -56,7 +56,7 @@
 	 var num = come_num;
 	 /* if($("#chkall").prop("checked",true)){ */
 	 
-	 url = "complete_comIn.admin?com_num=" + num;
+	 url = "complete_comIn.admin?com_num="+num;
 	 window
 		.open(
 				url,
@@ -74,7 +74,7 @@
 
 	<form name="wtf">
 		<h3>사업장 신청 목록</h3>
-		<table width="400" border="1" cellpadding="1" cellspacing="0">
+		<table width="400" border="1" cellpadding="1" cellspacing="0" name="">
 			<tbody>
 				<!-- <tr>
 					<td align="center">AllSelect<input id="chkall" type="checkbox">
@@ -90,7 +90,7 @@
 						<tr>
 							<td>
 							<!-- <input type="checkbox" id="company">  -->
-							<a onclick="listCheck(${compl.com_num})">${compl.com_name}</a> <input
+							<a onclick="listCheck(${compl.com_num})">${compl.com_name}</a><input
 								type="submit" id="submit" value="등록"
 								onclick="submitCheck(${compl.com_num})"> <input
 								type="button" id="delete" value="삭제"

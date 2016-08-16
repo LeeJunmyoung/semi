@@ -60,9 +60,10 @@ public class HoneyCombDBBean {
 
 			}
 			
-			pstmt = conn.prepareStatement("update members set com_num = ? where mem_num = ? ");
-			pstmt.setInt(1, (0-com.getCom_num()));
-			pstmt.setInt(2, mem_num);
+			pstmt = conn.prepareStatement("update members set com_name = ? , com_num = ? where mem_num = ? ");
+			pstmt.setString(1, com_name);
+			pstmt.setInt(2, (0-com.getCom_num()));
+			pstmt.setInt(3, mem_num);
 			pstmt.executeUpdate();
 			
 		} catch (SQLException ex) {

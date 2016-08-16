@@ -6,7 +6,9 @@
 <html>
 <body>
 
-		<h2>사용자 이름</h2>
+		<h2><img src="${ sessionScope.profile_img }"  width="68" height="70"
+					onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
+		<h2>${ sessionScope.name }</h2>
 
 	<ul>
 

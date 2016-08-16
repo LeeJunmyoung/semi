@@ -18,11 +18,11 @@ public class Option_Mypage implements Option_CommandAction {
 		List list = new ArrayList<LogOnDataBean>();
 		
 		int mem_num = (int)request.getSession().getAttribute("mem_num");
+		String profile_img = (String)request.getSession().getAttribute("profile_img");
 		
 		list = odbb.memberList(mem_num);
 		
 		request.setAttribute("my_list", list);
-		
 		
 		return "/Option_user/option_mypage.jsp";
 	}

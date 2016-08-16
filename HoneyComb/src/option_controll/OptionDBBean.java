@@ -119,6 +119,7 @@ public class OptionDBBean {
 	}
 
 	public List memberList(int com_num) {
+		// 해당 회사의 구성원리스트
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -128,9 +129,10 @@ public class OptionDBBean {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
-					"select name,email,phone_num,com_dept_name,com_pos_name from members where com_num = ? ");
+					"select name,email,phone_num,com_dept_name,com_pos_name from members where com_num = ? order by com_pos_num");
+			// com_pos_num을 기준으로 정렬 수정
 			pstmt.setInt(1, com_num);
-
+			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				memlist = new ArrayList<LogOnDataBean>();
@@ -252,6 +254,56 @@ public class OptionDBBean {
 
 		}
 		
+	}
+	
+	public String img_Register(int mem_num, String img_path) throws Exception {
+		// 프로필 사진 등록
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String profile_img = "";
+		
+		try {
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement("update members set profile_img = ? where mem_num = ?");
+			pstmt.setString(1, img_path);
+			pstmt.setInt(2, mem_num);
+			
+			pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement("select profile_img from members where mem_num = ?");
+			pstmt.setInt(1, mem_num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				profile_img = rs.getString(1);
+			}
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+		
+		return profile_img;
+		 
 	}
 
 }

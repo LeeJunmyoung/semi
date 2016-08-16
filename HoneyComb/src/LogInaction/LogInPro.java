@@ -38,6 +38,10 @@ public class LogInPro implements CommandAction{
 			/*session.setAttribute("com_name", member.get(6));
 			session.setAttribute("com_dept_name", member.get(7));
 			session.setAttribute("com_pos_name", member.get(8));*/
+			
+			session.setAttribute("profile_img", member.get(9)); // 추가
+			
+			
 		}
 		 
 		return "/index.jsp";

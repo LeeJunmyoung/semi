@@ -15,16 +15,22 @@ $(function(){
 $(document).bind("contextmenu", function(event) { 
     event.preventDefault();
     var data;
-    $('li').contextmenu(function(){
+    var checkboxck = "input[name=itemBox]:checked";
+    
+     $('li').contextmenu(function(){
 		/* alert("thisindex::"+$('li').index(this)); */
 		/* $("li:eq("+index+")").find("input:checkbox[name=itemBox]").prop("checked",true);  */
 		var index = $('li').index(this);
 			  $("input:checkbox[name=itemBox]").prop("checked",false);  
 			$(this).find("input:checkbox[name=itemBox]").prop("checked",true); 
 			
-    });
+    }); 
     
     if(!$("input[name=itemBox]:checked").length == 0){
+    	var file_path = $(checkboxck).data('file_path');
+    	if(file_path == ""){
+    		$('#fileonly').css("display","hidden");
+    	};
     	
 	};   
     
@@ -32,16 +38,30 @@ $(document).bind("contextmenu", function(event) {
     if($("div.cloud_menu")!= null){
     	$("div.cloud_menu").hide();
     };
-	if($("test"))
+	if($(checkboxck).data('file_path') ==""){
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
-    "<a  href='javascript:download()'><p >다운로드</p></a>"+
-    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+ 
-    "<a href ="+"javascript:deleteitem()"+"><p>삭제</p> </a>"+
+    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
+    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
     "<p>공유</p>"+    
     +"</div>")
-        .appendTo("div.cloudForm")
-        .css({top: event.pageY + "px", left: event.pageX + "px"});
+    .appendTo("div.cloudForm")
+    .css({top: event.pageY + "px", left: event.pageX + "px"});
+	}
+    $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
+	    "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
+	    "<a href='javascript:download()' id='fileonly'><p >다운로드</p></a>"+
+	    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
+	    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
+	    "<p>공유</p>"+    
+	    +"</div>")
+	    .appendTo("div.cloudForm")
+	    .css({top: event.pageY + "px", left: event.pageX + "px"});
+    
+    
+	
+        
+	
 }).bind("click", function(event) {
     $("div.cloud_menu").hide(); 
 });
@@ -61,7 +81,14 @@ $(document).bind("contextmenu", function(event) {
 			$(location).attr('href',url);
 		});
 	})
-	
+	//중복체크 제거
+	$('li').change(function(){
+		var index = $('li').index(this);
+		  $("input:checkbox[name=itemBox]").prop("checked",false);  
+		$(this).find("input:checkbox[name=itemBox]").prop("checked",true); 
+	});
+		 
+	 
 
 });
 </script>
@@ -77,6 +104,7 @@ text-align: center;}
 
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')">
 	<input type="button" name="download" value="다운로드" onclick="download()">
+	<input type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')">
 	<form name="searchform" action="">
 		<input type="text" name="search">
 		<input type="button" name="searchbutton" value="검색">
@@ -86,11 +114,12 @@ text-align: center;}
 		<c:forEach items="${cloudList}" var="cloudlist">
 				<li style="display: inline;">
 					<div style="width: 150px; display: inline-block;"id="test">
+					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
+						<label for="${cloudlist.file_num}">
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
 
-						<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
-						<label for="${cloudlist.file_num}">
+						
 						<div class="file"><img src="../images/file.png" width="150px"></div>
 						</c:when>
 						<c:otherwise>

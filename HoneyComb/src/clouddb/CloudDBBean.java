@@ -257,19 +257,30 @@ public void renameItem(String item, String itemName)throws SQLException{
 	
 }
 
-public void deleteItem(String iteminfo)throws SQLException{
+public void deleteItem(String iteminfo, String folder)throws SQLException{
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	try{
 
 		conn = getConnection();
 		
-		
+		if(folder ==null){//파일 삭제
 		//파일 경로일경우
 		String file_path = iteminfo;
 		pstmt =conn.prepareStatement("delete from cloud where file_path = ?");
 		pstmt.setString(1, file_path);
-
+		}else{//폴더삭제
+			String file_name = iteminfo;
+			if(folder == ""){//메인페이지 삭제
+				pstmt = conn.prepareStatement("delete from cloud where file_name = ? and folder is null");
+				pstmt.setString(1, file_name);
+			}else{
+			pstmt = conn.prepareStatement("delete from cloud where file_name = ? and folder = ?");
+			pstmt.setString(1, file_name);
+			pstmt.setString(2, folder);
+			}
+			
+		}
 		
 		
 		pstmt.executeUpdate();

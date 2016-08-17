@@ -20,17 +20,25 @@ public class CloudDeleteItem implements CommandActionCloud{
 		
 		//file_path 받아오는 기능
 		String file_path = (String)session.getAttribute("file_path");
+		
+		String folder = request.getParameter("folder");
 		//세션에 없을 경우
 		String returnp = "/cloudview/changeFilename.jsp";
 		if(file_path == null){
 			file_path = request.getParameter("file_path");
 			returnp = "/cloudview/cloudindex.jsp";
+			//폴더일경우
+			if(file_path == null){
+				String file_name = request.getParameter("file_name");
+				cloudDB.deleteItem(file_name, folder);
+				return returnp;
+			}
 		}
 		System.out.println(file_path);
 		File f = new File(file_path);
 		f.delete();
 		
-		cloudDB.deleteItem(file_path);
+		cloudDB.deleteItem(file_path,null);
 		//DB에서 삭제
 		
 		

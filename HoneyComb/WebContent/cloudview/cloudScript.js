@@ -43,13 +43,19 @@ function download(){
 		$(location).attr('href',url);
 	});
 };
-function deleteitem(){
+function deleteitem(folder){
 	$("input[name=itemBox]:checked").each(function(){
 		var file_name = $(this).data('file_name');
 		var file_path = $(this).data('file_path');
 		var result = confirm(file_name+'을 삭제하시겠습니까?');
 		if(result){
-			var url="/HoneyComb/cloud/cloudDeleteItem.cloud?file_path="+file_path;
+			if(file_path != ""){
+
+				var url="/HoneyComb/cloud/cloudDeleteItem.cloud?file_path="+file_path;
+			}else{
+				var url="/HoneyComb/cloud/cloudDeleteItem.cloud?file_name="+file_name+"&folder="+folder;
+			}
+			
 			$(location).attr('href',url);
 			
 		}else{

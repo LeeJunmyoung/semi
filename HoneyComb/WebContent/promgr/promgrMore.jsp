@@ -9,13 +9,23 @@
 <title>promgr more</title>
 <script>
 
-	function writeProject() { // project 생성
-		url = "/HoneyComb/promgr/promgrWriteForm.promgr";
+	function addProject() { // project 생성
+		url = "/HoneyComb/promgr/promgrAddForm.promgr";
 		window
 				.open(
 						url,
 						"post",
 						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function delProject(promgr_num) { // 프로젝트 삭제
+			
+			url = "/HoneyComb/promgr/promgrDel.promgr?promgr_num="+promgr_num;
+			window
+					.open(
+							url,
+							"post",
+							"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
 	function memberEditor(promgr_num) { // 참여자 관리
@@ -27,8 +37,8 @@
 						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
-	function writeChkList(promgr_num) { // checklist 생성
-		url = "/HoneyComb/promgr/PromgrChkListWriteForm.promgr?promgr_num="+promgr_num;
+	function AddChkList(promgr_num) { // checklist 생성
+		url = "/HoneyComb/promgr/PromgrChkListAddForm.promgr?promgr_num="+promgr_num;
 		window
 				.open(
 						url,
@@ -36,16 +46,35 @@
 						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
-	function AddItem(promgr_num, title) { // checkitem 생성
-		
-		url = "/HoneyComb/promgr/PromgrChkListAddItemForm.promgr?promgr_num="+promgr_num+"&chklist_title="+title;
+	function DelChkList(promgr_num, title_num) { // checklist 삭제
+		url = "/HoneyComb/promgr/PromgrChkListDel.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
 		window
 				.open(
 						url,
 						"post",
 						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
+	
+	function AddItem(promgr_num, title_num) { // checkitem 생성
 		
+		url = "/HoneyComb/promgr/PromgrChkListAddItemForm.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function DelItem(promgr_num, item_num) { // checkitem 삭제
+		
+		url = "/HoneyComb/promgr/PromgrChkListDelItem.promgr?promgr_num="+promgr_num+"&chklist_item="+item_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
 </script>
 
 <style type="text/css">
@@ -68,7 +97,8 @@ dl dt {
 dl dd {
 	border: 1px solid #7CADB6;
 	border-top: none;
-	height: 500px;
+	height: 300px;
+	overflow-y: scroll;
 }
 
 #content {
@@ -102,7 +132,7 @@ dl dd {
 		<b>프로젝트 목록 (전체 프로젝트 : ${promgr_count})</b>
 
 		<div align="right">
-			<a onclick="writeProject()">프로젝트 생성</a>
+			<a onclick="addProject()">프로젝트 생성</a>
 		</div>
 
 		<c:if test="${promgr_count == 0}">
@@ -119,8 +149,12 @@ dl dd {
 					<c:forEach var="article" items="${articleList}">
 
 						<dt>
-							<div>프로젝트 명 : ${article.promgr_name}
-								(${article.promgr_num})</div>
+							<div>
+								프로젝트 명 : ${article.promgr_name} (${article.promgr_num}) <input
+									type="button" value="del"
+									onclick="delProject(${article.promgr_num})" />
+							</div>
+
 						</dt>
 
 						<dd>
@@ -143,26 +177,26 @@ dl dd {
 											<div id="${view.title_num}">
 
 												<div>${view.title_name}(${view.title_num})
-													<input type="button" value="del">
+													<input type="button" value="del chklist" onclick="DelChkList(${article.promgr_num}, ${view.title_num})">
 												</div>
 
 												<div>[진행상황 그래프]</div>
 
-													<form method="post" name="chkItemform"
-														action="/HoneyComb/promgr/PromgrChkListAddItemAction.promgr?promgr_num=${article.promgr_num}&chklist_title=${view.title_name}"
-														onsubmit="return writeSave()">
+												<form method="post" name="chkItemform"
+													action="/HoneyComb/promgr/PromgrChkListAddItemAction.promgr?promgr_num=${article.promgr_num}&chklist_title=${view.title_name}"
+													onsubmit="return writeSave()">
 
-														<c:forEach var="item"
-															items="${view.item_name}">
-															<div>
-																<input type="checkbox" name="chkitem" /> ${item} <input
-																	type="button" value="del" hidden="true">
-															</div>
-														</c:forEach>
+													<c:forEach var="bean" items="${view.item_bean}">
+														<div>
+															<input type="checkbox" name="chkitem" value="${bean.item_num}" /> ${bean.item_name}
+															<input type="button" value="del item" onclick="DelItem(${article.promgr_num}, ${bean.item_num})">
+														</div>
+													</c:forEach>
 
-													</form>
+												</form>
 
-												<input type="button" value="add item" onclick="AddItem(${article.promgr_num}, ${view.title_num})" />
+												<input type="button" value="add item"
+													onclick="AddItem(${article.promgr_num}, ${view.title_num})" />
 
 											</div>
 
@@ -176,12 +210,14 @@ dl dd {
 									<input type="button" value="member"
 										onclick="memberEditor(${article.promgr_num})" /> <br /> <input
 										type="button" value="checklist"
-										onclick="writeChkList(${article.promgr_num})" /> <br /> <input
+										onclick="AddChkList(${article.promgr_num})" /> <br /> <input
 										type="button" value="file" />
 								</div>
 							</div>
 
-							<div id="content_comment"></div>
+							<div id="content_comment">
+							[comment]
+							</div>
 
 						</dd>
 

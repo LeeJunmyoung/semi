@@ -23,7 +23,7 @@
 <body>
 
 	<form method="post" name="addItemform"
-		action="/HoneyComb/promgr/PromgrChkListAddItemPro.promgr?promgr_num=${promgr_num}&chklist_title=${title}"
+		action="/HoneyComb/promgr/PromgrChkListAddItemPro.promgr?promgr_num=${promgr_num}&chklist_title=${title_num}"
 		onsubmit="return writeSave()">
 
 		항목 명 : <input type="text" name="promgr_list_item" size="30"

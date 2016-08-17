@@ -9,9 +9,9 @@
 <script>
 	function writeSave() {
 
-		if (document.writeform.promgr_list_title.value == "") {
+		if (document.chkListAddform.promgr_list_title.value == "") {
 			alert("내용을 입력하십시요.");
-			document.writeform.promgr_list_title.focus();
+			document.chkListAddform.promgr_list_title.focus();
 			return false;
 		}
 
@@ -22,8 +22,8 @@
 </head>
 <body>
 
-	<form method="post" name="chkListWriteform"
-		action="/HoneyComb/promgr/PromgrChkListWritePro.promgr?promgr_num=${promgr_num}"
+	<form method="post" name="chkListAddform"
+		action="/HoneyComb/promgr/PromgrChkListAddPro.promgr?promgr_num=${promgr_num}"
 		onsubmit="return writeSave()">
 
 		제목 : <input type="text" name="promgr_list_title" size="30" maxlength="40" /> <input type="submit" value="추가" />

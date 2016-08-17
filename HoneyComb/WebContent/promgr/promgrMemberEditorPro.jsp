@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<c:if test="${promgr_update_count==1}">
+	<c:if test="${promgr_update_count > 0}">
 		<%-- update 후 main reflash, write 화면 종료 --%>
 		<script>
 			window.opener.top.location.reload(true);

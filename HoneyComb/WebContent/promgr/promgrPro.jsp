@@ -17,5 +17,14 @@
 
 	</c:if>
 
+	<c:if test="${promgr_update_count > 0}">
+		<%-- insert 후 main reflash, write 화면 종료 --%>
+		<script>
+			window.opener.top.location.reload(true);
+			window.close();
+		</script>
+
+	</c:if>
+
 </body>
 </html>

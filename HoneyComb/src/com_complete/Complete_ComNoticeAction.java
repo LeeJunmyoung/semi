@@ -37,7 +37,7 @@ public class Complete_ComNoticeAction implements CommandAction{
 		request.setAttribute("notice_insert_count", notice_insert_count);
 		request.setAttribute("notice_onloadCheck", onloadCheck);
 
-		return "/page_layout/home.jsp";
+		return "/HoneyComb/page_layout/main_body.jsp";
 	}
 
 }

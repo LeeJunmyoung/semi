@@ -1,13 +1,29 @@
 
 package wsapp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.security.Principal;
 import java.util.*;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpUpgradeHandler;
+import javax.servlet.http.Part;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -27,7 +43,7 @@ public class ChatAnnotation {
     
     private static final Map<String,Integer> chat_num_Map = new HashMap<String,Integer>();
     
-    
+    private static Chat_Conversation_DBBean chat_db = Chat_Conversation_DBBean.getInstance();
     
     String nickname;
     // 클라이언트가 새로 접속할 때마다 한개의 Session 객체가 생성된다.
@@ -67,6 +83,7 @@ public class ChatAnnotation {
     	System.out.println("클라이언트 접속됨 "+session);
     	
     	chat_Num = this.getParameter(queryString, "chat_Num") ;
+
     	
     	
     	
@@ -120,10 +137,15 @@ public class ChatAnnotation {
         
         
         
-     
+     String date = "";
+        Date d = new Date();
+        date = String.valueOf(d.getMonth()+1)+"월 "+String.valueOf(d.getDate())+"일 "+String.valueOf(d.getHours())+"시 "+String.valueOf(d.getMinutes())+"분"; 
+
+    	chat_db.insert_Chat_Conversation(Integer.parseInt(chat_Num), mem_name, filteredMessage, date);
         
-        	
-        	if(sessionMap.get(receiverMem)!=null){
+    	
+    	
+    	if(sessionMap.get(receiverMem)!=null){
         		if(chat_num_Map.get(receiverMem)!=null){
             		if(chat_num_Map.get(mem_name).equals(chat_num_Map.get(receiverMem))){//여기오류
             		

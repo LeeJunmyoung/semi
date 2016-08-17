@@ -181,7 +181,7 @@ public class Chatting_DBBean {
 		List list = null;
 		ChatRoomDataBean crdb = null;
 		String chat_source="";
-		
+		String Chat_partner="";
 		try {
 			conn = getConnection();
 			String sql = "select * from chat where chat_member_participation like ? ";
@@ -221,13 +221,17 @@ public class Chatting_DBBean {
 					
 					
 					chat_source = view_Chat_Info(Integer.parseInt(temp));
-					
-					
-					
-					
 					crdb.setChat_mem_name(chat_source);
-							
-					System.out.println("chat_source :::: "+chat_source);
+					
+					
+					stok = new StringTokenizer(chat_source, " ",false);
+					
+					Chat_partner = stok.nextToken();
+					
+					crdb.setChat_partner(Chat_partner);
+					
+					
+					
 					list.add(crdb);
 					
 					
@@ -279,7 +283,13 @@ public class Chatting_DBBean {
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				
-				chat_source = rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3);
+				chat_source = rs.getString(1)+" ";
+				if(rs.getString(2)!=null){
+				chat_source = chat_source + rs.getString(2)+" ";
+				}
+				if(rs.getString(3)!=null){
+				chat_source = chat_source + rs.getString(3);
+				}
 			}
 			
 			//채팅 하는 사람 정보 검색 쿼리

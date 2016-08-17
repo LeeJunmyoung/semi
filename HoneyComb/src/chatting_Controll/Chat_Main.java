@@ -19,7 +19,7 @@ public class Chat_Main implements CommandAction_Chatting{
 		
 		request.getSession().setAttribute("current_chat_list", view_list);
 		
-		List view_list1= new ArrayList<>();
+		
 		
 		
 		return "/Chatting/Chat_main.jsp";

@@ -9,13 +9,13 @@
 <style type="text/css">
  .total_box{
  margin: auto;
- width:800px;
+ width:900px;
  height:600px;
  border-collapse: collapse;
  }
  .box1_select_chat{
   float:left; 
-  width:200px; 
+  width:300px; 
   height:600px; 
   border: 1px solid #CCCCCC;
   
@@ -29,6 +29,18 @@
   margin:0px;
   
   }  
+  #form1{
+  display:inline;
+   width:300px; 
+  height:58px; 
+  }
+  #form1 div{
+   width:300px; 
+  height:58px; 
+  }
+
+
+
 
 </style>
 <style type="text/css">
@@ -85,23 +97,90 @@ margin: 10px;
 	text-align:center;
 	padding: 5px;
 }
+.memmem{
+border-color:#fff;
+background-color:#fff;
+width :300px;
+height:58px;
+border : 0;
+border-top: 1px solid #efefef;
+border-bottom: 1px solid #efefef;
+position: relative;
+}
+
+
+
+
+.memname_chat{
+position: relative;
+left: 80px;
+top: -63px;
+z-index: 1;
+font-size: 15px;
+width: 230px;
+height : 20px;
+overflow:hidden;white-space:nowrap;
+text-overflow: clip;
+}
 
 
 
 </style>
+
+
 <script src='/HoneyComb/Calendar/fullcalendar/lib/jquery.min.js'></script>
 
 <script type="text/javascript">
 function invite_Member() {
 	var url = "/HoneyComb/Chatting/Invite_form.chat";
 	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,"+"scrollbars=no,resizable=no,width=550,height=400");
+
 }
 
 
 
+$(document).ready(function(){
+    $("p").click(function(){
+      var c ='form'+$(this).attr("id");
+   
+      $('form.'+c).submit();
+    });
+    
+    $("p").mouseenter(function(){
+    	 var c ="submit"+$(this).attr("id");
+    	 $('#'+c).css('border','1px solid');
+     	
+    	 $('#'+c).css('border-color','red');
+    	 
+    });
+    $("p").mouseleave(function(){
+   	 var c ="submit"+$(this).attr("id");
+   	 $('#'+c).css('border','0');
+   	 $('#'+c).css('border-color','#fff');
+   	 $('#'+c).css('border-top','1px solid #efefef');
+   	 $('#'+c).css('border-bottom','1px solid #efefef');
+	 });
+    
+    
+    $(".memmem").mouseenter(function(){
+   	
+   	 $(this).css('border','1px solid');
+	 $(this).css('border-color','red');
+	 
+    });
+    $(".memmem").mouseleave(function(){
+
+      	 $(this).css('border','0');
+      	 $(this).css('border-color','#fff');
+      	 $(this).css('border-top','1px solid #efefef');
+      	 $(this).css('border-bottom','1px solid #efefef');
+   	 });
+    
+    
+});
+	
 
 </script>
-
 <script type="application/javascript">
 
 			
@@ -109,9 +188,9 @@ function invite_Member() {
 			var chat_Num = '${chat_Num}';
 			var chat_mem_name = '${chat_mem_name}';
 			var chat_Member_Participation = '${chat_Member_Participation}';
-			
+			var chat_partner = '${chat_partner}';
 		
-			
+		//	 alert("chat_Num :::::: "+chat_Num+"   chat_mem_name:::::: "+chat_mem_name+" chat_Member_Participation :::::: "+chat_Member_Participation+" chat_partner :::::: "+chat_partner)
 
 			
 			var mem_num = '${mem_num}'
@@ -135,7 +214,7 @@ function invite_Member() {
 	
 	             // 서버에 접속이 되면 호출되는 콜백함수
 	            Chat.socket.onopen = function () {
-	                Console.sys('Info: WebSocket connection opened.');
+	                Console.sys("알림 : " +chat_partner +" 님과 연결되었습니다. ");
 	                // 채팅입력창에 메시지를 입력하기 위해 키를 누르면 호출되는 콜백함수
 	                document.getElementById('chat').onkeydown = function(event) {
 	                    // 엔터키가 눌린 경우, 서버로 메시지를 전송함
@@ -171,7 +250,7 @@ function invite_Member() {
 	        Chat.initialize = function() {
 	            if (window.location.protocol == 'http:') {
 	                //Chat.connect('ws://' + window.location.host + '/websocket/chat');
-	            	Chat.connect('ws://localhost:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver='+chat_Member_Participation);
+	            	Chat.connect('ws://localhost:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver='+chat_Member_Participation+'&chat_Num='+chat_Num);
 	            } else {
 	                Chat.connect('wss://' + window.location.host + '/websocket/Chatting');
 	            }
@@ -264,6 +343,25 @@ function invite_Member() {
 	    
 </script> 
 
+<script type="text/javascript">
+
+function filter(){
+	if($('#search_name').val()==""){
+		 $("#form1 div").css('display','');	
+		
+		
+	}
+	else{
+/* 		$("#form1 input").css('display','none');
+		$(".memname_chat").hide(); */
+		$('#form1 div').css('display','none');	
+		$("#form1 div[class*='"+$('#search_name').val()+"']").css('display','');
+	}
+	return false;
+}
+
+
+</script>
 
 </head>
 <body>
@@ -271,13 +369,13 @@ function invite_Member() {
 <div class='total_box'>
 <div class = 'box1_select_chat'>
 <input type = "button" value="+" onclick="invite_Member()">
-<input type = "text" placeholder="naem" id = 'search_name'>
+<input type = "text" placeholder="name" id = 'search_name'  onkeyup='{filter();return false}' onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
+<br>
 <br>
 
-
-<c:forEach var="chat_list" items="${current_chat_list}">
-<form method="post"  action="/HoneyComb/Chatting/Chat_Select_OneNone.chat">
-<input type="hidden" name ="chat_Num" id="chat_Num" value="${chat_list.chat_Num}">
+<c:forEach var="chat_list" items="${current_chat_list}" >
+<form method="post"  action="/HoneyComb/Chatting/Chat_Select_OneNone.chat" class='form${chat_list.chat_Num }' id = 'form1'>
+<input type="hidden" name ="chat_Num" id="chat_Num" value="${chat_list.chat_Num}" >
 
 <input type="hidden" name ="chat_mem_name" id="chat_mem_name" value="${chat_list.chat_mem_name}">
 
@@ -287,8 +385,12 @@ function invite_Member() {
 
 <input type="hidden" name ="last_Chat_Conversation" id="last_Chat_Conversation" value ="${chat_list.last_Chat_Conversation}">
 
-<input type="submit" value="${chat_list.chat_mem_name }">
+<input type = "hidden" name = "chat_partner" id="chat_partner" value = "${chat_list.chat_partner } ">
 
+<div  class = '${chat_list.chat_partner }' > 
+<input type="submit" value=" "  id="submit${chat_list.chat_Num}" class = 'memmem'>
+<p class='memname_chat' id = '${chat_list.chat_Num}'   >${chat_list.chat_partner }  </p>
+</div>
 </form>
 
 </c:forEach>
@@ -324,5 +426,7 @@ function invite_Member() {
 
 
 </div>
+
+
 </body>
 </html>

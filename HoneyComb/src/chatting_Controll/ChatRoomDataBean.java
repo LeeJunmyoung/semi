@@ -6,8 +6,14 @@ public class ChatRoomDataBean {
 	private String chat_Member_Participation;
 	private String last_Chat_Date;
 	private String last_Chat_Conversation;
+	private String chat_partner;
 	
-	
+	public String getChat_partner() {
+		return chat_partner;
+	}
+	public void setChat_partner(String chat_partner) {
+		this.chat_partner = chat_partner;
+	}
 	public int getChat_Num() {
 		return chat_Num;
 	}

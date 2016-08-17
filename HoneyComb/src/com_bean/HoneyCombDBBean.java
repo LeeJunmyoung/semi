@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import notice.NoticeDataBean;
+
 public class HoneyCombDBBean {
 
 	private static HoneyCombDBBean instance = new HoneyCombDBBean();
@@ -481,4 +483,45 @@ public class HoneyCombDBBean {
 		      return com_num;
 
 		   }
+	   public int noticeComplete(NoticeDataBean article) throws Exception {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			HoneyCombDataBean comp = new HoneyCombDataBean();
+			int count = 0;
+			
+			try {
+				conn = getConnection();
+				
+				pstmt = conn.prepareStatement("insert into notice_admin(notice_admin_num,notice_admin_content,notice_admin_member,notice_admin_date) values(notice_admin_num.NEXTVAL,?,?,?)");
+				//pstmt.setInt(1, notice_num);
+				pstmt.setString(1, article.getNotice_content());
+				pstmt.setString(2, article.getNotice_member());
+				pstmt.setTimestamp(3, article.getNotice_date());
+				count = pstmt.executeUpdate();
+				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			} finally {
+				if (pstmt != null)
+					try {
+						pstmt.close();
+					} catch (SQLException ex) {
+					}
+				if (conn != null)
+					try {
+						conn.close();
+					} catch (SQLException ex) {
+					}
+				if (rs != null){
+					try{
+						rs.close();
+					}catch (SQLException ex) {
+					}
+				}	
+			}
+			return count;
+
+		}
+	   
 	}

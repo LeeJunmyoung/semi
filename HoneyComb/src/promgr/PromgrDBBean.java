@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import oracle.net.aso.s;
-
 public class PromgrDBBean {
 
 	private static PromgrDBBean instance = new PromgrDBBean();
@@ -34,7 +32,6 @@ public class PromgrDBBean {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int count = 0;
-		String sql = null;
 
 		try {
 
@@ -88,12 +85,14 @@ public class PromgrDBBean {
 		StringTokenizer stz = null;
 		int[] item_list = null;
 		int idx = 0;
+
 		String[] mem_name_arr = null;
-		String[] chklist_title_arr = null;
-		String[] chklist_item_arr = null;
+		List chklist_view = null;
+		String[] chklist_item_num = null;
+		String[] chklist_item_name = null;
 
 		List articleList = null;
-		String sql = null;
+		String sql = "";
 
 		try {
 
@@ -146,8 +145,6 @@ public class PromgrDBBean {
 					article.setPromgr_date(rs.getTimestamp("promgr_date"));
 					article.setMem_num(rs.getString("mem_num"));
 					article.setFile_num(rs.getString("file_num"));
-					article.setChklist_title_num(rs.getString("chklist_title_num"));
-					article.setChklist_item_num(rs.getString("chklist_item_num"));
 					article.setComment_num(rs.getString("comment_num"));
 					article.setCom_num(rs.getInt("com_num"));
 
@@ -183,7 +180,9 @@ public class PromgrDBBean {
 
 					article.setMem_name_arr(mem_name_arr);
 
-					// <chklist_title_arr setting>
+					// <chklist_view setting>
+					chklist_view = new ArrayList();
+
 					// chklist_title_num 분리
 					if (rs.getString("chklist_title_num") != null) {
 						stz = new StringTokenizer(rs.getString("chklist_title_num"), "/");
@@ -197,10 +196,8 @@ public class PromgrDBBean {
 						idx++;
 					} // while (stz.hasMoreTokens()) end
 
-					// chklist_title_num -> chklist_title_name
-					chklist_title_arr = new String[item_list.length];
-
 					for (int j = 0; j < item_list.length; j++) {
+						// chklist_view item setting
 
 						pstmt = conn.prepareStatement("select * from chklist_title where chklist_title_num=?");
 						pstmt.setInt(1, item_list[j]);
@@ -209,51 +206,55 @@ public class PromgrDBBean {
 
 						if (rs_chklist_title.next()) {
 
-							chklist_title_arr[j] = rs_chklist_title.getString("chklist_title_name");
+							ChkListViewDataBean chklist_view_item = new ChkListViewDataBean();
+
+							chklist_view_item.setTitle_num(rs_chklist_title.getString("chklist_title_num"));
+							chklist_view_item.setTitle_name(rs_chklist_title.getString("chklist_title_name"));
+
+							sql = "select count(*) from chklist_item where chklist_title_num=?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setString(1, rs_chklist_title.getString("chklist_title_num"));
+
+							ResultSet rs_chklist_item_count = pstmt.executeQuery();
+
+							if (rs_chklist_item_count.next()) {
+
+								chklist_item_num = new String[rs_chklist_item_count.getInt(1)];
+								chklist_item_name = new String[rs_chklist_item_count.getInt(1)];
+
+							}
+
+							sql = "select * from chklist_item where chklist_title_num=?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setString(1, rs_chklist_title.getString("chklist_title_num"));
+
+							ResultSet rs_chklist_item = pstmt.executeQuery();
+
+							if (rs_chklist_item.next()) {
+
+								int idx_item = 0;
+
+								do {
+
+									chklist_item_num[idx_item] = rs_chklist_item.getString("chklist_item_num");
+									chklist_item_name[idx_item] = rs_chklist_item.getString("chklist_item_name");
+
+									idx_item++;
+
+								} while (rs_chklist_item.next());
+
+								chklist_view_item.setItem_num(chklist_item_num);
+								chklist_view_item.setItem_name(chklist_item_name);
+
+							} // chklist_item item if (rs.next()) end
+
+							chklist_view.add(chklist_view_item);
 
 						} // chklist_title item if (rs.next()) end
 
 					} // chklist_title_arr for end
 
-					article.setChklist_title_arr(chklist_title_arr);
-
-					// <chklist_item_arr setting>
-					// chklist_tiem_num 분리
-					if (rs.getString("chklist_item_num") != null) {
-						stz = new StringTokenizer(rs.getString("chklist_item_num"), "/");
-					}
-
-					idx = 0;
-					item_list = new int[stz.countTokens()];
-
-					while (stz.hasMoreTokens()) {
-						item_list[idx] = Integer.parseInt(stz.nextToken());
-						idx++;
-					} // while (stz.hasMoreTokens()) end
-
-					// chklist_item_num -> chklist_item_name
-					chklist_item_arr = new String[item_list.length];
-
-					for (int j = 0; j < item_list.length; j++) {
-
-						pstmt = conn.prepareStatement("select * from chklist_item where chklist_item_num=?");
-						pstmt.setInt(1, item_list[j]);
-
-						ResultSet rs_chklist_item = pstmt.executeQuery();
-
-						if (rs_chklist_item.next()) {
-
-							chklist_item_arr[j] = rs_chklist_item.getString("chklist_item_name");
-
-						} // chklist_item item if (rs.next()) end
-
-						for (int k = 0; k < chklist_item_arr.length; k++) {
-							System.out.println("chklist_item_arr[" + k + "] : " + chklist_item_arr[k]);
-						}
-
-					} // chklist_item_arr for end
-
-					article.setChklist_item_arr(chklist_item_arr);
+					article.setChklist_view(chklist_view);
 
 					articleList.add(article);
 
@@ -288,69 +289,6 @@ public class PromgrDBBean {
 		return articleList;
 
 	} // List getPromgrList(int endRow) end
-
-	public PromgrDataBean getPromgrArticle(int rowNum, String mem_num) throws Exception {
-		// promgr 목록의 한 item의 데이터를 호출
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		PromgrDataBean article = null;
-
-		try {
-
-			conn = getConnection();
-
-			pstmt = conn.prepareStatement("select * from promgr where promgr_num=? and mem_num like ?");
-			pstmt.setInt(1, rowNum);
-			pstmt.setString(2, "%" + mem_num + "%");
-
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-
-				article = new PromgrDataBean();
-
-				article.setPromgr_num(rs.getInt("promgr_num"));
-				article.setPromgr_name(rs.getString("promgr_name"));
-				article.setPromgr_content(rs.getString("promgr_content"));
-				article.setPromgr_date(rs.getTimestamp("promgr_date"));
-				article.setMem_num(rs.getString("mem_num"));
-				article.setFile_num(rs.getString("file_num"));
-				article.setChklist_title_num(rs.getString("chklist_title_num"));
-				article.setChklist_item_num(rs.getString("chklist_item_num"));
-				article.setComment_num(rs.getString("comment_num"));
-				article.setCom_num(rs.getInt("com_num"));
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException ex) {
-				}
-
-		}
-
-		return article;
-
-	} // PromgrDataBean getPromgrArticle(int rowNum, String mem_num) end
 
 	public int insertPromgr(PromgrDataBean article) throws Exception {
 		// promgr 생성
@@ -414,11 +352,12 @@ public class PromgrDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		String item_all = null;
 		StringTokenizer stz = null;
 		int[] item_list = null;
+		
 		List articleList = null;
-		String sql = null;
 
 		try {
 
@@ -504,12 +443,14 @@ public class PromgrDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		int com_num = 0;
 		String item_all = null;
 		StringTokenizer stz = null;
 		int[] item_list = null;
+		
 		List articleList = null;
-		String sql = null;
+		String sql = "";
 
 		try {
 
@@ -604,8 +545,10 @@ public class PromgrDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		String item_all = "";
 		String mem_num_str = "";
+		
 		int count = 0;
 		String sql = "";
 
@@ -672,10 +615,12 @@ public class PromgrDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		String item_all = "";
 		StringTokenizer stz = null;
 		int[] item_list = null;
 		String mem_num_str = "";
+		
 		int count = 0;
 		String sql = "";
 
@@ -720,10 +665,7 @@ public class PromgrDBBean {
 
 				}
 
-				System.out.println("mem_num_str : " + mem_num_str);
-
 				sql = "update promgr set mem_num = ? where promgr_num=?";
-
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, mem_num_str);
 				pstmt.setInt(2, promgr_num);
@@ -766,7 +708,9 @@ public class PromgrDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		String chklist_num_str = "";
+		
 		int count = 0;
 		String sql = "";
 
@@ -854,30 +798,21 @@ public class PromgrDBBean {
 
 	} // int insertChkList(ChkListTitleDataBean article) end
 
-	public int insertChkItem(String title, ChkListItemDataBean article) throws Exception {
+	public int insertChkItem(String num, ChkListItemDataBean article) throws Exception {
 		// checklist item 생성
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int chklist_title_num = 0;
-		int chklist_item_num = 0;
+		
 		String chkitem_num_str = "";
+		
 		int count = 0;
 		String sql = "";
 
 		try {
 
 			conn = getConnection();
-			// chklist_title_num
-			sql = "select * from chklist_title where chklist_title_name=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, title);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				chklist_title_num = rs.getInt("chklist_title_num");
-			}
 
 			// insert
 			sql = "insert into ";
@@ -886,7 +821,7 @@ public class PromgrDBBean {
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, article.getChklist_item_name());
-			pstmt.setInt(2, chklist_title_num);
+			pstmt.setString(2, num);
 			pstmt.setInt(3, article.getPromgr_num());
 			pstmt.setInt(4, article.getCom_num());
 

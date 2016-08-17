@@ -2,17 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ page import="promgr.PromgrDBBean"%>
-<%@ page import="promgr.ChkListItemDataBean"%>
-
 <!DOCTYPE >
-
-<c:if test="${promgr_insert_count==0}">
-	<script>
-			alert("입력된 내용이 없습니다. 다시 입력해주세요.");
-			history.go(-1);
-		</script>
-</c:if>
 
 <html>
 <head>
@@ -147,33 +137,32 @@ dl dd {
 									<div>시작일 : ${article.promgr_date}</div>
 									<div>내용 : ${article.promgr_content}</div>
 									<div>
-										진행 상황 항목 : ${article.chklist_title_num}
 
-										<c:forEach var="title" items="${article.chklist_title_arr}">
+										<c:forEach var="view" items="${article.chklist_view}">
 
-											<div id="${title}">
+											<div id="${view.title_num}">
 
-												<div>${title}
+												<div>${view.title_name}(${view.title_num})
 													<input type="button" value="del">
 												</div>
 
 												<div>[진행상황 그래프]</div>
 
-												<form method="post" name="chkItemform"
-													action="/HoneyComb/promgr/PromgrChkListAddItemAction.promgr?promgr_num=${article.promgr_num}&chklist_title=${title}"
-													onsubmit="return writeSave()">
+													<form method="post" name="chkItemform"
+														action="/HoneyComb/promgr/PromgrChkListAddItemAction.promgr?promgr_num=${article.promgr_num}&chklist_title=${view.title_name}"
+														onsubmit="return writeSave()">
 
-													<c:forEach var="item" items="${article.chklist_item_arr}">
-														<div>
-															<input type="checkbox" name="chkitem" /> ${item} <input
-																type="button" value="del" hidden="true">
-														</div>
-													</c:forEach>
+														<c:forEach var="item"
+															items="${view.item_name}">
+															<div>
+																<input type="checkbox" name="chkitem" /> ${item} <input
+																	type="button" value="del" hidden="true">
+															</div>
+														</c:forEach>
 
-												</form>
+													</form>
 
-												<input type="button" value="add item"
-													onclick="AddItem(${article.promgr_num}, ${title})" />
+												<input type="button" value="add item" onclick="AddItem(${article.promgr_num}, ${view.title_num})" />
 
 											</div>
 

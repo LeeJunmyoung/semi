@@ -6,15 +6,22 @@
 <head>
 <title>공지완료폼</title>
 </head>
-<script>
-	opener.location.reload();
-</script>
-<body bgcolor="<%=bodyback_c%>">
-	<center>
-		공지등록이 완료 되었습니다.
-		<p>
-			<input type="button" value="확인" onclick="window.close()">
-	</center>
 
+<c:forEach var="notice" items="${noticeList}">
+<table width="320" border="1" bordercolor="#cccccc" align="center" cellpadding="5" cellspacing="0">
+<tr bgcolor="#ffcc00">
+<td aling="center"><B>공지사항</B></td>
+</tr>
+<tr bordercolor="white">
+<td align="center">
+${notice.notice_admin_content}
+</td>
+</tr>
+</table>
+<br/>
+<center>
+<input type="button" value="창 닫기" onclick="self.close()">
+</center>
+</c:forEach>
 </body>
 </html>

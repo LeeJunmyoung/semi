@@ -17,17 +17,19 @@
 			alert("내용을 입력하십시요.");
 			document.writeform.notice_content.focus();
 			return false;
-		}else{
-			var num = notice_num;
+		}
+		/* else{
+			var num = notice_admin_num;
+			alert("notice_admin_num = "+notice_admin_num);
 			
-			url = "complete_comNotice.admin?notice_num=" + num;
+			url = "complete_comNotice.admin?notice_admin_num=" + num;
 
 				  window
 						.open(
 								url,
 								"post",
 								"toolbar=no,width=300,height=500,directories=no,status=yes,scrollbars=yes,menubar=no");
-		}
+		} */
 
 	}
 </script>

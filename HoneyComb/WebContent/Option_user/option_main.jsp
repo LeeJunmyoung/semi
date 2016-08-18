@@ -4,8 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>MainPage</title>
 </head>
+
+<script>
+	function logout() {
+
+		var out = confirm("정말 로그아웃 하시겠습니까?");
+
+		if (out) {
+			location.href = "/HoneyComb/Option_user/logout_page.jsp";
+		} else {
+			return false;
+		}
+	}
+</script>
+
 <body bgcolor="<%=bodyback_c%>">
 
 	<form align="center">
@@ -19,9 +33,11 @@
 
 		<input type="button" value="마이페이지"
 			onclick="location.href='/HoneyComb/Option_user/mypage.option'" />
-		<input type="button" value="로그아웃" onclick="href.location='#'" />
+			
+		<input type="button" value="로그아웃" onclick="logout();" />
+		
 		<p>
-				<input type="button" value="back" onclick="history.go(-1)">
+		<input type="button" value="back" onclick="history.go(-1)">
 	</form>
 
 </body>

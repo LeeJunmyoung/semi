@@ -4,11 +4,24 @@
 
 <!DOCTYPE html>
 <html>
+<script>
+	function logout() {
+
+		var out = confirm("정말 로그아웃 하시겠습니까?");
+
+		if (out) {
+			location.href = "/HoneyComb/Option_user/logout_page.jsp";
+		} else {
+			return false;
+		}
+	}
+</script>
 <body>
 
-		<h2><img src="${ sessionScope.profile_img }"  width="68" height="70"
+		<h2><img src="${ sessionScope.profile_img }"  width="150" height="153"
 					onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
 		<h2>${ sessionScope.name }</h2>
+		
 
 	<ul>
 
@@ -16,10 +29,10 @@
 		<c:forEach var="menu" items="${userMenus}">
 			<li><a href="${menu.link}">${menu.name}</a></li>
 		</c:forEach>
-		<li><a  href="/HoneyComb/Option_user/logout_page.jsp" >log out</a></li>
+		<li><a href="#logout" onclick="logout();return false;" onkeypress="this.onclick;">log out</a></li>
+		<!-- <a href="/HoneyComb/Option_user/logout_page.jsp"> -->
+	
 	</ul>
 
 </body>
 </html>
-
-

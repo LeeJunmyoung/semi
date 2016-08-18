@@ -1,5 +1,8 @@
 package option_controll;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import LogInDB.LogOnDataBean;
-import com_bean.HoneyCombDBBean;
+import oracle.jdbc.proxy.annotation.Pre;
 
 public class OptionDBBean {
 
@@ -132,7 +135,7 @@ public class OptionDBBean {
 					"select name,email,phone_num,com_dept_name,com_pos_name from members where com_num = ? order by com_pos_num");
 			// com_pos_num을 기준으로 정렬 수정
 			pstmt.setInt(1, com_num);
-			
+
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				memlist = new ArrayList<LogOnDataBean>();
@@ -253,33 +256,75 @@ public class OptionDBBean {
 				}
 
 		}
-		
+
 	}
-	
+
 	public String img_Register(int mem_num, String img_path) throws Exception {
 		// 프로필 사진 등록
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String profile_img = "";
+
+		try {
+			conn = getConnection();
+
+			pstmt = conn.prepareStatement("update members set profile_img = ? where mem_num = ?");
+			pstmt.setString(1, img_path);
+			pstmt.setInt(2, mem_num);
+
+			pstmt.executeUpdate();
+
+			pstmt = conn.prepareStatement("select profile_img from members where mem_num = ?");
+			pstmt.setInt(1, mem_num);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				profile_img = rs.getString(1);
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return profile_img;
+
+	}
+
+	public String passwd_Get(int mem_num) throws Exception {
+		// 게정 삭제를 위한 비밀번호
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String passwd = "";
 		
 		try {
 			conn = getConnection();
 			
-			pstmt = conn.prepareStatement("update members set profile_img = ? where mem_num = ?");
-			pstmt.setString(1, img_path);
-			pstmt.setInt(2, mem_num);
-			
-			pstmt.executeUpdate();
-			
-			pstmt = conn.prepareStatement("select profile_img from members where mem_num = ?");
+			pstmt = conn.prepareStatement("select passwd from members where mem_num = ?");
 			pstmt.setInt(1, mem_num);
-			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				profile_img = rs.getString(1);
-			}
+			rs.next();
+			passwd = rs.getString(1);
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -302,8 +347,36 @@ public class OptionDBBean {
 
 		}
 		
-		return profile_img;
-		 
+		return passwd;
+	}
+	
+	public void user_Delete(int mem_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement("delete from members where mem_num = ?");
+			pstmt.setInt(1, mem_num);
+			pstmt.executeQuery();
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+		
 	}
 
 }

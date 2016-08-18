@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 import notice.NoticeDataBean;
+import com_bean.Notice_adminDataBean;
 
 public class HoneyCombDBBean {
 
@@ -483,7 +484,7 @@ public class HoneyCombDBBean {
 		      return com_num;
 
 		   }
-	   public int noticeComplete(NoticeDataBean article) throws Exception {
+	   public int noticeComplete(Notice_adminDataBean article) throws Exception {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -495,9 +496,9 @@ public class HoneyCombDBBean {
 				
 				pstmt = conn.prepareStatement("insert into notice_admin(notice_admin_num,notice_admin_content,notice_admin_member,notice_admin_date) values(notice_admin_num.NEXTVAL,?,?,?)");
 				//pstmt.setInt(1, notice_num);
-				pstmt.setString(1, article.getNotice_content());
-				pstmt.setString(2, article.getNotice_member());
-				pstmt.setTimestamp(3, article.getNotice_date());
+				pstmt.setString(1, article.getNotice_admin_content());
+				pstmt.setString(2, article.getNotice_admin_member());
+				pstmt.setTimestamp(3, article.getNotice_admin_date());
 				count = pstmt.executeUpdate();
 				
 			} catch (SQLException ex) {

@@ -7,7 +7,61 @@
 <html>
 <head>
 <title>promgr more</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
+	
+/* $(function() {
+	
+	 $('#chkList_lab').click(function(){
+		
+		if($('#chkList_lab').) {
+			$('#chklist_lab').css("display", "none");
+			$('#chkList_modText').css("display", "");
+			$('#chkList_modBtn').css("display", "");
+			$('#chkList_delBtn').css("display", "");
+			$('#exit_list').css("display", "");
+		}
+		
+	});
+	 
+	$(document).click(function(){
+			
+		if($('#chkList_lab').css("display") == "none") {
+			$('#chkList_lab').css("display", "");
+			$('#chkList_modText').css("display", "none");				
+			$('#chkList_modBtn').css("display", "none");
+			$('#chkList_delBtn').css("display", "none");
+			$('#exit_list').css("display", "none");
+		}
+		
+	});
+	 
+}); */
+
+
+	function hidden_input(lab, text, modbtn, delbtn, exit) { // 수정, 삭제
+		
+		if(document.getElementById(lab).hidden == false ) {
+			document.getElementById(lab).hidden = true;
+			document.getElementById(text).hidden = false;
+			document.getElementById(modbtn).hidden = false;
+			document.getElementById(delbtn).hidden = false;
+			document.getElementById(exit).hidden = false;
+		}
+	
+	}
+	
+	function appear_input(lab, text, modbtn, delbtn, exit) { // 수정, 삭제
+		
+		if(document.getElementById(lab).hidden == true ) {
+			document.getElementById(lab).hidden = false;
+			document.getElementById(text).hidden = true;
+			document.getElementById(modbtn).hidden = true;
+			document.getElementById(delbtn).hidden = true;
+			document.getElementById(exit).hidden = true;
+		} 
+	
+	}
 
 	function addProject() { // project 생성
 		url = "/HoneyComb/promgr/promgrAddForm.promgr";
@@ -25,7 +79,7 @@
 					.open(
 							url,
 							"post",
-							"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+							"toolbar=no ,width=1 ,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
 	function memberEditor(promgr_num) { // 참여자 관리
@@ -46,13 +100,22 @@
 						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
+	function ModChkList(promgr_num, title_num) { // checklist명 수정
+		url = "/HoneyComb/promgr/PromgrChkListMod.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=1 ,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
+	}
+	
 	function DelChkList(promgr_num, title_num) { // checklist 삭제
 		url = "/HoneyComb/promgr/PromgrChkListDel.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
 		window
 				.open(
 						url,
 						"post",
-						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+						"toolbar=no ,width=1 ,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
 	function AddItem(promgr_num, title_num) { // checkitem 생성
@@ -65,6 +128,16 @@
 						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
+	function ModItem(promgr_num, item_num) { // checkitem명 수정
+		
+		url = "/HoneyComb/promgr/PromgrChkListDelItem.promgr?promgr_num="+promgr_num+"&chklist_item="+item_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
+	}
+	
 	function DelItem(promgr_num, item_num) { // checkitem 삭제
 		
 		url = "/HoneyComb/promgr/PromgrChkListDelItem.promgr?promgr_num="+promgr_num+"&chklist_item="+item_num;
@@ -72,8 +145,10 @@
 				.open(
 						url,
 						"post",
-						"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
+	
+	
 	
 </script>
 
@@ -84,7 +159,7 @@
 }
 
 dl {
-	width: 400px;
+	width: 750px;
 	margin: 50px auto;
 }
 
@@ -107,7 +182,7 @@ dl dd {
 }
 
 #content_view {
-	width: 70%;
+	width: 75%;
 	float: left;
 	text-align: left;
 	float: left;
@@ -115,7 +190,7 @@ dl dd {
 }
 
 #content_editor {
-	width: 30%;
+	width: 25%;
 	float: right;
 }
 
@@ -176,8 +251,26 @@ dl dd {
 
 											<div id="${view.title_num}">
 
-												<div>${view.title_name}(${view.title_num})
-													<input type="button" value="del chklist" onclick="DelChkList(${article.promgr_num}, ${view.title_num})">
+												<div>
+												
+													<%-- <label id="chkList_lab">${view.title_name}(${view.title_num})</label>
+													<input type="text" id="chkList_modText" value="${view.title_name}"/>
+													<input type="button" id="chkList_modBtn" value="modList"
+														onclick="ModChkList(${article.promgr_num}, ${view.title_num})">
+													<input type="button" id="chkList_delBtn" value="deList"
+														onclick="DelChkList(${article.promgr_num}, ${view.title_num})">
+													<input type="button" id="exit_list" value="X"> --%>
+												
+													<label id="chkList_lab_${view.title_num}"
+														onclick="hidden_input('chkList_lab_${view.title_num}', 'chkList_modText_${view.title_num}', 'chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')">${view.title_name}(${view.title_num})</label>
+													<input type="text" id="chkList_modText_${view.title_num}" value="${view.title_name}" hidden="true" />
+													<input type="button" id="chkList_modBtn_${view.title_num}" value="modList"
+														onclick="ModChkList(${article.promgr_num}, ${view.title_num})" hidden="true">
+													<input type="button" id="chkList_delBtn_${view.title_num}" value="deList"
+														onclick="DelChkList(${article.promgr_num}, ${view.title_num})" hidden="true">
+													<input type="button" id="exit_list_${view.title_num}" value="X"
+														onclick="appear_input('chkList_lab_${view.title_num}', 'chkList_modText_${view.title_num}', 'chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')" hidden="true">
+												
 												</div>
 
 												<div>[진행상황 그래프]</div>
@@ -188,8 +281,21 @@ dl dd {
 
 													<c:forEach var="bean" items="${view.item_bean}">
 														<div>
-															<input type="checkbox" name="chkitem" value="${bean.item_num}" /> ${bean.item_name}
-															<input type="button" value="del item" onclick="DelItem(${article.promgr_num}, ${bean.item_num})">
+															<input type="checkbox" name="chkitem" value="${bean.item_num}" />
+															
+															<label id="chkItem_lab_${bean.item_num}"
+																onclick="hidden_input('chkItem_lab_${bean.item_num}', 'chkItem_modText_${bean.item_num}', 'chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')">${bean.item_name}(${bean.item_num})</label>
+															
+															<input type="text" id="chkItem_modText_${bean.item_num}" value="${bean.item_name}" hidden="true" />
+															
+															<input type="button" id="chkItem_modBtn_${bean.item_num}" value="modItem"
+																onclick="ModItem(${article.promgr_num}, ${bean.item_num})" hidden="true">
+															
+															<input type="button" id="chkItem_delBtn_${bean.item_num}" value="delItem"
+																onclick="DelItem(${article.promgr_num}, ${bean.item_num})" hidden="true">
+															
+															<input type="button" id="exit_item_${bean.item_num}" value="X"
+															onclick="appear_input('chkItem_lab_${bean.item_num}', 'chkItem_modText_${bean.item_num}', 'chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')" hidden="true">
 														</div>
 													</c:forEach>
 
@@ -213,11 +319,10 @@ dl dd {
 										onclick="AddChkList(${article.promgr_num})" /> <br /> <input
 										type="button" value="file" />
 								</div>
+								
 							</div>
 
-							<div id="content_comment">
-							[comment]
-							</div>
+							<div id="content_comment">[comment]</div>
 
 						</dd>
 

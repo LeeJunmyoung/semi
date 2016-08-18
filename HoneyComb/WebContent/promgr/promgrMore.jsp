@@ -7,39 +7,10 @@
 <html>
 <head>
 <title>promgr more</title>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
-	
-/* $(function() {
-	
-	 $('#chkList_lab').click(function(){
-		
-		if($('#chkList_lab').) {
-			$('#chklist_lab').css("display", "none");
-			$('#chkList_modText').css("display", "");
-			$('#chkList_modBtn').css("display", "");
-			$('#chkList_delBtn').css("display", "");
-			$('#exit_list').css("display", "");
-		}
-		
-	});
-	 
-	$(document).click(function(){
-			
-		if($('#chkList_lab').css("display") == "none") {
-			$('#chkList_lab').css("display", "");
-			$('#chkList_modText').css("display", "none");				
-			$('#chkList_modBtn').css("display", "none");
-			$('#chkList_delBtn').css("display", "none");
-			$('#exit_list').css("display", "none");
-		}
-		
-	});
-	 
-}); */
 
-	function hidden_input(modbtn, delbtn, exit) { // 수정, 삭제
-		
+	function HiddenInput(modbtn, delbtn, exit) { // 수정, 삭제
+
 		if(document.getElementById(exit).hidden == false ) {
 			document.getElementById(modbtn).hidden = true;
 			document.getElementById(delbtn).hidden = true;
@@ -48,7 +19,7 @@
 	
 	}
 	
-	function appear_input(modbtn, delbtn, exit) { // 수정, 삭제
+	function AppearInput(modbtn, delbtn, exit) { // 수정, 삭제
 		
 		if(document.getElementById(exit).hidden == true ) {
 			document.getElementById(modbtn).hidden = false;
@@ -257,7 +228,7 @@ dl dd {
 												<div>
 												
 													<label id="chkList_lab_${view.title_num}"
-														onclick="hidden_input('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')">${view.title_name}(${view.title_num})</label>
+														ondblclick="HiddenInput('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')">${view.title_name}(${view.title_num})</label>
 													
 													<input type="button" id="chkList_modBtn_${view.title_num}" value="modList" 
 														onclick="ModChkList(${view.title_num})" hidden="true">
@@ -266,7 +237,7 @@ dl dd {
 														onclick="DelChkList(${article.promgr_num}, ${view.title_num})" hidden="true">
 													
 													<input type="button" id="exit_list_${view.title_num}" value="X"
-														onclick="appear_input('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')" hidden="true">
+														onclick="AppearInput('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')" hidden="true">
 												
 												</div>
 
@@ -275,21 +246,23 @@ dl dd {
 												<form method="post" name="chkItemform" >
 
 													<c:forEach var="bean" items="${view.item_bean}">
+														
 														<div>
 															<input type="checkbox" name="chkitem" value="${bean.item_num}" />
 															
 															<label id="chkItem_lab_${bean.item_num}"
-																onclick="hidden_input('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')">${bean.item_name}(${bean.item_num})</label>
+																ondblclick="HiddenInput('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')">${bean.item_name}(${bean.item_num})</label>
 															
 															<input type="button" id="chkItem_modBtn_${bean.item_num}" value="modItem" 
-																onclick="ModChkItem(${bean.item_num})" hidden="true">
+																onclick="ModChkItem(${bean.item_num})" hidden="true" />
 															
 															<input type="button" id="chkItem_delBtn_${bean.item_num}" value="delItem"
-																onclick="DelItem(${article.promgr_num}, ${bean.item_num})" hidden="true">
+																onclick="DelItem(${article.promgr_num}, ${bean.item_num})" hidden="true" />
 															
 															<input type="button" id="exit_item_${bean.item_num}" value="X"
-															onclick="appear_input('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')" hidden="true">
+															onclick="AppearInput('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')" hidden="true">
 														</div>
+														
 													</c:forEach>
 
 												</form>

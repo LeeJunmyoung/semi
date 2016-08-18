@@ -948,7 +948,7 @@ public class PromgrDBBean {
 
 	} // int deletePromgr(String promgr_num, int com_num) end
 
-	public int delchkItem(int promgr_num, int item_num) throws Exception {
+	public int delChkItem(int promgr_num, int item_num) throws Exception {
 		// promgr의 item_num을 이용해 chklist_item 삭제
 
 		Connection conn = null;
@@ -1033,14 +1033,11 @@ public class PromgrDBBean {
 
 		return count;
 
-	} // int delchkItem(int promgr_num, int item_num) end
+	} // int delChkItem(int promgr_num, int item_num) end
 
-	public int delchkTitle(int promgr_num, int title_num) throws Exception {
+	public int delChkList(int promgr_num, int title_num) throws Exception {
 		// promgr의 title_num을 이용해 chklist_title 삭제
 
-		System.out.println("promgr_num : " + promgr_num);
-		System.out.println("title_num : " + title_num);
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1083,8 +1080,6 @@ public class PromgrDBBean {
 
 					} while (rs.next());
 
-					System.out.println("chkitem_num_str : " + chkitem_num_str);
-
 					sql = "update promgr set chklist_item_num=? where promgr_num=?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, chkitem_num_str);
@@ -1122,7 +1117,126 @@ public class PromgrDBBean {
 
 					} while (rs.next());
 
-					System.out.println("chklist_num_str : " + chklist_num_str);
+					sql = "update promgr set chklist_title_num=? where promgr_num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, chklist_num_str);
+					pstmt.setInt(2, promgr_num);
+
+					count = pstmt.executeUpdate();
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return count;
+
+	} // int delChkList(int promgr_num, int title_num) end
+	
+	public int modChkList(int promgr_num, int title_num) throws Exception {
+		// promgr의 title_num을 이용해 chklist_title 삭제
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String item_all = "";
+		StringTokenizer stz = null;
+		int[] item_list = null;
+		String chklist_num_str = "";
+		String chkitem_num_str = "";
+
+		int count = 0;
+		String sql = "";
+
+		try {
+
+			conn = getConnection();
+
+			// title_num에 해당하는 chklist_item 삭제
+			sql = "delete from chklist_item where chklist_title_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, title_num);
+			count = pstmt.executeUpdate();
+
+			if (count > 0) {
+
+				pstmt = conn.prepareStatement("select * from chklist_item where promgr_num=?");
+				pstmt.setInt(1, promgr_num);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+
+					do {
+
+						if (chkitem_num_str.equals("")) {
+							chkitem_num_str += rs.getString("chklist_item_num");
+						} else {
+							chkitem_num_str += "/" + rs.getString("chklist_item_num");
+						}
+
+					} while (rs.next());
+
+					sql = "update promgr set chklist_item_num=? where promgr_num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, chkitem_num_str);
+					pstmt.setInt(2, promgr_num);
+
+					count = pstmt.executeUpdate();
+
+				} // promgr if (rs.next()) end
+
+			} // chklist_item del
+
+			// title_num에 해당하는 chklist_title 삭제
+			sql = "delete from chklist_title where chklist_title_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, title_num);
+			count = pstmt.executeUpdate();
+
+			if (count > 0) {
+				// promgr에서 chklist_title_num 호출
+
+				pstmt = conn.prepareStatement("select * from chklist_title where promgr_num=?");
+				pstmt.setInt(1, promgr_num);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+
+					do {
+
+						if (chklist_num_str.equals("")) {
+							chklist_num_str += rs.getString("chklist_title_num");
+						} else {
+							chklist_num_str += "/" + rs.getString("chklist_title_num");
+						}
+
+					} while (rs.next());
 
 					sql = "update promgr set chklist_title_num=? where promgr_num=?";
 					pstmt = conn.prepareStatement(sql);
@@ -1162,5 +1276,6 @@ public class PromgrDBBean {
 		return count;
 
 	} // int delchkTitle(int promgr_num, int title_num) end
+	
 
 } // public class PromgrDBBean end

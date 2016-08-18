@@ -79,7 +79,6 @@ public class MemCheckDBBean {
 		}
 
 		return comList;
-
 	}
 
 	public ArrayList comSearch(String com_name) throws Exception {
@@ -148,9 +147,10 @@ public class MemCheckDBBean {
 			conn = getConnection();
 
 			pstmt = conn.prepareStatement(
-					"select name, email, phone_num, com_dept_name, com_pos_name from members where com_num = ?");
+					"select name, email, phone_num, com_dept_name, com_pos_name from members where com_num = ? order by com_pos_num");
 			pstmt.setInt(1, com_num);
 			rs = pstmt.executeQuery();
+			// com_pos_num기준으로 정렬 (modify)
 
 			if (rs.next()) {
 				comMemberList = new ArrayList();
@@ -191,7 +191,6 @@ public class MemCheckDBBean {
 		}
 
 		return comMemberList;
-
 	}
 
 }

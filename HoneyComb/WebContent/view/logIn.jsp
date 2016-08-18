@@ -2,6 +2,23 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+
+H    H  EEEEEE  L       L        OOO    
+H    H  E       L       L       O   O    
+HHHHHH  EEEEEE  L       L      O     O    
+H    H  E       L       L       O   O      
+H    H  EEEEEE  LLLLLL  LLLLLL   OOO       
+
+
+W           W    OOO    RRRRRR     L       DDDD     !!!
+ W         W    O   O   R    R     L       D   D    !!!
+  W   W   W    O     O  RRRRR      L       D	D   !!!
+   W W W W      O   O   R    R     L       D   D      
+    W   W        OOO    R     R    LLLLLL  DDDD     !!!
+
+ -->
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">

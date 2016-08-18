@@ -1,8 +1,7 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>로☆그☆아☆웃</title>
+<title>Insert title here</title>
 </head>
 <%
 	session.invalidate();
@@ -13,7 +12,6 @@
 	history.go(-Backlen);
 	window.location.href = '/HoneyComb/index.jsp';
 </script>
-
 
 <body>
 

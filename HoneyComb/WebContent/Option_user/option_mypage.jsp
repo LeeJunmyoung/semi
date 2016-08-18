@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 
-	function init() {
-		window.location.reload();
-	}
+ 	function init() {
+		window.location.reload(true);
+	} 
 	
 	function passwd_confirm() {
 		// 비밀번호 찾기 폼
@@ -24,7 +24,7 @@
 	function user_del() {
 		// 계정 삭제 폼
 
-		var url = '/HoneyComb/Option_user/user_delete_reLogin.jsp';
+		var url = '/HoneyComb/Option_user/user_delete.option';
 		open(url, "confirm", "toolbar=no,location=no,status=no,menubar=no,"
 				+ "scrollbars=no,resizable=no,width=550,height=400");
 
@@ -33,16 +33,17 @@
 	function file_extension() {
 		// img파일인지 확인
 
-		var check = document.myPage.profile_img.value;
-		var extension = check.substr(check.length-3);
+		var check = document.myPage.profile_img.value; // 파일명 (확장자 포함)
+		var extension = check.substr(check.length-3); // 확장자
 			
 		if (!(extension == 'png' || extension == 'bmp' || extension == 'gif' || extension == 'jpg')) {
-			
+			// 사진파일이 아닐때
 			alert("사진 파일만 선택해주세요\n * png, bmp, gif, jpg \n");
 			return false;
 			
 		}else if (extension == 'png' || extension == 'bmp' || extension == 'gif' || extension == 'jpg') {
-
+			// 사진파일일때 action실행
+			window.location.reload();
 			return true;
 		}
 
@@ -68,22 +69,22 @@
 			</tr>
 
 			<tr>
-				<td align="center">이름</td>
+				<td align="center">Name</td>
 				<td>${name}</td>
 			</tr>
 			
 			<tr>
-				<td align="center">이메일</td>
+				<td align="center">Email</td>
 				<td>${ sessionScope.email }</td>
 			</tr>
 
 			<tr>
-				<td align="center">비밀번호 변경하기</td>
+				<td align="center">Change Password</td>
 				<td><input type="button" value="변경" onclick="passwd_confirm()"></td>
 			</tr>
 
 			<tr>
-				<td align="center">계정삭제</td>
+				<td align="center">Delete Account</td>
 				<td><input type="button" value="계정삭제" onclick="user_del()" /></td>
 			</tr>
 

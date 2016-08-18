@@ -22,9 +22,13 @@ window.opener.location.reload();
 }
 
 function test(){
-	alert(file_name.val())
+//	document.uploadform.uploadfile.select();
+//	alert(document.selection.createRange().text);
+	var file = document.getElementById("uploadfile");
+	file.select();
+	alert(document.selection.createRange().text);
 	
-}
+	}
 function emptyck(value){
 	var item = document.getElementById(value).value;
 	

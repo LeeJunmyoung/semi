@@ -13,6 +13,8 @@ public class CloudDataBean {
 	private int com_num;
 	private String folder;
 	
+	
+	
 	public int getFile_num() {
 		return file_num;
 	}

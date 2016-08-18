@@ -32,16 +32,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form  action="/HoneyComb/cloud/fileUploader.cloud?folder=${param.folder}"  method="post" enctype="multipart/form-data" onsubmit="return emptyck('uploadfile')">
+<form  action="/HoneyComb/cloud/fileUploader.cloud?folder=${param.folder}"  name="uploadform" enctype="multipart/form-data" method="post" onsubmit="return emptyck('uploadfile')">
 	업로드 파일을 선택해주세요<br>
 	
 	<input type="hidden" value="${param.filecheck}" id="filecheck">
 	<input type="hidden" value="${param.upload}" id="uploadcheck">
+	<input type="hidden" value="${param.promgr_num}" name="promgr_num">
 	업로드:: ${param.upload}
 	
-	<input type="file" name="uploadFile" id="uploadfile"><br>
+	<input type="file" name="uploadFile" name="uploadfile" id="uploadfile"><br>
 	<input type="text" name="filename">
 	<input type="submit" name="upload" value="업로드" id="button">
+	<div>
+	test com_num:${com_num}<Br>
+	test mem_num:${mem_num}<br>
+	test name:${name}<br>
+	test promgr_num:${param.promgr_num}
+	</div>
 </form>
 </body>
 </html>

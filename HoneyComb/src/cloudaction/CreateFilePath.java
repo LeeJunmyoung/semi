@@ -33,7 +33,7 @@ public class CreateFilePath {
 		day = String.valueOf(today);
 		
 		/*com_num 구하기*/
-		com_num  = (String)session.getAttribute("com_num");
+		com_num  = String.valueOf(session.getAttribute("com_num"));
 		
 		//파일업로더 구하기
 		name = (String)session.getAttribute("name");

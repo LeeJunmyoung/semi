@@ -31,10 +31,7 @@ public class FileUploader implements CommandActionCloud{
 			String savefilepath = "E://cloud//";
 			HttpSession session = request.getSession();
 						
-			//세션입시설정
-			session.setAttribute("mem_num", "11");
-			session.setAttribute("com_num", "1");
-			session.setAttribute("name", "tester");
+			
 			//파일먼저 업로드
 			MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*100,"utf-8");
 			//기본경로 받기
@@ -63,9 +60,15 @@ public class FileUploader implements CommandActionCloud{
 			
 			//dataBean 에 저장
 				//session 불러오기
-				int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
+ 
 				String name = (String)session.getAttribute("name");
+				int com_num = (int)session.getAttribute("com_num");
 				String folder = request.getParameter("folder");
+				int promgr_num = 0;//프로젝트 없으면 0일 수 있도록 초기화
+				System.out.println("getp::"+mr.getParameter("promgr_num"));
+				if((String)mr.getParameter("promgr_num")==""){
+					promgr_num = Integer.parseInt((String)mr.getParameter("promgr_num"));//프로젝트 넘 정하기
+				}
 			cloudDB.setFile_name(filename);
 			cloudDB.setFile_path(newPath);
 			cloudDB.setFile_uploader(name);
@@ -73,7 +76,7 @@ public class FileUploader implements CommandActionCloud{
 			cloudDB.setCom_num(com_num);
 			cloudDB.setFolder(folder);
 			//DBinsert
-			int filecheck = cloud.cloudInsert(cloudDB);
+			int filecheck = cloud.cloudInsert(cloudDB, promgr_num);
 		
 		
 			//이름바꿔줄 file_num session으로 저장

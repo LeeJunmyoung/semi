@@ -88,23 +88,41 @@ public class CloudDBBean {
 		return cloud;
 		
 	}
-public int cloudInsert(CloudDataBean cloudDB)throws SQLException{
+public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException{
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		try{
-			
-			
+			String progr_name = null;//
+			String sql = null;
 			int file = checkFolder(cloudDB);
 			
 			
-			conn = getConnection();			
-			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?)");
+			conn = getConnection();
+			
+			//프로젝트에서 업로드 했을 때
+			if(promgr_num != 0){
+				//프로젝트 명 가지고 오기
+				progr_name = getProgrName(promgr_num);
+				createFolder(cloudDB, progr_name);
+				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,?)";//마지막에 들어갈 promgr_num
+				String progrfolder = progr_name+"|";//프로젝트명의 가상파일 생성
+				cloudDB.setFolder(progrfolder);
+				pstmt =conn.prepareStatement(sql);
+				pstmt.setInt(7, promgr_num);
+				
+			}else{
+				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,null)";//promgr_num이  없기 때문에 null
+				pstmt =conn.prepareStatement(sql);
+			}
+			
+			
 			pstmt.setString(1, cloudDB.getFile_name());
 			pstmt.setString(2, cloudDB.getFile_path());
 			pstmt.setString(3, cloudDB.getFile_uploader());
 			pstmt.setString(4, String.valueOf(cloudDB.getFile_size()));
 			pstmt.setInt(5, cloudDB.getCom_num());
 			pstmt.setString(6, cloudDB.getFolder());
+			
 			
 			pstmt.executeUpdate();
 			conn.commit();
@@ -129,13 +147,17 @@ public int cloudInsert(CloudDataBean cloudDB)throws SQLException{
 		return 1;
 	}
 
-public void createFolder(CloudDataBean cloudPro)throws SQLException{
+public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLException{
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	try{
-
+		
 		conn = getConnection();			
-		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?)");
+		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
+		if(progr_name!=null){
+			progr_name = "\\"+progr_name;
+			cloudPro.setFile_name(progr_name);
+		}
 		//����ù��°�� �����
 		pstmt.setString(1, cloudPro.getFile_name());
 		pstmt.setString(2,cloudPro.getFile_uploader());
@@ -301,5 +323,36 @@ public void deleteItem(String iteminfo, String folder)throws SQLException{
 			}
 	}
 	
+}
+private String getProgrName(int promgr_num)throws SQLException{
+	// promgr_num으로 프로젝트명 찾기
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	ResultSet rs = null;
+	String promgr_name = null;
+	try{
+		conn = getConnection();
+		pstmt = conn.prepareStatement("select PROMGR_NAME from promgr where promgr_num = ?");
+		pstmt.setInt(1, promgr_num);
+		rs = pstmt.executeQuery();
+		rs.next();
+		promgr_name = rs.getString(1);
+		return promgr_name;
+		
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+	
+	}return promgr_name;
 }
 }

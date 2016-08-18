@@ -147,6 +147,12 @@
 						"post",
 						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
+	function cloudInsert(promgr_num){
+		url = "/HoneyComb/cloudview/uploadForm.jsp?promgr_num="+promgr_num;
+		window.open(url,
+				"post",
+				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
 	
 	
 	
@@ -317,7 +323,7 @@ dl dd {
 										onclick="memberEditor(${article.promgr_num})" /> <br /> <input
 										type="button" value="checklist"
 										onclick="AddChkList(${article.promgr_num})" /> <br /> <input
-										type="button" value="file" />
+										type="button" value="file" onclick="cloudInsert(${article.promgr_num})"/>
 								</div>
 								
 							</div>

@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
-	function opencenter(winNM, width, height) {
+	function opencenter() {
 
 		window
 				.open(
 						"/HoneyComb/complete/popup_main.admin",
 						'',
-						"toolbar=no,location=no,status=no,menubar=no scrollbars=no,resizable=no,width=400,height=350");
+						"toolbar=no,location=no,status=no,menubar=no scrollbars=no,resizable=no,left=400, top=100,width=400,height=350");
 	}
 </script>
 <link href="/HoneyComb/page_layout/home.css" rel="stylesheet"

@@ -9,7 +9,7 @@ public class PromgrChkItemDelAction implements PromgrFormAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
 		int promgr_num = Integer.parseInt(request.getParameter("promgr_num"));
-		int item_num = Integer.parseInt(request.getParameter("chklist_item"));
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();
 		int promgr_update_count = dbPro.delChkItem(promgr_num, item_num);

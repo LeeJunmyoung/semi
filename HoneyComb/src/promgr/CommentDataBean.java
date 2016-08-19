@@ -1,5 +1,7 @@
 package promgr;
 
+import java.sql.Timestamp;
+
 public class CommentDataBean {
 
 	private int comment_num; // 댓글 번호
@@ -8,6 +10,7 @@ public class CommentDataBean {
 	private String mem_name; // 작성자 이름
 	private int promgr_num; // 프로젝트 번호
 	private int com_num; // 회사 번호
+	private Timestamp comment_date;
 
 	public int getComment_num() {
 		return comment_num;
@@ -55,6 +58,14 @@ public class CommentDataBean {
 
 	public void setCom_num(int com_num) {
 		this.com_num = com_num;
+	}
+
+	public Timestamp getComment_date() {
+		return comment_date;
+	}
+
+	public void setComment_date(Timestamp timestamp) {
+		this.comment_date = timestamp;
 	}
 
 } // public class CommentDataBean end

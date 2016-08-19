@@ -17,9 +17,10 @@ public class PromgrCommentModProAction implements PromgrFormAction {
 
 		int comment_num = Integer.valueOf(request.getParameter("comment_num"));
 		String comment_content = String.valueOf(request.getParameter("promgr_comment"));
+		Timestamp update_time = new Timestamp(System.currentTimeMillis());
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();
-		int promgr_update_count = dbPro.modComment(comment_num, comment_content);
+		int promgr_update_count = dbPro.modComment(comment_num, comment_content, update_time);
 
 		// 해당 view에서 사용할 속성
 		request.setAttribute("promgr_update_count", promgr_update_count);

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -116,9 +117,9 @@ public class PromgrDBBean {
 
 			} else { // more 화면에서 보여지는 list sql
 
-				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,r from (";
-				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,rownum r from (";
-				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num from promgr ";
+				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,promgr_ing,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,promgr_ing,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,rownum r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,promgr_ing,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num from promgr ";
 				sql += "where com_num=? and mem_num like ? order by promgr_num desc)) ";
 				sql += "where r>=? and r<=?";
 
@@ -143,6 +144,7 @@ public class PromgrDBBean {
 					article.setPromgr_num(rs.getInt("promgr_num"));
 					article.setPromgr_name(rs.getString("promgr_name"));
 					article.setPromgr_content(rs.getString("promgr_content"));
+					article.setPromgr_ing(rs.getInt("promgr_ing"));
 					article.setPromgr_date(rs.getTimestamp("promgr_date"));
 					article.setMem_num(rs.getString("mem_num"));
 					article.setFile_num(rs.getString("file_num"));
@@ -208,8 +210,9 @@ public class PromgrDBBean {
 
 							ChkListViewDataBean chklist_view_item = new ChkListViewDataBean();
 
-							chklist_view_item.setTitle_num(rs_chklist_title.getString("chklist_title_num"));
-							chklist_view_item.setTitle_name(rs_chklist_title.getString("chklist_title_name"));
+							chklist_view_item.setList_num(rs_chklist_title.getString("chklist_title_num"));
+							chklist_view_item.setList_name(rs_chklist_title.getString("chklist_title_name"));
+							chklist_view_item.setList_ing(rs_chklist_title.getInt("chklist_title_ing"));
 
 							sql = "select * from chklist_item where chklist_title_num=?";
 							pstmt = conn.prepareStatement(sql);
@@ -225,10 +228,11 @@ public class PromgrDBBean {
 
 								do {
 
-									ChkListViewItemDataBean item = new ChkListViewItemDataBean();
+									ChkItemDataBean item = new ChkItemDataBean();
 
-									item.setItem_num(rs_chklist_item.getString("chklist_item_num"));
-									item.setItem_name(rs_chklist_item.getString("chklist_item_name"));
+									item.setChklist_item_num(rs_chklist_item.getInt("chklist_item_num"));
+									item.setChklist_item_name(rs_chklist_item.getString("chklist_item_name"));
+									item.setChklist_item_chk(rs_chklist_item.getInt("chklist_item_chk"));
 
 									chkitem_bean.add(item);
 
@@ -262,7 +266,7 @@ public class PromgrDBBean {
 					} // while (stz.hasMoreTokens()) end
 
 					comment_view = new ArrayList();
-					
+
 					for (int i = 0; i < item_list.length; i++) {
 						// chklist_view item setting
 
@@ -281,6 +285,7 @@ public class PromgrDBBean {
 							item.setMem_num(rs_comment.getInt("mem_num"));
 							item.setPromgr_num(rs_comment.getInt("promgr_num"));
 							item.setCom_num(rs_comment.getInt("com_num"));
+							item.setComment_date(rs_comment.getTimestamp("comment_date"));
 
 							sql = "select * from members where mem_num=?";
 							pstmt = conn.prepareStatement(sql);
@@ -842,7 +847,7 @@ public class PromgrDBBean {
 
 	} // int addChkList(ChkListTitleDataBean article) end
 
-	public int addChkItem(int title_num, ChkItemDataBean article) throws Exception {
+	public int addChkItem(int list_num, ChkItemDataBean article) throws Exception {
 		// checklist item 생성
 
 		Connection conn = null;
@@ -865,7 +870,7 @@ public class PromgrDBBean {
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, article.getChklist_item_name());
-			pstmt.setInt(2, title_num);
+			pstmt.setInt(2, list_num);
 			pstmt.setInt(3, article.getPromgr_num());
 			pstmt.setInt(4, article.getCom_num());
 
@@ -1091,7 +1096,7 @@ public class PromgrDBBean {
 
 	} // int delChkItem(int promgr_num, int item_num) end
 
-	public int delChkList(int promgr_num, int title_num) throws Exception {
+	public int delChkList(int promgr_num, int list_num) throws Exception {
 		// promgr의 title_num을 이용해 chklist_title 삭제
 
 		Connection conn = null;
@@ -1111,7 +1116,7 @@ public class PromgrDBBean {
 			// title_num에 해당하는 chklist_item 삭제
 			sql = "delete from chklist_item where chklist_title_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, title_num);
+			pstmt.setInt(1, list_num);
 			count = pstmt.executeUpdate();
 
 			if (count > 0) {
@@ -1147,7 +1152,7 @@ public class PromgrDBBean {
 			// title_num에 해당하는 chklist_title 삭제
 			sql = "delete from chklist_title where chklist_title_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, title_num);
+			pstmt.setInt(1, list_num);
 			count = pstmt.executeUpdate();
 
 			if (count > 0) {
@@ -1209,8 +1214,8 @@ public class PromgrDBBean {
 
 	} // int delChkList(int promgr_num, int title_num) end
 
-	public int modChkList(int title_num, String title_name) throws Exception {
-		// promgr의 title_num을 이용해 chklist_title_name 변경
+	public int modChkList(int list_num, String list_name) throws Exception {
+		// promgr의 list_num을 이용해 chklist_title_name 변경
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1225,8 +1230,8 @@ public class PromgrDBBean {
 
 			sql = "update chklist_title set chklist_title_name=? where chklist_title_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, title_name);
-			pstmt.setInt(2, title_num);
+			pstmt.setString(1, list_name);
+			pstmt.setInt(2, list_num);
 
 			count = pstmt.executeUpdate();
 
@@ -1325,14 +1330,15 @@ public class PromgrDBBean {
 
 			// insert
 			sql = "insert into ";
-			sql += "promgr_comment(comment_num,comment_content,mem_num,promgr_num,com_num) ";
-			sql += "values(comment_num.NEXTVAL,?,?,?,?)";
+			sql += "promgr_comment(comment_num,comment_content,mem_num,promgr_num,com_num,comment_date) ";
+			sql += "values(comment_num.NEXTVAL,?,?,?,?,?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, article.getComment_content());
 			pstmt.setInt(2, article.getMem_num());
 			pstmt.setInt(3, article.getPromgr_num());
 			pstmt.setInt(4, article.getCom_num());
+			pstmt.setTimestamp(5, article.getComment_date());
 
 			count = pstmt.executeUpdate();
 
@@ -1405,8 +1411,8 @@ public class PromgrDBBean {
 		return count;
 
 	} // int addComment(ChkItemDataBean article) end
-	
-	public int modComment(int comment_num, String comment_content) throws Exception {
+
+	public int modComment(int comment_num, String comment_content, Timestamp update_date) throws Exception {
 		// promgr의 comment_num을 이용해 comment_content 변경
 
 		Connection conn = null;
@@ -1423,6 +1429,13 @@ public class PromgrDBBean {
 			sql = "update promgr_comment set comment_content=? where comment_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, comment_content);
+			pstmt.setInt(2, comment_num);
+
+			count = pstmt.executeUpdate();
+
+			sql = "update promgr_comment set comment_date=? where comment_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setTimestamp(1, update_date);
 			pstmt.setInt(2, comment_num);
 
 			count = pstmt.executeUpdate();
@@ -1538,5 +1551,148 @@ public class PromgrDBBean {
 		return count;
 
 	} // int delComment(int promgr_num, int comment_num) end
+
+	public int ChangeCheckedItem(int promgr_num, int list_num, int item_num, int checked) throws Exception {
+		// promgr의 item_num을 이용해 chklist_item_chk 변경
+
+		System.out.println("checked : " + checked);
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int list_item_all = 0;
+		int list_item_chk = 0;
+		int promgr_item_all = 0;
+		int promgr_item_chk = 0;
+
+		int count = 0;
+		String sql = "";
+
+		try {
+
+			conn = getConnection();
+
+			sql = "update chklist_item set chklist_item_chk= ? where chklist_item_num= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, checked);
+			pstmt.setInt(2, item_num);
+
+			int update_count = pstmt.executeUpdate();
+			
+			if (update_count > 0) {
+
+				// [list_ing setting]
+				// list item all
+				sql = "select count(*) from chklist_item where chklist_title_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, list_num);
+				ResultSet rs_list_item_all = pstmt.executeQuery();
+
+				if (rs_list_item_all.next()) {
+					list_item_all = rs_list_item_all.getInt(1);
+				}
+
+				System.out.println("list_item_all : " + list_item_all);
+				
+				// list item chk
+				sql = "select count(*) from chklist_item where chklist_title_num=? and chklist_item_chk=1";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, list_num);
+
+				ResultSet rs_list_item_chk = pstmt.executeQuery();
+
+				if (rs_list_item_chk.next()) {
+					list_item_chk = rs_list_item_chk.getInt(1);
+				}
+
+				System.out.println("list_item_chk : " + list_item_chk);
+
+				// list_ing 계산
+				int list_ing = (int) ((double) list_item_chk / (double) list_item_all * 100);
+
+				System.out.println("list_ing : " + list_ing);
+
+				sql = "update chklist_title set chklist_title_ing=? where chklist_title_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, list_ing);
+				pstmt.setInt(2, list_num);
+
+				int list_update_count = pstmt.executeUpdate();
+
+				if (list_update_count > 0) {
+					
+					// [promgr_ing setting]
+					// promgr item all
+					
+					System.out.println("promgr::::"+promgr_num);
+					sql = "select count(*) from chklist_item where promgr_num = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, promgr_num);
+					ResultSet rs_promgr_item_all = pstmt.executeQuery();
+
+					if (rs_promgr_item_all.next()) {
+						
+						System.out.println("rs_promgr_item_all.getInt(1) : " + rs_promgr_item_all.getInt(1));
+						
+						promgr_item_all = rs_promgr_item_all.getInt(1);
+					}
+					System.out.println("promgr_item_all : " + promgr_item_all);
+
+					// promgr item chk
+					sql = "select count(*) from chklist_item where promgr_num=? and chklist_item_chk=1";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, promgr_num);
+					ResultSet rs_promgr_item_chk = pstmt.executeQuery();
+
+					if (rs_promgr_item_chk.next()) {
+						promgr_item_chk = rs_promgr_item_chk.getInt(1);
+					}
+					
+					System.out.println("promgr_item_chk : " + promgr_item_chk);
+
+					// promgr_ing 계산
+					int promgr_ing = (int) ((double) promgr_item_chk / (double) promgr_item_all * 100);
+
+					System.out.println("promgr_ing : " + promgr_ing);
+
+					sql = "update promgr set promgr_ing=? where promgr_num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, promgr_ing);
+					pstmt.setInt(2, promgr_num);
+
+					count = pstmt.executeUpdate();
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return count;
+
+	} // int int ChangeCheckedItem(int item_num, int checked) end
 
 } // public class PromgrDBBean end

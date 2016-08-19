@@ -7,6 +7,7 @@
 <html>
 <head>
 <title>promgr more</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
 
 	function HiddenInput(modbtn, delbtn, exit) { // 수정, 삭제
@@ -94,9 +95,9 @@
 						"toolbar=no,width=450,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
-	function ModChkList(title_num) { // checklist명 수정
+	function ModChkList(list_num) { // checklist명 수정
 		
-		url = "/HoneyComb/promgr/PromgrChkListModForm.promgr?chklist_num="+title_num;
+		url = "/HoneyComb/promgr/PromgrChkListModForm.promgr?list_num="+list_num;
 		window
 				.open(
 						url,
@@ -104,8 +105,8 @@
 						"toolbar=no,width=450,height=80,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
-	function DelChkList(promgr_num, title_num) { // checklist 삭제
-		url = "/HoneyComb/promgr/PromgrChkListDel.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
+	function DelChkList(promgr_num, list_num) { // checklist 삭제
+		url = "/HoneyComb/promgr/PromgrChkListDel.promgr?promgr_num="+promgr_num+"&list_num="+list_num;
 		window
 				.open(
 						url,
@@ -113,9 +114,9 @@
 						"toolbar=no ,width=1 ,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
-	function AddItem(promgr_num, title_num) { // checkitem 생성
+	function AddItem(promgr_num, list_num) { // checkitem 생성
 		
-		url = "/HoneyComb/promgr/PromgrChkItemAddForm.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
+		url = "/HoneyComb/promgr/PromgrChkItemAddForm.promgr?promgr_num="+promgr_num+"&list_num="+list_num;
 		window
 				.open(
 						url,
@@ -125,7 +126,7 @@
 	
 	function ModItem(item_num) { // checkitem명 수정
 		
-		url = "/HoneyComb/promgr/PromgrChkItemModForm.promgr?chklist_item="+item_num;
+		url = "/HoneyComb/promgr/PromgrChkItemModForm.promgr?item_num="+item_num;
 		window
 				.open(
 						url,
@@ -135,7 +136,7 @@
 	
 	function DelItem(promgr_num, item_num) { // checkitem 삭제
 		
-		url = "/HoneyComb/promgr/PromgrChkItemDel.promgr?promgr_num="+promgr_num+"&chklist_item="+item_num;
+		url = "/HoneyComb/promgr/PromgrChkItemDel.promgr?promgr_num="+promgr_num+"&item_num="+item_num;
 		window
 				.open(
 						url,
@@ -178,7 +179,31 @@
 						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
-	
+	function ChangeCheckedItem(promgr_num, list_num, item_num){
+		
+		if(document.getElementById(item_num).checked == true) {
+			
+			url = "/HoneyComb/promgr/PromgrChkItemChangeChecked.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num+"&checked=1";
+			window
+					.open(
+							url,
+							"post",
+							"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
+			
+		} 
+		
+		if(document.getElementById(item_num).checked == false) {
+			
+			url = "/HoneyComb/promgr/PromgrChkItemChangeChecked.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num+"&checked=0";
+			window
+					.open(
+							url,
+							"post",
+							"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
+			
+		}
+		
+	}
 	
 </script>
 
@@ -267,6 +292,7 @@ dl dd {
 
 								<div id="content_view">
 								
+									<div>[promgr 진행상황 그래프] : ${article.promgr_ing}</div>
 									<div>
 										참여자 :
 										<c:forEach var="mem_name" items="${article.mem_name_arr}">
@@ -279,44 +305,52 @@ dl dd {
 
 										<c:forEach var="view" items="${article.chklist_view}">
 
-											<div id="${view.title_num}">
+											<div id="${view.list_num}">
 
 												<div>
 												
-													<label id="chkList_lab_${view.title_num}"
-														ondblclick="HiddenInput('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')">${view.title_name} (${view.title_num})</label>
+													<label id="chkList_lab_${view.list_num}"
+														ondblclick="HiddenInput('chkList_modBtn_${view.list_num}', 'chkList_delBtn_${view.list_num}', 'exit_list_${view.list_num}')">${view.list_name} (${view.list_num})</label>
 													
-													<input type="button" id="chkList_modBtn_${view.title_num}" value="mod" 
-														onclick="ModChkList(${view.title_num})" hidden="true">
+													<input type="button" id="chkList_modBtn_${view.list_num}" value="mod" 
+														onclick="ModChkList(${view.list_num})" hidden="true">
 													
-													<input type="button" id="chkList_delBtn_${view.title_num}" value="del"
-														onclick="DelChkList(${article.promgr_num}, ${view.title_num})" hidden="true">
+													<input type="button" id="chkList_delBtn_${view.list_num}" value="del"
+														onclick="DelChkList(${article.promgr_num}, ${view.list_num})" hidden="true">
 													
-													<input type="button" id="exit_list_${view.title_num}" value="X"
-														onclick="AppearInput('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')" hidden="true">
+													<input type="button" id="exit_list_${view.list_num}" value="X"
+														onclick="AppearInput('chkList_modBtn_${view.list_num}', 'chkList_delBtn_${view.list_num}', 'exit_list_${view.list_num}')" hidden="true">
 												
 												</div>
 
-												<div>[진행상황 그래프]</div>
+												<div>[chklist 진행상황 그래프] : ${view.list_ing}</div>
 
 												<form method="post" name="chkItemform" >
 
 													<c:forEach var="bean" items="${view.item_bean}">
 														
 														<div>
-															<input type="checkbox" name="chkitem" value="${bean.item_num}" />
+															<c:if test="${bean.chklist_item_chk == 1}">
+																<input type="checkbox" name="chkitem" id="${bean.chklist_item_num}"
+																	onchange="ChangeCheckedItem(${article.promgr_num}, ${view.list_num}, ${bean.chklist_item_num})" checked="checked" />
+															</c:if>
 															
-															<label id="chkItem_lab_${bean.item_num}"
-																ondblclick="HiddenInput('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')">${bean.item_name} (${bean.item_num})</label>
+															<c:if test="${bean.chklist_item_chk == 0}">
+																<input type="checkbox" name="chkitem" id="${bean.chklist_item_num}"
+																	onchange="ChangeCheckedItem(${article.promgr_num}, ${view.list_num}, ${bean.chklist_item_num})" />
+															</c:if>
+														
+															<label id="chkItem_lab_${bean.chklist_item_num}"
+																ondblclick="HiddenInput('chkItem_modBtn_${bean.chklist_item_num}', 'chkItem_delBtn_${bean.chklist_item_num}', 'exit_item_${bean.chklist_item_num}')">${bean.chklist_item_name} (${bean.chklist_item_num})</label>
 															
-															<input type="button" id="chkItem_modBtn_${bean.item_num}" value="mod" 
-																onclick="ModItem(${bean.item_num})" hidden="true" />
+															<input type="button" id="chkItem_modBtn_${bean.chklist_item_num}" value="mod" 
+																onclick="ModItem(${bean.chklist_item_num})" hidden="true" />
 															
-															<input type="button" id="chkItem_delBtn_${bean.item_num}" value="del"
-																onclick="DelItem(${article.promgr_num}, ${bean.item_num})" hidden="true" />
+															<input type="button" id="chkItem_delBtn_${bean.chklist_item_num}" value="del"
+																onclick="DelItem(${article.promgr_num}, ${bean.chklist_item_num})" hidden="true" />
 															
-															<input type="button" id="exit_item_${bean.item_num}" value="X"
-															onclick="AppearInput('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')" hidden="true">
+															<input type="button" id="exit_item_${bean.chklist_item_num}" value="X"
+															onclick="AppearInput('chkItem_modBtn_${bean.chklist_item_num}', 'chkItem_delBtn_${bean.chklist_item_num}', 'exit_item_${bean.chklist_item_num}')" hidden="true">
 														</div>
 														
 													</c:forEach>
@@ -324,7 +358,7 @@ dl dd {
 												</form>
 
 												<input type="button" value="add item"
-													onclick="AddItem(${article.promgr_num}, ${view.title_num})" />
+													onclick="AddItem(${article.promgr_num}, ${view.list_num})" />
 
 											</div>
 
@@ -352,7 +386,7 @@ dl dd {
 									
 										<label id="comment_lab_${item.comment_num}"
 											ondblclick="HiddenInputComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')">
-											(${item.comment_num}) ${item.mem_name} : ${item.comment_content}
+											[${item.comment_num}] ${item.mem_name} : ${item.comment_content} (${item.comment_date})
 										</label>
 																	
 										<input type="button" id="comment_modBtn_${item.comment_num}" value="mod" 

@@ -5,9 +5,6 @@ import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.NoticeDBBean;
-import notice.NoticeDataBean;
-
 public class PromgrCommentAddProAction implements PromgrFormAction {
 
 	@Override
@@ -21,6 +18,7 @@ public class PromgrCommentAddProAction implements PromgrFormAction {
 		article.setMem_num((int) request.getSession().getAttribute("mem_num"));
 		article.setPromgr_num(Integer.parseInt(request.getParameter("promgr_num")));
 		article.setCom_num((int) request.getSession().getAttribute("com_num"));
+		article.setComment_date(new Timestamp(System.currentTimeMillis()));
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();
 		int promgr_insert_count = dbPro.addComment(article);

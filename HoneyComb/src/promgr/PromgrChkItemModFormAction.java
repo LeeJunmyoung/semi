@@ -8,7 +8,7 @@ public class PromgrChkItemModFormAction implements PromgrFormAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-		int item_num = Integer.parseInt(request.getParameter("chklist_item"));
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
 
 		request.setAttribute("item_num", item_num);
 

@@ -9,6 +9,7 @@ public class PromgrDataBean {
 	private String promgr_name; // 프로젝트 이름
 	private String promgr_content; // 프로젝트 내용
 	private Timestamp promgr_date; // 프로젝트 생성 날짜
+	private int promgr_ing; // 프로젝트 진행률
 	private String mem_num; // 프로젝트 참여자 번호
 	private String[] mem_name_arr; // 프로젝트 참여자 이름
 	private String file_num; // 파일 번호
@@ -46,6 +47,14 @@ public class PromgrDataBean {
 
 	public void setPromgr_date(Timestamp promgr_date) {
 		this.promgr_date = promgr_date;
+	}
+
+	public int getPromgr_ing() {
+		return promgr_ing;
+	}
+
+	public void setPromgr_ing(int promgr_ing) {
+		this.promgr_ing = promgr_ing;
 	}
 
 	public String getMem_num() {

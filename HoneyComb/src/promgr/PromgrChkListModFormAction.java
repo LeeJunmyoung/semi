@@ -8,9 +8,9 @@ public class PromgrChkListModFormAction implements PromgrFormAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-		int title_num = Integer.parseInt(request.getParameter("chklist_num"));
+		int list_num = Integer.parseInt(request.getParameter("list_num"));
 
-		request.setAttribute("title_num", title_num);
+		request.setAttribute("list_num", list_num);
 
 		return "/promgr/promgrChkListModForm.jsp";
 

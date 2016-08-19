@@ -23,7 +23,7 @@
 <body>
 
 	<form method="post" name="chkListModform"
-		action="/HoneyComb/promgr/PromgrChkListModPro.promgr?title_num=${title_num}"
+		action="/HoneyComb/promgr/PromgrChkListModPro.promgr?list_num=${list_num}"
 		onsubmit="return writeSave()">
 
 		<input type="text" name="promgr_list_title" size="30" maxlength="40" placeholder="check list name" />

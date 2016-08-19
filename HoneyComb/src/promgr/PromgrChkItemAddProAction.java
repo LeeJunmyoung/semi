@@ -16,10 +16,10 @@ public class PromgrChkItemAddProAction implements PromgrFormAction {
 		article.setPromgr_num(Integer.parseInt(request.getParameter("promgr_num")));
 		article.setCom_num((int) request.getSession().getAttribute("com_num"));
 
-		int title_num = Integer.parseInt(request.getParameter("chklist_title"));
+		int list_num = Integer.parseInt(request.getParameter("list_num"));
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();
-		int promgr_insert_count = dbPro.addChkItem(title_num, article);
+		int promgr_insert_count = dbPro.addChkItem(list_num, article);
 
 		// 해당 view에서 사용할 속성
 		request.setAttribute("promgr_insert_count", promgr_insert_count);

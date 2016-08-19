@@ -98,17 +98,20 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 			
 			
 			conn = getConnection();
-			
+			System.out.println("프로젝트 넘:"+promgr_num);
 			//프로젝트에서 업로드 했을 때
 			if(promgr_num != 0){
+				System.out.println("프로젝트에서 실행됨");
 				//프로젝트 명 가지고 오기
 				progr_name = getProgrName(promgr_num);
 				createFolder(cloudDB, progr_name);
 				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,?)";//마지막에 들어갈 promgr_num
-				String progrfolder = progr_name+"|";//프로젝트명의 가상파일 생성
+				String progrfolder = "*"+progr_name+"|";//프로젝트명의 가상파일 생성
 				cloudDB.setFolder(progrfolder);
 				pstmt =conn.prepareStatement(sql);
 				pstmt.setInt(7, promgr_num);
+				//프로젝트 DB 에 파일이름 업데이트
+				updateProgr(cloudDB, progr_name);
 				
 			}else{
 				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,null)";//promgr_num이  없기 때문에 null
@@ -121,11 +124,12 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 			pstmt.setString(3, cloudDB.getFile_uploader());
 			pstmt.setString(4, String.valueOf(cloudDB.getFile_size()));
 			pstmt.setInt(5, cloudDB.getCom_num());
-			pstmt.setString(6, cloudDB.getFolder());
-			
-			
+			pstmt.setString(6, cloudDB.getFolder());			
 			pstmt.executeUpdate();
 			conn.commit();
+			if(promgr_num != 0){//프로젝트명 업데이트
+				updateProgr(cloudDB, progr_name);
+			}
 			if (file == 0 ){
 				return 0;
 			}
@@ -151,22 +155,44 @@ public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLExc
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	try{
-		
+		String file_path = null;//저장할 파일경로
+		String file_name = null;//파일명
 		conn = getConnection();			
 		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
 		if(progr_name!=null){
-			progr_name = "\\"+progr_name;
+			progr_name = "*"+progr_name;
+			file_name = cloudPro.getFile_name();
 			cloudPro.setFile_name(progr_name);
+			file_path = cloudPro.getFile_path();//파일패스 임시 저장
+			cloudPro.setFile_path(null);//폴더이기때문에 file_path 초기화
+			
+			
+			int i = checkFolder(cloudPro);//그 폴더가 중복되었을 경우
+			
+			if (i != 0){//그 폴더가 중복이 아닐경우
+				pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
+				pstmt.setString(1, cloudPro.getFile_name());
+				pstmt.setString(2,cloudPro.getFile_uploader());
+				pstmt.setInt(3,cloudPro.getCom_num());
+				pstmt.setString(4,cloudPro.getFolder());
+				pstmt.executeUpdate();
+				conn.commit();
+			}
+			
+		}else{//프로젝트 아닐경우
+			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
+			pstmt.setString(1, cloudPro.getFile_name());
+			pstmt.setString(2,cloudPro.getFile_uploader());
+			pstmt.setInt(3,cloudPro.getCom_num());
+			pstmt.setString(4,cloudPro.getFolder());
+			pstmt.executeUpdate();
+			conn.commit();
 		}
 		//����ù��°�� �����
-		pstmt.setString(1, cloudPro.getFile_name());
-		pstmt.setString(2,cloudPro.getFile_uploader());
-		pstmt.setInt(3,cloudPro.getCom_num());
-		pstmt.setString(4,cloudPro.getFolder());
 		
-		pstmt.executeUpdate();
-		conn.commit();
 		
+		cloudPro.setFile_name(file_name);//파일명 다시 넣
+		cloudPro.setFile_path(file_path);//폴더 저장 끝났으면 다시 실행
 	}catch (Exception ex) {
 		ex.printStackTrace();
 	} finally {
@@ -355,4 +381,50 @@ private String getProgrName(int promgr_num)throws SQLException{
 	
 	}return promgr_name;
 }
+
+private void updateProgr(CloudDataBean cloudDB, String promgr_name)throws SQLException{
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	ResultSet rs = null;
+	try{
+		conn = getConnection();
+		String file_Path = cloudDB.getFile_path();
+		int file_num = 0;
+		//파일넘부터 받아오기
+		String sql = "select file_num from cloud where file_path = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, file_Path);
+		rs = pstmt.executeQuery();
+		rs.next();
+		file_num = rs.getInt("file_num");
+		System.out.println("파일넘 받아올 수 있는지 없는지 보자"+file_num);
+		//promgr에 업데이트
+		int com_num = cloudDB.getCom_num();
+		sql = "update promgr set file_num=? where promgr_name = ? and com_num = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, file_num);
+		pstmt.setString(2, promgr_name);
+		pstmt.setInt(3, com_num);
+		pstmt.executeUpdate();
+		
+		
+		
+		
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+	
+	}
+	
+};
 }

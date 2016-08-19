@@ -66,7 +66,7 @@ public class FileUploader implements CommandActionCloud{
 				String folder = request.getParameter("folder");
 				int promgr_num = 0;//프로젝트 없으면 0일 수 있도록 초기화
 				System.out.println("getp::"+mr.getParameter("promgr_num"));
-				if((String)mr.getParameter("promgr_num")==""){
+				if((String)mr.getParameter("promgr_num")!=""){
 					promgr_num = Integer.parseInt((String)mr.getParameter("promgr_num"));//프로젝트 넘 정하기
 				}
 			cloudDB.setFile_name(filename);

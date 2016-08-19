@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import notice.NoticeDataBean;
-import com_bean.Notice_adminDataBean;
-
 public class HoneyCombDBBean {
 
 	private static HoneyCombDBBean instance = new HoneyCombDBBean();
@@ -484,7 +481,7 @@ public class HoneyCombDBBean {
 		      return com_num;
 
 		   }
-	   public List noticeComplete(String notice_admin_content) throws Exception {
+	   public List noticeComplete(Notice_adminDataBean NoticeDB) throws Exception {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -494,8 +491,10 @@ public class HoneyCombDBBean {
 			try {
 				conn = getConnection();
 				
-				pstmt = conn.prepareStatement("insert into notice_admin(notice_admin_num,notice_admin_content) values(notice_admin_num.NEXTVAL,?)");
-				pstmt.setString(1 , notice_admin_content);
+				pstmt = conn.prepareStatement("insert into notice_admin(notice_admin_num,notice_admin_title,notice_admin_content,notice_admin_date) values(notice_admin_num.NEXTVAL,?,?,?)");
+				pstmt.setString(1 , NoticeDB.getNotice_admin_title());
+				pstmt.setString(2 , NoticeDB.getNotice_admin_content());
+				pstmt.setTimestamp(3, NoticeDB.getNotice_admin_date());
 				pstmt.executeUpdate();
 				
 				pstmt = conn.prepareStatement("select * from (select * from notice_admin order by notice_admin_num desc) where rownum =1");
@@ -509,7 +508,9 @@ public class HoneyCombDBBean {
 			               notice = new Notice_adminDataBean();
 
 			               notice.setNotice_admin_num(rs.getInt("notice_admin_num"));
+			               notice.setNotice_admin_title(rs.getString("notice_admin_title"));
 			               notice.setNotice_admin_content(rs.getString("notice_admin_content"));
+			               notice.setNotice_admin_date(rs.getTimestamp("notice_admin_date"));
 
 			               noticeList.add(notice);
 
@@ -540,11 +541,12 @@ public class HoneyCombDBBean {
 
 		}
 	   
-	   public String popList() throws Exception {
+	   public List popList() throws Exception {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String pop = "";
+			List pop = null;
+			Notice_adminDataBean noticeDB = null;
 			
 			try {
 				conn = getConnection();	
@@ -552,9 +554,15 @@ public class HoneyCombDBBean {
 				pstmt = conn.prepareStatement("select * from (select * from notice_admin order by notice_admin_num desc) where rownum = 1");
 				rs = pstmt.executeQuery();
 				
+				pop = new ArrayList();
+				noticeDB = new Notice_adminDataBean();
+				
 				rs.next();
-				pop = rs.getString("notice_admin_content");
-				System.out.println("!!1" + pop);
+				noticeDB.setNotice_admin_title(rs.getString("notice_admin_title"));
+				noticeDB.setNotice_admin_content(rs.getString("notice_admin_content"));
+				noticeDB.setNotice_admin_date(rs.getTimestamp("notice_admin_date"));
+				
+				pop.add(noticeDB);
 				
 			} catch (SQLException ex) {
 				ex.printStackTrace();

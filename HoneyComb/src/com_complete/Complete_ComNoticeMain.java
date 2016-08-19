@@ -1,5 +1,6 @@
 package com_complete;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class Complete_ComNoticeMain implements CommandAction{
 		request.setCharacterEncoding("UTF-8");
 		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
 		
-		String popup = "";
+		List popup = new ArrayList<>();
 		popup = dbPro.popList();
 		
 		request.setAttribute("popup", popup);

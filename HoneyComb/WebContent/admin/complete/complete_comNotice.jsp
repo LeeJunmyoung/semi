@@ -7,11 +7,11 @@
 <script>
 	function writeSave() {
 
-		/* if (document.writeform.notice_title.value == "") {
+		if (document.writeform.notice_title.value == "") {
 			alert("제목을 입력하십시요.");
 			document.writeform.notice_title.focus();
 			return false;
-		} */
+		}
 
 		if (document.writeform.notice_content.value == "") {
 			alert("내용을 입력하십시요.");
@@ -39,7 +39,7 @@
 
 	<form method="post" name="writeform" action="/HoneyComb/complete/complete_comNotice_admin.admin" onsubmit="return writeSave()">
 	
-		<!-- 글제목 <input type="text" name="notice_title" size="40" maxlength="50" /> <br> -->
+		글제목 <input type="text" name="notice_admin_title" size="40" maxlength="50" /> <br>
 		공지팝업창 내용 <textarea name="notice_admin_content" rows="15" cols="30"></textarea> <br>
 		
 		<input type="reset" value="reset"> 

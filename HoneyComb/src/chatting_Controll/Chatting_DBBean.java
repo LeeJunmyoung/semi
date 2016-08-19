@@ -70,6 +70,8 @@ public class Chatting_DBBean {
 			if (pstmt != null)
 				try {
 					pstmt.close();
+					
+					
 				} catch (SQLException ex) {
 				}
 			if (conn != null)
@@ -94,7 +96,7 @@ public class Chatting_DBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "insert into chat(chat_num,chat_member_participation) values ( OneNOneChat.nextval , ? )";
+			String sql = "insert into chat(chat_num,chat_member_participation,chat_mem_name,last_chat_member,last_chat_read) values ( OneNOneChat.nextval , ? ,'0',',','t')";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, chat_mem_num);
@@ -174,14 +176,14 @@ public class Chatting_DBBean {
 		return true;
 	}
 	
-	public List view_My_chat(int mem_num){
+	public List view_My_chat(int mem_num){//내가 햇던 채팅들 보여줌
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		ResultSet rs2  = null; //새로 만든거 2016-08-18
 		List list = null;
 		ChatRoomDataBean crdb = null;
-		String chat_source="";
-		String Chat_partner="";
+		
 		try {
 			conn = getConnection();
 			String sql = "select * from chat where chat_member_participation like ? ";
@@ -189,7 +191,8 @@ public class Chatting_DBBean {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+mem_num+"%");
 			rs = pstmt.executeQuery();
-			
+			String chat_source="";
+			String Chat_partner="";
 			
 			//채팅 하는 사람 정보 검색 쿼리
 			
@@ -201,6 +204,8 @@ public class Chatting_DBBean {
 				list = new ArrayList<>();
 				
 				do{
+					
+		
 					crdb = new ChatRoomDataBean();
 					crdb.setChat_Num(rs.getInt(1));
 					
@@ -208,31 +213,127 @@ public class Chatting_DBBean {
 					StringTokenizer stok = new StringTokenizer(rs.getString(2), "n", false);
 					String temp = stok.nextToken();
 					
+					
+					
+					
 					if(temp.equals(String.valueOf(mem_num))){
 						temp=stok.nextToken();
-					}// 나를 제외한  채팅 구성원 보기 
+					}else{
+						stok.nextToken();
+					}
+					
+					if(!stok.hasMoreTokens() ){
+					
+						pstmt= conn.prepareStatement(" select profile_img from members where mem_num = ? ");
+						pstmt.setInt(1, Integer.parseInt(temp));
+						rs2 = pstmt.executeQuery();
+						if(rs2.next()){
+							crdb.setProfile_IMG(rs2.getString(1));
+						}
+						crdb.setChat_Member_Participation(temp);
+						crdb.setLast_Chat_Date(rs.getString(3));
+						crdb.setLast_Chat_Conversation(rs.getString(4));	
+						chat_source = view_Chat_Info(Integer.parseInt(temp));
+						crdb.setChat_mem_name(chat_source);
+						stok = new StringTokenizer(chat_source, " ",false);
+						Chat_partner = stok.nextToken();
+						crdb.setChat_partner(Chat_partner);
+						//20168월 17일 추가분  읽엇는지 않읽엇는지 확인
+						crdb.setLast_Chat_Member(rs.getString("Last_Chat_Member"));
+						crdb.setLast_Chat_Read(rs.getString("Last_Chat_Read"));
+						list.add(crdb);
+						
+						
+
+					/*	System.out.println("chat_Num :::" + crdb.getChat_Num());
+						//채털방
+						System.out.println("chat_mem_name :::" + crdb.getChat_mem_name());
+						//대화할사람 이름
+						System.out.println("chat_Member_Participation :::" + crdb.getChat_Member_Participation());
+						//반대편 number
+						System.out.println("last_Chat_Date :::" + crdb.getLast_Chat_Date());
+						// 미구현
+						System.out.println("last_Chat_Conversation :::" + crdb.getLast_Chat_Conversation());
+						//미구현
+						System.out.println("chat_partner :::" + crdb.getChat_partner());
+						// 반대편 사람 이름
+						System.out.println("last_Chat_Member :::" + crdb.getLast_Chat_Member());
+						// 마지막 글 
+						System.out.println("last_Chat_Read :::" + crdb.getLast_Chat_Read());
+						// 읽었는지 않 읽었는지
+						System.out.println("profile_IMG :::" + crdb.getProfile_IMG());
+						//프로필 이미지
+*/						
+						
+					}else{
+						StringTokenizer multi_Stok = new StringTokenizer(rs.getString(2), "n", false);
+						StringTokenizer korea_Name = null;
+						String multi_Names = "";
+						String temp_Names="";
+						Chat_partner="";
+						
+						while(multi_Stok.hasMoreTokens()){
+							temp_Names = multi_Stok.nextToken();
+							
+							if(temp_Names.equals(String.valueOf(mem_num))){
+								
+							}else{
+								multi_Names = multi_Names +temp_Names +","; //멤버 숫자정보 
+								chat_source= view_Chat_Info(Integer.parseInt(temp_Names)); //
+								korea_Name = new StringTokenizer(chat_source, " ");
+								Chat_partner = Chat_partner+korea_Name.nextToken()+",";  // 한글이름 추출
+							}
+						}
+						
+						
+						
+						
+						
+						
+						
+						crdb.setChat_mem_name(Chat_partner);// 대화할 시람 한글 이름
+						crdb.setChat_Member_Participation(multi_Names);
+						crdb.setChat_partner(Chat_partner);
+						
+						
+						
+						
+						
+						
+						
+						crdb.setLast_Chat_Member(rs.getString("Last_Chat_Member"));
+						crdb.setLast_Chat_Read(rs.getString("Last_Chat_Read"));
+						
+						
+						list.add(crdb);
+						
+						/*System.out.println("chat_Num :::" + crdb.getChat_Num());
+						//채털방
+						System.out.println("chat_mem_name :::" + crdb.getChat_mem_name());
+						//대화할사람 이름
+						System.out.println("chat_Member_Participation :::" + crdb.getChat_Member_Participation());
+						//반대편 number
+						System.out.println("last_Chat_Date :::" + crdb.getLast_Chat_Date());
+						// 미구현
+						System.out.println("last_Chat_Conversation :::" + crdb.getLast_Chat_Conversation());
+						//미구현
+						System.out.println("chat_partner :::" + crdb.getChat_partner());
+						// 반대편 사람 이름
+						System.out.println("last_Chat_Member :::" + crdb.getLast_Chat_Member());
+						// 마지막 글 
+						System.out.println("last_Chat_Read :::" + crdb.getLast_Chat_Read());
+						// 읽었는지 않 읽었는지
+						System.out.println("profile_IMG :::" + crdb.getProfile_IMG());
+						//프로필 이미지
+*/						
+						
+						
+					}
 					
 					
-					crdb.setChat_Member_Participation(temp);
-					crdb.setLast_Chat_Date(rs.getString(3));
-					crdb.setLast_Chat_Conversation(rs.getString(4));
 					
 					
 					
-					
-					chat_source = view_Chat_Info(Integer.parseInt(temp));
-					crdb.setChat_mem_name(chat_source);
-					
-					
-					stok = new StringTokenizer(chat_source, " ",false);
-					
-					Chat_partner = stok.nextToken();
-					
-					crdb.setChat_partner(Chat_partner);
-					
-					
-					
-					list.add(crdb);
 					
 					
 				}while(rs.next());
@@ -261,6 +362,11 @@ public class Chatting_DBBean {
 					rs.close();
 				} catch (SQLException ex) {
 				}
+			if(rs2 != null)
+				try {
+				rs.close();
+			} catch (SQLException ex) {
+			}
 			
 		}
 		return list;

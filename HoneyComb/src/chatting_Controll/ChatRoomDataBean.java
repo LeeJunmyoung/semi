@@ -7,7 +7,30 @@ public class ChatRoomDataBean {
 	private String last_Chat_Date;
 	private String last_Chat_Conversation;
 	private String chat_partner;
+	private String last_Chat_Member;
+	private String last_Chat_Read;
+	private String profile_IMG;
 	
+	
+	
+	public String getProfile_IMG() {
+		return profile_IMG;
+	}
+	public void setProfile_IMG(String profile_IMG) {
+		this.profile_IMG = profile_IMG;
+	}
+	public String getLast_Chat_Member() {
+		return last_Chat_Member;
+	}
+	public void setLast_Chat_Member(String last_Chat_Member) {
+		this.last_Chat_Member = last_Chat_Member;
+	}
+	public String getLast_Chat_Read() {
+		return last_Chat_Read;
+	}
+	public void setLast_Chat_Read(String last_Chat_Read) {
+		this.last_Chat_Read = last_Chat_Read;
+	}
 	public String getChat_partner() {
 		return chat_partner;
 	}

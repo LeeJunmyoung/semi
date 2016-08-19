@@ -121,6 +121,40 @@ input#chat {
 	white-space: nowrap;
 	text-overflow: clip;
 }
+
+.sendCheckImg {
+	width: 50px;
+	height: 50px;
+	position: relative;
+	top: -107px;
+	z-index: -3;
+}
+
+
+.visibleImg{
+width: 50px;
+height:50px;
+position:relative;
+top:-107px;
+z-index: 3;
+}
+
+.myProfilePicture{
+width: 50px;
+height: 50px;
+position: relative;
+z-index: 2;
+top:-105px;
+left: 3px;
+margin: 0px;
+}
+
+img:nth-of-type(2) {
+
+left:-52px;
+
+}
+
 </style>
 
 
@@ -168,12 +202,20 @@ input#chat {
 			$(this).css('border-color', '#fff');
 			$(this).css('border-top', '1px solid #efefef');
 			$(this).css('border-bottom', '1px solid #efefef');
+
 		});
 
 	});
 </script>
 <script type="application/javascript">
 	
+function new_msg(num){
+	
+	
+	$('#img_new'+num).css('z-index','3');
+	
+	
+}
 
 			
 	
@@ -181,11 +223,11 @@ input#chat {
 			var chat_mem_name = '${chat_mem_name}';
 			var chat_Member_Participation = '${chat_Member_Participation}';
 			var chat_partner = '${chat_partner}';
-		
+		 	var my_Name = '${name}'
 		//	 alert("chat_Num :::::: "+chat_Num+"   chat_mem_name:::::: "+chat_mem_name+" chat_Member_Participation :::::: "+chat_Member_Participation+" chat_partner :::::: "+chat_partner)
 
 			
-			var mem_num = '${mem_num}'
+			var mem_num = '${mem_num}';
 				
 			
 	        var Chat = {};
@@ -242,9 +284,9 @@ input#chat {
 	        Chat.initialize = function() {
 	            if (window.location.protocol == 'http:') {
 	                //Chat.connect('ws://' + window.location.host + '/websocket/chat');
-	            	Chat.connect('ws://localhost:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver='+chat_Member_Participation+'&chat_Num='+chat_Num);
+	            	Chat.connect('ws://localhost:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver='+chat_Member_Participation+'&chat_Num='+chat_Num+'&my_name='+my_Name);
 	            } else {
-	                Chat.connect('wss://' + window.location.host + '/websocket/Chatting');
+	                Chat.connect('wss://' + window.location.host + '/websocket/Chatting?mem_name='+mem_num+'&receiver='+chat_Member_Participation+'&chat_Num='+chat_Num+'&my_name='+my_Name);
 	            }
 	        };
 	
@@ -270,14 +312,35 @@ input#chat {
 	            
 	            
 	            var name = document.createElement('p');
-
 	            var receiveName = chat_mem_name;
+	            
 	            name.id='name';
 	            name.innerHTML = receiveName;
-	            console.appendChild(name);
+	
+	            
+	            var strArray = message.split('::');
 	            
 	            
-	            console.appendChild(p); // 전달된 메시지를 하단에 추가함
+	            var sysmsg='its message is deffrent user message';
+	            var multimsg ='its message is multiMsg';
+	            if(strArray[0] == sysmsg){
+	            
+	            	var num= strArray[1];
+	            	new_msg(num);
+	            }else if(strArray[0] == multimsg){
+	            	name.innerHTML = strArray[1];
+	            	p.innerHTML =strArray[2];
+	            	console.appendChild(name);
+	            	console.appendChild(p);
+	            	
+	            }else{
+	            
+	            	
+	            	
+	                console.appendChild(name);
+	            	console.appendChild(p);
+	            }
+	            // 전달된 메시지를 하단에 추가함
 	            // 추가된 메시지가 25개를 초과하면 가장 먼저 추가된 메시지를 한개 삭제함
 	          /*   while (console.childNodes.length > 25) {
 	                console.removeChild(console.firstChild);
@@ -334,6 +397,7 @@ input#chat {
 
 	    
 
+
 </script>
 
 <script type="text/javascript">
@@ -379,12 +443,38 @@ input#chat {
 						value="${chat_list.last_Chat_Conversation}"> <input
 						type="hidden" name="chat_partner" id="chat_partner"
 						value="${chat_list.chat_partner } ">
+						<input type="hidden" name="chat_partner" id="chat_partner"
+						value="${chat_list.chat_partner}"> 
 
 					<div class='${chat_list.chat_partner }'>
 						<input type="submit" value=" " id="submit${chat_list.chat_Num}"
 							class='memmem'>
 						<p class='memname_chat' id='${chat_list.chat_Num}'>${chat_list.chat_partner }
 						</p>
+
+
+							<c:set var="temp_check"  value="0"/>
+						<c:forTokens items="${chat_list.last_Chat_Member }" delims="," var="last_Chat_Member">
+							<c:if test="${chat_list.last_Chat_Read == 'f' }">
+								<c:if test="${ mem_num == last_Chat_Member }">
+								<c:set var="temp_check"  value="1"/>
+								</c:if>
+							</c:if>
+						</c:forTokens>
+						<c:if test="${chat_list.last_Chat_Read == 'f' }">
+						<c:if test="${temp_check != 1 }">
+						<img src="/HoneyComb/Chatting/chat_image/new.gif" class = 'visibleImg' />
+						</c:if>
+						</c:if>
+								
+						
+									
+							<img src="${ chat_list.profile_IMG }"  onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진" class = 'myProfilePicture'>
+				
+			
+							
+						<img src="/HoneyComb/Chatting/chat_image/new.gif"
+							id='img_new${chat_list.chat_Num }' class='sendCheckImg'  />
 					</div>
 				</form>
 
@@ -404,23 +494,36 @@ input#chat {
 
 
 					<div id="console">
+					
+					
 						<c:forEach items='${before_chat_record}' var="before_chat">
-							
+
 							<c:if test="${before_chat.chat_User eq mem_num}">
 								<p id="me">${before_chat.chat_Conversation }</p>
 							</c:if>
+
+							<c:if
+								test="${before_chat.chat_User eq chat_Member_Participation }">
+								<p id="receive">${before_chat.chat_Conversation }</p>
+							</c:if>
+							<c:forTokens var="token" items="${chat_Member_Participation}" delims=",">
 							
-							<c:if test= "${before_chat.chat_User eq chat_Member_Participation }">
-							<p id="receive">${before_chat.chat_Conversation }</p>
+							<c:if
+								test="${before_chat.chat_User eq token }">
+								
+								<p>${before_chat.chat_User_Name}</p>
+								
+								<p id="receive">${before_chat.chat_Conversation }</p>
 							</c:if>
 							
-							
+							</c:forTokens>
+
 						</c:forEach>
-						
-						
-						
-						
-						
+
+
+
+
+
 
 					</div>
 					<input type="text" placeholder="type and press enter to chat"

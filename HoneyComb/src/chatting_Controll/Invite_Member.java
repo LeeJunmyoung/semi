@@ -54,22 +54,20 @@ public class Invite_Member implements CommandAction_Chatting {
 
 			} // 초대인원 숫자크기에 의한 정렬
 
-			if (cdbb.check_OneNOne_Chat(chat_mem_num)) {
+			if (cdbb.check_OneNOne_Chat(chat_mem_num)) {// 원래 잇는 방인지 검사
 
 				cdbb.create_OneNOne_Chat(chat_mem_num);
 
 			} else {
 				view_list = cdbb.view_My_chat(my_mem_num);
 				request.getSession().setAttribute("current_chat_list", view_list);
-				
-				
+
 				int chat_num = 0;
 				String chat_mem_name = "";
 				String chat_Member_Participation = "";
 				String last_Chat_Date = "";
 				String last_Chat_Conversation = "";
-				
-				
+
 				for (ChatRoomDataBean chat : view_list) {
 
 					if (chat.getChat_Member_Participation().equals(invite_mem_num[0])) {
@@ -79,24 +77,12 @@ public class Invite_Member implements CommandAction_Chatting {
 						last_Chat_Date = chat.getLast_Chat_Date();
 						last_Chat_Conversation = chat.getLast_Chat_Conversation();
 					}
-					
-					
-					
-					
-					System.out.println("chat_num:::" + chat_num);
-					System.out.println("chat_mem_name:::" + chat_mem_name);
-					System.out.println("chat_Member_Participation:::" + chat_Member_Participation);
-					System.out.println("last_Chat_Date:::" + last_Chat_Date);
-					System.out.println("last_Chat_Conversation:::" + last_Chat_Conversation);
-					System.out.println("invite_mem_num[0] ::::" +invite_mem_num[0]);
+
 				}
-				
-				
+
 				request.setAttribute("chat_Num", chat_num);
 				request.setAttribute("chat_mem_name", chat_mem_name);
 				request.setAttribute("chat_Member_Participation", chat_Member_Participation);
-
-			
 
 				return "/Chatting/Existed_Chat.jsp";
 
@@ -107,11 +93,54 @@ public class Invite_Member implements CommandAction_Chatting {
 			request.getSession().setAttribute("current_chat_list", view_list);
 
 			return "/Chatting/Invite_pro.jsp";
-		} 
-		
-		
-		
-		
+			
+			
+		} else {
+			cdbb = Chatting_DBBean.getInstance();
+			String [] multi_Mem_Num = new String [invite_mem_num.length+1]; 
+			
+			for(int i =0; i< invite_mem_num.length;i++){
+				multi_Mem_Num[i] = invite_mem_num[i];
+			}
+			multi_Mem_Num[invite_mem_num.length] = String.valueOf(my_mem_num);
+			
+			for (int i = 0; i < multi_Mem_Num.length; i++) {
+				for (int j = 0; j < multi_Mem_Num.length; j++) {
+
+					if (Integer.parseInt(multi_Mem_Num[j]) > Integer.parseInt(multi_Mem_Num[i])) {
+						String temp = "";
+						temp = multi_Mem_Num[i];
+						multi_Mem_Num[i] = multi_Mem_Num[j];
+						multi_Mem_Num[j] = temp;
+					}
+				}
+
+			}
+			chat_mem_num="";
+			for(int i = 0; i<multi_Mem_Num.length;i++){
+				chat_mem_num = chat_mem_num + multi_Mem_Num[i] ;
+				if(i != multi_Mem_Num.length-1){
+					chat_mem_num = chat_mem_num +"n";
+				}
+			}
+			
+			
+			if (cdbb.check_OneNOne_Chat(chat_mem_num)) {// 원래 잇는 방인지 검사
+				System.out.println("실행됌");
+				cdbb.create_OneNOne_Chat(chat_mem_num);
+			}
+			
+			
+			view_list = cdbb.view_My_chat(my_mem_num);
+
+			request.getSession().setAttribute("current_chat_list", view_list);
+
+			return "/Chatting/Invite_pro.jsp";
+			
+			
+			
+		}
+
 		// 1명 선택시
 
 		/*
@@ -128,7 +157,7 @@ public class Invite_Member implements CommandAction_Chatting {
 		 * 
 		 */
 
-		return "/Chatting/Chat_main.jsp";
+		
 	}
 
 }

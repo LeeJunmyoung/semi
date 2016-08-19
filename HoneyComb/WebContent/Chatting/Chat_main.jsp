@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -7,41 +7,39 @@
 <head>
 <title>Insert title here</title>
 <style type="text/css">
- .total_box{
- margin: auto;
- width:900px;
- height:600px;
- border-collapse: collapse;
- }
- .box1_select_chat{
-  float:left; 
-  width:300px; 
-  height:600px; 
-  border: 1px solid #CCCCCC;
-  
-  }
- .box2_execute_chat{
-  display:inline-block;
-  width:500px;
-  height:600px; 
-  border:1px solid #CCCCCC;
-  padding:0px;
-  margin:0px;
-  
-  }  
-  #form1{
-  display:inline;
-   width:300px; 
-  height:58px; 
-  }
-  #form1 div{
-   width:300px; 
-  height:58px; 
-  }
+.total_box {
+	margin: auto;
+	width: 900px;
+	height: 600px;
+	border-collapse: collapse;
+}
 
+.box1_select_chat {
+	float: left;
+	width: 300px;
+	height: 600px;
+	border: 1px solid #CCCCCC;
+}
 
+.box2_execute_chat {
+	display: inline-block;
+	width: 500px;
+	height: 600px;
+	border: 1px solid #CCCCCC;
+	padding: 0px;
+	margin: 0px;
+}
 
+#form1 {
+	display: inline;
+	width: 300px;
+	height: 58px;
+}
 
+#form1 div {
+	width: 300px;
+	height: 58px;
+}
 </style>
 <style type="text/css">
 input#chat {
@@ -49,7 +47,7 @@ input#chat {
 }
 
 #console-container {
-	width:400px;
+	width: 400px;
 	margin: auto;
 }
 
@@ -73,10 +71,11 @@ input#chat {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
+
 #console #me {
 	margin: 20px;
 	position: relative;
-	left :200px;
+	left: 200px;
 	width: 150px;
 	padding: 5px;
 	background: #FAF4C0;
@@ -85,44 +84,76 @@ input#chat {
 	border-radius: 10px;
 	text-align: center;
 }
-#console #name{
+
+#console #name {
 	margin: 10px;
 	position: relative;
 	padding: 5px;
-	
 }
-#console #sys{
-margin: 10px;
+
+#console #sys {
+	margin: 10px;
 	position: relative;
-	text-align:center;
+	text-align: center;
 	padding: 5px;
 }
-.memmem{
-border-color:#fff;
-background-color:#fff;
-width :300px;
-height:58px;
-border : 0;
-border-top: 1px solid #efefef;
-border-bottom: 1px solid #efefef;
-position: relative;
+
+.memmem {
+	border-color: #fff;
+	background-color: #fff;
+	width: 300px;
+	height: 58px;
+	border: 0;
+	border-top: 1px solid #efefef;
+	border-bottom: 1px solid #efefef;
+	position: relative;
+}
+
+.memname_chat {
+	position: relative;
+	left: 80px;
+	top: -63px;
+	z-index: 1;
+	font-size: 15px;
+	width: 230px;
+	height: 20px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: clip;
+}
+
+.sendCheckImg {
+	width: 50px;
+	height: 50px;
+	position: relative;
+	top: -107px;
+	z-index: -3;
 }
 
 
-
-
-.memname_chat{
-position: relative;
-left: 80px;
-top: -63px;
-z-index: 1;
-font-size: 15px;
-width: 230px;
-height : 20px;
-overflow:hidden;white-space:nowrap;
-text-overflow: clip;
+.visibleImg{
+width: 50px;
+height:50px;
+position:relative;
+top:-107px;
+z-index: 3;
 }
 
+.myProfilePicture{
+width: 50px;
+height: 50px;
+position: relative;
+z-index: 2;
+top:-105px;
+left: 3px;
+margin: 0px;
+}
+
+img:nth-of-type(2) {
+
+left:-52px;
+
+}
 
 
 </style>
@@ -131,69 +162,77 @@ text-overflow: clip;
 <script src='/HoneyComb/Calendar/fullcalendar/lib/jquery.min.js'></script>
 
 <script type="text/javascript">
-function invite_Member() {
-	var url = "/HoneyComb/Chatting/Invite_form.chat";
-	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,"+"scrollbars=no,resizable=no,width=550,height=400");
+	function invite_Member() {
+		var url = "/HoneyComb/Chatting/Invite_form.chat";
+		open(url, "confirm", "toolbar=no,location=no,status=no,menubar=no,"
+				+ "scrollbars=no,resizable=no,width=550,height=400");
 
-}
+	}
 
+	$(document).ready(function() {
+		$("p").click(function() {
+			var c = 'form' + $(this).attr("id");
 
+			$('form.' + c).submit();
+		});
 
-$(document).ready(function(){
-    $("p").click(function(){
-      var c ='form'+$(this).attr("id");
-   
-      $('form.'+c).submit();
-    });
-    
-    $("p").mouseenter(function(){
-    	 var c ="submit"+$(this).attr("id");
-    	 $('#'+c).css('border','1px solid');
-     	
-    	 $('#'+c).css('border-color','red');
-    	 
-    });
-    $("p").mouseleave(function(){
-   	 var c ="submit"+$(this).attr("id");
-   	 $('#'+c).css('border','0');
-   	 $('#'+c).css('border-color','#fff');
-   	 $('#'+c).css('border-top','1px solid #efefef');
-   	 $('#'+c).css('border-bottom','1px solid #efefef');
-	 });
-    
-    
-    $(".memmem").mouseenter(function(){
-   	
-   	 $(this).css('border','1px solid');
-	 $(this).css('border-color','red');
-	 
-    });
-    $(".memmem").mouseleave(function(){
+		$("p").mouseenter(function() {
+			var c = "submit" + $(this).attr("id");
+			$('#' + c).css('border', '1px solid');
 
-      	 $(this).css('border','0');
-      	 $(this).css('border-color','#fff');
-      	 $(this).css('border-top','1px solid #efefef');
-      	 $(this).css('border-bottom','1px solid #efefef');
-   	 });
-    
-    
-});
-	
+			$('#' + c).css('border-color', 'red');
 
+		});
+		$("p").mouseleave(function() {
+			var c = "submit" + $(this).attr("id");
+			$('#' + c).css('border', '0');
+			$('#' + c).css('border-color', '#fff');
+			$('#' + c).css('border-top', '1px solid #efefef');
+			$('#' + c).css('border-bottom', '1px solid #efefef');
+		});
+
+		$(".memmem").mouseenter(function() {
+
+			$(this).css('border', '1px solid');
+			$(this).css('border-color', 'red');
+
+		});
+		$(".memmem").mouseleave(function() {
+
+			$(this).css('border', '0');
+			$(this).css('border-color', '#fff');
+			$(this).css('border-top', '1px solid #efefef');
+			$(this).css('border-bottom', '1px solid #efefef');
+		});
+		
+		
+		
+	});
 </script>
-<!-- 
+
+
 <script type="application/javascript">
 	
-			var chat_Num = '${chat_Num}';
+function new_msg(num){
+	
+	
+	$('#img_new'+num).css('z-index','3');
+	
+	
+}
+
 			
 	
+			var chat_Num = '${chat_Num}';
 			var chat_mem_name = '${chat_mem_name}';
-			
-			
 			var chat_Member_Participation = '${chat_Member_Participation}';
+			var chat_partner = '${chat_partner}';
+		 	var my_Name = '${name}'
+		//	 alert("chat_Num :::::: "+chat_Num+"   chat_mem_name:::::: "+chat_mem_name+" chat_Member_Participation :::::: "+chat_Member_Participation+" chat_partner :::::: "+chat_partner)
+
 			
-			var mem_num = '${mem_num}'
-		
+			var mem_num = '${mem_num}';
+				
 			
 	        var Chat = {};
 	
@@ -213,7 +252,7 @@ $(document).ready(function(){
 	
 	             // 서버에 접속이 되면 호출되는 콜백함수
 	            Chat.socket.onopen = function () {
-	                Console.sys('Info: WebSocket connection opened.');
+	           //     Console.sys("알림 : " +chat_partner +" 님과 연결되었습니다. ");
 	                // 채팅입력창에 메시지를 입력하기 위해 키를 누르면 호출되는 콜백함수
 	                document.getElementById('chat').onkeydown = function(event) {
 	                    // 엔터키가 눌린 경우, 서버로 메시지를 전송함
@@ -234,7 +273,7 @@ $(document).ready(function(){
 	            Chat.socket.onclose = function () {
 	            	// 채팅 입력창 이벤트를 제거함
 	                document.getElementById('chat').onkeydown = null;
-	                Console.sys('Info: WebSocket closed.');
+	                 Console.sys('Info: WebSocket closed.');
 	            };
 				
 	            // 서버로부터 메시지를 받은 경우에 호출되는 콜백함수
@@ -249,9 +288,9 @@ $(document).ready(function(){
 	        Chat.initialize = function() {
 	            if (window.location.protocol == 'http:') {
 	                //Chat.connect('ws://' + window.location.host + '/websocket/chat');
-	            	Chat.connect('ws://localhost:8888/WebSocketEx/websocket/chat?mem_name='+mem_num+'&receiver='+chat_Member_Participation);
+	            	Chat.connect('ws://192.168.42.80:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver=99999&chat_Num=99999&my_name=defult');
 	            } else {
-	                Chat.connect('wss://' + window.location.host + '/websocket/chat');
+	                Chat.connect('wss://' + window.location.host + '/websocket/Chatting?mem_name='+mem_num+'&receiver=99999&chat_Num=99999&my_name=defult');
 	            }
 	        };
 	
@@ -277,18 +316,39 @@ $(document).ready(function(){
 	            
 	            
 	            var name = document.createElement('p');
-
 	            var receiveName = chat_mem_name;
+	            
 	            name.id='name';
 	            name.innerHTML = receiveName;
-	            console.appendChild(name);
+	
+	            
+	            var strArray = message.split('::');
 	            
 	            
-	            console.appendChild(p); // 전달된 메시지를 하단에 추가함
-	            // 추가된 메시지가 25개를 초과하면 가장 먼저 추가된 메시지를 한개 삭제함
-	            while (console.childNodes.length > 25) {
-	                console.removeChild(console.firstChild);
+	            var sysmsg='its message is deffrent user message';
+	            var multimsg ='its message is multiMsg';
+	            if(strArray[0] == sysmsg){
+	            
+	            	var num= strArray[1];
+	            	new_msg(num);
+	            }else if(strArray[0] == multimsg){
+	            	name.innerHTML = strArray[1];
+	            	p.innerHTML =strArray[2];
+	            	console.appendChild(name);
+	            	console.appendChild(p);
+	            	
+	            }else{
+	            
+	            	
+	            	
+	                console.appendChild(name);
+	            	console.appendChild(p);
 	            }
+	            // 전달된 메시지를 하단에 추가함
+	            // 추가된 메시지가 25개를 초과하면 가장 먼저 추가된 메시지를 한개 삭제함
+	          /*   while (console.childNodes.length > 25) {
+	                console.removeChild(console.firstChild);
+	            } */
 	            // 스크롤을 최상단에 있도록 설정함
 	            console.scrollTop = console.scrollHeight;
 	        });
@@ -307,9 +367,9 @@ $(document).ready(function(){
 	           
 	            console.appendChild(p); // 전달된 메시지를 하단에 추가함
 	            // 추가된 메시지가 25개를 초과하면 가장 먼저 추가된 메시지를 한개 삭제함
-	            while (console.childNodes.length > 25) {
+	           /*  while (console.childNodes.length > 25) {
 	                console.removeChild(console.firstChild);
-	            }
+	            } */
 	            // 스크롤을 최상단에 있도록 설정함
 	            console.scrollTop = console.scrollHeight;
 	        });
@@ -326,9 +386,9 @@ $(document).ready(function(){
 	           
 	            console.appendChild(sys); // 전달된 메시지를 하단에 추가함
 	            // 추가된 메시지가 25개를 초과하면 가장 먼저 추가된 메시지를 한개 삭제함
-	            while (console.childNodes.length > 25) {
+	            /* while (console.childNodes.length > 25) {
 	                console.removeChild(console.firstChild);
-	            }
+	            } */
 	            // 스크롤을 최상단에 있도록 설정함
 	            console.scrollTop = console.scrollHeight;
 	        });
@@ -340,87 +400,147 @@ $(document).ready(function(){
 
 
 	    
-</script> -->
+
+
+</script>
+
+
+
+
 <script type="text/javascript">
+	function filter() {
+		if ($('#search_name').val() == "") {
+			$("#form1 div").css('display', '');
 
-function filter(){
-	if($('#search_name').val()==""){
-		 $("#form1 div").css('display','');	
-		
-		
+		} else {
+			/* 		$("#form1 input").css('display','none');
+			 $(".memname_chat").hide(); */
+			$('#form1 div').css('display', 'none');
+			$("#form1 div[class*='" + $('#search_name').val() + "']").css(
+					'display', '');
+		}
+		return false;
 	}
-	else{
-/* 		$("#form1 input").css('display','none');
-		$(".memname_chat").hide(); */
-		$('#form1 div').css('display','none');	
-		$("#form1 div[class*='"+$('#search_name').val()+"']").css('display','');
-	}
-	return false;
-}
-
-
 </script>
 
 </head>
 <body>
 
-<div class='total_box'>
-<div class = 'box1_select_chat'>
-<input type = "button" value="+" onclick="invite_Member()">
-<input type = "text" placeholder="name" id = 'search_name'  onkeyup='{filter();return false}' onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
-<br>
-<br>
+	<div class='total_box'>
+		<div class='box1_select_chat'>
+			<input type="button" value="+" onclick="invite_Member()"> <input
+				type="text" placeholder="name" id='search_name'
+				onkeyup='{filter();return false}'
+				onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
+			<br> <br>
 
-<c:forEach var="chat_list" items="${current_chat_list}" >
-<form method="post"  action="/HoneyComb/Chatting/Chat_Select_OneNone.chat" class='form${chat_list.chat_Num }' id = 'form1'>
-<input type="hidden" name ="chat_Num" id="chat_Num" value="${chat_list.chat_Num}" >
+			<c:forEach var="chat_list" items="${current_chat_list}">
+				<form method="post"
+					action="/HoneyComb/Chatting/Chat_Select_OneNone.chat"
+					class='form${chat_list.chat_Num }' id='form1'>
+					<input type="hidden" name="chat_Num" id="chat_Num"
+						value="${chat_list.chat_Num}"> <input type="hidden"
+						name="chat_mem_name" id="chat_mem_name"
+						value="${chat_list.chat_mem_name}"> <input type="hidden"
+						name="chat_Member_Participation" id="chat_Member_Participation"
+						value="${chat_list.chat_Member_Participation }"> <input
+						type="hidden" name="last_Chat_Date" id="last_Chat_Date"
+						value="${chat_list.last_Chat_Date }"> <input type="hidden"
+						name="last_Chat_Conversation" id="last_Chat_Conversation"
+						value="${chat_list.last_Chat_Conversation}"> <input
+						type="hidden" name="chat_partner" id="chat_partner"
+						value="${chat_list.chat_partner } ">
+						<input type="hidden" name="chat_partner" id="chat_partner"
+						value="${chat_list.chat_partner}"> 
 
-<input type="hidden" name ="chat_mem_name" id="chat_mem_name" value="${chat_list.chat_mem_name}">
-
-<input type="hidden" name ="chat_Member_Participation" id="chat_Member_Participation" value="${chat_list.chat_Member_Participation }">
-
-<input type="hidden" name ="last_Chat_Date"  id="last_Chat_Date" value="${chat_list.last_Chat_Date }">
-
-<input type="hidden" name ="last_Chat_Conversation" id="last_Chat_Conversation" value ="${chat_list.last_Chat_Conversation}">
-<div  class = '${chat_list.chat_partner }' > 
-<input type="submit" value=" "  id="submit${chat_list.chat_Num}" class = 'memmem'>
-<p class='memname_chat' id = '${chat_list.chat_Num}'   >${chat_list.chat_partner }  </p>
-</div>
-</form>
-
-</c:forEach>
-
-
- </div>
-
-<div class = 'box2_execute_chat'> 
-
-
-	<div>
-	
-		<div id="console-container">
-			<div id="console" >&lt PLEASE SELECT YOUR MEMBERS</div>
-			<input type="text" placeholder="type and press enter to chat" readonly="readonly"
-				id="chat" />
-		</div>
-		
-		<p>
+					<div class='${chat_list.chat_partner }'>
+						<input type="submit" value=" " id="submit${chat_list.chat_Num}"
+							class='memmem'>
+						<p class='memname_chat' id='${chat_list.chat_Num}'>${chat_list.chat_partner }
+						</p>
+						
+						
+						<c:set var="temp_check"  value="0"/>
+						<c:forTokens items="${chat_list.last_Chat_Member }" delims="," var="last_Chat_Member">
+							<c:if test="${chat_list.last_Chat_Read == 'f' }">
+								<c:if test="${ mem_num == last_Chat_Member }">
+								<c:set var="temp_check"  value="1"/>
+								</c:if>
+							</c:if>
+						</c:forTokens>
+						<c:if test="${chat_list.last_Chat_Read == 'f' }">
+						<c:if test="${temp_check != 1 }">
+						<img src="/HoneyComb/Chatting/chat_image/new.gif" class = 'visibleImg' />
+						</c:if>
+						</c:if>
+							<img src="${ chat_list.profile_IMG }"  onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진" class = 'myProfilePicture'>
+				
 			
-		</p>
+							
+						<img src="/HoneyComb/Chatting/chat_image/new.gif"
+							id='img_new${chat_list.chat_Num }' class='sendCheckImg'  />
+					</div>
+				</form>
+
+			</c:forEach>
+
+
+		</div>
+
+		<div class='box2_execute_chat'>
+
+
+			<div>
+
+				<div id="console-container">
+
+
+
+
+					<div id="console">
+					
+					
+						<c:forEach items='${before_chat_record}' var="before_chat">
+
+							<c:if test="${before_chat.chat_User eq mem_num}">
+								<p id="me">${before_chat.chat_Conversation }</p>
+							</c:if>
+
+							<c:if
+								test="${before_chat.chat_User eq chat_Member_Participation }">
+								<p id="receive">${before_chat.chat_Conversation }</p>
+							</c:if>
+							<c:forTokens var="token" items="${chat_Member_Participation}" delims=",">
+							
+							<c:if
+								test="${before_chat.chat_User eq token }">
+								
+								<p>${before_chat.chat_User_Name}</p>
+								
+								<p id="receive">${before_chat.chat_Conversation }</p>
+							</c:if>
+							
+							</c:forTokens>
+
+						</c:forEach>
+
+
+
+
+
+
+					</div>
+					<input type="text" placeholder="type and press enter to chat"
+						id="chat"  readonly="readonly" disabled="disabled"/>
+				</div>
+
+				<p></p>
+			</div>
+
+		</div>
+
+
 	</div>
-	
-
-
-
-
-
-
-
-
-</div>
-
-
-</div>
 
 
 </body>

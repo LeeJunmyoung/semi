@@ -17,6 +17,9 @@ public class Chat_Main implements CommandAction_Chatting{
 		
 		view_list=cdbb.view_My_chat(mem_num);
 		
+		
+		
+		
 		request.getSession().setAttribute("current_chat_list", view_list);
 		
 		

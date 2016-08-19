@@ -23,7 +23,7 @@ public class CloudDeleteItem implements CommandActionCloud{
 		
 		String folder = request.getParameter("folder");
 		//세션에 없을 경우
-		String returnp = "/cloudview/changeFilename.jsp";
+		String returnp = "/cloudview/changeFilename.jsp?type=close";
 		if(file_path == null){
 			file_path = request.getParameter("file_path");
 			returnp = "/cloudview/cloudindex.jsp";
@@ -34,7 +34,6 @@ public class CloudDeleteItem implements CommandActionCloud{
 				return returnp;
 			}
 		}
-		System.out.println(file_path);
 		File f = new File(file_path);
 		f.delete();
 		

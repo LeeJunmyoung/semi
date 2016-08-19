@@ -108,6 +108,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,?)";//마지막에 들어갈 promgr_num
 				String progrfolder = "*"+progr_name+"|";//프로젝트명의 가상파일 생성
 				cloudDB.setFolder(progrfolder);
+				file = checkFolder(cloudDB);
 				pstmt =conn.prepareStatement(sql);
 				pstmt.setInt(7, promgr_num);
 				//프로젝트 DB 에 파일이름 업데이트
@@ -131,7 +132,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 				updateProgr(cloudDB, progr_name);
 			}
 			if (file == 0 ){
-				return 0;
+				return 0;//중복이면 0을 리턴
 			}
 		}catch (Exception ex) {
 			ex.printStackTrace();
@@ -221,7 +222,7 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 		String folder = cloudPro.getFolder();
 		String file_name = cloudPro.getFile_name();
 		String file_path = cloudPro.getFile_path();
-		if(file_path == null){
+		if(file_path == null){//폴더이면
 		if (folder == ""){
 			
 			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null and file_path is null");
@@ -232,24 +233,23 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 		pstmt.setString(1, file_name);
 		pstmt.setString(2, folder);
 		}
-		} else{
-			if (folder == ""){
+		} else{//폴더가 아니면
+			if (folder == ""){//메인일때
 				
-				pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null and file_path = ?");
+				pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder is null and file_path is not null");
 				pstmt.setString(1, file_name);
-				pstmt.setString(2, file_path);
+				
 			}else{
 				
-			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ? and file_path = ?");
+			pstmt =conn.prepareStatement("select * from cloud where file_name = ? and folder = ? and file_path is not null");
 			pstmt.setString(1, file_name);
 			pstmt.setString(2, folder);
-			pstmt.setString(3, file_path);
 			}
 		}
 		
 		rs = pstmt.executeQuery();
 		if(rs.next()){
-			return 0;
+			return 0;//중복이면 0을 리턴
 		}
 		
 	}catch (Exception ex) {
@@ -267,19 +267,22 @@ public int checkFolder(CloudDataBean cloudPro)throws SQLException{
 			}
 		
 	}
-	return 1;
+	return 1;//중복이 아니면 1을 리턴
 }
 
-public void renameItem(String item, String itemName)throws SQLException{
+public int renameItem(CloudDataBean cloudData, String itemName)throws SQLException{
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	try{
-
+		cloudData.setFile_name(itemName);
 		conn = getConnection();
+		int i = checkFolder(cloudData);
 		
-		
+		if (i ==0){
+			return 0;
+		}
 		//파일 경로일경우
-		String file_path = item;
+		String file_path = cloudData.getFile_path();
 		pstmt =conn.prepareStatement("update cloud set file_name = ? where file_path=?");
 		pstmt.setString(1, itemName);
 		pstmt.setString(2, file_path);
@@ -302,7 +305,7 @@ public void renameItem(String item, String itemName)throws SQLException{
 			} catch (SQLException ex) {
 			}
 	}
-	
+	return 1;
 }
 
 public void deleteItem(String iteminfo, String folder)throws SQLException{
@@ -427,4 +430,37 @@ private void updateProgr(CloudDataBean cloudDB, String promgr_name)throws SQLExc
 	}
 	
 };
+public CloudDataBean renameCheck(String file_path)throws SQLException{
+	CloudDataBean cloudData = new CloudDataBean();
+	PreparedStatement pstmt = null;
+	Connection conn = null;
+	ResultSet rs = null;
+	
+	try{
+	
+		conn = getConnection();
+		String sql = "select * from cloud where file_path=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, file_path);
+		
+		rs = pstmt.executeQuery();
+		rs.next();
+		cloudData =  makeCloudListResultSet(rs);
+	}catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException ex) {
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException ex) {
+			}
+	
+	}
+	return cloudData;
+}
 }

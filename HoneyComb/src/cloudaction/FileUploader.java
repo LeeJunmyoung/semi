@@ -65,8 +65,9 @@ public class FileUploader implements CommandActionCloud{
 				int com_num = (int)session.getAttribute("com_num");
 				String folder = request.getParameter("folder");
 				int promgr_num = 0;//프로젝트 없으면 0일 수 있도록 초기화
-				System.out.println("getp::"+mr.getParameter("promgr_num"));
-				if((String)mr.getParameter("promgr_num")!=""){
+				String str = (String)mr.getParameter("promgr_num");
+				if(str.length() != 0){
+					System.out.println("이게 실행이 됨?");
 					promgr_num = Integer.parseInt((String)mr.getParameter("promgr_num"));//프로젝트 넘 정하기
 				}
 			cloudDB.setFile_name(filename);
@@ -80,12 +81,13 @@ public class FileUploader implements CommandActionCloud{
 		
 		
 			//이름바꿔줄 file_num session으로 저장
-			session.setAttribute("file_path", cloudDB.getFile_path());
 			
 			if(filecheck == 0){
-				return "/cloudview/uploadForm.jsp?filecheck="+cloudDB.getFile_name();
+				session.setAttribute("file_path", cloudDB.getFile_path());
+				return "/cloudview/uploadForm.jsp?filecheck="+cloudDB.getFile_name()+"&promgr_num="+(String)mr.getParameter("promgr_num");
 			}else{
-				return "/cloudview/uploadForm.jsp?upload=done";
+				
+				return "/cloudview/uploadForm.jsp?upload=done&promgr_num="+(String)mr.getParameter("promgr_num");
 			}
 		
 			}

@@ -490,7 +490,6 @@ public class HoneyCombDBBean {
 			ResultSet rs = null;
 			List noticeList = null;
 			Notice_adminDataBean notice = new Notice_adminDataBean();
-			int count = 0;
 			
 			try {
 				conn = getConnection();
@@ -499,7 +498,7 @@ public class HoneyCombDBBean {
 				pstmt.setString(1 , notice_admin_content);
 				pstmt.executeUpdate();
 				
-				pstmt = conn.prepareStatement("select * from notice_admin");
+				pstmt = conn.prepareStatement("select * from (select * from notice_admin order by notice_admin_num desc) where rownum =1");
 				rs = pstmt.executeQuery();
 				noticeList = new ArrayList();
 				
@@ -538,6 +537,46 @@ public class HoneyCombDBBean {
 				}	
 			}
 			return noticeList;
+
+		}
+	   
+	   public String popList() throws Exception {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String pop = "";
+			
+			try {
+				conn = getConnection();	
+				
+				pstmt = conn.prepareStatement("select * from (select * from notice_admin order by notice_admin_num desc) where rownum = 1");
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				pop = rs.getString("notice_admin_content");
+				System.out.println("!!1" + pop);
+				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			} finally {
+				if (pstmt != null)
+					try {
+						pstmt.close();
+					} catch (SQLException ex) {
+					}
+				if (conn != null)
+					try {
+						conn.close();
+					} catch (SQLException ex) {
+					}
+				if (rs != null){
+					try{
+						rs.close();
+					}catch (SQLException ex) {
+					}
+				}	
+			}
+			return pop;
 
 		}
 	   

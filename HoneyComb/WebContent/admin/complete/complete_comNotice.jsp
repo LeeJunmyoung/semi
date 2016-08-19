@@ -37,7 +37,7 @@
 </head>
 <body>
 
-	<form method="post" name="writeform" action="/HoneyComb/complete/complete_comNoticeAction.admin" onsubmit="return writeSave()">
+	<form method="post" name="writeform" action="/HoneyComb/complete/complete_comNotice_admin.admin" onsubmit="return writeSave()">
 	
 		<!-- 글제목 <input type="text" name="notice_title" size="40" maxlength="50" /> <br> -->
 		공지팝업창 내용 <textarea name="notice_admin_content" rows="15" cols="30"></textarea> <br>

@@ -20,7 +20,7 @@ ${notice.notice_admin_content}
 </table>
 <br/>
 <center>
-<input type="button" value="창 닫기" onclick="self.close()">
+<a href="javascript:this.close();">닫기</a>
 </center>
 </c:forEach>
 </body>

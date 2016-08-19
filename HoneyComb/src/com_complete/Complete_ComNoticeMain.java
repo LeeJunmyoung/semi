@@ -7,22 +7,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com_bean.HoneyCombDBBean;
 
-
-public class Complete_ComNoticeAction implements CommandAction{
-
+public class Complete_ComNoticeMain implements CommandAction{
+	
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
 		
 		request.setCharacterEncoding("UTF-8");
-		String notice_admin_content = request.getParameter("notice_admin_content");
 		HoneyCombDBBean dbPro = HoneyCombDBBean.getInstance();
-		List noticeList = null;
-		noticeList = dbPro.noticeComplete(notice_admin_content);
 		
-		request.setAttribute("noticeList", noticeList);
+		String popup = "";
+		popup = dbPro.popList();
 		
-		return "/admin/complete/complete_comNotice_admin.jsp";
+		request.setAttribute("popup", popup);
+		
+		return "/admin/complete/popup_main.jsp";
 	}
 
 }

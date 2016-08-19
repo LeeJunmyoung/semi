@@ -3,7 +3,7 @@ package promgr;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PromgrChkListModItemFormAction implements PromgrFormAction {
+public class PromgrChkItemModFormAction implements PromgrFormAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
@@ -12,7 +12,7 @@ public class PromgrChkListModItemFormAction implements PromgrFormAction {
 
 		request.setAttribute("item_num", item_num);
 
-		return "/promgr/promgrChkListAddItemForm.jsp";
+		return "/promgr/promgrChkItemModForm.jsp";
 
 	} // String requestPro end
 

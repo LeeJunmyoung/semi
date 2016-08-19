@@ -3,7 +3,7 @@ package promgr;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PromgrChkListModItemProAction implements PromgrFormAction {
+public class PromgrChkItemModProAction implements PromgrFormAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {

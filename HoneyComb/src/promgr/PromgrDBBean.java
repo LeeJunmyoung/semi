@@ -89,6 +89,8 @@ public class PromgrDBBean {
 		String[] mem_name_arr = null;
 		List chklist_view = null;
 		List chkitem_bean = null;
+		List file_view = null;
+		List comment_view = null;
 
 		List articleList = null;
 		String sql = "";
@@ -144,7 +146,6 @@ public class PromgrDBBean {
 					article.setPromgr_date(rs.getTimestamp("promgr_date"));
 					article.setMem_num(rs.getString("mem_num"));
 					article.setFile_num(rs.getString("file_num"));
-					article.setComment_num(rs.getString("comment_num"));
 					article.setCom_num(rs.getInt("com_num"));
 
 					// <num_name arr setting>
@@ -162,16 +163,16 @@ public class PromgrDBBean {
 					// mem_num -> mem_name
 					mem_name_arr = new String[item_list.length];
 
-					for (int j = 0; j < item_list.length; j++) {
+					for (int i = 0; i < item_list.length; i++) {
 
 						pstmt = conn.prepareStatement("select * from members where mem_num=?");
-						pstmt.setInt(1, item_list[j]);
+						pstmt.setInt(1, item_list[i]);
 
 						ResultSet rs_name = pstmt.executeQuery();
 
 						if (rs_name.next()) {
 
-							mem_name_arr[j] = rs_name.getString("name");
+							mem_name_arr[i] = rs_name.getString("name");
 
 						} // members item if (rs.next()) end
 
@@ -195,11 +196,11 @@ public class PromgrDBBean {
 						idx++;
 					} // while (stz.hasMoreTokens()) end
 
-					for (int j = 0; j < item_list.length; j++) {
+					for (int i = 0; i < item_list.length; i++) {
 						// chklist_view item setting
 
 						pstmt = conn.prepareStatement("select * from chklist_title where chklist_title_num=?");
-						pstmt.setInt(1, item_list[j]);
+						pstmt.setInt(1, item_list[i]);
 
 						ResultSet rs_chklist_title = pstmt.executeQuery();
 
@@ -245,6 +246,60 @@ public class PromgrDBBean {
 
 					article.setChklist_view(chklist_view);
 
+					// <file_view setting>
+
+					// <comment_view setting>
+					if (rs.getString("comment_num") != null) {
+						stz = new StringTokenizer(rs.getString("comment_num"), "/");
+					}
+
+					idx = 0;
+					item_list = new int[stz.countTokens()];
+
+					while (stz.hasMoreTokens()) {
+						item_list[idx] = Integer.parseInt(stz.nextToken());
+						idx++;
+					} // while (stz.hasMoreTokens()) end
+
+					comment_view = new ArrayList();
+					
+					for (int i = 0; i < item_list.length; i++) {
+						// chklist_view item setting
+
+						sql = "select * from promgr_comment where comment_num=? order by comment_num desc";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, item_list[i]);
+
+						ResultSet rs_comment = pstmt.executeQuery();
+
+						if (rs_comment.next()) {
+
+							CommentDataBean item = new CommentDataBean();
+
+							item.setComment_num(rs_comment.getInt("comment_num"));
+							item.setComment_content(rs_comment.getString("comment_content"));
+							item.setMem_num(rs_comment.getInt("mem_num"));
+							item.setPromgr_num(rs_comment.getInt("promgr_num"));
+							item.setCom_num(rs_comment.getInt("com_num"));
+
+							sql = "select * from members where mem_num=?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, rs_comment.getInt("mem_num"));
+
+							ResultSet rs_comment_mem_name = pstmt.executeQuery();
+
+							if (rs_comment_mem_name.next()) {
+								item.setMem_name(rs_comment_mem_name.getString("name"));
+							}
+
+							comment_view.add(item);
+
+						} // comment_view_item
+
+					} // comment_view
+
+					article.setComment_view(comment_view);
+
 					articleList.add(article);
 
 				} while (rs.next());
@@ -279,7 +334,7 @@ public class PromgrDBBean {
 
 	} // List getPromgrList(int endRow) end
 
-	public int insertPromgr(PromgrDataBean article) throws Exception {
+	public int AddPromgr(PromgrDataBean article) throws Exception {
 		// promgr 생성
 
 		Connection conn = null;
@@ -333,7 +388,7 @@ public class PromgrDBBean {
 
 		return count;
 
-	} // int insertPromgr(PromgrDataBean article) end
+	} // int addPromgr(PromgrDataBean article) end
 
 	public List getMemberDataList(String promgr_num, int my_mem_num) throws Exception {
 		// promgr의 mem_num의 정보를 가져와서 분리 후 참여자 정보 호출
@@ -691,7 +746,7 @@ public class PromgrDBBean {
 
 	} // int delMembers(int promgr_num, String[] del_mem_num) end
 
-	public int insertChkList(ChkListTitleDataBean article) throws Exception {
+	public int addChkList(ChkListDataBean article) throws Exception {
 		// checklist 생성
 
 		Connection conn = null;
@@ -785,9 +840,9 @@ public class PromgrDBBean {
 
 		return count;
 
-	} // int insertChkList(ChkListTitleDataBean article) end
+	} // int addChkList(ChkListTitleDataBean article) end
 
-	public int insertChkItem(int title_num, ChkListItemDataBean article) throws Exception {
+	public int addChkItem(int title_num, ChkItemDataBean article) throws Exception {
 		// checklist item 생성
 
 		Connection conn = null;
@@ -884,9 +939,9 @@ public class PromgrDBBean {
 
 		return count;
 
-	} // int insertChkItem(ChkListItemDataBean article) end
+	} // int addChkItem(ChkListItemDataBean article) end
 
-	public int deletePromgr(String promgr_num, int com_num) throws Exception {
+	public int delPromgr(String promgr_num, int com_num) throws Exception {
 		// promgr 삭제
 
 		Connection conn = null;
@@ -912,7 +967,11 @@ public class PromgrDBBean {
 
 			// file del
 
-			// comment del
+			sql = "delete from promgr_comment where promgr_num=? and com_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, promgr_num);
+			pstmt.setInt(2, com_num);
+			count = pstmt.executeUpdate();
 
 			sql = "delete from promgr where promgr_num=? and com_num=?";
 			pstmt = conn.prepareStatement(sql);
@@ -946,7 +1005,7 @@ public class PromgrDBBean {
 
 		return count;
 
-	} // int deletePromgr(String promgr_num, int com_num) end
+	} // int delPromgr(String promgr_num, int com_num) end
 
 	public int delChkItem(int promgr_num, int item_num) throws Exception {
 		// promgr의 item_num을 이용해 chklist_item 삭제
@@ -1149,7 +1208,7 @@ public class PromgrDBBean {
 		return count;
 
 	} // int delChkList(int promgr_num, int title_num) end
-	
+
 	public int modChkList(int title_num, String title_name) throws Exception {
 		// promgr의 title_num을 이용해 chklist_title_name 변경
 
@@ -1198,7 +1257,7 @@ public class PromgrDBBean {
 		return count;
 
 	} // int modChkList(int title_num, String title_name) end
-	
+
 	public int modChkItem(int item_num, String item_name) throws Exception {
 		// promgr의 title_num을 이용해 chklist_title_name 변경
 
@@ -1247,6 +1306,237 @@ public class PromgrDBBean {
 		return count;
 
 	} // int modChkItem(int item_num, String item_name) end
+
+	public int addComment(CommentDataBean article) throws Exception {
+		// checklist item 생성
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String comment_num_str = "";
+
+		int count = 0;
+		String sql = "";
+
+		try {
+
+			conn = getConnection();
+
+			// insert
+			sql = "insert into ";
+			sql += "promgr_comment(comment_num,comment_content,mem_num,promgr_num,com_num) ";
+			sql += "values(comment_num.NEXTVAL,?,?,?,?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, article.getComment_content());
+			pstmt.setInt(2, article.getMem_num());
+			pstmt.setInt(3, article.getPromgr_num());
+			pstmt.setInt(4, article.getCom_num());
+
+			count = pstmt.executeUpdate();
+
+			if (count > 0) {
+				// promgr comment_num update
+
+				// comment_num
+				sql = "select * from promgr_comment where mem_num=? order by comment_num desc";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, article.getMem_num());
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+
+					String new_comment_num = rs.getString("comment_num");
+
+					sql = "select * from promgr where promgr_num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, article.getPromgr_num());
+					rs = pstmt.executeQuery();
+
+					if (rs.next()) {
+
+						String comment_num = rs.getString("comment_num");
+
+						if (comment_num == null) {
+							comment_num_str = new_comment_num;
+						} else {
+							comment_num_str = comment_num + "/" + new_comment_num;
+						}
+
+						sql = "update promgr set comment_num=? where promgr_num=?";
+
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, comment_num_str);
+						pstmt.setInt(2, article.getPromgr_num());
+
+						count = pstmt.executeUpdate();
+
+					} // promgr comment_num
+
+				} // new_comment_num
+
+			} // insert comment_num
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return count;
+
+	} // int addComment(ChkItemDataBean article) end
 	
+	public int modComment(int comment_num, String comment_content) throws Exception {
+		// promgr의 comment_num을 이용해 comment_content 변경
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int count = 0;
+		String sql = "";
+
+		try {
+
+			conn = getConnection();
+
+			sql = "update promgr_comment set comment_content=? where comment_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, comment_content);
+			pstmt.setInt(2, comment_num);
+
+			count = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return count;
+
+	} // int modComment(int comment_num, String comment_name) end
+
+	public int delComment(int promgr_num, int comment_num) throws Exception {
+		// promgr의 comment_num을 이용해 comment 삭제
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String comment_num_str = "";
+
+		int count = 0;
+		String sql = "";
+
+		try {
+
+			conn = getConnection();
+
+			sql = "delete from promgr_comment where comment_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comment_num);
+			count = pstmt.executeUpdate();
+
+			if (count > 0) {
+				// promgr에서 comment_num 호출
+
+				pstmt = conn.prepareStatement("select * from promgr_comment where promgr_num=?");
+				pstmt.setInt(1, promgr_num);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+
+					do {
+
+						if (comment_num_str.equals("")) {
+							comment_num_str += rs.getInt("comment_num");
+						} else {
+							comment_num_str += "/" + rs.getString("comment_num");
+						}
+
+					} while (rs.next());
+
+					System.out.println("comment_num_str : " + comment_num_str);
+
+					sql = "update promgr set comment_num=? where promgr_num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, comment_num_str);
+					pstmt.setInt(2, promgr_num);
+
+					count = pstmt.executeUpdate();
+
+				} // promgr if (rs.next()) end
+
+			} // comment del
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
+		return count;
+
+	} // int delComment(int promgr_num, int comment_num) end
 
 } // public class PromgrDBBean end

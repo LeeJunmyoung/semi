@@ -12,9 +12,8 @@ public class PromgrDataBean {
 	private String mem_num; // 프로젝트 참여자 번호
 	private String[] mem_name_arr; // 프로젝트 참여자 이름
 	private String file_num; // 파일 번호
-	
 	private List chklist_view; // 진행 상황 체크
-	private String comment_num; // 댓글 번호
+	private List comment_view; // 댓글 번호
 	private int com_num; // 회사 번호
 
 	public int getPromgr_num() {
@@ -81,12 +80,12 @@ public class PromgrDataBean {
 		this.chklist_view = chklist_view;
 	}
 
-	public String getComment_num() {
-		return comment_num;
+	public List getComment_view() {
+		return comment_view;
 	}
 
-	public void setComment_num(String comment_num) {
-		this.comment_num = comment_num;
+	public void setComment_view(List comment_view) {
+		this.comment_view = comment_view;
 	}
 
 	public int getCom_num() {

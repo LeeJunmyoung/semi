@@ -10,13 +10,13 @@ public class PromgrChkListAddProAction implements PromgrFormAction {
 
 		request.setCharacterEncoding("utf-8");
 
-		ChkListTitleDataBean article = new ChkListTitleDataBean();
+		ChkListDataBean article = new ChkListDataBean();
 		article.setChklist_title_name(String.valueOf(request.getParameter("promgr_list_title")));
 		article.setPromgr_num(Integer.parseInt(request.getParameter("promgr_num")));
 		article.setCom_num((int) request.getSession().getAttribute("com_num"));
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();
-		int promgr_insert_count = dbPro.insertChkList(article);
+		int promgr_insert_count = dbPro.addChkList(article);
 
 		// 해당 view에서 사용할 속성
 		request.setAttribute("promgr_insert_count", promgr_insert_count);

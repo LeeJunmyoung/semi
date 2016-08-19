@@ -23,11 +23,11 @@
 <body>
 
 	<form method="post" name="chkItemModform"
-		action="/HoneyComb/promgr/PromgrChkListModItemPro.promgr?item_num=${item_num}"
+		action="/HoneyComb/promgr/PromgrChkItemModPro.promgr?item_num=${item_num}"
 		onsubmit="return writeSave()">
 
-		항목 명 : <input type="text" name="promgr_list_item" size="30"
-			maxlength="40" /> <input type="submit" value="추가" />
+		<input type="text" name="promgr_list_item" size="30" maxlength="40" placeholder="check item name" />
+		<input type="submit" value="Mod Item" />
 
 	</form>
 

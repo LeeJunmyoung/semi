@@ -1,6 +1,6 @@
 package promgr;
 
-public class ChkListTitleDataBean {
+public class ChkListDataBean {
 
 	private int chklist_title_num; // 진행 상황 체트 제목 번호
 	private String chklist_title_name; // 진행 상황 체크 제목 이름

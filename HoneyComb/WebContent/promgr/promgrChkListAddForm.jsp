@@ -26,7 +26,8 @@
 		action="/HoneyComb/promgr/PromgrChkListAddPro.promgr?promgr_num=${promgr_num}"
 		onsubmit="return writeSave()">
 
-		제목 : <input type="text" name="promgr_list_title" size="30" maxlength="40" /> <input type="submit" value="추가" />
+		<input type="text" name="promgr_list_title" size="30" maxlength="40" placeholder="check list name" />
+		<input type="submit" value="Add List" />
 		
 	</form>
 

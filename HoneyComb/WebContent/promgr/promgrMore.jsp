@@ -11,24 +11,52 @@
 
 	function HiddenInput(modbtn, delbtn, exit) { // 수정, 삭제
 
-		if(document.getElementById(exit).hidden == false ) {
-			document.getElementById(modbtn).hidden = true;
-			document.getElementById(delbtn).hidden = true;
-			document.getElementById(exit).hidden = true;
+		if(document.getElementById(exit).hidden == true ) {
+			document.getElementById(modbtn).hidden = false;
+			document.getElementById(delbtn).hidden = false;
+			document.getElementById(exit).hidden = false;
 		}
 	
 	}
 	
 	function AppearInput(modbtn, delbtn, exit) { // 수정, 삭제
 		
-		if(document.getElementById(exit).hidden == true ) {
-			document.getElementById(modbtn).hidden = false;
-			document.getElementById(delbtn).hidden = false;
-			document.getElementById(exit).hidden = false;
+		if(document.getElementById(exit).hidden == false ) {
+			document.getElementById(modbtn).hidden = true;
+			document.getElementById(delbtn).hidden = true;
+			document.getElementById(exit).hidden = true;
 		} 
 	
 	}
+	
+	function HiddenInputComment(session_mem_num, comment_mem_num, modbtn, delbtn, exit) { // 수정, 삭제
 
+		if(session_mem_num == comment_mem_num) {
+			
+			if(document.getElementById(exit).hidden == true ) {
+				document.getElementById(modbtn).hidden = false;
+				document.getElementById(delbtn).hidden = false;
+				document.getElementById(exit).hidden = false;
+			}
+			
+		}
+		
+	}
+	
+	function AppearInputComment(session_mem_num, comment_mem_num, modbtn, delbtn, exit) { // 수정, 삭제
+		
+		if(session_mem_num == comment_mem_num) {
+			
+			if(document.getElementById(exit).hidden == false ) {
+				document.getElementById(modbtn).hidden = true;
+				document.getElementById(delbtn).hidden = true;
+				document.getElementById(exit).hidden = true;
+			} 
+			
+		}
+	
+	}
+	
 	function addProject() { // project 생성
 		url = "/HoneyComb/promgr/promgrAddForm.promgr";
 		window
@@ -87,7 +115,7 @@
 	
 	function AddItem(promgr_num, title_num) { // checkitem 생성
 		
-		url = "/HoneyComb/promgr/PromgrChkListAddItemForm.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
+		url = "/HoneyComb/promgr/PromgrChkItemAddForm.promgr?promgr_num="+promgr_num+"&chklist_title="+title_num;
 		window
 				.open(
 						url,
@@ -97,7 +125,7 @@
 	
 	function ModItem(item_num) { // checkitem명 수정
 		
-		url = "/HoneyComb/promgr/PromgrChkListModItemForm.promgr?chklist_item="+item_num;
+		url = "/HoneyComb/promgr/PromgrChkItemModForm.promgr?chklist_item="+item_num;
 		window
 				.open(
 						url,
@@ -107,7 +135,7 @@
 	
 	function DelItem(promgr_num, item_num) { // checkitem 삭제
 		
-		url = "/HoneyComb/promgr/PromgrChkListDelItem.promgr?promgr_num="+promgr_num+"&chklist_item="+item_num;
+		url = "/HoneyComb/promgr/PromgrChkItemDel.promgr?promgr_num="+promgr_num+"&chklist_item="+item_num;
 		window
 				.open(
 						url,
@@ -120,6 +148,34 @@
 		window.open(url,
 				"post",
 				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function AddComment(promgr_num) { // comment 생성
+		url = "/HoneyComb/promgr/PromgrCommentAddForm.promgr?promgr_num="+promgr_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function ModComment(comment_num) { // comment 생성
+		url = "/HoneyComb/promgr/PromgrCommentModForm.promgr?comment_num="+comment_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function DelComment(promgr_num, comment_num) { // comment 삭제
+		
+		url = "/HoneyComb/promgr/PromgrCommentDel.promgr?promgr_num="+promgr_num+"&comment_num="+comment_num;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
 	
@@ -210,12 +266,12 @@ dl dd {
 							<div id="content">
 
 								<div id="content_view">
+								
 									<div>
 										참여자 :
 										<c:forEach var="mem_name" items="${article.mem_name_arr}">
-													${mem_name}
-												</c:forEach>
-
+											${mem_name}
+										</c:forEach>
 									</div>
 									<div>시작일 : ${article.promgr_date}</div>
 									<div>내용 : ${article.promgr_content}</div>
@@ -228,12 +284,12 @@ dl dd {
 												<div>
 												
 													<label id="chkList_lab_${view.title_num}"
-														ondblclick="HiddenInput('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')">${view.title_name}(${view.title_num})</label>
+														ondblclick="HiddenInput('chkList_modBtn_${view.title_num}', 'chkList_delBtn_${view.title_num}', 'exit_list_${view.title_num}')">${view.title_name} (${view.title_num})</label>
 													
-													<input type="button" id="chkList_modBtn_${view.title_num}" value="modList" 
+													<input type="button" id="chkList_modBtn_${view.title_num}" value="mod" 
 														onclick="ModChkList(${view.title_num})" hidden="true">
 													
-													<input type="button" id="chkList_delBtn_${view.title_num}" value="delList"
+													<input type="button" id="chkList_delBtn_${view.title_num}" value="del"
 														onclick="DelChkList(${article.promgr_num}, ${view.title_num})" hidden="true">
 													
 													<input type="button" id="exit_list_${view.title_num}" value="X"
@@ -251,12 +307,12 @@ dl dd {
 															<input type="checkbox" name="chkitem" value="${bean.item_num}" />
 															
 															<label id="chkItem_lab_${bean.item_num}"
-																ondblclick="HiddenInput('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')">${bean.item_name}(${bean.item_num})</label>
+																ondblclick="HiddenInput('chkItem_modBtn_${bean.item_num}', 'chkItem_delBtn_${bean.item_num}', 'exit_item_${bean.item_num}')">${bean.item_name} (${bean.item_num})</label>
 															
-															<input type="button" id="chkItem_modBtn_${bean.item_num}" value="modItem" 
-																onclick="ModChkItem(${bean.item_num})" hidden="true" />
+															<input type="button" id="chkItem_modBtn_${bean.item_num}" value="mod" 
+																onclick="ModItem(${bean.item_num})" hidden="true" />
 															
-															<input type="button" id="chkItem_delBtn_${bean.item_num}" value="delItem"
+															<input type="button" id="chkItem_delBtn_${bean.item_num}" value="del"
 																onclick="DelItem(${article.promgr_num}, ${bean.item_num})" hidden="true" />
 															
 															<input type="button" id="exit_item_${bean.item_num}" value="X"
@@ -288,7 +344,33 @@ dl dd {
 								
 							</div>
 
-							<div id="content_comment">[comment]</div>
+							<div id="content_comment" align="left">
+							
+								<c:forEach var="item" items="${article.comment_view}">
+								
+									<div id="${item.comment_num}">
+									
+										<label id="comment_lab_${item.comment_num}"
+											ondblclick="HiddenInputComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')">
+											(${item.comment_num}) ${item.mem_name} : ${item.comment_content}
+										</label>
+																	
+										<input type="button" id="comment_modBtn_${item.comment_num}" value="mod" 
+											onclick="ModComment(${item.comment_num})" hidden="true" />
+														
+										<input type="button" id="commnet_delBtn_${item.comment_num}" value="del"
+											onclick="DelComment(${article.promgr_num}, ${item.comment_num})" hidden="true" />
+																	
+										<input type="button" id="exit_comment_${item.comment_num}" value="X"
+											onclick="AppearInputComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')" hidden="true">
+																
+									</div>
+								
+								</c:forEach>
+							
+								<input type="button" value="add comment" onclick="AddComment(${article.promgr_num})" />
+
+							</div>
 
 						</dd>
 

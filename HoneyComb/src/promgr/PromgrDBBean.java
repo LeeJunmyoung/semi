@@ -71,7 +71,7 @@ public class PromgrDBBean {
 				}
 
 		}
-
+		
 		return count;
 
 	} // int getPromgrCount(int com_num, int mem_num) end
@@ -102,9 +102,9 @@ public class PromgrDBBean {
 
 			if (start == -1) { // main 화면에서 보여지는 list sql
 
-				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,r from (";
-				sql += "select  promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,rownum r from (";
-				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num from promgr ";
+				sql = "select promgr_num,promgr_name,promgr_content,promgr_date,promgr_ing,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,promgr_ing,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num,rownum r from (";
+				sql += "select promgr_num,promgr_name,promgr_content,promgr_date,promgr_ing,mem_num,file_num,chklist_title_num,chklist_item_num,comment_num,com_num from promgr ";
 				sql += "where com_num=? and mem_num like ? order by promgr_num desc)) ";
 				sql += "where r<=?";
 

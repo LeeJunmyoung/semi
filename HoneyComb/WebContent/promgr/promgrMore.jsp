@@ -7,7 +7,12 @@
 <html>
 <head>
 <title>promgr more</title>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script>
 
 	function HiddenInput(modbtn, delbtn, exit) { // 수정, 삭제
@@ -59,7 +64,7 @@
 	}
 	
 	function addProject() { // project 생성
-		url = "/HoneyComb/promgr/promgrAddForm.promgr";
+		url = "/HoneyComb/promgr/promgrAddForm.promgr?";
 		window
 				.open(
 						url,
@@ -87,7 +92,7 @@
 	}
 	
 	function AddChkList(promgr_num) { // checklist 생성
-		url = "/HoneyComb/promgr/PromgrChkListAddForm.promgr?promgr_num="+promgr_num;
+		url = "/HoneyComb/promgr/promgrChkListAddForm.promgr?promgr_num="+promgr_num;
 		window
 				.open(
 						url,
@@ -97,7 +102,7 @@
 	
 	function ModChkList(list_num) { // checklist명 수정
 		
-		url = "/HoneyComb/promgr/PromgrChkListModForm.promgr?list_num="+list_num;
+		url = "/HoneyComb/promgr/promgrChkListModForm.promgr?list_num="+list_num;
 		window
 				.open(
 						url,
@@ -106,7 +111,7 @@
 	}
 	
 	function DelChkList(promgr_num, list_num) { // checklist 삭제
-		url = "/HoneyComb/promgr/PromgrChkListDel.promgr?promgr_num="+promgr_num+"&list_num="+list_num;
+		url = "/HoneyComb/promgr/promgrChkListDel.promgr?promgr_num="+promgr_num+"&list_num="+list_num;
 		window
 				.open(
 						url,
@@ -116,7 +121,7 @@
 	
 	function AddItem(promgr_num, list_num) { // checkitem 생성
 		
-		url = "/HoneyComb/promgr/PromgrChkItemAddForm.promgr?promgr_num="+promgr_num+"&list_num="+list_num;
+		url = "/HoneyComb/promgr/promgrChkItemAddForm.promgr?promgr_num="+promgr_num+"&list_num="+list_num;
 		window
 				.open(
 						url,
@@ -126,7 +131,7 @@
 	
 	function ModItem(item_num) { // checkitem명 수정
 		
-		url = "/HoneyComb/promgr/PromgrChkItemModForm.promgr?item_num="+item_num;
+		url = "/HoneyComb/promgr/promgrChkItemModForm.promgr?item_num="+item_num;
 		window
 				.open(
 						url,
@@ -136,7 +141,7 @@
 	
 	function DelItem(promgr_num, item_num) { // checkitem 삭제
 		
-		url = "/HoneyComb/promgr/PromgrChkItemDel.promgr?promgr_num="+promgr_num+"&item_num="+item_num;
+		url = "/HoneyComb/promgr/promgrChkItemDel.promgr?promgr_num="+promgr_num+"&item_num="+item_num;
 		window
 				.open(
 						url,
@@ -152,7 +157,7 @@
 	}
 	
 	function AddComment(promgr_num) { // comment 생성
-		url = "/HoneyComb/promgr/PromgrCommentAddForm.promgr?promgr_num="+promgr_num;
+		url = "/HoneyComb/promgr/promgrCommentAddForm.promgr?promgr_num="+promgr_num;
 		window
 				.open(
 						url,
@@ -161,7 +166,7 @@
 	}
 	
 	function ModComment(comment_num) { // comment 생성
-		url = "/HoneyComb/promgr/PromgrCommentModForm.promgr?comment_num="+comment_num;
+		url = "/HoneyComb/promgr/promgrCommentModForm.promgr?comment_num="+comment_num;
 		window
 				.open(
 						url,
@@ -171,7 +176,7 @@
 	
 	function DelComment(promgr_num, comment_num) { // comment 삭제
 		
-		url = "/HoneyComb/promgr/PromgrCommentDel.promgr?promgr_num="+promgr_num+"&comment_num="+comment_num;
+		url = "/HoneyComb/promgr/promgrCommentDel.promgr?promgr_num="+promgr_num+"&comment_num="+comment_num;
 		window
 				.open(
 						url,
@@ -183,7 +188,7 @@
 		
 		if(document.getElementById(item_num).checked == true) {
 			
-			url = "/HoneyComb/promgr/PromgrChkItemChangeChecked.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num+"&checked=1";
+			url = "/HoneyComb/promgr/promgrChkItemChangeChecked.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num+"&checked=1";
 			window
 					.open(
 							url,
@@ -194,7 +199,7 @@
 		
 		if(document.getElementById(item_num).checked == false) {
 			
-			url = "/HoneyComb/promgr/PromgrChkItemChangeChecked.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num+"&checked=0";
+			url = "/HoneyComb/promgr/promgrChkItemChangeChecked.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num+"&checked=0";
 			window
 					.open(
 							url,
@@ -292,7 +297,15 @@ dl dd {
 
 								<div id="content_view">
 								
-									<div>[promgr 진행상황 그래프] : ${article.promgr_ing}</div>
+									<div id="promgr_ing">
+									
+										<div class="progress">
+	    									<div class="progress-bar" role="progressbar" aria-valuenow="${article.promgr_ing}" aria-valuemin="0" aria-valuemax="100" style="width:${article.promgr_ing}%">
+	     										 ${article.promgr_ing}%
+										    </div>
+										</div>
+									
+									</div>
 									<div>
 										참여자 :
 										<c:forEach var="mem_name" items="${article.mem_name_arr}">
@@ -323,7 +336,15 @@ dl dd {
 												
 												</div>
 
-												<div>[chklist 진행상황 그래프] : ${view.list_ing}</div>
+												<div id="chklist_ing">
+												
+													<div class="progress">
+				    									<div class="progress-bar" role="progressbar" aria-valuenow="${view.list_ing}" aria-valuemin="0" aria-valuemax="100" style="width:${view.list_ing}%">
+				     										 ${view.list_ing}%
+													    </div>
+													</div>
+												
+												</div>
 
 												<form method="post" name="chkItemform" >
 
@@ -359,7 +380,7 @@ dl dd {
 
 												<input type="button" value="add item"
 													onclick="AddItem(${article.promgr_num}, ${view.list_num})" />
-
+		
 											</div>
 
 										</c:forEach>

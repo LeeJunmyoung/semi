@@ -19,7 +19,7 @@ public class PromgrAddProAction implements PromgrFormAction {
 		article.setPromgr_name(request.getParameter("promgr_title"));
 		article.setPromgr_content(request.getParameter("promgr_content"));
 		article.setPromgr_date(new Timestamp(System.currentTimeMillis()));
-		article.setMem_num((String) request.getSession().getAttribute("mem_num"));
+		article.setMem_num(String.valueOf(request.getSession().getAttribute("mem_num")));
 		article.setCom_num((int) request.getSession().getAttribute("com_num"));
 
 		PromgrDBBean dbPro = PromgrDBBean.getInstance();

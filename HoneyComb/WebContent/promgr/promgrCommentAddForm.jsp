@@ -24,7 +24,7 @@
 <body>
 
 	<form method="post" name="commentAddform" 
-		action="/HoneyComb/promgr/PromgrCommentAddPro.promgr?promgr_num=${promgr_num}"
+		action="/HoneyComb/promgr/promgrCommentAddPro.promgr?promgr_num=${promgr_num}"
 		onsubmit="return writeSave()">
 	
 		<textarea name="promgr_comment" rows="15" cols="30" placeholder="comment"></textarea> <br>

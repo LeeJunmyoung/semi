@@ -23,7 +23,7 @@
 <body>
 
 	<form method="post" name="chkItemModform"
-		action="/HoneyComb/promgr/PromgrChkItemModPro.promgr?item_num=${item_num}"
+		action="/HoneyComb/promgr/promgrChkItemModPro.promgr?item_num=${item_num}"
 		onsubmit="return writeSave()">
 
 		<input type="text" name="promgr_list_item" size="30" maxlength="40" placeholder="check item name" />

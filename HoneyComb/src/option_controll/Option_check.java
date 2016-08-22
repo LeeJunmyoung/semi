@@ -21,7 +21,7 @@ public class Option_check implements Option_CommandAction{
 
 		request.setAttribute("memberlist", memberlist);
 
-		return "/Option_user/option_check.jsp";
+		return "/page_layout/Option/Member_List/Option_home_Member_List.jsp";
 	}
 	
 	}

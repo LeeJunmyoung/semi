@@ -24,7 +24,7 @@ public class Option_Mypage implements Option_CommandAction {
 		
 		request.setAttribute("my_list", list);
 		
-		return "/Option_user/option_mypage.jsp";
+		return "/page_layout/Option/myPage/Option_home_myPage.jsp";
 	}
 
 }

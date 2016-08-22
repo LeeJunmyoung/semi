@@ -16,34 +16,63 @@
    
    
    
-   <definition name="notice" template="/page_layout/notice/notice_layout.jsp" extends="home">
+   <definition name="notice" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/notice/notice_body.jsp" />
 
    </definition> 
    
-     <definition name="calendar" template="/page_layout/Calendar/Calendar_layout.jsp" extends="home">
+     <definition name="calendar" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/Calendar/Calendar_body.jsp" />
 
    </definition> 
    
-    <definition name="Option" template="/page_layout/Option/Option_layout.jsp" extends="home">
+    <definition name="Option" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/Option/Option_body.jsp" />
-
    </definition> 
    
-   <definition name="Chat" template="/page_layout/Chat/Chat_layout.jsp" extends="home">
+    <definition name="Option_Member_List" template="/page_layout/layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Option/Member_List/Option_body_Member_List.jsp" />
+   </definition> 
+   
+       <definition name="Option_Accept_member" template="/page_layout/layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Option/Accept_member/Option_body_Accept_member.jsp" />
+   </definition> 
+   
+    <definition name="Option_myPage" template="/page_layout/layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Option/myPage/Option_body_myPage.jsp" />
+   </definition>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <definition name="Chat" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/Chat/Chat_body.jsp" />
 
    </definition> 
    
-     <definition name="Cloud" template="/page_layout/Cloud/Cloud_layout.jsp" extends="home">
+   
+   <definition name="Select_chat" template="/page_layout/layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Chat/Select_chat/Chat_body_Select_chat.jsp" />
+
+   </definition> 
+   
+   
+   
+   
+   
+   
+     <definition name="Cloud" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/Cloud/Cloud_body.jsp" />
 
    </definition> 
    
-    <definition name="ProMGR" template="/page_layout/ProMGR/ProMGR_layout.jsp" extends="home">
+    <definition name="ProMGR" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/ProMGR/ProMGR_body.jsp" />
-
    </definition> 
    
 

@@ -123,7 +123,7 @@ public class Chat_Select_OneNone implements CommandAction_Chatting {
 		
 		
 		
-		return "/Chatting/Chat_use.jsp";
+		return "/page_layout/Chat/Select_chat/Chat_home_Select_chat.jsp";
 	}
 
 }

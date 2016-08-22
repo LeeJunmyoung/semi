@@ -21,7 +21,7 @@ public class Option_View_Temp_Member implements Option_CommandAction {
 		
 		request.setAttribute("temp_member", list);
 		
-		return "/Option_user/company_accept_member.jsp";
+		return "/page_layout/Option/Accept_member/Option_home_Accept_member.jsp";
 	}
 
 }

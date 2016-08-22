@@ -55,7 +55,7 @@ public class PromgrMoreAction implements PromgrFormAction {
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("my_mem_num", my_mem_num);
 
-		return "/promgr/promgrMore.jsp";
+		return "/page_layout/ProMGR/ProMGR_home.jsp";
 
 	} // String requestPro end
 

@@ -46,7 +46,9 @@
 	<div id="main_notice">
 		<jsp:include page="/notice/noticeMain.jsp"></jsp:include>
 	</div>
-	<div id="main_project_manage"></div>
+	<div id="main_project_manage">
+	<jsp:include page="/promgr/promgrMain.jsp"></jsp:include>
+	</div>
 	<div id="main_cal">
 		<jsp:include page="/Calendar/cal_user_main.jsp"></jsp:include>
 	</div>

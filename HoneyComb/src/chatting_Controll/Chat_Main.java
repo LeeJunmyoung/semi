@@ -25,7 +25,7 @@ public class Chat_Main implements CommandAction_Chatting{
 		
 		
 		
-		return "/Chatting/Chat_main.jsp";
+		return "/page_layout/Chat/Chat_home.jsp";
 	}
 
 }

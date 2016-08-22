@@ -15,7 +15,7 @@
 
 </head>
 <body>
-
+<input type = "button" value="+" onclick="location.href='/HoneyComb/promgr/promgrMore.promgr'">
 <div align="center">
 	<b>프로젝트 목록 (전체 프로젝트 : ${promgr_count})</b>
 </div>
@@ -26,7 +26,7 @@
 
 	<c:if test="${promgr_count > 0}">
 	
-		<c:forEach var="article" items="${articleList}">
+		<c:forEach var="article" items="${ pro_articleList}">
 			
 			<div id="promgr_${article.promgr_num}">
 			

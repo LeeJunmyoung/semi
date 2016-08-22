@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cal_Controll.Cal_DBBean;
 import notice.NoticeDBBean;
+import promgr.PromgrDBBean;
 
 public class Home_Frame implements Layout_CommandAction{
 
@@ -81,6 +82,31 @@ public class Home_Frame implements Layout_CommandAction{
 		/*일정 받는 부분 */
 		
 		
+		
+		int pro_rowSize = 5; // 한 페이지의 글 갯수
+		int promgr_count = 0; // 전체 글 갯수
+		int pro_com_num = (int) request.getSession().getAttribute("com_num");
+		int pro_mem_num = (int) request.getSession().getAttribute("mem_num");
+
+		List pro_articleList = null;
+		PromgrDBBean pro_dbPro = PromgrDBBean.getInstance(); // DB처리
+		promgr_count =  pro_dbPro.getPromgrCount(com_num, mem_num); // row 갯수 호출
+
+		if (promgr_count > 0) {
+
+			// 현재 페이지에 해당하는 글 목록
+			articleList =  pro_dbPro.getPromgrList(com_num, mem_num, -1, rowSize);
+
+		} else {
+			articleList = Collections.EMPTY_LIST;
+		}
+
+		// 해당 view에서 사용할 속성
+		request.setAttribute("promgr_count", promgr_count);
+		request.setAttribute(" pro_articleList",  pro_articleList);
+
+		/* 프로젝트 매니저 받는 부분
+		*/
 		return "/page_layout/home.jsp";
 	}
 

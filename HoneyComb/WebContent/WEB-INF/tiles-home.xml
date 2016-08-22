@@ -25,5 +25,26 @@
      <put-attribute name="body" value="/page_layout/Calendar/Calendar_body.jsp" />
 
    </definition> 
+   
+    <definition name="Option" template="/page_layout/Option/Option_layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Option/Option_body.jsp" />
+
+   </definition> 
+   
+   <definition name="Chat" template="/page_layout/Chat/Chat_layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Chat/Chat_body.jsp" />
+
+   </definition> 
+   
+     <definition name="Cloud" template="/page_layout/Cloud/Cloud_layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/Cloud/Cloud_body.jsp" />
+
+   </definition> 
+   
+    <definition name="ProMGR" template="/page_layout/ProMGR/ProMGR_layout.jsp" extends="home">
+     <put-attribute name="body" value="/page_layout/ProMGR/ProMGR_body.jsp" />
+
+   </definition> 
+   
 
 </tiles-definitions>

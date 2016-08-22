@@ -38,7 +38,7 @@ public class CloudForm implements CommandActionCloud{
 		request.setAttribute("cloudList", cloudList);
 				
 		
-		return "/cloudview/cloudForm.jsp?folder="+folder;
+		return "/page_layout/Cloud/Cloud_home.jsp?folder="+folder;
 	}
 
 }

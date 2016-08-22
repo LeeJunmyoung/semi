@@ -4,7 +4,7 @@
 <html>
 <body>
 
-	<div align="left">HONEYCOMB</div>
+	<div align="left"><a href="/HoneyComb/index.jsp">HONEYCOMB</a></div>
 
 	<div align="right">${ sessionScope.com_name }</div>
 

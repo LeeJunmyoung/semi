@@ -45,53 +45,99 @@ table {
 
 /* page layout */
 #page_container {
-	width: 80%;
-	margin: 2% auto;
-	padding: 2%;
-	border: 1px solid #bcbcbc;
+	background: #e9ebee;
+	
 }
 
 #page_header {
-	padding: 2%;
-	margin-bottom: 2%;
-	border: 1px solid #bcbcbc;
+	position:static;
+	height : 15%;
+	background: #344d91;
+	
+}
+#header_wrapper{
+	width: 500px;
+	position: relative;
+	left: 300px;
+	z-index: 3;
+
 }
 
+#logo{
+	display: inline;	
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+#header_honey{
+	
+	
+	display:inline;
+	font-size:38pt;
+	color: #fff;
+    height:100px;
+	
+		vertical-align: middle;
+	
+}
+
+#page_center_contents{
+position:relative;
+left:300px;
+ width: 70%;
+ height: 800px;
+ display: block;
+}
+
+
 #page_content {
-	width: 75%;
+	position:relative;
+	width: 70%;
+	height:1200px;
 	padding: 2%;
-	margin-bottom: 2%;
-	float: right;
+
+	float: left;
 	border: 1px solid #bcbcbc;
+	background: #fff;
 }
 
 #page_sidebar {
-	width: 15%;
+	position:relative;
+	width: 20%;
+	height: 1200px;
 	padding: 2%;
-	margin-bottom: 2%;
+
 	float: left;
 	border: 1px solid #bcbcbc;
+	background: #fff;
 }
 
 #page_footer {
+	position:relative;
+	left:300px;
 	clear: both;
+	width:63%;
+
 	padding: 2%;
-	border: 1px solid #bcbcbc;
+	border-top: 1px solid #000;
+	
+	
 }
 
 #main_notice{
 	border: 1px solid;
-	height : 600px;
+	height : 200px;
 	margin : 5px;
 }
 #main_project_manage{
 	border: 1px solid;
-	height : 600px;
+	height : 300px;
 	margin : 5px;
 }
 #main_cal{
 	border: 1px solid;
-	height : 700px;
+	height : 632px;
 	margin : 5px;
 }
 
@@ -99,5 +145,28 @@ table {
 	border: 1px solid black;
 	margin: auto;
 
+	
+}
+
+#menu_div{
+	
+	width:148px;
+	height:1100px;
+	margin: auto;
+	
+	
+}
+#my_profile{
+	margin: auto;
+	text-align: center;
+	
+	
+}
+
+#menu_link{
+	
+	font-size: 20pt;
+	
+	
 	
 }

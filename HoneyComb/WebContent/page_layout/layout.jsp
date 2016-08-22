@@ -18,7 +18,9 @@
 			<tiles:insertAttribute name="header" />
 
 		</div>
-
+		
+	<div id ="page_center_contents">
+	
 		<div id="page_sidebar">
 
 			<tiles:insertAttribute name="menu" />
@@ -30,7 +32,9 @@
 			<tiles:insertAttribute name="body" />
 			
 		</div>
-
+	</div>
+	
+	
 		<div id="page_footer">
 
 			<tiles:insertAttribute name="footer" />

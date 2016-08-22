@@ -17,22 +17,23 @@
 	}
 </script>
 <body>
-
-		<h2><img src="${ sessionScope.profile_img }"  width="150" height="153"
+<div id ="menu_div">
+		<h2 ><img src="${ sessionScope.profile_img }"  width="150" height="153"
 					onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
-		<h2>${ sessionScope.name }</h2>
+		<h2 id="my_profile">${ sessionScope.name }</h2>
 		
 
 	<ul>
-
+<br>
+<br>
 		<tiles:importAttribute name="userMenus" />
 		<c:forEach var="menu" items="${userMenus}">
-			<li><a href="${menu.link}">${menu.name}</a></li>
+			<li><a id="menu_link" href="${menu.link}">${menu.name}</a></li>
 		</c:forEach>
-		<li><a href="#logout" onclick="logout();return false;" onkeypress="this.onclick;">log out</a></li>
+		<li><a id="menu_link"  href="#logout" onclick="logout();return false;" onkeypress="this.onclick;">LOG OUT</a></li>
 		<!-- <a href="/HoneyComb/Option_user/logout_page.jsp"> -->
 	
 	</ul>
-
+</div>
 </body>
 </html>

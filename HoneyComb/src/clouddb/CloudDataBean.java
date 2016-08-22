@@ -12,6 +12,7 @@ public class CloudDataBean {
 	private Date file_date;
 	private int com_num;
 	private String folder;
+	private int mem_num;
 	
 	
 	
@@ -65,6 +66,12 @@ public class CloudDataBean {
 			this.folder = "";
 		}else		
 		this.folder = folder;
+	}
+	public int getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
 	}
 	
 	

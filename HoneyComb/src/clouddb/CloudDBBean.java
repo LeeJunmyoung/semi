@@ -84,6 +84,7 @@ public class CloudDBBean {
 		cloud.setFile_size(rs.getInt(5));
 		cloud.setFile_date(rs.getDate(6));
 		cloud.setFolder(rs.getString(8));
+		cloud.setMem_num(rs.getInt(9));
 		
 		return cloud;
 		
@@ -105,7 +106,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 				//프로젝트 명 가지고 오기
 				progr_name = getProgrName(promgr_num);
 				createFolder(cloudDB, progr_name);
-				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,?)";//마지막에 들어갈 promgr_num
+				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,?,?)";//마지막에 들어갈 promgr_num
 				String progrfolder = "*"+progr_name+"|";//프로젝트명의 가상파일 생성
 				cloudDB.setFolder(progrfolder);
 				file = checkFolder(cloudDB);
@@ -125,7 +126,8 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 			pstmt.setString(3, cloudDB.getFile_uploader());
 			pstmt.setString(4, String.valueOf(cloudDB.getFile_size()));
 			pstmt.setInt(5, cloudDB.getCom_num());
-			pstmt.setString(6, cloudDB.getFolder());			
+			pstmt.setString(6, cloudDB.getFolder());
+			pstmt.setInt(8, cloudDB.getMem_num());
 			pstmt.executeUpdate();
 			conn.commit();
 			if(promgr_num != 0){//프로젝트명 업데이트
@@ -159,7 +161,7 @@ public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLExc
 		String file_path = null;//저장할 파일경로
 		String file_name = null;//파일명
 		conn = getConnection();			
-		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
+		pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'',?)");
 		if(progr_name!=null){
 			progr_name = "*"+progr_name;
 			file_name = cloudPro.getFile_name();
@@ -171,11 +173,12 @@ public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLExc
 			int i = checkFolder(cloudPro);//그 폴더가 중복되었을 경우
 			
 			if (i != 0){//그 폴더가 중복이 아닐경우
-				pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
+				pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'',?)");
 				pstmt.setString(1, cloudPro.getFile_name());
 				pstmt.setString(2,cloudPro.getFile_uploader());
 				pstmt.setInt(3,cloudPro.getCom_num());
 				pstmt.setString(4,cloudPro.getFolder());
+				pstmt.setInt(5, cloudPro.getMem_num());
 				pstmt.executeUpdate();
 				conn.commit();
 			}
@@ -186,6 +189,7 @@ public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLExc
 			pstmt.setString(2,cloudPro.getFile_uploader());
 			pstmt.setInt(3,cloudPro.getCom_num());
 			pstmt.setString(4,cloudPro.getFolder());
+			pstmt.setInt(5, cloudPro.getMem_num());
 			pstmt.executeUpdate();
 			conn.commit();
 		}

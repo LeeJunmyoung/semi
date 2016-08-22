@@ -90,20 +90,20 @@ public class Home_Frame implements Layout_CommandAction{
 
 		List pro_articleList = null;
 		PromgrDBBean pro_dbPro = PromgrDBBean.getInstance(); // DB처리
-		promgr_count =  pro_dbPro.getPromgrCount(com_num, mem_num); // row 갯수 호출
+		promgr_count =  pro_dbPro.getPromgrCount(pro_com_num, pro_mem_num); // row 갯수 호출
 
 		if (promgr_count > 0) {
 
 			// 현재 페이지에 해당하는 글 목록
-			articleList =  pro_dbPro.getPromgrList(com_num, mem_num, -1, rowSize);
+			pro_articleList =  pro_dbPro.getPromgrList(pro_com_num, pro_mem_num, -1, pro_rowSize);
 
 		} else {
-			articleList = Collections.EMPTY_LIST;
+			pro_articleList = Collections.EMPTY_LIST;
 		}
 
 		// 해당 view에서 사용할 속성
 		request.setAttribute("promgr_count", promgr_count);
-		request.setAttribute(" pro_articleList",  pro_articleList);
+		request.setAttribute("pro_articleList",  pro_articleList);
 
 		/* 프로젝트 매니저 받는 부분
 		*/

@@ -75,5 +75,11 @@
      <put-attribute name="body" value="/page_layout/ProMGR/ProMGR_body.jsp" />
    </definition> 
    
+   
+   
+   
+   
+   
+   
 
 </tiles-definitions>

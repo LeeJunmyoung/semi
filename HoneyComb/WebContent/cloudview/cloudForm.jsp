@@ -43,21 +43,24 @@ $(document).bind("contextmenu", function(event) {
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
     "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
     "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
+    "<a href="+"javascript:renameItem('"+ $(checkboxck).data('file_num')+"')><p>이름변경</p></a>"+
     "<p>공유</p>"+    
     +"</div>")
-    .appendTo("div.cloudForm")
+    .appendTo("body")
     .css({top: event.pageY + "px", left: event.pageX + "px"});
-	}
+	}else{
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
 	    "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
 	    "<a href='javascript:download()' id='fileonly'><p >다운로드</p></a>"+
 	    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
 	    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
+	    "<a href="+"javascript:renameItem('"+ $(checkboxck).data('file_num')+"')><p>이름변경</p></a>"+
 	    "<p>공유</p>"+    
 	    +"</div>")
-	    .appendTo("div.cloudForm")
+	    .appendTo("body")
 	    .css({top: event.pageY + "px", left: event.pageX + "px"});
-    
+};
+	
     
 	
         
@@ -101,7 +104,7 @@ text-align: center;}
 </style>
 </head>
 <body>
-
+mem_num = ${mem_num}
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')">
 	<input type="button" name="download" value="다운로드" onclick="download()">
 	<input type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')">
@@ -114,10 +117,11 @@ text-align: center;}
 		<c:forEach items="${cloudList}" var="cloudlist">
 				<li style="display: inline;">
 					<div style="width: 150px; display: inline-block;"id="test">
-					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}">
+					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
+						mem_num = ${cloudlist.mem_num}
 
 						
 						<div class="file"><img src="../images/file.png" width="150px"></div>

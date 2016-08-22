@@ -84,7 +84,7 @@ public class CloudDBBean {
 		cloud.setFile_size(rs.getInt(5));
 		cloud.setFile_date(rs.getDate(6));
 		cloud.setFolder(rs.getString(8));
-		cloud.setMem_num(rs.getInt(9));
+		cloud.setMem_num(rs.getInt(10));
 		
 		return cloud;
 		
@@ -114,10 +114,12 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 				pstmt.setInt(7, promgr_num);
 				//프로젝트 DB 에 파일이름 업데이트
 				updatePromgr(cloudDB, promgr_num);
+				pstmt.setInt(8, cloudDB.getMem_num());
 				
 			}else{
-				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,null)";//promgr_num이  없기 때문에 null
+				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,null,?)";//promgr_num이  없기 때문에 null
 				pstmt =conn.prepareStatement(sql);
+				pstmt.setInt(7, cloudDB.getMem_num());
 			}
 			
 			
@@ -127,7 +129,6 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 			pstmt.setString(4, String.valueOf(cloudDB.getFile_size()));
 			pstmt.setInt(5, cloudDB.getCom_num());
 			pstmt.setString(6, cloudDB.getFolder());
-			pstmt.setInt(8, cloudDB.getMem_num());
 			pstmt.executeUpdate();
 			conn.commit();
 			if(promgr_num != 0){//프로젝트명 업데이트

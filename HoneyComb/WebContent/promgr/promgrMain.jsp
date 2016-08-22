@@ -25,7 +25,7 @@
 		</c:if>
 
 	<c:if test="${promgr_count > 0}">
-	???
+	
 		<c:forEach var="article" items="${ pro_articleList}">
 			
 			<div id="promgr_${article.promgr_num}">

@@ -4,10 +4,3 @@
 
 
 <tiles:insertDefinition name="home" />
-<%-- <c:if test="${notice_insert_count==1}">
-	insert 후 main reflash, write 화면 종료
-		<script>
-			window.opener.top.location.href="/HoneyComb/notice/noticeMain.notice"
-		</script>
-		
-	</c:if> --%>

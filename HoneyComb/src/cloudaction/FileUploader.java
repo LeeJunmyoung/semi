@@ -28,7 +28,7 @@ public class FileUploader implements CommandActionCloud{
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
 			//저장 기본경로
-			String savefilepath = "E://cloud//";
+			String savefilepath = "C://Users//mia//Downloads";
 			HttpSession session = request.getSession();
 						
 			

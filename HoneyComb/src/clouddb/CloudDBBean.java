@@ -112,7 +112,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 				pstmt =conn.prepareStatement(sql);
 				pstmt.setInt(7, promgr_num);
 				//프로젝트 DB 에 파일이름 업데이트
-				updateProgr(cloudDB, progr_name);
+				updatePromgr(cloudDB, promgr_num);
 				
 			}else{
 				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,null)";//promgr_num이  없기 때문에 null
@@ -129,7 +129,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 			pstmt.executeUpdate();
 			conn.commit();
 			if(promgr_num != 0){//프로젝트명 업데이트
-				updateProgr(cloudDB, progr_name);
+				updatePromgr(cloudDB, promgr_num);
 			}
 			if (file == 0 ){
 				return 0;//중복이면 0을 리턴
@@ -385,7 +385,7 @@ private String getProgrName(int promgr_num)throws SQLException{
 	}return promgr_name;
 }
 
-private void updateProgr(CloudDataBean cloudDB, String promgr_name)throws SQLException{
+private void updatePromgr(CloudDataBean cloudDB, int promgr_num)throws SQLException{
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	ResultSet rs = null;
@@ -398,20 +398,41 @@ private void updateProgr(CloudDataBean cloudDB, String promgr_name)throws SQLExc
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, file_Path);
 		rs = pstmt.executeQuery();
-		rs.next();
-		file_num = rs.getInt("file_num");
-		System.out.println("파일넘 받아올 수 있는지 없는지 보자"+file_num);
+		
+		if(rs.next()) {
+			file_num = rs.getInt("file_num");
+			System.out.println("파일넘 받아올 수 있는지 없는지 보자"+file_num);
+		}
+		
 		//promgr에 업데이트
 		int com_num = cloudDB.getCom_num();
-		sql = "update promgr set file_num=? where promgr_name = ? and com_num = ?";
+		
+		sql = "select * from promgr where promgr_num=?";
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, file_num);
-		pstmt.setString(2, promgr_name);
-		pstmt.setInt(3, com_num);
-		pstmt.executeUpdate();
+		pstmt.setInt(1, promgr_num);
+		rs = pstmt.executeQuery();
+
+		String file_num_str = "";
 		
-		
-		
+		if (rs.next()) {
+
+			String old_file_num = rs.getString("file_num");
+
+			if (old_file_num == null) {
+				file_num_str = String.valueOf(file_num);
+			} else {
+				file_num_str = old_file_num + "/" + file_num;
+			}
+
+			sql = "update promgr set file_num=? where promgr_num=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, file_num_str);
+			pstmt.setInt(2, promgr_num);
+
+			pstmt.executeUpdate();
+
+		} // promgr chklist_title_num
 		
 	}catch (Exception ex) {
 		ex.printStackTrace();
@@ -429,7 +450,8 @@ private void updateProgr(CloudDataBean cloudDB, String promgr_name)throws SQLExc
 	
 	}
 	
-};
+}
+
 public CloudDataBean renameCheck(String file_path)throws SQLException{
 	CloudDataBean cloudData = new CloudDataBean();
 	PreparedStatement pstmt = null;

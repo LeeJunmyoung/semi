@@ -15,7 +15,7 @@
 
 <script>
 
-	function HiddenInput(modbtn, delbtn, exit) { // 수정, 삭제
+	function HiddenList(modbtn, delbtn, exit) { // 수정, 삭제
 
 		if(document.getElementById(exit).hidden == true ) {
 			document.getElementById(modbtn).hidden = false;
@@ -25,7 +25,7 @@
 	
 	}
 	
-	function AppearInput(modbtn, delbtn, exit) { // 수정, 삭제
+	function AppearList(modbtn, delbtn, exit) { // 수정, 삭제
 		
 		if(document.getElementById(exit).hidden == false ) {
 			document.getElementById(modbtn).hidden = true;
@@ -35,7 +35,7 @@
 	
 	}
 	
-	function HiddenInputComment(session_mem_num, comment_mem_num, modbtn, delbtn, exit) { // 수정, 삭제
+	function HiddenComment(session_mem_num, comment_mem_num, modbtn, delbtn, exit) { // 수정, 삭제
 
 		if(session_mem_num == comment_mem_num) {
 			
@@ -49,12 +49,38 @@
 		
 	}
 	
-	function AppearInputComment(session_mem_num, comment_mem_num, modbtn, delbtn, exit) { // 수정, 삭제
+	function AppearComment(session_mem_num, comment_mem_num, modbtn, delbtn, exit) { // 수정, 삭제
 		
 		if(session_mem_num == comment_mem_num) {
 			
 			if(document.getElementById(exit).hidden == false ) {
 				document.getElementById(modbtn).hidden = true;
+				document.getElementById(delbtn).hidden = true;
+				document.getElementById(exit).hidden = true;
+			} 
+			
+		}
+	
+	}
+	
+	function HiddenFile(session_mem_num, file_mem_num, delbtn, exit) { // 수정, 삭제
+
+		if(session_mem_num == file_mem_num) {
+			
+			if(document.getElementById(exit).hidden == true ) {
+				document.getElementById(delbtn).hidden = false;
+				document.getElementById(exit).hidden = false;
+			}
+			
+		}
+		
+	}
+	
+	function AppearFile(session_mem_num, file_mem_num, delbtn, exit) { // 수정, 삭제
+		
+		if(session_mem_num == file_mem_num) {
+			
+			if(document.getElementById(exit).hidden == false ) {
 				document.getElementById(delbtn).hidden = true;
 				document.getElementById(exit).hidden = true;
 			} 
@@ -149,13 +175,6 @@
 						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
-	function cloudInsert(promgr_num){
-		url = "/HoneyComb/cloudview/uploadForm.jsp?promgr_num="+promgr_num;
-		window.open(url,
-				"post",
-				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
-	}
-	
 	function AddComment(promgr_num) { // comment 생성
 		url = "/HoneyComb/promgr/promgrCommentAddForm.promgr?promgr_num="+promgr_num;
 		window
@@ -208,6 +227,20 @@
 			
 		}
 		
+	}
+	
+	function AddFile(promgr_num){
+		url = "/HoneyComb/cloudview/uploadForm.jsp?promgr_num="+promgr_num;
+		window.open(url,
+				"post",
+				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	function DelFile(promgr_num){
+		url = "/HoneyComb/cloudview/uploadForm.jsp?promgr_num="+promgr_num;
+		window.open(url,
+				"post",
+				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
 </script>
@@ -306,24 +339,28 @@ dl dd {
 										</div>
 									
 									</div>
+									
 									<div>
 										참여자 :
 										<c:forEach var="mem_name" items="${article.mem_name_arr}">
 											${mem_name}
 										</c:forEach>
 									</div>
+									
 									<div>시작일 : ${article.promgr_date}</div>
+									
 									<div>내용 : ${article.promgr_content}</div>
-									<div>
+									
+									<div id="content_chklist" align="left">
 
 										<c:forEach var="view" items="${article.chklist_view}">
 
 											<div id="${view.list_num}">
 
-												<div>
+												<div id="chklist_${view.list_num}">
 												
 													<label id="chkList_lab_${view.list_num}"
-														ondblclick="HiddenInput('chkList_modBtn_${view.list_num}', 'chkList_delBtn_${view.list_num}', 'exit_list_${view.list_num}')">${view.list_name} (${view.list_num})</label>
+														ondblclick="HiddenList('chkList_modBtn_${view.list_num}', 'chkList_delBtn_${view.list_num}', 'exit_list_${view.list_num}')">${view.list_name} (${view.list_num})</label>
 													
 													<input type="button" id="chkList_modBtn_${view.list_num}" value="mod" 
 														onclick="ModChkList(${view.list_num})" hidden="true">
@@ -332,7 +369,7 @@ dl dd {
 														onclick="DelChkList(${article.promgr_num}, ${view.list_num})" hidden="true">
 													
 													<input type="button" id="exit_list_${view.list_num}" value="X"
-														onclick="AppearInput('chkList_modBtn_${view.list_num}', 'chkList_delBtn_${view.list_num}', 'exit_list_${view.list_num}')" hidden="true">
+														onclick="AppearList('chkList_modBtn_${view.list_num}', 'chkList_delBtn_${view.list_num}', 'exit_list_${view.list_num}')" hidden="true">
 												
 												</div>
 
@@ -362,7 +399,7 @@ dl dd {
 															</c:if>
 														
 															<label id="chkItem_lab_${bean.chklist_item_num}"
-																ondblclick="HiddenInput('chkItem_modBtn_${bean.chklist_item_num}', 'chkItem_delBtn_${bean.chklist_item_num}', 'exit_item_${bean.chklist_item_num}')">${bean.chklist_item_name} (${bean.chklist_item_num})</label>
+																ondblclick="HiddenList('chkItem_modBtn_${bean.chklist_item_num}', 'chkItem_delBtn_${bean.chklist_item_num}', 'exit_item_${bean.chklist_item_num}')">${bean.chklist_item_name} (${bean.chklist_item_num})</label>
 															
 															<input type="button" id="chkItem_modBtn_${bean.chklist_item_num}" value="mod" 
 																onclick="ModItem(${bean.chklist_item_num})" hidden="true" />
@@ -371,7 +408,7 @@ dl dd {
 																onclick="DelItem(${article.promgr_num}, ${bean.chklist_item_num})" hidden="true" />
 															
 															<input type="button" id="exit_item_${bean.chklist_item_num}" value="X"
-															onclick="AppearInput('chkItem_modBtn_${bean.chklist_item_num}', 'chkItem_delBtn_${bean.chklist_item_num}', 'exit_item_${bean.chklist_item_num}')" hidden="true">
+															onclick="AppearList('chkItem_modBtn_${bean.chklist_item_num}', 'chkItem_delBtn_${bean.chklist_item_num}', 'exit_item_${bean.chklist_item_num}')" hidden="true">
 														</div>
 														
 													</c:forEach>
@@ -386,51 +423,79 @@ dl dd {
 										</c:forEach>
 
 									</div>
-
-								</div>
-
-								<div id="content_editor">
-									<input type="button" value="member"
-										onclick="memberEditor(${article.promgr_num})" /> <br /> <input
-										type="button" value="checklist"
-										onclick="AddChkList(${article.promgr_num})" /> <br /> <input
-										type="button" value="file" onclick="cloudInsert(${article.promgr_num})"/>
-								</div>
-								
-							</div>
-
-							<div id="content_comment" align="left">
-							
-								<c:forEach var="item" items="${article.comment_view}">
-								
-									<div id="${item.comment_num}">
 									
-										<label id="comment_lab_${item.comment_num}"
-											ondblclick="HiddenInputComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')">
-											[${item.comment_num}] ${item.mem_name} : ${item.comment_content} (${item.comment_date})
-										</label>
-																	
-										<input type="button" id="comment_modBtn_${item.comment_num}" value="mod" 
-											onclick="ModComment(${item.comment_num})" hidden="true" />
-														
-										<input type="button" id="commnet_delBtn_${item.comment_num}" value="del"
-											onclick="DelComment(${article.promgr_num}, ${item.comment_num})" hidden="true" />
-																	
-										<input type="button" id="exit_comment_${item.comment_num}" value="X"
-											onclick="AppearInputComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')" hidden="true">
+									<div id="content_file" align="left">
+									
+										<c:forEach var="view" items="${article.file_view}">
+	
+											<div id="${view.file_num}">
+		
+												<div>
+															
+													<label id="chkList_lab_${view.file_num}"
+														ondblclick="HiddenFile(${my_mem_num}, ${view.mem_num}, 'chkList_delBtn_${view.file_num}', 'exit_list_${view.file_num}')">[${view.file_num}] ${view.file_name} (${view.mem_name})</label>
 																
+													<input type="button" id="chkList_delBtn_${view.file_num}" value="del"
+														onclick="DelFile(${article.promgr_num}, ${view.file_num})" hidden="true">
+																
+													<input type="button" id="exit_list_${view.file_num}" value="X"
+														onclick="AppearFile(${my_mem_num}, ${view.mem_num}, 'chkList_delBtn_${view.file_num}', 'exit_list_${view.file_num}')" hidden="true">
+															
+												</div>
+															
+											</div>
+			
+										</c:forEach>
+									
+									</div>
+
+									<div id="content_comment" align="left">
+								
+										<c:forEach var="item" items="${article.comment_view}">
+										
+											<div id="${item.comment_num}">
+											
+												<label id="comment_lab_${item.comment_num}"
+													ondblclick="HiddenComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')">
+													[${item.comment_num}] ${item.mem_name} : ${item.comment_content} (${item.comment_date})
+												</label>
+																			
+												<input type="button" id="comment_modBtn_${item.comment_num}" value="mod" 
+													onclick="ModComment(${item.comment_num})" hidden="true" />
+																
+												<input type="button" id="commnet_delBtn_${item.comment_num}" value="del"
+													onclick="DelComment(${article.promgr_num}, ${item.comment_num})" hidden="true" />
+																			
+												<input type="button" id="exit_comment_${item.comment_num}" value="X"
+													onclick="AppearComment(${my_mem_num}, ${item.mem_num}, 'comment_modBtn_${item.comment_num}', 'commnet_delBtn_${item.comment_num}', 'exit_comment_${item.comment_num}')" hidden="true">
+																		
+											</div>
+										
+										</c:forEach>
+									
+										<input type="button" value="add comment" onclick="AddComment(${article.promgr_num})" />
+	
 									</div>
 								
-								</c:forEach>
-							
-								<input type="button" value="add comment" onclick="AddComment(${article.promgr_num})" />
-
-							</div>
+									<div id="content_editor" align="right">
+									
+										<input type="button" value="member"
+											onclick="memberEditor(${article.promgr_num})" /> <br /> 
+											
+										<input type="button" value="checklist"
+											onclick="AddChkList(${article.promgr_num})" /> <br />
+											
+										<input type="button" value="file" 
+											onclick="AddFile(${article.promgr_num})"/>
+											
+									</div>
 
 						</dd>
 
 					</c:forEach>
+					
 				</dl>
+				
 			</div>
 
 		</c:if>

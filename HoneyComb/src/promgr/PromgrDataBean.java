@@ -12,7 +12,7 @@ public class PromgrDataBean {
 	private int promgr_ing; // 프로젝트 진행률
 	private String mem_num; // 프로젝트 참여자 번호
 	private String[] mem_name_arr; // 프로젝트 참여자 이름
-	private String file_num; // 파일 번호
+	private List file_view;
 	private List chklist_view; // 진행 상황 체크
 	private List comment_view; // 댓글 번호
 	private int com_num; // 회사 번호
@@ -73,12 +73,12 @@ public class PromgrDataBean {
 		this.mem_name_arr = mem_name_arr;
 	}
 
-	public String getFile_num() {
-		return file_num;
+	public List getFile_view() {
+		return file_view;
 	}
 
-	public void setFile_num(String file_num) {
-		this.file_num = file_num;
+	public void setFile_view(List file_view) {
+		this.file_view = file_view;
 	}
 
 	public List getChklist_view() {

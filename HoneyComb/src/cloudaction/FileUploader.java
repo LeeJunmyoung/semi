@@ -28,11 +28,8 @@ public class FileUploader implements CommandActionCloud{
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
 			//저장 기본경로
-			String savefilepath = "D://cloud/";
+			String savefilepath = "C://Users//mia//Downloads";
 			HttpSession session = request.getSession();
-		/*	session.setAttribute("mem_num", 44);
-			session.setAttribute("com_num", 1);
-			session.setAttribute("name", "test");*/
 			
 			//파일먼저 업로드
 			MultipartRequest mr = new MultipartRequest (request,savefilepath, 1024*1024*100,"utf-8");

@@ -11,6 +11,9 @@ public class CloudDownItem implements CommandActionCloud{
 	
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		
+		request.setCharacterEncoding("utf-8");
+		
 		String file_name = request.getParameter("file_name");
 		String file_path = request.getParameter("file_path");
 		int i = file_path.lastIndexOf(".");
@@ -31,9 +34,6 @@ public class CloudDownItem implements CommandActionCloud{
 		            	response.setHeader("Content-Disposition","attachment; filename=" + file_name +extension+ ";");
 		                outputstream = response.getOutputStream();
 		                inputstream = new FileInputStream(downloadfile);
-		                //Spring framework ����� ���
-		                //FileCopyUtils.copy(fis, out);
-		                //�Ϲ� �ڹ�/JSP ���ϴٿ�ε�
 		                byte[] buffer = new byte[1024];  
 		                int length = 0;  
 		                while((length = inputstream.read(buffer)) > 0) {

@@ -293,7 +293,7 @@ public class PromgrDBBean {
 							item.setFile_name(rs_file.getString("file_name"));
 							item.setFile_path(rs_file.getString("file_path"));
 							item.setFile_date(rs_file.getDate("file_date"));
-//							item.setMem_num(rs_file.getString("mem_num"));
+							item.setMem_num(rs_file.getInt("mem_num"));
 							item.setMem_name(rs_file.getString("file_uploader"));
 
 							file_view.add(item);

@@ -14,8 +14,6 @@ public class CloudDataBean {
 	private String folder;
 	private int mem_num;
 	
-	
-	
 	public int getFile_num() {
 		return file_num;
 	}

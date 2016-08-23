@@ -17,18 +17,7 @@ public class CloudForm implements CommandActionCloud{
 		CloudDataBean list = new CloudDataBean();
 		List cloudList = new ArrayList();
 		
-		HttpSession session = request.getSession();
-		
-		/*�ӽü��� com_num, folder*/
-		session.setAttribute("com_num", 1);
-		session.setAttribute("mem_num", 1);
-		session.setAttribute("name", "test");
-		
-		/*�ӽü��� ��*/
-		
-		
-		
-		int com_num = (int)session.getAttribute("com_num");
+		int com_num = (int) request.getSession().getAttribute("com_num");
 		String folder = (String)request.getParameter("folder");
 		if (folder ==null){
 			folder = "";

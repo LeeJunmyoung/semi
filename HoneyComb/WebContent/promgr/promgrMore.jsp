@@ -64,7 +64,7 @@
 	}
 	
 	function HiddenFile(session_mem_num, file_mem_num, delbtn, exit) { // 수정, 삭제
-
+		
 		if(session_mem_num == file_mem_num) {
 			
 			if(document.getElementById(exit).hidden == true ) {
@@ -236,12 +236,20 @@
 				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
 	}
 	
-	function DelFile(promgr_num){
-		url = "/HoneyComb/cloudview/uploadForm.jsp?promgr_num="+promgr_num;
-		window.open(url,
-				"post",
-				"toolbar=no ,width=450 ,height=80,directories=no,status=yes,scrollbars=yes,menubar=no");
+ 	function DownFile(file_name, file_path){
+ 		document.location.href="/HoneyComb/cloud/cloudDownItem.cloud?file_name="+file_name+"&file_path="+file_path;
 	}
+	
+	function DelFile(promgr_num, file_path){ // file 삭제
+		
+		url = "/HoneyComb/cloud/cloudDeleteItem.cloud?promgr_num="+promgr_num+"&file_path="+file_path;
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no,width=1,height=1,directories=no,status=yes,scrollbars=no,menubar=no");
+	}
+	
 	
 </script>
 
@@ -432,14 +440,17 @@ dl dd {
 		
 												<div>
 															
-													<label id="chkList_lab_${view.file_num}"
-														ondblclick="HiddenFile(${my_mem_num}, ${view.mem_num}, 'chkList_delBtn_${view.file_num}', 'exit_list_${view.file_num}')">[${view.file_num}] ${view.file_name} (${view.mem_name})</label>
+													<label id="file_lab_${view.file_num}"
+														ondblclick="HiddenFile(${my_mem_num}, ${view.mem_num}, 'file_delBtn_${view.file_num}', 'exit_file_${view.file_num}')">[${view.file_num}] ${view.file_name} (${view.mem_name})</label>
 																
-													<input type="button" id="chkList_delBtn_${view.file_num}" value="del"
-														onclick="DelFile(${article.promgr_num}, ${view.file_num})" hidden="true">
+													<input type="button" id="file_downBtn_${view.file_num}" value="down"
+														onclick="DownFile('${view.file_name}', '${view.file_path}')">
 																
-													<input type="button" id="exit_list_${view.file_num}" value="X"
-														onclick="AppearFile(${my_mem_num}, ${view.mem_num}, 'chkList_delBtn_${view.file_num}', 'exit_list_${view.file_num}')" hidden="true">
+													<input type="button" id="file_delBtn_${view.file_num}" value="del"
+														onclick="DelFile('${article.promgr_num}', '${view.file_path}')" hidden="true">
+																
+													<input type="button" id="exit_file_${view.file_num}" value="X"
+														onclick="AppearFile(${my_mem_num}, ${view.mem_num}, 'file_delBtn_${view.file_num}', 'exit_file_${view.file_num}')" hidden="true">
 															
 												</div>
 															

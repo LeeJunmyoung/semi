@@ -313,9 +313,10 @@ public int renameItem(CloudDataBean cloudData, String itemName)throws SQLExcepti
 	return 1;
 }
 
-public void deleteItem(String iteminfo, String folder)throws SQLException{
+public int deleteItem(String iteminfo, String folder)throws SQLException{
 	PreparedStatement pstmt = null;
 	Connection conn = null;
+	int x = 0;
 	try{
 
 		conn = getConnection();
@@ -338,8 +339,10 @@ public void deleteItem(String iteminfo, String folder)throws SQLException{
 			
 		}
 		
+		x = pstmt.executeUpdate();
 		
-		pstmt.executeUpdate();
+		System.out.println("x : " + x);
+		
 		conn.commit();
 		
 	}catch (Exception ex) {
@@ -356,6 +359,8 @@ public void deleteItem(String iteminfo, String folder)throws SQLException{
 			} catch (SQLException ex) {
 			}
 	}
+	
+	return x;
 	
 }
 private String getProgrName(int promgr_num)throws SQLException{

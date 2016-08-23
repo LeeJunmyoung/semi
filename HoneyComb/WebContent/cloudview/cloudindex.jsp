@@ -7,16 +7,16 @@
 
 </head>
 	<body>
-		<c:set value="44" var = "mem_num"/>
-		
-		<c:if test="${empty mem_num}">
+	
+		<c:if test="${empty sessionScope.mem_num}">
 		
 		<% response.sendRedirect("/HoneyComb/cloud/cloudLogOnCheck.cloud"); %>
 		</c:if>
 	
-		<c:if test="${!empty mem_num}">
+		<c:if test="${!empty sessionScope.mem_num}">
 		
 		<% response.sendRedirect("/HoneyComb/cloud/cloudForm.cloud"); %>
 		</c:if>
+		
 	</body>
 </html> 

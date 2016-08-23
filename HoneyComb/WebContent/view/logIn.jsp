@@ -116,7 +116,9 @@ position: absolute;
 left: 250px;
 padding:0;
 }
-
+#col-md-12{
+padding:0;
+}
 
 </style>
 
@@ -133,9 +135,9 @@ padding:0;
               <div class="navbar navbar-default" >
               </div>
               <div class="cover-image" style="background-image : url('https://unsplash.imgix.net/reserve/jEs6K0y1SbK3DAvgrBe5_IMG_3410.jpg?w=1024&amp;q=50&amp;fm=jpg&amp;s=b02e0318fd02be9616e40e5928db8ddc')" ></div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-12 text-center">
+             <div class="container" style="width:70%;">
+                
+                  <div class="col-md-12 text-center" id="col-md-12">
                     <h1>HoneyComb</h1>
             <p>로그인페이지</p>
             <form class="form-horizontal text-center" action="/HoneyComb/coin/LogInPro.coin" method="post" onsubmit="return checkEmail()" name="myform">

@@ -5,6 +5,7 @@
 <head>
 <title>현황 확인 폼(가입인원 체크)</title>
 
+
 <script type='text/javascript'
 	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <script type='text/javascript'>
@@ -37,13 +38,13 @@
 	}
 </script>
 </head>
-<body bgcolor="<%=bodyback_c%>">
+<body bgcolor="#e9ebee">
 	<!-- method="post" action="" -->
-
+<div id="admin">
 	<form name="join_company" align="center" method="post"
 		action="/HoneyComb/memCheck/memCheck_ComSearch.mc">
 		<!-- method="post" action="/HoneyComb/admin/memCheck/memCheck_ComSearch.mc" -->
-		<h3>현황 확인</h3>
+		<h2>현황 확인</h2>
 		<input type="text" placeholder="Company" id="com_name"
 			onkeyup='{filter();return false}'
 			onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
@@ -80,6 +81,6 @@
 			</c:if>
 		</table>
 	</form>
-
+</div>
 </body>
 </html>

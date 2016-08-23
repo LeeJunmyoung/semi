@@ -6,6 +6,12 @@
 <head>
 <title>Insert title here</title>
 
+<style>
+
+#admin {margin:0 auto; width:300px; height:600; border-style:ridge; background-color:#fff; text-align=center;}
+
+</style>
+
 <script>
 	function logout() {
 
@@ -20,8 +26,10 @@
 </script>
 
 </head>
-<body>
-	관리자 페이지
+<body bgcolor="#e9ebee">
+<div id="admin">
+<center>
+	<h2>관리자 페이지</h2>
 	<p>
 		<tr>
 			<td><input type="button" value="현황 확인"
@@ -43,5 +51,7 @@
 				onclick="logout();return false;" onkeypress="this.onclick;">
 			</td>
 		</tr>
+		</center>
+		</div>
 </body>
 </html>

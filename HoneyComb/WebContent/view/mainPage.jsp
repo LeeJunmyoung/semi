@@ -67,7 +67,7 @@ width:405;
               <div class="navbar navbar-default" >
               </div>
               <div class="cover-image" style="background-image : url('https://unsplash.imgix.net/reserve/jEs6K0y1SbK3DAvgrBe5_IMG_3410.jpg?w=1024&amp;q=50&amp;fm=jpg&amp;s=b02e0318fd02be9616e40e5928db8ddc')" ></div>
-             <div class="container">
+             <div class="container" style="width:70%;">
                 <div class="row">
                   <div class="col-md-12 text-center">
                     <h1>HONEYCOMB</h1><p></p><p></p>

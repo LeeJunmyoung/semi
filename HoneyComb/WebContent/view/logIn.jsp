@@ -90,7 +90,7 @@ padding: 0;
 }
 #logo_wrapper{
 position: absolute;
-left: 200px;
+left: 250px;
 z-index: 3;
 }
 
@@ -113,7 +113,7 @@ text-decoration: none;
 
 .container{
 position: absolute;
-left: 200px;
+left: 250px;
 }
 
 
@@ -138,19 +138,25 @@ left: 200px;
                     <h1>HoneyComb</h1>
             <p>로그인페이지</p>
             <form class="form-horizontal text-center" action="/HoneyComb/coin/LogInPro.coin" method="post" onsubmit="return checkEmail()" name="myform">
+            
                  <input type="email"  name="email" id="email" placeholder="Email">
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="password" name="passwd" id="passwd" placeholder="Password">
+                  <p></p> <p></p>  
                   <div class="checkbox">
                     <label>
                       <input type="checkbox" id="idSaveCheck" onClick="confirmSave(this)">이메일 저장</label>
+                      <p></p> <p></p>  
             </div>
               <div id="buttoncheck">
                 
-                  <button type="submit" class="btn btn-default">Sign in</button><p></p>    
+                  <button type="submit" class="btn btn-default">Sign in</button><p></p> <p></p>   
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                    <a href="/HoneyComb/view/signIn.jsp">회원가입</a>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/HoneyComb/view/findEmail.jsp">이메일 찾기</a>&nbsp;/&nbsp; 
-                 <a href="/HoneyComb/view/findPasswd.jsp">비밀번호 찾기</a>          
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/HoneyComb/view/findEmail.jsp">Email</a>&nbsp;/&nbsp; 
+                 <a href="/HoneyComb/view/findPasswd.jsp">Passwd 찾기</a>          
               </div>
             </form>
                   

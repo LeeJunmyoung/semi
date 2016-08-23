@@ -7,9 +7,15 @@
 <title>Insert title here</title>
 
 <style>
-
-#admin {margin:0 auto; width:300px; height:600; border-style:ridge; background-color:#fff; text-align=center;}
-
+#admin {
+	top: 100px;
+	margin: auto;
+	width: 300px;
+	height: 600;
+	border-style: ridge;
+	background-color: #fff;
+	text-align: center;
+}
 </style>
 
 <script>
@@ -27,31 +33,31 @@
 
 </head>
 <body bgcolor="#e9ebee">
-<div id="admin">
-<center>
-	<h2>관리자 페이지</h2>
-	<p>
-		<tr>
-			<td><input type="button" value="현황 확인"
-				onClick="javascript:window.location='/HoneyComb/memCheck/memCheck_Main.mc'"></td>
-		</tr>
-	<p>
-		<tr>
-			<td><input type="button" value="회사 승인"
-				onClick="javascript:window.location='/HoneyComb/complete/complete_com.admin'"></td>
-		</tr>
-	<p>
-		<tr>
-			<td><input type="button" value="관리자 공지 보내기"
-				onClick="javascript:window.location='/HoneyComb/admin/complete/complete_comNotice.jsp'"></td>
-		</tr>
-	<p>
-		<tr>
-			<td><input type="button" value="로그아웃"
-				onclick="logout();return false;" onkeypress="this.onclick;">
-			</td>
-		</tr>
+	<div id="admin">
+		<center>
+			<h2>관리자 페이지</h2>
+			<p>
+				<tr>
+					<td><input type="button" value="현황 확인"
+						onClick="javascript:window.location='/HoneyComb/memCheck/memCheck_Main.mc'"></td>
+				</tr>
+			<p>
+				<tr>
+					<td><input type="button" value="회사 승인"
+						onClick="javascript:window.location='/HoneyComb/complete/complete_com.admin'"></td>
+				</tr>
+			<p>
+				<tr>
+					<td><input type="button" value="관리자 공지 보내기"
+						onClick="javascript:window.location='/HoneyComb/admin/complete/complete_comNotice.jsp'"></td>
+				</tr>
+			<p>
+				<tr>
+					<td><input type="button" value="로그아웃"
+						onclick="logout();return false;" onkeypress="this.onclick;">
+					</td>
+				</tr>
 		</center>
-		</div>
+	</div>
 </body>
 </html>

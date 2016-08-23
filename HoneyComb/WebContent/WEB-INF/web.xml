@@ -119,5 +119,45 @@
 		<servlet-name>ControllerUsingURIProMgr</servlet-name>
 		<url-pattern>*.pro</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>main_controller</servlet-name>
+		<servlet-class>main_controller.Controller</servlet-class>
+		<init-param>
+			<param-name>main_Controller</param-name>
+			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Main_handler.properties</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>main_controller</servlet-name>
+		<url-pattern>*.main</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>chatting_Controll</servlet-name>
+		<servlet-class>chatting_Controll.ControllerUsingURI_Chatting</servlet-class>
+		<init-param>
+			<param-name>chat_propertyConfig</param-name>
+			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Chatting.properties</param-value>		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>chatting_Controll</servlet-name>
+		<url-pattern>*.chat</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>option_controll</servlet-name>
+		<servlet-class>option_controll.Option_ControllerUsingURI</servlet-class>
+		<init-param>
+			<param-name>option_propertyConfig</param-name>
+			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\option_controller.properties</param-value>		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>option_controll</servlet-name>
+		<url-pattern>*.option</url-pattern>
+	</servlet-mapping>
 
 </web-app>

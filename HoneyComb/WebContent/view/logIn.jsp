@@ -114,6 +114,7 @@ text-decoration: none;
 .container{
 position: absolute;
 left: 250px;
+padding:0;
 }
 
 

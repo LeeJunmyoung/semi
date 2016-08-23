@@ -86,7 +86,7 @@ table {
 position:relative;
 left:250px;
 width: 70%;
-height: 1200px;
+height: 1500px;
 display: block;
 }
 
@@ -94,23 +94,24 @@ display: block;
 #page_content {
 	position:relative;
 	width: 80%;
-	height:1200px;
+	height:1500px;
 	padding: 2%;
 	float: left;
 	border: 1px solid #bcbcbc;
 	background: #fff;
-	border-bottom:  2px solid black;
+	border-left: 3px solid #bcbcbc;
+	border-bottom:  3px solid #344d91	;
 }
 
 #page_sidebar {
 	position:relative;
 	width: 20%;
-	height: 1200px;
+	height: 1500px;
 	padding: 1%;
 	float: left;
 	border: 1px solid #bcbcbc;
 	background: #fff;
-	border-bottom:  2px solid black;
+	border-bottom:  3px solid #344d91;
 }
 
 #page_footer {
@@ -124,17 +125,17 @@ display: block;
 
 #main_notice{
 	border: 1px solid;
-	height : 200px;
+	height : 400px;
 	margin : 5px;
 }
 #main_project_manage{
 	border: 1px solid;
-	height : 300px;
+	height : 400px;
 	margin : 5px;
 }
 #main_cal{
 	border: 1px solid;
-	height : 632px;
+	height : 600px;
 	margin : 5px;
 }
 
@@ -189,3 +190,12 @@ dl dd {
 	border-top: none;
 	height: 300px;
 }
+
+#chat_more{
+	
+	border: 1px solid;
+	height : 1100px;
+	margin : 5px;
+	
+}
+

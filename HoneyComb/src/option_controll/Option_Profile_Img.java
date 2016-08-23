@@ -51,9 +51,9 @@ public class Option_Profile_Img implements Option_CommandAction {
 			 session.setAttribute("profile_img", profile_img);
 			 System.out.println(profile_img);
 			 
-			return "/Option_user/option_mypage.jsp";
+			return "/page_layout/Option/myPage/Option_home_myPage.jsp";
 		}
 
-		return "/Option_user/option_mypage.jsp";
+		return "/page_layout/Option/myPage/Option_home_myPage.jsp";
 	}
 }

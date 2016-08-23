@@ -34,7 +34,7 @@
 		<input type="button" value="마이페이지"
 			onclick="location.href='/HoneyComb/Option_user/mypage.option'" />
 			
-		<input type="button" value="로그아웃" onclick="logout();" />
+	<!-- 	<input type="button" value="로그아웃" onclick="logout();" /> -->
 		
 		<p>
 		<input type="button" value="back" onclick="history.go(-1)">

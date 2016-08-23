@@ -8,23 +8,27 @@
 <title>Insert title here</title>
 <style type="text/css">
 .total_box {
+	
+	position:relative;
+	top:50px;
+
+	width: 90%;
 	margin: auto;
-	width: 900px;
-	height: 600px;
+	height: 1000px;
 	border-collapse: collapse;
 }
 
 .box1_select_chat {
 	float: left;
-	width: 300px;
-	height: 600px;
+	width: 37.5%;
+	height: 1000px;
 	border: 1px solid #CCCCCC;
 }
 
 .box2_execute_chat {
 	display: inline-block;
-	width: 500px;
-	height: 600px;
+	width: 62.5%;
+	height: 1000px;
 	border: 1px solid #CCCCCC;
 	padding: 0px;
 	margin: 0px;
@@ -154,6 +158,20 @@ img:nth-of-type(2) {
 left:-52px;
 
 }
+
+#search_div{
+position: relative;
+top:20px;
+left:20px;
+}
+
+#add_member{
+border: 0px;
+background: #344d91;
+color:#fff;
+}
+
+
 
 
 </style>
@@ -428,10 +446,13 @@ function new_msg(num){
 
 	<div class='total_box'>
 		<div class='box1_select_chat'>
-			<input type="button" value="+" onclick="invite_Member()"> <input
+		<div id = "search_div">
+			<input type="button" value="+" onclick="invite_Member()" id="add_member"> <input
 				type="text" placeholder="name" id='search_name'
 				onkeyup='{filter();return false}'
 				onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
+		</div>		
+				
 			<br> <br>
 
 			<c:forEach var="chat_list" items="${current_chat_list}">

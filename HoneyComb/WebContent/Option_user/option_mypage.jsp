@@ -90,7 +90,7 @@
 
 		</table>
 		<p>
-			<input type="button" value="back" align="center" onclick="history.go(-1)">
+			<input type="button" value="back" align="center" onclick="location.href='/HoneyComb/page_layout/Option/Option_home.jsp'">
 	</form>
 
 </body>

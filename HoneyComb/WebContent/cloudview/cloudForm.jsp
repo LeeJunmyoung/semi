@@ -22,7 +22,9 @@ $(document).bind("contextmenu", function(event) {
 		/* $("li:eq("+index+")").find("input:checkbox[name=itemBox]").prop("checked",true);  */
 		var index = $('li').index(this);
 			  $("input:checkbox[name=itemBox]").prop("checked",false);  
-			$(this).find("input:checkbox[name=itemBox]").prop("checked",true); 
+			$(this).find("input:checkbox[name=itemBox]").prop("checked",true);
+			$('#img.file').css("border","1px solid silver")
+			$(this).find('div#img.file').css("border","3px solid silver");
 			
     }); 
     
@@ -49,7 +51,7 @@ $(document).bind("contextmenu", function(event) {
     .appendTo("body")
     .css({top: event.pageY + "px", left: event.pageX + "px"});
 	}else{
-    $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
+    $("<div class='cloud_menu' style='position: absolute; z-index:1000;'>"+
 	    "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
 	    "<a href='javascript:download()' id='fileonly'><p >다운로드</p></a>"+
 	    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
@@ -87,20 +89,64 @@ $(document).bind("contextmenu", function(event) {
 	//중복체크 제거
 	$('li').change(function(){
 		var index = $('li').index(this);
-		  $("input:checkbox[name=itemBox]").prop("checked",false);  
-		$(this).find("input:checkbox[name=itemBox]").prop("checked",true); 
+		  $("input:checkbox[name=itemBox]").prop("checked",false);   
+		$(this).find("input:checkbox[name=itemBox]").prop("checked",true);
+		$('#img.file').css("border","1px solid silver")
+		$(this).find('div#img.file').css("border","3px solid silver");
+		
+		
 	});
-		 
 	 
-
+	 
+	
 });
+
 </script>
 <title>Insert title here</title>
 <style type="text/css">
+/* 폼 박스 수정 */
 div.file{
-width=200px;
-text-align: center;}
 
+text-align: center;
+margin: auto;
+}
+div#item.item{
+width: 205px;
+display: inline-block;
+padding: 10px;
+}
+
+div#img{
+width: 150px;
+height: 150px;
+padding: 15px;
+border: 1px solid silver;
+margin: auto;
+
+}
+div.item img{
+width: 75px;
+margin-top: 25%;
+}
+/* 폼박스_체크박스 수정 */
+input[type=checkbox]{
+display: none;
+}   
+/* 우클릭박스 수정 */
+div.cloud_menu{
+background-color: white;
+border: 1px solid black;
+}
+div.cloud_menu a{
+text-decoration: none;
+}
+div.cloud_menu p{
+margin: 0px;
+}
+div.cloud_menu p:HOVER {
+background-color: silver;
+}
+/* 우클릭 박스 수정끝 */
 </style>
 </head>
 <body>
@@ -115,21 +161,22 @@ mem_num = ${mem_num}
 	<div class="cloudForm">
 	<ul>
 		<c:forEach items="${cloudList}" var="cloudlist">
+		<div class="item" id="item">
 				<li style="display: inline;">
-					<div style="width: 150px; display: inline-block;"id="test">
+					
 					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
-						mem_num = ${cloudlist.mem_num}
+						<%-- mem_num = ${cloudlist.mem_num} --%>
 
 						
-						<div class="file"><img src="../images/file.png" width="150px"></div>
+						<div class="file" id="img"><img src="../images/file.png"></div>
 						</c:when>
 						<c:otherwise>
 						<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">
 						
-						<div class="file"><img src="../images/folder.png" width="150px"></div>
+						<div class="file" id="img"><img src="../images/folder.png"></div>
 						</c:otherwise>
 						</c:choose>
 						<div class="file">${cloudlist.file_name}</div>
@@ -141,9 +188,9 @@ mem_num = ${mem_num}
 						<div class="file">${cloudlist.file_date}</div>						
 						
 						</label>
-					</div>
+					
 				</li>
-				
+				</div>
 		</c:forEach>
 	</ul>
 	</div>

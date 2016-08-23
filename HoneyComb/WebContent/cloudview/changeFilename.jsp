@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="/HoneyComb/cloudview/cloudScript.js" type="text/javascript"></script>
+<script>
+window.opener.location.reload();
+</script>
 <title>Insert title here</title>
 </head>
 <body>

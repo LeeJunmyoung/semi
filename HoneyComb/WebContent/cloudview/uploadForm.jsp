@@ -8,13 +8,14 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
  $(function(){
-	
-	if(	$('#filecheck').val() != ""){
+	 
+ 	if(	$('#filecheck').val() != ""){
 		alert("'"+'${param.filecheck}'+"'"+"은 이미 있는 파일입니다. 다른 파일명을 입력해 주세요");
 		var url = "/HoneyComb/cloudview/changeFilename.jsp?dupli=y&promgr_num="${param.promgr_num};
 		$(location).attr('href',url);
 	}
-	if($('#uploadcheck').val() == 'done'){
+ 	window.opener.location.reload();
+	/* if($('#uploadcheck').val() == 'done'){
 		var result = confirm('파일을 더 업로드하시겠습니까?')
 		if(result){
 
@@ -24,7 +25,7 @@
 			window.opener.document.location.reload();
 			window.close();
 		}
-	}
+	}  */
 	
 })
 </script>

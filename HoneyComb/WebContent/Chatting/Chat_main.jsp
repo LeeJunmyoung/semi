@@ -14,21 +14,21 @@
 
 	width: 90%;
 	margin: auto;
-	height: 1000px;
+	height: 1200px;
 	border-collapse: collapse;
 }
 
 .box1_select_chat {
 	float: left;
-	width: 37.5%;
-	height: 1000px;
+	width: 300px;
+	height: 1200px;
 	border: 1px solid #CCCCCC;
 }
 
 .box2_execute_chat {
 	display: inline-block;
 	width: 62.5%;
-	height: 1000px;
+	height: 1200px;
 	border: 1px solid #CCCCCC;
 	padding: 0px;
 	margin: 0px;
@@ -47,19 +47,23 @@
 </style>
 <style type="text/css">
 input#chat {
-	width: 400px;
+position:relative;
+	width: 500px;
+	top:20px;
 }
 
 #console-container {
-	width: 400px;
+	width: 500px;
 	margin: auto;
 }
 
 #console {
+position:relative;
+top:20px;
 	border: 1px solid #CCCCCC;
 	border-right-color: #999999;
 	border-bottom-color: #999999;
-	height: 500px;
+	height: 1100px;
 	overflow-y: scroll;
 	padding: 5px;
 	width: 100%;
@@ -102,10 +106,16 @@ input#chat {
 	padding: 5px;
 }
 
+#chat_mem_div{
+width: 298px;
+height: 58px;
+}
+
+
 .memmem {
 	border-color: #fff;
 	background-color: #fff;
-	width: 300px;
+	width:298px;
 	height: 58px;
 	border: 0;
 	border-top: 1px solid #efefef;
@@ -116,7 +126,7 @@ input#chat {
 .memname_chat {
 	position: relative;
 	left: 80px;
-	top: -63px;
+	top: -53px;
 	z-index: 1;
 	font-size: 15px;
 	width: 230px;
@@ -130,7 +140,7 @@ input#chat {
 	width: 50px;
 	height: 50px;
 	position: relative;
-	top: -107px;
+	top: -97px;
 	z-index: -3;
 }
 
@@ -139,7 +149,7 @@ input#chat {
 width: 50px;
 height:50px;
 position:relative;
-top:-107px;
+top:-87px;
 z-index: 3;
 }
 
@@ -148,14 +158,14 @@ width: 50px;
 height: 50px;
 position: relative;
 z-index: 2;
-top:-105px;
+top:-83px;
 left: 3px;
 margin: 0px;
 }
 
 img:nth-of-type(2) {
 
-left:-52px;
+left:-53px;
 
 }
 
@@ -170,7 +180,6 @@ border: 0px;
 background: #344d91;
 color:#fff;
 }
-
 
 
 
@@ -198,7 +207,7 @@ color:#fff;
 			var c = "submit" + $(this).attr("id");
 			$('#' + c).css('border', '1px solid');
 
-			$('#' + c).css('border-color', 'red');
+			$('#' + c).css('border-color', '#344d91');
 
 		});
 		$("p").mouseleave(function() {
@@ -212,7 +221,7 @@ color:#fff;
 		$(".memmem").mouseenter(function() {
 
 			$(this).css('border', '1px solid');
-			$(this).css('border-color', 'red');
+			$(this).css('border-color', '#344d91');
 
 		});
 		$(".memmem").mouseleave(function() {
@@ -474,11 +483,15 @@ function new_msg(num){
 						<input type="hidden" name="chat_partner" id="chat_partner"
 						value="${chat_list.chat_partner}"> 
 
-					<div class='${chat_list.chat_partner }'>
+
+
+					<div class='${chat_list.chat_partner }' id = "chat_mem_div"> 
 						<input type="submit" value=" " id="submit${chat_list.chat_Num}"
 							class='memmem'>
 						<p class='memname_chat' id='${chat_list.chat_Num}'>${chat_list.chat_partner }
 						</p>
+						
+						
 						
 						
 						<c:set var="temp_check"  value="0"/>

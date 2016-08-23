@@ -8,23 +8,27 @@
 <title>Insert title here</title>
 <style type="text/css">
 .total_box {
+	
+	position:relative;
+	top:50px;
+
+	width: 90%;
 	margin: auto;
-	width: 900px;
-	height: 600px;
+	height: 1200px;
 	border-collapse: collapse;
 }
 
 .box1_select_chat {
 	float: left;
 	width: 300px;
-	height: 600px;
+	height: 1200px;
 	border: 1px solid #CCCCCC;
 }
 
 .box2_execute_chat {
 	display: inline-block;
-	width: 500px;
-	height: 600px;
+	width: 62.5%;
+	height: 1200px;
 	border: 1px solid #CCCCCC;
 	padding: 0px;
 	margin: 0px;
@@ -43,19 +47,23 @@
 </style>
 <style type="text/css">
 input#chat {
-	width: 400px;
+position:relative;
+	width: 500px;
+	top:20px;
 }
 
 #console-container {
-	width: 400px;
+	width: 500px;
 	margin: auto;
 }
 
 #console {
+position:relative;
+top:20px;
 	border: 1px solid #CCCCCC;
 	border-right-color: #999999;
 	border-bottom-color: #999999;
-	height: 500px;
+	height: 1100px;
 	overflow-y: scroll;
 	padding: 5px;
 	width: 100%;
@@ -75,7 +83,7 @@ input#chat {
 #console #me {
 	margin: 20px;
 	position: relative;
-	left: 200px;
+	left: 300px;
 	width: 150px;
 	padding: 5px;
 	background: #FAF4C0;
@@ -98,10 +106,16 @@ input#chat {
 	padding: 5px;
 }
 
+#chat_mem_div{
+width: 298px;
+height: 58px;
+}
+
+
 .memmem {
 	border-color: #fff;
 	background-color: #fff;
-	width: 300px;
+	width:298px;
 	height: 58px;
 	border: 0;
 	border-top: 1px solid #efefef;
@@ -112,7 +126,7 @@ input#chat {
 .memname_chat {
 	position: relative;
 	left: 80px;
-	top: -63px;
+	top: -53px;
 	z-index: 1;
 	font-size: 15px;
 	width: 230px;
@@ -126,7 +140,7 @@ input#chat {
 	width: 50px;
 	height: 50px;
 	position: relative;
-	top: -107px;
+	top: -87px;
 	z-index: -3;
 }
 
@@ -135,7 +149,7 @@ input#chat {
 width: 50px;
 height:50px;
 position:relative;
-top:-107px;
+top:-87px;
 z-index: 3;
 }
 
@@ -144,19 +158,32 @@ width: 50px;
 height: 50px;
 position: relative;
 z-index: 2;
-top:-105px;
+top:-83px;
 left: 3px;
 margin: 0px;
 }
 
 img:nth-of-type(2) {
 
-left:-52px;
+left:-53px;
 
 }
 
-</style>
+#search_div{
+position: relative;
+top:20px;
+left:20px;
+}
 
+#add_member{
+border: 0px;
+background: #344d91;
+color:#fff;
+}
+
+
+
+</style>
 
 <script src='/HoneyComb/Calendar/fullcalendar/lib/jquery.min.js'></script>
 
@@ -179,7 +206,7 @@ left:-52px;
 			var c = "submit" + $(this).attr("id");
 			$('#' + c).css('border', '1px solid');
 
-			$('#' + c).css('border-color', 'red');
+			$('#' + c).css('border-color', '#344d91');
 
 		});
 		$("p").mouseleave(function() {
@@ -193,7 +220,7 @@ left:-52px;
 		$(".memmem").mouseenter(function() {
 
 			$(this).css('border', '1px solid');
-			$(this).css('border-color', 'red');
+			$(this).css('border-color', '#344d91');
 
 		});
 		$(".memmem").mouseleave(function() {
@@ -421,10 +448,13 @@ function new_msg(num){
 
 	<div class='total_box'>
 		<div class='box1_select_chat'>
-			<input type="button" value="+" onclick="invite_Member()"> <input
+		<div id = "search_div">
+			<input type="button" value="+" onclick="invite_Member()" id="add_member"> <input
 				type="text" placeholder="name" id='search_name'
 				onkeyup='{filter();return false}'
 				onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
+		</div>		
+				
 			<br> <br>
 
 			<c:forEach var="chat_list" items="${current_chat_list}">
@@ -446,14 +476,18 @@ function new_msg(num){
 						<input type="hidden" name="chat_partner" id="chat_partner"
 						value="${chat_list.chat_partner}"> 
 
-					<div class='${chat_list.chat_partner }'>
+
+
+					<div class='${chat_list.chat_partner }' id = "chat_mem_div"> 
 						<input type="submit" value=" " id="submit${chat_list.chat_Num}"
 							class='memmem'>
 						<p class='memname_chat' id='${chat_list.chat_Num}'>${chat_list.chat_partner }
 						</p>
-
-
-							<c:set var="temp_check"  value="0"/>
+						
+						
+						
+						
+						<c:set var="temp_check"  value="0"/>
 						<c:forTokens items="${chat_list.last_Chat_Member }" delims="," var="last_Chat_Member">
 							<c:if test="${chat_list.last_Chat_Read == 'f' }">
 								<c:if test="${ mem_num == last_Chat_Member }">
@@ -466,9 +500,6 @@ function new_msg(num){
 						<img src="/HoneyComb/Chatting/chat_image/new.gif" class = 'visibleImg' />
 						</c:if>
 						</c:if>
-								
-						
-									
 							<img src="${ chat_list.profile_IMG }"  onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진" class = 'myProfilePicture'>
 				
 			
@@ -526,8 +557,7 @@ function new_msg(num){
 
 
 					</div>
-					<input type="text" placeholder="type and press enter to chat"
-						id="chat" />
+					<input type="text" placeholder="type and press enter to chat" id="chat" />
 				</div>
 
 				<p></p>

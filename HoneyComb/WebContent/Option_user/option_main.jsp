@@ -37,7 +37,7 @@
 	<!-- 	<input type="button" value="로그아웃" onclick="logout();" /> -->
 		
 		<p>
-		<input type="button" value="back" onclick="history.go(-1)">
+		<input type="button" value="back" onclick="location.href='/HoneyComb/index.jsp'">
 	</form>
 
 </body>

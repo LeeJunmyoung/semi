@@ -8,8 +8,7 @@
 </head>
 <body>
 	
-	<c:if test="${notice_insert_count==1}">
-	<%-- insert 후 main reflash, write 화면 종료 --%>
+	<c:if test="${notice_insert_count > 0}">
 		<script>
 			window.opener.top.location.reload(true);
 			window.close()

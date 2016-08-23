@@ -14,17 +14,8 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script>
-    
-	function noticeRowView(rowNum) { // 공지 정보 보기
-		url = "/HoneyComb/notice/noticeContent.notice?num="+rowNum;
-		window.open(
-						url,
-						"post",
-						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"
-					);
-	}
 	
-	function writeView() { // 공지 작성
+ 	function writeView() { // 공지 작성
 		url = "/HoneyComb/notice/noticeWriteForm.notice";
 		window.open(
 						url,
@@ -34,83 +25,109 @@
 	}
 	
 </script>
+
 </head>
 <body>
-<div width="400" height="150">
-	<b>NOTICE <span class="badge">${notice_count}</span></b>
-
-	<div align="right">
-	  <input type="button" class="btn btn-primary btn-xs" value="더보기"
-	  	onclick="location.href='/HoneyComb/notice/noticeMore.notice'">
+	<div class="row">
 	
-		<input type="button" class="btn btn-primary btn-xs" value="공지작성"
-			onclick="writeView()" >		
-	</div>
-	
-	<c:if test="${notice_count == 0}">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>공지 글이 없습니다.</td>
-				</tr>
-			</tbody>
-		</table>
-	</c:if>
-
-	<c:if test="${notice_count > 0}">
-	
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="article" items="${articleList}">
-					<tr data-toggle="modal" 
-					data-target="#notice_content_${article.notice_num}" >
-						<th>
-							${article.notice_title}
-							<c:if test="${article.isNew == 0}">
-								<img src="../images/hot.gif">
-							</c:if>
-						</th>
-						<th>${article.notice_member}</th>
-						<th>${article.notice_date}</th>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	
-		<c:forEach var="article" items="${articleList}">
-		  <div class="modal fade" id="notice_content_${article.notice_num}" role="dialog">
-		    <div class="modal-dialog modal-sm">
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">${article.notice_title} (${article.notice_date})</h4>
-		        </div>
-		        <div class="modal-body">
-		          <p>${article.notice_content}</p>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Close</button>
-		        </div>
-		      </div>
-		    </div>
-		  </div>
-		</c:forEach>
+		<div class="col-md-9">
 		
-	</c:if>
-</div>
+			<b>NOTICE <span class="badge">${notice_count}</span></b>
+			
+		</div>
+		
+		<div class="col-md-1">	
+		
+			<input type="button" class="btn btn-primary btn-xs btn-lg" value="공지작성"
+				onclick="writeView()" >
+					
+		</div>
+		
+		<div class="col-md-1">
+		
+				<input type="button" class="btn btn-primary btn-xs" value="더보기"
+			  		onclick="location.href='/HoneyComb/notice/noticeMore.notice'">
+			
+		</div>
+		
+	</div>
+
+	<div class="row">
+	
+		<div class="col-md-1"></div>
+	
+		<div class="col-md-10">
+			
+			<c:if test="${notice_count == 0}">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="text-center">제목</th>
+							<th class="text-center">작성자</th>
+							<th class="text-center">작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>공지 글이 없습니다.</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</c:if>
+		
+			<c:if test="${notice_count > 0}">
+			
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="text-center">제목</th>
+							<th class="text-center">작성자</th>
+							<th class="text-center">작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="article" items="${articleList}">
+							<tr data-toggle="modal" 
+							data-target="#notice_content_${article.notice_num}" >
+								<th class="col-md-6">
+									${article.notice_title}
+									<c:if test="${article.isNew == 0}">
+										<img src="../images/hot.gif">
+									</c:if>
+								</th>
+								<th class="col-md-2 text-center">${article.notice_member}</th>
+								<th class="col-md-4 text-center">${article.notice_date}</th>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
+				<c:forEach var="article" items="${articleList}">
+				  <div class="modal fade" id="notice_content_${article.notice_num}" role="dialog">
+				    <div class="modal-dialog modal-lg">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">${article.notice_title} (${article.notice_date})</h4>
+				        </div>
+				        <div class="modal-body">
+				          <p>${article.notice_content}</p>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Close</button>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</c:forEach>
+				
+			</c:if>
+			
+		</div>
+		
+		<div class="col-md-1"></div>
+	</div>
 </body>
 </html>

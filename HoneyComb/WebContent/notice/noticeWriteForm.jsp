@@ -6,18 +6,24 @@
 <head>
 <title>write</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
 <script>
 	function writeSave() {
 
-		if (document.writeform.notice_title.value == "") {
+		if (document.noticeWriteform.notice_title.value == "") {
 			alert("제목을 입력하십시요.");
-			document.writeform.notice_title.focus();
+			document.noticeWriteform.notice_title.focus();
 			return false;
 		}
 
-		if (document.writeform.notice_content.value == "") {
+		if (document.noticeWriteform.notice_content.value == "") {
 			alert("내용을 입력하십시요.");
-			document.writeform.notice_content.focus();
+			document.noticeWriteform.notice_content.focus();
 			return false;
 		}
 
@@ -27,15 +33,22 @@
 </head>
 <body>
 
-	<form method="post" name="writeform" action="/HoneyComb/notice/noticeWritePro.notice" onsubmit="return writeSave()">
-	
-		글제목 <input type="text" name="notice_title" size="40" maxlength="50" /> <br>
-		글내용 <textarea name="notice_content" rows="15" cols="30"></textarea> <br>
+	<form class="col-sm-10" role="form" method="post" name="noticeWriteform" 
+		action="/HoneyComb/notice/noticeWritePro.notice" onsubmit="return writeSave()" >
 		
-		<input type="reset" value="reset"> 
-		<input type="submit" value="submit">
-
+		<div class="form-group">
+			<label for="notice_title">공지제목:</label>
+			<input type="text" class="form-control" id="notice_title" name="notice_title">
+		</div>
+		
+		<div class="form-group">
+			<label for="notice_content">공지내용:</label>
+			<textarea class="form-control" rows="5" id="notice_content" name="notice_content"></textarea>
+		</div>
+		
+		<input type="submit" class="btn btn-primary btn-xs" value="공지작성">
+		
 	</form>
-	<input type="button" value="back" onclick="history.go(-1)">
+	
 </body>
 </html>

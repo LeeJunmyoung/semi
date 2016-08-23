@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <link href="/HoneyComb/page_layout/home.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 <body>
 
 <div id = "main_Cloud">

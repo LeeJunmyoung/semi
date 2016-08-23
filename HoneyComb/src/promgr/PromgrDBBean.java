@@ -399,7 +399,7 @@ public class PromgrDBBean {
 			
 			if (rs_comment != null)
 				try {
-					rs_file.close();
+					rs_comment.close();
 				} catch (SQLException ex) {
 				}
 			

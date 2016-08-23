@@ -18,8 +18,7 @@
 </script>
 <body>
 <div id ="menu_div">
-		<h2 ><img src="${ sessionScope.profile_img }"  width="150" height="153"
-					onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
+		<h2 ><img src="${ sessionScope.profile_img }"  width="150" height="153" onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
 		<h2 id="my_profile">${ sessionScope.name }</h2>
 		
 

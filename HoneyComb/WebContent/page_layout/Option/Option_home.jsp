@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/HoneyComb/page_layout/home.css" rel="stylesheet" type="text/css" />
+
 <title>Insert title here</title>
 </head>
 <body>

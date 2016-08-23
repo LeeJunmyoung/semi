@@ -39,8 +39,7 @@
 		return ""
 	}
 </script>
-<link href="/HoneyComb/page_layout/home.css" rel="stylesheet"
-	type="text/css" />
+
 <body onload="pop_up()">
 
 	<div id="main_notice">
@@ -52,4 +51,5 @@
 	<div id="main_cal">
 		<jsp:include page="/Calendar/cal_user_main.jsp"></jsp:include>
 	</div>
+</body>
 </html>

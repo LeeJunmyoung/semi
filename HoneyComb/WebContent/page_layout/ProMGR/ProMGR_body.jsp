@@ -12,7 +12,7 @@
 
 <body>
 
-<div id = "main_cal">
+<div id = "proMGR_contents">
  <jsp:include page="/promgr/promgrMore.jsp"></jsp:include>
 </div>
 

@@ -17,6 +17,7 @@
    
    
    <definition name="notice" template="/page_layout/layout.jsp" extends="home">
+   
      <put-attribute name="body" value="/page_layout/notice/notice_body.jsp" />
 
    </definition> 
@@ -24,9 +25,9 @@
      <definition name="calendar" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/Calendar/Calendar_body.jsp" />
 
-   </definition> 
+ 	 </definition> 
    
-    <definition name="Option" template="/page_layout/layout.jsp" extends="home">
+    <definition name="Option" template="/page_layout/layout.jsp"  extends="home">
      <put-attribute name="body" value="/page_layout/Option/Option_body.jsp" />
    </definition> 
    
@@ -70,6 +71,8 @@
      <put-attribute name="body" value="/page_layout/Cloud/Cloud_body.jsp" />
 
    </definition> 
+   
+   
    
     <definition name="ProMGR" template="/page_layout/layout.jsp" extends="home">
      <put-attribute name="body" value="/page_layout/ProMGR/ProMGR_body.jsp" />

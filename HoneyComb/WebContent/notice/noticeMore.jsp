@@ -4,9 +4,9 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<title>notice more</title>
+
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <script>
 
 	$(function() { // list event
@@ -21,31 +21,7 @@
 	
 </script>
 
-<style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-}
 
-dl {
-	width: 400px;
-	margin: 50px auto;
-}
-
-dl dt {
-	background: #7CADB6;
-	border-bottom: 1px solid #FFFFFF;
-	cursor: pointer;
-}
-
-dl dd {
-	border: 1px solid #7CADB6;
-	border-top: none;
-	height: 300px;
-}
-</style>
-
-</head>
 <body>
 
 	<div align="center">

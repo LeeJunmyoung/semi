@@ -4,10 +4,16 @@
 <!DOCTYPE html>
 <html>
 <link href="/HoneyComb/page_layout/home.css" rel="stylesheet" type="text/css" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <body>
 
-<div id = "main_notice">
+
+
+<div id = "NoticeMore_Contents">
  <jsp:include page="/notice/noticeMore.jsp"></jsp:include>
+ 
 </div>
 
 </body>

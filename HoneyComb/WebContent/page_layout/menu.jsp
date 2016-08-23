@@ -18,13 +18,20 @@
 </script>
 <body>
 <div id ="menu_div">
+<h1 align="center">${ sessionScope.com_name }</h1>
+
 		<h2 ><img src="${ sessionScope.profile_img }"  width="150" height="153" onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
+		
+		
+
+		
 		<h2 id="my_profile">${ sessionScope.name }</h2>
 		
 
 	<ul>
-<br>
-<br>
+
+
+
 		<tiles:importAttribute name="userMenus" />
 		<c:forEach var="menu" items="${userMenus}">
 			<li><a id="menu_link" href="${menu.link}">${menu.name}</a></li>

@@ -22,15 +22,8 @@ public class NoticeWriteProAction implements NoticeFormAction {
 		NoticeDBBean dbPro = NoticeDBBean.getInstance();
 		int notice_insert_count = dbPro.insertArticle(article); // 삽입된 row 갯수 호출
 
-		boolean onloadCheck = false;
-
-		if (notice_insert_count > 0) {
-			onloadCheck = true; // reflash 여부 결정
-		}
-
 		// 해당 view에서 사용할 속성
 		request.setAttribute("notice_insert_count", notice_insert_count);
-		request.setAttribute("notice_onloadCheck", onloadCheck);
 
 		return "/notice/noticeWritePro.jsp";
 

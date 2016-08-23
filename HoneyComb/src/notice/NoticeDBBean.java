@@ -185,61 +185,6 @@ public class NoticeDBBean {
 
 	} // List getArticles(int endRow) end
 
-	// db로 부터 목록의 한 항목의 데이터를 호출
-	public NoticeDataBean getArticle(int rowNum) throws Exception {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		NoticeDataBean article = null;
-
-		try {
-
-			conn = getConnection();
-
-			pstmt = conn.prepareStatement("select * from notice where notice_num=?");
-			pstmt.setInt(1, rowNum);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-
-				article = new NoticeDataBean();
-				article.setNotice_num(rs.getInt("notice_num"));
-				article.setNotice_title(rs.getString("notice_title"));
-				article.setNotice_content(rs.getString("notice_content"));
-				article.setNotice_member(rs.getString("notice_member"));
-				article.setNotice_date(rs.getTimestamp("notice_date"));
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException ex) {
-				}
-
-		}
-
-		return article;
-
-	} // NoticeDataBean getArticle(int rowNum) end
-
 	// 공지 작성 (관리자, 임원)
 	public int insertArticle(NoticeDataBean article) throws Exception {
 

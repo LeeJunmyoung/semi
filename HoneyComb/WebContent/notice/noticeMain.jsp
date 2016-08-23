@@ -18,6 +18,15 @@
 					);
 	}
 	
+	function writeView() { // 공지 작성
+		url = "/HoneyComb/notice/noticeWriteForm.notice";
+		window.open(
+						url,
+						"post",
+						"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"
+					);
+	}
+	
 </script>
 </head>
 <body >
@@ -26,6 +35,7 @@
 
 	<div align="right">
 		<a href="/HoneyComb/notice/noticeMore.notice">더보기</a>
+		<a onclick="writeView()">공지작성</a>
 	</div>
 
 	<c:if test="${notice_count == 0}">

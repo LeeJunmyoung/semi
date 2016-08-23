@@ -8,17 +8,6 @@
 </head>
 
 <script>
-function writeView() { // 공지 작성
-	url = "/HoneyComb/notice/noticeWriteForm.notice";
-	window.open(
-					url,
-					"post",
-					"toolbar=no ,width=550 ,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"
-				);
-}
-</script>
-
-<script>
 	function logout() {
 
 		var out = confirm("정말 로그아웃 하시겠습니까?");
@@ -40,7 +29,6 @@ function writeView() { // 공지 작성
 		<c:if test="${com_pos_num < 3 }">
 			<input type="button" value="가입승인"
 				onclick="location.href='/HoneyComb/Option_user/company_accept_member.option'" />
-				<input type="button" value="공지작성" onclick="writeView()"/>
 		</c:if>
 
 		<input type="button" value="마이페이지"

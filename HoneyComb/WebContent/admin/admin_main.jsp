@@ -1,114 +1,20 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>관리자 페이지</title>
-<style>
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
-	output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup,
-	menu, nav, section {
-	display: block;
-}
-
-body {
-	line-height: 1;
-}
-
-ol, ul {
-	list-style: none;
-}
-
-blockquote, q {
-	quotes: none;
-}
-
-blockquote:before, blockquote:after, q:before, q:after {
-	content: '';
-	content: none;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-#content {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 100;
-	filter: alpha(opacity = 50);
-	background: #e9ebee;
-}
-
-#main {
-	background: #e9ebee;
-	position: relative;
-	top: 150px;
-	height: 60%;
-	width: 200px;
-	margin: 0 auto;
-}
-
-#admin {
-	margin: 0 auto;
-	width: 300px;
-	height: 600;
-}
-
-#admin_name{
-font-size: 37px;
-}
-
-hr{
-width:300px;
-border-top:1px solid #bbb;
-border-bottom:1px solid #bbb;
-}
-
-.myButton {
-   background-color: #4367b0;
-   -moz-border-radius: 5px;
-   -webkit-border-radius: 5px;
-   border-radius: 5px;
-   display: inline-block;
-   cursor: pointer;
-   color: #fff;
-   font-size: 15px;
-   padding: 8px 25px;
-   text-decoration: none;
-   margin: 20px;
-   width: 200px;
-}
-
-.myButton:hover {
-   background-color: #344d91;
-}
-
-.myButton:active {
-   position: relative;
-   top: 1px;
-}
-</style>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript"
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/HoneyComb/view/script.js"></script>
 <script>
 	function logout() {
 
@@ -121,43 +27,151 @@ border-bottom:1px solid #bbb;
 		}
 	}
 </script>
+<style type="text/css">
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+#home_banner {
+	width: 100%;
+	height: 11%;
+	background: #344d91;
+	margin: 0;
+	padding: 0;
+}
+
+#logo_wrapper {
+	position: absolute;
+	left: 250px;
+	z-index: 3;
+}
+
+#logo_banner {
+	display: inline;
+	margin: auto;
+	width: 100px;
+	height: 100px;
+}
+
+#Honey_comB {
+	display: inline;
+	font-size: 38pt;
+	color: #fff;
+	vertical-align: middle;
+}
+
+#logo_a {
+	text-decoration: none;
+}
+
+.container {
+	position: absolute;
+	left: 250px;
+	padding: 0;
+}
+
+#col-md-12 {
+	padding: 0;
+}
+
+hr {
+	width: 500px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
+
+body {
+	background: #e9ebee;
+}
+
+.myButton {
+	background-color: #4367b0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	font-size: 15px;
+	padding: 8px 25px;
+	text-decoration: none;
+	margin: 20px;
+	width: 200px;
+}
+
+.myButton:hover {
+	background-color: #344d91;
+}
+
+.myButton:active {
+	position: relative;
+	top: 1px;
+}
+</style>
 
 </head>
 <body>
-
-	<div id="content">
-		<div id="main">
-
-			<div id="admin">
-				<center>
-				<h1 id=admin_name>Admin Page</h1>
-				<hr>
-					<p>
-						<tr>
-							<td><a
-								href="javascript:window.location='/HoneyComb/memCheck/memCheck_Main.mc'"
-								class="myButton">Present Condition</a></td>
-						</tr>
-					<p>
-						<tr>
-							<td><a
-								href="javascript:window.location='/HoneyComb/complete/complete_com.admin'"
-								class="myButton">Company Approval</a></td>
-						</tr>
-					<p>
-						<tr>
-							<td><a
-								href="javascript:window.location='/HoneyComb/admin/complete/complete_comNotice.jsp'"
-								class="myButton">Notice</a></td>
-						</tr>
-					<p>
-						<tr>
-							<td><a onclick="logout();return false;"
-								onkeypress="this.onclick;" class="myButton">Log Out</a></td>
-						</tr>
-				</center>
-			</div>
+	<div id="home_banner">
+		<div id="logo_wrapper">
+			<img id="logo_banner" src="/HoneyComb/view/Logo.png" width="100"
+				height="100" onclick="location.href='/HoneyComb/index.jsp'"> <a
+				id="logo_a" href="/HoneyComb/index.jsp"><p id="Honey_comB">HoneyComb</p></a>
 		</div>
 	</div>
+	<div class="container" style="height: 89%; width: 80%;">
+		<div class="cover">
+			<div class="navbar navbar-default"></div>
+
+			<div class="container" style="width: 70%;">
+				<div id="content">
+					<div id="main">
+
+						<div id="admin">
+							<center>
+								<h1 id=admin_name>Admin Page</h1>
+								<hr>
+								<p>
+									<tr>
+										<td><a
+											href="javascript:window.location='/HoneyComb/memCheck/memCheck_Main.mc'"
+											class="myButton">Present Condition</a></td>
+									</tr>
+								<p>
+									<tr>
+										<td><a
+											href="javascript:window.location='/HoneyComb/complete/complete_com.admin'"
+											class="myButton">Company Approval</a></td>
+									</tr>
+								<p>
+									<tr>
+										<td><a
+											href="javascript:window.location='/HoneyComb/admin/complete/complete_comNotice.jsp'"
+											class="myButton">Notice</a></td>
+									</tr>
+								<p>
+									<tr>
+										<td><a onclick="logout();return false;"
+											onkeypress="this.onclick;" class="myButton">Log Out</a></td>
+									</tr>
+							</center>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
 </body>
 </html>

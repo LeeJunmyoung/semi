@@ -5,104 +5,108 @@
 <head>
 <title>현황 확인 폼(가입인원 체크)</title>
 
-<style>
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
-	output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup,
-	menu, nav, section {
-	display: block;
-}
-
-body {
-	line-height: 1;
-}
-
-ol, ul {
-	list-style: none;
-}
-
-blockquote, q {
-	quotes: none;
-}
-
-blockquote:before, blockquote:after, q:before, q:after {
-	content: '';
-	content: none;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-input[type=text] {
-	height: 30px;
-	border-radius: 5px 5px 5px 5px;
-	font-size: 16px;
-	padding-left: 10px;
-	text-align: lift;
-}
-
-.myButton {
-	background-color: #4367b0;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	display: inline-block;
-	cursor: pointer;
-	color: #fff;
-	font-size: 15px;
-	padding: 8px 25px;
-	text-decoration: none;
-	margin: 20px;
-}
-
-.myButton:hover {
-	background-color: #344d91;
-}
-
-.myButton:active {
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<style type="text/css">
+#member_check {
 	position: relative;
-	top: 1px;
+	top: 30px;
+	width: 370px;
+	margin: auto;
 }
 
-hr {
-	width: 400px;
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
+td {
+	text-align: center;
 }
 
-#memCheck_name {
-	font-size: 37px;
+form {
+	margin: auto;
 }
 
-table, tr, th, td {
-	border-collapse: collapse;
-	border: 1px solid #ffffff; cellpadding =0; cellspacing =0;
-	font-size: 14px;
-	padding: 8px;
+.title {
+	background: #344d91;
+	color: white;
+}
+
+#title {
+	table-layout: fixed;
+	position: relative;
 	margin: 0 auto;
 }
 
-#memCheck_title th {
+#title>tbody {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 150px;
+}
+
+#title th {
+	background: #344d91;
 	color: white;
-	font-size: 16px; letter-spacing : 1.5px;
+	font-size: 16px;
+	letter-spacing: 1.5px;
 	font-weight: bold;
 	padding: 10px;
 	text-align: center;
+	color: white;
+}
+
+#text:nth-child(odd) {
+	background-color: #e9ebee;
+	color: black;
+}
+
+#text:hover {
+	background-color: #A4A4A4;
+	color: black;
+}
+
+#title_option tr {
+	height: 31px;
+}
+
+td {
+	vertical-align: middle;
+}
+
+#back_button {
+	position: relative;
+	top: 60px;
+}
+
+#back_button {
+	width: 50px;
+	margin: auto;
+}
+
+#back_button_div {
+	width: 60px;
+	margin: auto;
+}
+
+tr {
+	height: 31px;
+}
+
+td {
+	height: 31px;
+}
+
+h1_tag {
+	width: 230px;
+	margin: 0px;
+}
+
+h1 {
+	width: 200px;
+	margin: auto;
+}
+
+#no_member {
+	width: 680;
+	text-align: center;
+	font-size: 20pt;
+	margin: auto;
 }
 </style>
 
@@ -156,10 +160,13 @@ function in_focus(){
 			<p>
 				<c:if test="${ empty companyList }">
 					<tr>
-						<tr colspan="5"><p align="center">왜 조회가 안되니 데이터가 없잖니</p></td>
+					<tr colspan="5">
+						<p align="center">왜 조회가 안되니 데이터가 없잖니</p>
+						</td>
 					</tr>
 				</c:if>
-			<table border="1" id="memCheck_title"cellpadding="1" cellspacing="0" align="center">
+			<table border="1" id="memCheck_title" cellpadding="1" cellspacing="0"
+				align="center">
 				<c:if test="${ !empty companyList }">
 					<tr>
 						<td width="100" align="center">Company</td>

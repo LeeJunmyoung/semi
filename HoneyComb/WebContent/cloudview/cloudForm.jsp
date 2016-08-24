@@ -44,9 +44,7 @@ $(document).bind("contextmenu", function(event) {
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
     "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
-    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
-    "<a href="+"javascript:renameItem('"+ $(checkboxck).data('file_num')+"')><p>이름변경</p></a>"+
-    "<p>공유</p>"+    
+    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+  
     +"</div>")
     .appendTo("body")
     .css({top: event.pageY + "px", left: event.pageX + "px"});
@@ -56,8 +54,6 @@ $(document).bind("contextmenu", function(event) {
 	    "<a href='javascript:download()' id='fileonly'><p >다운로드</p></a>"+
 	    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
 	    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
-	    "<a href="+"javascript:renameItem('"+ $(checkboxck).data('file_num')+"')><p>이름변경</p></a>"+
-	    "<p>공유</p>"+    
 	    +"</div>")
 	    .appendTo("body")
 	    .css({top: event.pageY + "px", left: event.pageX + "px"});
@@ -104,6 +100,22 @@ $(document).bind("contextmenu", function(event) {
 </script>
 <title>Insert title here</title>
 <style type="text/css">
+/* 상단 버튼 수정 */
+.indexbutton{
+position:static;
+color:black;
+width:70px;
+height: 30px;
+background-color: #F8F8F8 ;	
+border: 1px solid silver;
+margin: 5px 0px;
+text-align: center;
+}
+.indexbutton:HOVER{
+background-color: silver;
+}
+/* 상단 버튼 수정 끝 */
+
 /* 폼 박스 수정 */
 div.file{
 
@@ -111,7 +123,7 @@ text-align: center;
 margin: auto;
 }
 div#item.item{
-width: 205px;
+width: 170px;
 display: inline-block;
 padding: 10px;
 }
@@ -135,10 +147,11 @@ display: none;
 /* 우클릭박스 수정 */
 div.cloud_menu{
 background-color: white;
-border: 1px solid black;
+border: 2px solid #F8F8F8;
 }
 div.cloud_menu a{
 text-decoration: none;
+color: black;
 }
 div.cloud_menu p{
 margin: 0px;
@@ -147,13 +160,16 @@ div.cloud_menu p:HOVER {
 background-color: silver;
 }
 /* 우클릭 박스 수정끝 */
+
 </style>
 </head>
 <body>
-mem_num = ${mem_num}
-	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')">
-	<input type="button" name="download" value="다운로드" onclick="download()">
-	<input type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')">
+mem_num = ${mem_num}<br>	
+<div class="indexbox">
+	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')" class="indexbutton">
+	<input type="button" name="download" value="다운로드" onclick="download()"class="indexbutton">
+	<input type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')" class="indexbutton">
+</div>
 	<form name="searchform" action="">
 		<input type="text" name="search">
 		<input type="button" name="searchbutton" value="검색">

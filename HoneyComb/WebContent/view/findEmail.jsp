@@ -7,6 +7,43 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<title>Email찾기</title>
+<script type="text/javascript">
+
+
+
+function filter(){
+	if($('#phone1').val().length==3){
+	
+		$('#phone2').focus();
+	 
+	
+	return false;
+
+	}
+	if($('#phone2').val().length==4){
+		
+		$('#phone3').focus();
+	 
+	
+	return false;
+
+	}
+}
+
+
+function filter1(){
+	if($('#phone2').val().length==4){
+		
+		$('#phone3').focus();
+	 
+	
+	return false;
+
+	}
+}
+</script>
 <style type="text/css">
 a:link {text-decoration: none; color: #333333;}
 a:visited {text-decoration: none; color: #333333;}
@@ -83,17 +120,19 @@ width:200;
              <div class="container" style="width:70%;">
                 <div class="row">
                   <div class="col-md-12 text-center">
-             <form action="/HoneyComb/coin/FindEmailPro.coin">
-	이름을 입력해주세요<br><br>
+                    <form action="/HoneyComb/coin/FindEmailPro.coin">
+	<h4>이름을 입력해주세요</h4>
 	<input type="text"  placeholder="Name" name="name" id="name"/><br><br>
-	전화번호를 입력해주세요<br><br>
+	<h4>전화번호를 입력해주세요</h4>
 	<div id="phone">
 		<input type="text"  placeholder="phone1" id='phone1'  name="phone1" maxlength="3"  onkeyup='{filter();return false}' onkeypress='javascript:if(event.keyCode==3){ filter(); return false;}'/> -
 		<input	type="text"  placeholder="phone2" id='phone2' name="phone2" maxlength="4"  onkeyup='{filter1();return false}' onkeypress='javascript:if(event.keyCode==4){ filter1(); return false;}'/>  -
-		<input type="text"  placeholder="phone3" id='phone3' name="phone3" maxlength="4"/><br><br>
-</div>
+		<input type="text"  placeholder="phone3" id='phone3' name="phone3" maxlength="4"/><br>
+    </div>
+    <br>
 	<input type="submit" class="btn btn-default" value="find Email" id="findEmail"/>
 	</form>
+            
                   </div>
                 </div>
               </div>
@@ -101,4 +140,3 @@ width:200;
           </div>
 </body>
 </html>
-

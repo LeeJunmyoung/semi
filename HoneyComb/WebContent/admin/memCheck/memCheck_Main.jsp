@@ -8,10 +8,19 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <style type="text/css">
+
+input[type=text] {
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 16px;
+	padding-left: 10px;
+	text-align: lift;
+}
+
 #member_check {
 	position: relative;
 	top: 30px;
-	width: 370px;
+	width: -50px;
 	margin: auto;
 }
 
@@ -85,21 +94,26 @@ td {
 }
 
 tr {
+    width: 100px;
 	height: 31px;
 }
 
 td {
+    width: 100px;
 	height: 31px;
 }
 
-h1_tag {
-	width: 230px;
-	margin: 0px;
+#h1_tag {
+	width: 500px;
+	margin: auto;
+	font-size: 40px;
+	text-align: center;
 }
 
 h1 {
-	width: 200px;
+	width: 500px;
 	margin: auto;
+	text-align: center;
 }
 
 #no_member {
@@ -107,6 +121,11 @@ h1 {
 	text-align: center;
 	font-size: 20pt;
 	margin: auto;
+}
+#memCheck_table{
+width: 800px;
+text-align:center;
+margin:auto;
 }
 </style>
 
@@ -148,53 +167,51 @@ function in_focus(){
 	}
 </script>
 </head>
-<body bgcolor="#e9ebee" onload="in_focus()">
-	<div id="admin">
+<body onload="in_focus()">
+	<div id='h1_tag'>
+	<br>
+	Present Condition
+	</div>
+	<div id="member_check">
 		<form name="join_company" align="center" method="post"
 			action="/HoneyComb/memCheck/memCheck_ComSearch.mc">
-			<h1 id="memCheck_name">Present Condition</h1>
-			<hr>
+			<hr><br>
 			<input type="text" placeholder="Company" id="com_name"
 				onkeyup='{filter();return false}'
 				onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
 			<p>
+			<br><br>
 				<c:if test="${ empty companyList }">
 					<tr>
 					<tr colspan="5">
-						<p align="center">왜 조회가 안되니 데이터가 없잖니</p>
-						</td>
+						<p id='no_member'>회사가 없습니다.</p>
 					</tr>
 				</c:if>
-			<table border="1" id="memCheck_title" cellpadding="1" cellspacing="0"
-				align="center">
+			<table border='1px' id="memCheck_table">
 				<c:if test="${ !empty companyList }">
 					<tr>
-						<td width="100" align="center">Company</td>
-						<td width="250" align="center">Address</td>
-						<td width="70" align="center">Affiliation</td>
-						<td width="150" align="center">PhoneNumber</td>
-						<td width="70" align="center">Detail</td>
+						<td width="100" class="title" align="center">Company</td>
+						<td width="250" class="title" align="center">Address</td>
+						<td width="70" class="title" align="center">Affiliation</td>
+						<td width="150" class="title" align="center">PhoneNumber</td>
+						<td width="70" class="title" align="center">Detail</td>
 					</tr>
 					<c:forEach var="com" items="${ companyList }">
-
-						<tbody id="modify">
-
-							<tr id="check_com" name="${ com.com_name }">
+							<tr id="text" name="${ com.com_name }">
 								<td width="100" align="center">${ com.com_name }</td>
 								<td width="250" align="center">${ com.com_add }</td>
 								<td width="70" align="center">${ com.com_aff }</td>
 								<td width="150" align="center">0${ com.com_phone }</td>
-								<td><input type="button" value="memberList"
-									onclick="memberList(${ com.com_num })"></td>
-							</tr>
-						</tbody>
-					</c:forEach>
+								<td><input type="button" class="btn btn-primary btn-xs" value="memberList"
+									onclick="memberList(${ com.com_num })"></td></tr>
+									</c:forEach>
 				</c:if>
 			</table>
-			<tr>
-				<td align="center"><a onclick="history.go(-1)" class="myButton">back</a></td>
-			</tr>
+			<div id ="back_button_div">
+
+<input type="button" class="btn btn-primary btn-xs" value="back" id='back_button' onclick="history.go(-1)">
+</div>
 		</form>
-	</div>
+		</div>
 </body>
 </html>

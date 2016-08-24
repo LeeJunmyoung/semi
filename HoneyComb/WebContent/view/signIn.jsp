@@ -132,8 +132,8 @@ width:405;
 #email{
 position:relative;
 left:42px;
-width:200px;
-height:30px;
+width:250px;
+height:35px;
 text-align:center;
 }
 #mailcheck{
@@ -144,35 +144,36 @@ height:30px;
 #passwd{
 position:relative;
 left:-3px;
-width:200px;
-height:30px;
+width:250px;
+height:35px;
 text-align:center;
 }
 #checkpasswd{
 position:relative;
 left:-3px;
-width:200px;
-height:30px;
+width:250px;
+height:35px;
 text-align:center;
 }
 #name{
 position:relative;
 left:-3px;
-width:200px;
-height:30px;
+width:250px;
+height:35px;
 text-align:center;
 }
 
 .mailcheck{
 width:80px;
+height:35px;
 }
 #phone input{
 text-align:center;
-width:60px;
-height:30px;
+width:77px;
+height:35px;
 }
 #signin{
-width:200;
+width:250;
 }
 
 </style>

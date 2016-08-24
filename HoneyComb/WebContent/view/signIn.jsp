@@ -221,7 +221,6 @@ width:200;
      <button type="submit" class="btn btn-default" name="signin" id="signin">회원가입</button>
 </form>
                    </div>
-
             
                   </div>
                 </div>

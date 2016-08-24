@@ -104,7 +104,7 @@
 			
 				<c:forEach var="article" items="${articleList}">
 				  <div class="modal fade" id="notice_content_${article.notice_num}" role="dialog">
-				    <div class="modal-dialog modal-lg">
+				    <div class="modal-dialog modal-sm">
 				      <div class="modal-content">
 				        <div class="modal-header">
 				          <button type="button" class="close" data-dismiss="modal" onclick="location.reload()">&times;</button>
@@ -120,6 +120,7 @@
 				    </div>
 				  </div>
 				</c:forEach>
+				
 				
 			</c:if>
 			

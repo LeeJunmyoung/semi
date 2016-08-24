@@ -49,8 +49,36 @@ top:50px;
 
 											},
 											height : 'auto',
-										
-										
+											
+											eventClick : function(event) {
+												
+												if (event.title) {
+													
+													var start = datetoHtml(event.start);
+													if(event.end==null){
+														event.end=Number(event.start+86400000);
+													}
+													var end = datetoHtml(Number(event.end)-86400000);
+													
+													var url = "/HoneyComb/Calendar/main_curd_cal_page.jsp?num="+event.number+"&title="
+															+ event.title
+															+ "&start="
+															+ start
+															+ "&end="
+															+ end
+															+ "&contents="
+															+ event.Contents;
+															+ "&type=nonono"
+
+													open(
+															url,
+															"confirm",
+															"toolbar=no,location=no,status=no,menubar=no,"
+																	+ "scrollbars=no,resizable=no,width=450,height=300,left=400,top=200");
+
+												}
+
+										}
 
 										});
 
@@ -94,6 +122,25 @@ top:50px;
 								</c:forEach>
 
 							}
+
+						}
+						
+						function datetoHtml(time) {
+							
+							var time_temp;//13자리
+							var date = new Date(time);
+							
+							time_temp=(Number(date.getYear())+1900)+"-";
+							if(date.getMonth()<10){
+								time_temp=time_temp+"0";
+							}
+							time_temp=time_temp+(Number(date.getMonth())+1)+"-";
+							if(date.getDate()<10){
+								time_temp=time_temp+"0";
+							}
+							time_temp=time_temp+date.getDate();
+							//alert(time_temp);
+							return time_temp;
 
 						}
 						

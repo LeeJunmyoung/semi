@@ -93,7 +93,7 @@ top :80px;
 #form_submit input{
 display: inline;
 position: relative;
-left: 215px;
+left: 227px;
 }
 </style>
 <script type="text/javascript">
@@ -137,7 +137,7 @@ left: 215px;
 																url,
 																"confirm",
 																"toolbar=no,location=no,status=no,menubar=no,"
-																		+ "scrollbars=no,resizable=no,width=450,height=300");
+																		+ "scrollbars=no,resizable=no,width=450,height=300,left=400,top=200");
 
 													}
 
@@ -263,7 +263,7 @@ left: 215px;
 		
 		<div id = 'contents_form'>	<p>내용 : </p><textarea rows="3" cols="30" name="contents" placeholder="CONTENTS" class="form-control" id='contents' ></textarea></div>
 
-		<div id = "form_submit">	<input type="submit" id="view" value ="등록"></input> <input type="reset" value = "초기화">
+		<div id = "form_submit">	<input type="submit" id="view" class="btn btn-primary btn-xs" value ="등록"></input> <input type="reset" class="btn btn-primary btn-xs" value = "초기화">
 	
 		</div>
 	

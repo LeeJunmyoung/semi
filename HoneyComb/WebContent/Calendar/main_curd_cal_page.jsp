@@ -48,6 +48,8 @@ width: auto;
 #form_title input{
 display: inline;
 width: 250px;
+
+background: white;
 }
 
 
@@ -67,6 +69,8 @@ display: inline;
 #form_date input{
 display: inline;
 width: 155px;
+
+background: white;
 }
  
 #form_contents{
@@ -84,6 +88,7 @@ position: relative;
 
 display: inline;
 width: 355px;
+background: white;
 }
 #form_contents p{
 position:relative;
@@ -95,10 +100,9 @@ display: inline;
 #form_button{
 position: absolute;
 top: 225px;
-left:308px;
+left:388px;
 
 }
-
  
 </style>
 
@@ -106,25 +110,25 @@ left:308px;
 
 
 </head>
-<body style="background: #e9ebee">
+<body style="background: #e9ebee" >
 	<form action="/HoneyComb/Calendar/modify.cal" method="post"  >
 	
 	
-<div id = "form_title">		<p>제목 :</p> <input type="text" id='title' name="title" placeholder="SUBJECT" value="${param.title }" class="form-control"/>
+<div id = "form_title">		<p>제목 :</p> <input type="text" id='title' readonly="readonly" name="title" placeholder="SUBJECT" value="${param.title }" class="form-control"/>
 	</div>		 
- <div id = "form_date">	<p>	시작 :</p> <input type="date"	id='startDate' name="startDate" placeholder="일" value="${param.start}" class="form-control"/> 
-	<p>	종료 : </p> <input type="date"	id='endDate' name="endDate" placeholder="일" value="${param.end}" class="form-control"/>
+ <div id = "form_date">	<p>	시작 :</p> <input type="date"	readonly="readonly" id='startDate' name="startDate" placeholder="일" value="${param.start}" class="form-control"/> 
+	<p>	종료 : </p> <input type="date" readonly="readonly"	id='endDate' name="endDate" placeholder="일" value="${param.end}" class="form-control"/>
 			 </div>
 			 
 			 
-<div id = "form_contents">		<p>내용 :</p> <textarea rows="3" id='contents' cols="30" name="contents" placeholder="CONTENTS"  class="form-control">${param.contents}</textarea>
+<div id = "form_contents">		<p>내용 :</p> <textarea rows="3" id='contents' cols="30" name="contents" placeholder="CONTENTS"  readonly="readonly" class="form-control">${param.contents}</textarea>
 			 </div>
 			 
 		
 <div id= 'form_button'>
 			 
-			 <input type="submit" class="btn btn-primary btn-xs" id="modify" value="수정"/>
-			 <input type="button" class="btn btn-primary btn-xs" id ="del" value = "삭제" onclick="location.href='del_cal.cal?number=${param.num}'"/>
+			 <input type="hidden" id="modify" value="수정" />
+			 <input type="hidden" id ="del" value = "삭제" onclick="location.href='del_cal.cal?number=${param.num}'"/>
 			 
 			 
 			 <input type="button" class="btn btn-primary btn-xs" value="닫기" onclick="window.close()">

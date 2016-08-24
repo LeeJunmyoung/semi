@@ -239,3 +239,17 @@ display: block;
 	margin : 5px;
 	
 }
+
+#option_member_list{
+	width: 680px;
+	height: 900px;
+	margin:auto;
+
+	
+}
+
+#option_accept_member{
+		width: 680px;
+	height: 900px;
+	margin:auto;
+}

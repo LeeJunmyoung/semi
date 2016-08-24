@@ -40,7 +40,7 @@
 	}
 </script>
 
-<body onload="pop_up()">
+<body onload="pop_up()"   >
 
 	<div id="main_notice">
 		<jsp:include page="/notice/noticeMain.jsp"></jsp:include>

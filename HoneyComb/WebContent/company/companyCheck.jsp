@@ -8,65 +8,286 @@
 <head>
 <title>회사 검색</title>
 <script>
+	function in_focus() {
+		document.comSearch.com_name.focus();
+	}
+	
 	function comCheck() {
 		if (document.comSearch.com_name.value == "") {
-			alert("사업장명을 입력하세요!");
+			alert("검색할 사업장명을 입력하세요");
 			return false;
 		}
 
 		return true;
 	}
-	function send_com_name(conName,com_num) {
+	function send_com_name(conName, com_num) {
 		var sendcom = conName;
 		var send_num = com_num;
 		opener.document.com_search.com_num.value = com_num;
-		opener.document.com_search.com_name.value = sendcom; 
+		opener.document.com_search.com_name.value = sendcom;
 		window.close();
 	}
-
-/* 	function resultCheck() {
-		var result = com_name + " " + com + add + " " + com + phone;
-
-	} */
 </script>
+
+<!-- css 초기화 START -->
+<style>
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+</style>
+<!-- css 초기화 END -->
+
+<style>
+#content {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	filter: alpha(opacity = 50);
+	background: #e9ebee;
+}
+
+#main {
+	background: #fff;
+	position: relative;
+	height: 100%;
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.down {
+	position: relative;
+	top: 30px;
+	background: #fff;
+}
+
+input[type=text] {
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 16px;
+	padding-left: 10px;
+	text-align: lift;
+	width: 220px;
+}
+
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid #fff;
+	cellpadding: 0;
+	cellspacing: 0;
+	font-size: 14px;
+	padding: 8px;
+}
+
+#title {
+	table-layout: fixed;
+	position: relative;
+	margin: 0 auto;
+}
+
+#title>tbody {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 150px;
+}
+
+#title th {
+	background: #344d91;
+	color: white;
+	font-size: 16px;
+	letter-spacing: 1.5px;
+	font-weight: bold;
+	padding: 10px;
+	text-align: center;
+	color: white;
+}
+
+#text:nth-child(odd) {
+	background-color: #e9ebee;
+	color: black;
+}
+
+#text:hover {
+	background-color: #A4A4A4;
+	color: black;
+}
+
+#add {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+#phone {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.title {
+	background: #344d91;
+	color: white;
+}
+
+p {
+	font-size: 15px;
+}
+
+.close {
+	background-color: #4367b0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	font-size: 15px;
+	padding: 8px 25px;
+	text-decoration: none;
+	margin: 0 auto;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.close:hover {
+	background-color: #344d91;
+}
+
+.close:active {
+	position: relative;
+	top: 1px;
+}
+
+hr {
+	width: 400px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #fff
+}
+
+hr : after {
+	content: '';
+	display: block;
+	margin-top: 2px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #fff
+}
+
+h3 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+#com_add {
+	text-overflow: ellipsis;
+}
+
+#search {
+	width: 20px;
+	height: 20px;
+}
+
+#com_name {
+	text-decoration: none;
+	color: black;
+}
+
+.s {
+	position: relative;
+	left: 15px;
+}
+</style>
 </head>
-<body bgcolor="<%=bodyback_c%>">
+<body style="background: #e9ebee;" onload="in_focus()">
+
+	<div id="content">
+		<div id="main">
 
 
-		<form name="comSearch" method="post" action="/HoneyComb/company/companyCheckPro.company" onsubmit="return comCheck()">
-			<tr>
-				<td><br> 사업장명 <input type="text" name="com_name">
-					<input type="submit" value="찾기" ></td>
-				<!-- <table width="300" border="1" cellspacing="0" cellpadding="3"
+			<div class="down">
+				<form name="comSearch" method="post"
+					action="/HoneyComb/company/companyCheckPro.company"
+					onsubmit="return comCheck()">
+					<h3>사업장 검색</h3>
+					<hr class="subject">
+					<input type="text" name="com_name" placeholder="COMPANY NAME SEARCH" class="s">
+					<input type="image" value="찾기" src="view/search.png" id="search" class="s">
+					<!-- <table width="300" border="1" cellspacing="0" cellpadding="3"
 				align="center"> -->
-			</tr>
-		</form>
-		<c:if test="${ empty comList }">
-			<tr>
-				<td align="center"><br>검색된 결과가 없습니다</td>
-			</tr>
-		</c:if>
-		<c:if test="${ !empty comList }">
-			<tr>
-				<td align="center"><br> ※ 아래 회사명을 클릭하면 자동으로 입력됩니다</td>
-			</tr>
-			<c:forEach var="search" items="${ comList }">
-			<br><p>
-				<tr>
-					<td><a href="javascript:send_com_name('${search.com_name}','${search.com_num}' )" >
-							${search.com_name}&nbsp; ${search.com_add}&nbsp; ${search.com_phone}&nbsp;
-						
-					</a><br></td>
-				</tr>
-			</c:forEach>
-		</c:if>
-		<br>
-		<tr>
-			<td align="center"><br> <a href="javascript:this.close();">닫기</a>
-			</td>
-		</tr>
+				</form>
+			</div>
 
-		</table>
+
+			<div class="down">
+				<c:if test="${ empty comList }">
+					<br>
+					<p>검색된 결과가 없습니다</p>
+				</c:if>
+				<c:if test="${ !empty comList }">
+					<br>
+					<p>※ 아래 회사명을 클릭하면 자동으로 입력됩니다</p>
+					<br>
+					<table id="title">
+						<tr>
+							<td class="title">Company name</td>
+							<td class="title" id="add">Address</td>
+							<td class="title" id="phone">Phone</td>
+						</tr>
+						<c:forEach var="search" items="${ comList }">
+							<tbody>
+								<tr id="text">
+									<td><a
+										href="javascript:send_com_name('${search.com_name}','${search.com_num}' )"
+										id="com_name"> ${search.com_name} </a></td>
+									<td id="com_add">${search.com_add}</td>
+									<td>${search.com_phone}</td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+				</c:if>
+				<br> <a href="javascript:this.close();" class="close">닫기</a>
+			</div>
+		</div>
+	</div>
 
 
 </body>

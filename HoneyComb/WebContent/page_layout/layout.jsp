@@ -10,7 +10,7 @@
 
 
 </head>
-<body>
+<body background="red">
 
 	<div id="page_container">
 
@@ -20,7 +20,7 @@
 
 		</div>
 		
-	<div id ="page_center_contents">
+	<div id ="page_center_contents" >
 	
 		<div id="page_sidebar">
 

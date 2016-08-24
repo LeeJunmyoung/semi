@@ -45,7 +45,7 @@
 	function searchCheck() {
 
 		if (!document.com_search.com_name.value) {
-			alert("사업장명을 입력하세요");
+			alert("사업장을 선택해주세요");
 			return false;
 		}
 
@@ -71,7 +71,7 @@
 				.open(
 						url,
 						"post",
-						"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+						"toolbar=no, left=200, top=100, width=700, height=400, directories=no, status=yes, scrollbar=yes, menubar=no");
 	}
 </script>
 <script type='text/javascript'
@@ -79,18 +79,37 @@
 <script>
 	$(document).ready(function() {
 		$("#one").click(function() {
-			$("#one").css("background", "#fff");
+/* 			$("#one").css("background", "#fff");
 			$("#one").css("color", "black");
 			$("#two").css("background", "#344d91");
-			$("#two").css("color", "white");
+			$("#two").css("color", "white"); */
 			$("#company_form").css("display", "block");
 			$("#company_find_form").css("display", "none");
 		});
-		$("#two").click(function() {
+		$("#one").mouseenter(function() {
+			$("#one").css("background", "#fff");
+			$("#one").css("color", "black");
+		});
+		$("#one").mouseleave(function() {
 			$("#one").css("background", "#344d91");
-			$("#one").css("color", "white");
+			$("#one").css("color", "#fff");
+		});
+		
+		
+		$("#two").mouseenter(function() {
 			$("#two").css("background", "#fff");
 			$("#two").css("color", "black");
+		});
+		
+		$("#two").mouseleave(function() {
+			$("#two").css("background", "#344d91");
+			$("#two").css("color", "#fff");
+		});
+		$("#two").click(function() {
+			/* $("#one").css("background", "#344d91");
+			$("#one").css("color", "white");
+			$("#two").css("background", "#fff");
+			$("#two").css("color", "black"); */
 			$("#company_form").css("display", "none");
 			$("#company_find_form").css("display", "block");
 		});
@@ -157,7 +176,7 @@ table {
 	filter: alpha(opacity = 50);
 	background: #e9ebee;
 }
-
+/* 4367b0 */
 #main {
 	background: #e9ebee;
 	position: relative;
@@ -198,14 +217,14 @@ input[type=radio].ch {
 }
 
 #menu>label#one {
-	border-right: none;
+	border-right: 0.5px solid;
 	border-top-left-radius: 10px;
-	background: #fff;
-	color: black;
+	background: #344d91;
+	color: white;
 }
 
 #menu>label#two {
-	border-left: none;
+	border-left: 0.5px solid;
 	border-top-right-radius: 10px;
 	background: #344d91;
 	color: white;
@@ -246,44 +265,20 @@ input[type=radio].ch {
 }
 
 .submit {
-	-moz-box-shadow: inset 0px 0px 0px 0px #54a3f7;
-	-webkit-box-shadow: inset 0px 0px 0px 0px #54a3f7;
-	box-shadow: inset 0px 0px 0px 0px #54a3f7;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1
-		), color-stop(1, #0061a7));
-	background: -moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
-	background: -webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
-	background: -o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
-	background: -ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
-	background: linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1',
-		endColorstr='#0061a7', GradientType=0);
-	background-color: #007dc1;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	border: 2px solid #124d77;
+	background-color: #4367b0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 	display: inline-block;
 	cursor: pointer;
-	color: #ffffff;
-	font-family: Arial;
-	font-size: 13px;
-	padding: 6px 22px;
+	color: #fff;
+	font-size: 15px;
+	padding: 8px 25px;
 	text-decoration: none;
-	text-shadow: 0px 1px 0px #154682;
 }
 
 .submit:hover {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7
-		), color-stop(1, #007dc1));
-	background: -moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
-	background: -webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
-	background: -o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
-	background: -ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
-	background: linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7',
-		endColorstr='#007dc1', GradientType=0);
-	background-color: #0061a7;
+	background-color: #344d91;
 }
 
 .submit:active {
@@ -295,16 +290,17 @@ input[type=text] {
 	height: 30px;
 	border-radius: 5px 5px 5px 5px;
 	font-size: 16px;
-	text-align: center;
+	padding-left: 10px;
+	text-align: lift;
 }
 
 .cname {
-	width: 200px;
+	width: 340px;
 	margin: 10px;
 }
 
 .cadd {
-	width: 300px;
+	width: 340px;
 	margin: 10px;
 }
 
@@ -316,15 +312,57 @@ input[type=text] {
 select {
 	width: 120px;
 	height: 30px;
+	padding-left: 5px;
 	border-radius: 5px 5px 5px 5px;
 	margin: 10px;
 	font-size: 16px;
 }
+
+hr {
+	width: 400px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #fff;
+}
+
+hr : after {
+	content: '';
+	display: block;
+	margin-top: 3px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #fff;
+}
+
+h3 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.subject {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
 
+
+
+
 	<div id="content">
+	
 		<div id="main">
 
 
@@ -340,14 +378,16 @@ select {
 				<div id="company_form">
 					<form name="com_regi"
 						action="/HoneyComb/company/companyPro.company">
-						<input type="text" placeholder=" company name" name="com_name"
+						<h3>사업장 등록</h3>
+						<hr class="subject">
+						<input type="text" placeholder="COMPANY NAME" name="com_name"
 							class="cname" size="10"><br> <input type="text"
-							placeholder="address" name="com_add" class="cadd" size="30"><br>
-						전화번호 <input type="text" name="com_phone1" size="3" class="cphone"
+							placeholder="ADDRESS" name="com_add" class="cadd" size="30"><br>
+						PHONE <input type="text" name="com_phone1" size="3" class="cphone"
 							maxlength="3"> - <input type="text" name="com_phone2"
 							size="4" class="cphone" maxlength="4"> - <input
 							type="text" name="com_phone3" size="4" class="cphone"
-							maxlength="4"><br> <br> 회사 계열<select
+							maxlength="4"><br> <br> AFFILIATE<select
 							name="com_aff">
 							<option value="선택하세요">선택하세요</option>
 							<option value="Sample1">Sample1</option>
@@ -357,7 +397,9 @@ select {
 							<option value="Sample5">Sample5</option>
 							<option value="Sample6">Sample6</option>
 							<option value="Sample7">Sample7</option>
-						</select> <br> <br> <a href="javascript:com_regi.submit();"
+						</select>
+						<hr>
+						<br> <br> <a href="javascript:com_regi.submit();"
 							onclick="return inputCheck()" class="submit">등록완료</a>
 						<!-- <input type="submit" value="등록하기" /> -->
 					</form>
@@ -368,10 +410,12 @@ select {
 					<form name="com_search" method="post"
 						action="Company_Temp_Join.company">
 						<!-- onSubmit="return searchCheck()" -->
-						<input type="text" placeholder="company name" name="com_name"
+						<h3>내 회사 등록</h3>
+						<hr class="subject">
+						<input type="text" placeholder="COMPANY NAME SEARCH" name="com_name"
 							class="cname" readonly> <img src="view/search.png"
 							id="search" value="찾기" onClick="companyCheck();"><br>
-						<input type="hidden" name="com_num" /> 부서<select
+						<input type="hidden" name="com_num" />DEPARTMENT<select
 							name="com_dept_num">
 							<option value="-1">선택하세요</option>
 							<option value="0">총무</option>
@@ -387,14 +431,16 @@ select {
 							<option value="10">비서</option>
 							<option value="11">생산</option>
 							<option value="12">etc</option>
-						</select><br> 직급<select name="com_pos_name">
+						</select><br>POSITION<select name="com_pos_name">
 							<option value="선택하세요">선택하세요</option>
 							<option value="사원">사원</option>
 							<option value="대리">대리</option>
 							<option value="팀장">팀장</option>
 							<option value="부장">부장</option>
 							<option value="과장">과장</option>
-						</select><br> <br> <a href="javascript:com_search.submit();"
+						</select>
+						<hr>
+						<br> <br> <a href="javascript:com_search.submit();"
 							onclick="return searchCheck()" class="submit">등록완료</a>
 						<!-- <input type="submit" value="등록하기"> -->
 					</form>

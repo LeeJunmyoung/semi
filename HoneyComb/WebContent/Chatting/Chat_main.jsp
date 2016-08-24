@@ -315,7 +315,7 @@ function new_msg(num){
 	        Chat.initialize = function() {
 	            if (window.location.protocol == 'http:') {
 	                //Chat.connect('ws://' + window.location.host + '/websocket/chat');
-	            	Chat.connect('ws://192.168.42.80:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver=99999&chat_Num=99999&my_name=defult');
+	            	Chat.connect('ws://192.168.123.105:8888/HoneyComb/websocket/Chatting?mem_name='+mem_num+'&receiver=99999&chat_Num=99999&my_name=defult');
 	            } else {
 	                Chat.connect('wss://' + window.location.host + '/websocket/Chatting?mem_name='+mem_num+'&receiver=99999&chat_Num=99999&my_name=defult');
 	            }

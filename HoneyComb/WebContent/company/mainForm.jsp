@@ -65,7 +65,7 @@
 
 	function companyCheck() {
 
-		url = "companyCheck.jsp";
+		url = "/HoneyComb/company/companyCheck.jsp";
 
 		window
 				.open(

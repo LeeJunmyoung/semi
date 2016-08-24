@@ -7,6 +7,9 @@
 
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
+	<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <style type="text/css">
 
 input[type=text] {
@@ -130,15 +133,20 @@ margin:auto;
 </style>
 
 
-<script type='text/javascript'
-	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+
 <script type='text/javascript'>
 	function filter(){
-		if($('#com_name').val()=="")
-			$("#modify tr").css('display','');			
+		
+		
+		if($('#com_name_search').val()==""){
+			$("#memCheck_table tr").css('display','');			
+			$("#visible_tr").css('display','');
+		}
 		else{
-			$("#modify tr").css('display','none');
-			$("#modify tr[name*='"+$('#com_name').val()+"']").css('display','');
+			
+			$("#memCheck_table tr").css('display','none');
+			$("#memCheck_table tr[name*='"+$('#com_name_search').val()+"']").css('display','');
+			$("#visible_tr").css('display','');		
 		}
 		return false;
 	}
@@ -148,17 +156,9 @@ margin:auto;
 <script>
 
 function in_focus(){
-	document.join_company.com_name.focus();
+	/* document.join_company.com_name_search.focus(); */
 }
 
-	function searchClick() {
-		if(!document.join_company.com_name.value) {
-			alert("조회할 사업장명을 입력해주세요!");
-			return false;
-		}
-		
-		return true;
-	}
 	
 	function memberList(com_num) {
 
@@ -176,7 +176,7 @@ function in_focus(){
 		<form name="join_company" align="center" method="post"
 			action="/HoneyComb/memCheck/memCheck_ComSearch.mc">
 			<hr><br>
-			<input type="text" placeholder="Company" id="com_name"
+			<input type="text" placeholder="Company" id="com_name_search"
 				onkeyup='{filter();return false}'
 				onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
 			<p>
@@ -189,7 +189,7 @@ function in_focus(){
 				</c:if>
 			<table border='1px' id="memCheck_table">
 				<c:if test="${ !empty companyList }">
-					<tr>
+					<tr id='visible_tr'>
 						<td width="100" class="title" align="center">Company</td>
 						<td width="250" class="title" align="center">Address</td>
 						<td width="70" class="title" align="center">Affiliation</td>

@@ -10,29 +10,56 @@
  $(function(){
 	if(	$('#foldercheck').val() != ""){
 		alert("'"+'${param.name}'+"'"+"은 이미 있는 폴더입니다. 다른 폴더명을 입력해 주세요");
-	}
-	if($('#uploadcheck').val() == 'done'){
-		var result = confirm('파일을 더 업로드하시겠습니까?')
-		if(result){
-			$('#uploadcheck').val('true');
-		}else{
-			window.opener.document.location.reload();
-			window.close();
 		}
-	}
-})
+	})
 </script>
+<style type="text/css">
+body{
+text-align:  center;
+background-color: #E9EBEE;
+}
+/* 기본버튼설정 */
+.indexbutton{
+
+
+color:black;
+width:70px;
+height: 30px;
+background-color: #F8F8F8 ;	
+border: 1px solid silver;
+text-align: center;
+cursor: pointer;
+margin-left: -6px;
+}
+.indexbutton:HOVER{
+background-color: silver;
+border: 1px solid silver;
+}
+/* 기본버튼설정 끝 */
+/* 텍스트 기본설정 */
+.foldertext{
+height: 23px;
+padding-top: 3px;
+}
+/* 텍스트 기본설정 끝 */
+</style>
 
 <title>Insert title here</title>
 </head>
-<body>
-<form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('foldername')">
-<input type="text" name="foldername">
-<input type="hidden" value="${param.uploadcheck}" id="uploadcheck">
-uploadcheck::${uploadcheck}
-<input type="hidden" value="${param.name}" id="foldercheck">
-<input type="hidden" value="${param.folder}" name="folder">
-<input type="submit" value="폴더 생성">
+<body onload="refresh()">
+<form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('foldername')" class="foldertext">
+<h3>
+생성할 폴더 이름을 입력해 주세요
+</h3>
+<div>
+	<input type="text" name="foldername" class="foldertext">
+	<input type="submit" value="폴더 생성" class="indexbutton">
+	<input type="hidden" value="${param.uploadcheck}" id="uploadcheck">
+	<input type="hidden" value="${param.name}" id="foldercheck">
+	<input type="hidden" value="${param.folder}" name="folder">
+	com_Num:${com_num}
+	
+</div>
 </form>
 </body>
 </html>

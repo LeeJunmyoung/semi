@@ -28,7 +28,7 @@ public class FileUploader implements CommandActionCloud{
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
 			//저장 기본경로
-			String savefilepath = "C://Users//mia//Downloads";
+			String savefilepath = "D://cloud/";
 			HttpSession session = request.getSession();
 			
 			//파일먼저 업로드
@@ -61,7 +61,7 @@ public class FileUploader implements CommandActionCloud{
 				//session 불러오기
  
 				String name = (String)session.getAttribute("name");
-				int com_num = (int)session.getAttribute("com_num");
+				int com_num = Integer.parseInt(String.valueOf(session.getAttribute("com_num")));
 				int mem_num = (int)session.getAttribute("mem_num");
 				String folder = request.getParameter("folder");
 				int promgr_num = 0;//프로젝트 없으면 0일 수 있도록 초기화

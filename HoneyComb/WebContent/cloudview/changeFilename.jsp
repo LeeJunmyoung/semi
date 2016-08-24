@@ -9,30 +9,46 @@
 <script>
 window.opener.location.reload();
 </script>
+<style type="text/css">
+body{
+text-align:  center;
+background-color: #E9EBEE;
+}
+/* 기본버튼설정 */
+.indexbutton{
+position:static;
+color:black;
+width:70px;
+height: 31px;
+background-color: #F8F8F8 ;	
+border: 1px solid silver;
+margin-left: -6px;
+text-align: center;
+cursor: pointer;
+}
+.indexbutton:HOVER{
+background-color: silver;
+}
+.renametext{
+height: 23px;
+padding-top: 3px;
+}
+/* 기본버튼설정 끝 */
+</style>
 <title>Insert title here</title>
 </head>
 <body>
-	중복::${param.dupli} 파일경로:: ${file_path} 새로운 파일이름을 입력해주세요
 	<form action="/HoneyComb/cloud/cloudRenameItem.cloud" method="post"
 		onsubmit="emptyck('itemName')">
-		새로운 파일이름을 입력해주세요<br> <input type="text" name="itemName"
-			id="itemName"> <input type="submit" value="확인">
-			<input type="hidden" name="promgr_num" value="${param.promgr_num}">
+		<h3>새로운 파일이름을 입력해주세요</h3>
+		<input type="text" name="itemName"id="itemName" class="renametext">
+		<input type="submit" value="확인" class="indexbutton">
+		<input type="hidden" name="promgr_num" value="${param.promgr_num}">
 
 		<c:if test="${param.dupli == 'y'}">
 	취소버튼을 누를경우 파일이 업로드 되지 않습니다
 	<a href="/HoneyComb/cloud/cloudDeleteItem.cloud">취소</a>
 		</c:if>
-		<c:if test="${!dupli == 'y'}">
-	취소버튼을 누를경우 파일이름은 유지됩니다.
-	<a href="javascript:close();">취소</a>
-		</c:if>
-		<c:if test="${param.type =='close'}">
-			<script>
-				window.close();
-			</script>
-		</c:if>
-
 	</form>
 </body>
 </html>

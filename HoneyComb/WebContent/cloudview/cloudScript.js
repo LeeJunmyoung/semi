@@ -1,12 +1,12 @@
 function fileUploader(folder){
 	url="/HoneyComb/cloud/fileUploader.cloud?upload=true&folder="+folder;
-	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=550, height=200");
+	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=550, height=250, left=50%, top=50%");
 }
 
 function createfolder(folder){
 	folder = encodeURIComponent(folder);
 	url="/HoneyComb/cloudview/createfolder.jsp?folder="+folder;
-	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=550, height=200");
+	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=550, height=200, left=50%, top=50%");
 	
 }
 function movefolder(folder, name){
@@ -15,6 +15,10 @@ function movefolder(folder, name){
 	}else{
 	window.location="/HoneyComb/cloud/cloudForm.cloud?folder="+folder+name+"|";
 	}
+}
+function renameItem(file_num){
+	url="/HoneyComb/cloudview/itemRenameForm.jsp?file_num="+file_num;
+	open(url, "confirm", "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=550, height=200, left=50%, top=50%");	
 }
 
 function refresh(){

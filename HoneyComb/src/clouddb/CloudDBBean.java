@@ -185,7 +185,7 @@ public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLExc
 			}
 			
 		}else{//프로젝트 아닐경우
-			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'')");
+			pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'',?)");
 			pstmt.setString(1, cloudPro.getFile_name());
 			pstmt.setString(2,cloudPro.getFile_uploader());
 			pstmt.setInt(3,cloudPro.getCom_num());

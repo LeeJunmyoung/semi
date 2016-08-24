@@ -185,9 +185,8 @@ mem_num = ${mem_num}<br>
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
 						<%-- mem_num = ${cloudlist.mem_num} --%>
-
-						
-						<div class="file" id="img"><img src="../images/file.png"></div>
+						<c:set var="fileName" value="${fn:split(cloudlist.file_name, '.')}" />
+						<div class="file" id="img"><img src="../images/${fileName[fn:length(fileName)-1]}.png" onError="this.src='../images/file.png'"></div>
 						</c:when>
 						<c:otherwise>
 						<div style="width: 150px; display: inline-block;" ondblclick="movefolder('${param.folder}','${cloudlist.file_name}')">

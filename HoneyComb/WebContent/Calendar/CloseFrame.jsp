@@ -6,13 +6,13 @@
 <title>Insert title here</title>
 <script src='fullcalendar/lib/jquery.min.js'></script>
 <script type="text/javascript">
-$(document).ready(function(){  //모든 Jquery함수는 document.ready 안에 존재함.
-	opener.location.reload();   	
-	window.close();
-	<% boolean check =false;
-	request.getSession().setAttribute("check", check);  %>
-	});
 
+$(document).ready(function(){  //모든 Jquery함수는 document.ready 안에 존재함.
+	opener.location.href='/HoneyComb/page_layout/Calendar/Calendar_home.jsp';   	
+	window.close();
+
+	});
+	
 
 
 

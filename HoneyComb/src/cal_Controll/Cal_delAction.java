@@ -1,9 +1,12 @@
 /*** Eclipse Class Decompiler plugin, copyright (c) 2016 Chen Chao (cnfree2000@hotmail.com) ***/
 package cal_Controll;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import cal_Controll.CommandAction;
 
@@ -15,14 +18,19 @@ public class Cal_delAction implements CommandAction {
 		int num = Integer.parseInt(request.getParameter("number"));
 		System.out.println(num);
 		caldbb.delete(num);
-		boolean check = false;
-		request.getSession().setAttribute("check", Boolean.valueOf(check));
-		List totalCal = caldbb.viewCal(mem_num);
+		
+		List totalCal = new ArrayList<>();
+				
+				
+		totalCal = caldbb.viewCal(mem_num);
+				
 		if (totalCal != null) {
+			
 			request.getSession().setAttribute("total", totalCal);
 			request.getSession().setAttribute("count", Integer.valueOf(totalCal.size()));
+			
 		}
-
+        
 		return "CloseFrame.jsp";
 	}
 }

@@ -35,7 +35,7 @@ top:50px;
 	$(document)
 			.ready(
 					function() {
-<%boolean check = false;%>
+
 						// page is now ready, initialize the calendar...
 						var total1;
 
@@ -100,11 +100,7 @@ top:50px;
 
 					});
 	
-	function check(){
-		<%check = true;
-		request.getSession().setAttribute("check", check); %>
-		
-	}
+
 </script>
 
 </head>

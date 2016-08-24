@@ -9,6 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${param.title }</title>
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+
 <script type="text/javascript">
 function deleteCal() {
 	<%
@@ -28,19 +32,110 @@ function deleteCal() {
 
 </script>
 
+<style type="text/css">
+#form_title{
+display: inline;
+width:420px;
+position: absolute;
+top:20px;
+left:30px;
+}
+#form_title p{
+display: inline;
+width: auto;
+}
+#form_title input{
+display: inline;
+width: 250px;
+}
+
+
+#form_date{
+display: inline;
+width:420px;
+position: absolute;
+top:80px;
+left:30px;
+}
+
+#form_date p{
+display: inline;
+
+}
+ 
+#form_date input{
+display: inline;
+width: 155px;
+}
+ 
+#form_contents{
+
+display: inline;
+width:420px;
+position: absolute;
+top:140px;
+left:30px;
+
+} 
+ 
+#form_contents textarea{
+position: relative;
+
+display: inline;
+width: 355px;
+}
+#form_contents p{
+position:relative;
+top:-60px;
+display: inline;
+
+} 
+
+#form_button{
+position: absolute;
+top: 225px;
+left:285px;
+
+}
+ 
+</style>
+
+
+
+
 </head>
 <body >
 	<form action="/HoneyComb/Calendar/modify.cal" method="post"  >
-			 <input type="text" name="title" placeholder="SUBJECT" value="${param.title }"/><br>
-			 <input type="date"	name="startDate" placeholder="일" value="${param.start}"/> <br>
-			 <input type="date"	name="endDate" placeholder="일" value="${param.end}"/><br> 
-			 <textarea rows="3" cols="30" name="contents" placeholder="CONTENTS">${param.contents}</textarea>
-			 <input type="hidden" name = "cal_num" value="${param.num}">
-
-			 <br>
+	
+	
+<div id = "form_title">		<p>제목 :</p> <input type="text" id='title' name="title" placeholder="SUBJECT" value="${param.title }" class="form-control"/>
+	</div>		 
+ <div id = "form_date">	<p>	시작 :</p> <input type="date"	id='startDate' name="startDate" placeholder="일" value="${param.start}" class="form-control"/> 
+	<p>	종료 : </p> <input type="date"	id='endDate' name="endDate" placeholder="일" value="${param.end}" class="form-control"/>
+			 </div>
+			 
+			 
+<div id = "form_contents">		<p>내용 :</p> <textarea rows="3" id='contents' cols="30" name="contents" placeholder="CONTENTS"  class="form-control">${param.contents}</textarea>
+			 </div>
+			 
+		
+<div id= 'form_button'>
+			 
 			 <input type="submit" id="modify" value="수정"/>
-			 <input type="button" id ="del" value = "삭제" onclick="location.href='del_cal.cal?number=<%=request.getParameter("num")%>'"/>
+			 <input type="button" id ="del" value = "삭제" onclick="location.href='del_cal.cal?number=${param.num}'"/>
 			 <input type="button" value="닫기" onclick="window.close()">
+	</div>		 
+			 
+			  <input type="hidden" name = "cal_num" value="${param.num}">
+			 
 </form>
+
+
+
+
+
+
+
+
 </body>
 </html>

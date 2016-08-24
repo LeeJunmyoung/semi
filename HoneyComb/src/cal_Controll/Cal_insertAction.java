@@ -3,6 +3,7 @@ package cal_Controll;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,9 @@ public class Cal_insertAction implements CommandAction {
 		String startDate = "";
 		String endDate = "";
 		String contents = "";
-		boolean check = ((Boolean) request.getSession().getAttribute("check")).booleanValue();
-		if (check) {
+		
+		totalCal = new ArrayList<>();
+		
 			startDate = request.getParameter("startDate");
 			endDate = request.getParameter("endDate");
 			contents = request.getParameter("contents");
@@ -35,10 +37,10 @@ public class Cal_insertAction implements CommandAction {
 			cdb.setCal_end(this.fomatToDate(endDate));
 			cdb.setCal_contents(contents);
 			caldbb.insertCal(cdb,mem_num,com_num,com_dept_num);
-			check = false;
-		}
+			
+	
 
-		request.getSession().setAttribute("check", Boolean.valueOf(check));
+	
 		totalCal = caldbb.viewCal(mem_num);
 		if (totalCal != null) {
 			request.getSession().setAttribute("total", totalCal);

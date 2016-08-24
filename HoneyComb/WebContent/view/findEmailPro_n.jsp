@@ -5,12 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script type="text/javascript">
+function emailclose(){
+	window.close();
+}
+</script>
 <title>Email 찾기</title>
 </head>
 <body>
 <div style="margin:auto; width:50%">
 	<h3 align="center">해당 Email 은 존재하지 않습니다.</h3>
-	<a href = "/HoneyComb/index.jsp">메인으로 </a>
+	<input type="button" value="닫기" onclick="emailclose()">
 </div>
 
 </body>

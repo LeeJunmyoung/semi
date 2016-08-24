@@ -14,7 +14,6 @@
 		var url = "/HoneyComb/cloudview/changeFilename.jsp?dupli=y&promgr_num="${param.promgr_num};
 		$(location).attr('href',url);
 	}
- 	window.opener.location.reload();
 	/* if($('#uploadcheck').val() == 'done'){
 		var result = confirm('파일을 더 업로드하시겠습니까?')
 		if(result){
@@ -93,7 +92,7 @@ display: inline-block;
 </style>
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="refresh()">
 <form  action="/HoneyComb/cloud/fileUploader.cloud?folder=${param.folder}"  name="uploadform" enctype="multipart/form-data" method="post" onsubmit="return emptyck('uploadfile')">
 	<div class="text">
 	<h3>업로드 파일을 선택해주세요</h3>

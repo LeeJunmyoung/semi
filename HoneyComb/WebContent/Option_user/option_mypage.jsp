@@ -7,11 +7,10 @@
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
-
- 	function init() {
+	function init() {
 		window.location.reload(true);
-	} 
-	
+	}
+
 	function passwd_confirm() {
 		// 비밀번호 찾기 폼
 
@@ -34,14 +33,15 @@
 		// img파일인지 확인
 
 		var check = document.myPage.profile_img.value; // 파일명 (확장자 포함)
-		var extension = check.substr(check.length-3); // 확장자
-			
+		var extension = check.substr(check.length - 3); // 확장자
+
 		if (!(extension == 'png' || extension == 'bmp' || extension == 'gif' || extension == 'jpg')) {
 			// 사진파일이 아닐때
 			alert("사진 파일만 선택해주세요\n * png, bmp, gif, jpg \n");
 			return false;
-			
-		}else if (extension == 'png' || extension == 'bmp' || extension == 'gif' || extension == 'jpg') {
+
+		} else if (extension == 'png' || extension == 'bmp'
+				|| extension == 'gif' || extension == 'jpg') {
 			// 사진파일일때 action실행
 			window.location.reload();
 			return true;
@@ -49,49 +49,175 @@
 
 	}
 </script>
-<body bgcolor="<%=bodyback_c%>">
 
-	<form name="myPage" align="center"
-		action="/HoneyComb/Option_user/in_Profile_Img.option" method="post"
-		enctype="multipart/form-data" onsubmit="return file_extension();">
-		<h3>My Page</h3>
-		<p>
-		<table border="1" cellpadding="1" cellspacing="0" align="center">
+<style>
+#content {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	filter: alpha(opacity = 50);
+	margin-top: 50px;
+}
 
-			<tr>
-				<td align="center"><%-- ${ sessionScope.profile_img } --%>
-				<img src="${ sessionScope.profile_img }" name="profile_img" width="68" height="70"
-					onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></td>
-				<td><p><font size="1.5"> * '파일선택'을 클릭하여 프로필사진을 등록하세요</font></p>
-				<input type="file" value="선택" name="profile_img">
-				<br>
-				<input type="submit" value="등록"></td>
-			</tr>
+#main {
+	background: #fff;
+	position: relative;
+	height: 100%;
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
 
-			<tr>
-				<td align="center">Name</td>
-				<td>${name}</td>
-			</tr>
-			
-			<tr>
-				<td align="center">Email</td>
-				<td>${ sessionScope.email }</td>
-			</tr>
+#my_page {
+	font-size: 37px;
+}
 
-			<tr>
-				<td align="center">Change Password</td>
-				<td><input type="button" value="변경" onclick="passwd_confirm()"></td>
-			</tr>
+hr {
+	width: 300px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
 
-			<tr>
-				<td align="center">Delete Account</td>
-				<td><input type="button" value="계정삭제" onclick="user_del()" /></td>
-			</tr>
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid #bbb;
+	cellpadding: 0;
+	cellspacing: 0;
+	font-size: 14px;
+	padding: 8px;
+}
 
-		</table>
-		<p>
-			<input type="button" value="back" align="center" onclick="location.href='/HoneyComb/page_layout/Option/Option_home.jsp'">
-	</form>
+#table {
+	margin-top: 100px;
+	width: 488px;
+	margin: 0 auto;
+}
+
+/* table {
+	border: 1px solid;
+	cellpadding: 1;
+	cellspacing: 0;
+	text-align: center;
+} */
+img {
+	margin-top: 20px;
+	width: 100px;
+	height: 104px;
+}
+
+#back {
+   background-color: #4367b0;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+   display: block;
+   cursor: pointer;
+   color: #fff;
+   font-size: 15px;
+   padding: 5px 10px;
+   text-decoration: none;
+   margin: 0 auto;
+   width: 100px;
+   margin-top: 100px;
+   margin-bottom: 30px;
+}
+
+#back:hover {
+   background-color: #344d91;
+   color: white;
+}
+
+#back:active {
+   position: relative;
+   top: 1px;
+}
+
+.a {
+	width: 200px;
+}
+
+.b {
+
+}
+
+#image {
+	height: 80px;
+}
+#image td{
+height: 100px;
+padding: 0;
+}
+
+#image_b{
+padding: 0;
+margin:0;
+width: 287px;
+height:100px;
+}
+
+#image_a{
+padding: 0;
+margin:0;
+width: 287px;
+height:100px;
+}
+</style>
+<body>
+
+	<div id="content">
+		<div id="main">
+			<form name="myPage"
+				action="/HoneyComb/Option_user/in_Profile_Img.option" method="post"
+				enctype="multipart/form-data" onsubmit="return file_extension();">
+				<h1 id="my_page">My Page</h1>
+				<hr>
+				<p>
+				<div id="table">
+					<table>
+
+						<tr id="image">
+							<td class="a" id = 'image_a'>
+								<%-- ${ sessionScope.profile_img } --%> <img
+								src="${ sessionScope.profile_img }" name="profile_img"
+								onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진">
+							</td>
+							<td class="b" id = 'image_b'> * '파일선택'을 클릭하여 프로필사진을 등록하세요 
+							<input 	type="file" value="선택" name="profile_img"> 
+							<br> 
+							<input type="submit" value="등록"></td>
+						</tr>
+
+						<tr>
+							<td class="a">Name</td>
+							<td class="b">${name}</td>
+						</tr>
+
+						<tr>
+							<td class="a">Email</td>
+							<td class="b">${ sessionScope.email }</td>
+						</tr>
+
+						<tr>
+							<td class="a">Change Password</td>
+							<td class="b"><input type="button" value="변경"
+								onclick="passwd_confirm()"></td>
+						</tr>
+
+						<tr>
+							<td class="a">Delete Account</td>
+							<td class="b"><input type="button" value="계정삭제" onclick="user_del()" /></td>
+						</tr>
+					</table>
+				</div>
+
+				<p>
+					<a href="/HoneyComb/page_layout/Option/Option_home.jsp" id="back">뒤로가기</a>
+			</form>
+		</div>
+	</div>
 
 </body>
 </html>

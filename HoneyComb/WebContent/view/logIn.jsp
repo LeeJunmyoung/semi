@@ -126,7 +126,7 @@ padding:0;
   <body>
   <div id = "home_banner">
   <div id = "logo_wrapper">
-       <img id="logo_banner" src="/HoneyComb/view/Logo.png" width="100" height="100"onclick="location.href='/HoneyComb/index.jsp'">
+       <img id="logo_banner" src="/HoneyComb/page_layout/page_image/logo.png" width="100" height="100"onclick="location.href='/HoneyComb/index.jsp'">
  <a id="logo_a" href="/HoneyComb/index.jsp"><p id="Honey_comB" >HoneyComb</p></a>
   </div>
   </div>

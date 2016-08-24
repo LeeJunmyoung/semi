@@ -14,21 +14,21 @@
 
 	width: 90%;
 	margin: auto;
-	height: 1200px;
+	height: 800px;
 	border-collapse: collapse;
 }
 
 .box1_select_chat {
 	float: left;
 	width: 300px;
-	height: 1200px;
+	height: 800px;
 	border: 1px solid #CCCCCC;
 }
 
 .box2_execute_chat {
 	display: inline-block;
 	width: 62.5%;
-	height: 1200px;
+	height: 800px;
 	border: 1px solid #CCCCCC;
 	padding: 0px;
 	margin: 0px;
@@ -63,7 +63,7 @@ top:20px;
 	border: 1px solid #CCCCCC;
 	border-right-color: #999999;
 	border-bottom-color: #999999;
-	height: 1100px;
+	height: 700px;
 	overflow-y: scroll;
 	padding: 5px;
 	width: 100%;
@@ -196,6 +196,8 @@ color:#fff;
 	}
 
 	$(document).ready(function() {
+	
+		
 		$("p").click(function() {
 			var c = 'form' + $(this).attr("id");
 
@@ -231,6 +233,9 @@ color:#fff;
 			$(this).css('border-bottom', '1px solid #efefef');
 
 		});
+		
+		
+		$('#submit'+${chat_Num}).css('background','#e9ebee');
 
 	});
 </script>
@@ -244,7 +249,8 @@ function new_msg(num){
 	
 }
 
-			
+
+
 	
 			var chat_Num = '${chat_Num}';
 			var chat_mem_name = '${chat_mem_name}';

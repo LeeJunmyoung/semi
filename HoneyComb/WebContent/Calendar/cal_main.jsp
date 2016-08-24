@@ -12,6 +12,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel='stylesheet' href='/HoneyComb/Calendar/fullcalendar/fullcalendar.css' />
 <script src='/HoneyComb/Calendar/fullcalendar/lib/jquery.min.js'></script>
 <script src='/HoneyComb/Calendar/fullcalendar/lib/moment.min.js'></script>
@@ -22,7 +23,12 @@
 				<%boolean check = false;%>
 						// page is now ready, initialize the calendar...
 						var total1;
-
+						
+						$('#calendar').fullCalendar({
+						    height: 500
+						    
+						});
+						
 						$('#calendar').fullCalendar(
 										{
 
@@ -123,6 +129,11 @@
 
 						}
 
+						
+						
+						
+						
+						
 					});
 	
 	function check(){
@@ -134,7 +145,7 @@
 
 </head>
 <body style="background-color: white;">
-	<div id='calendar' style='margin: auto; font-size: 13px; width: 30%'></div>
+	<div id='calendar' style='margin: auto; font-size: 13px;width:700px;'></div>
 	
 	
 	
@@ -149,7 +160,7 @@
 			<input type="submit" id="view">
 		</form>
 
-	</div>
+	</div> 
 
 
 </body>

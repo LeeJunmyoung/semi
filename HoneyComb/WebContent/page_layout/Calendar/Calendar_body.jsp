@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <body>
 
-<div id = "main_cal">
+<div id = "main_cal_more">
  <jsp:include page="/Calendar/cal_main.jsp"></jsp:include>
 </div>
 

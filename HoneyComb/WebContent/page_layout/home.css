@@ -46,7 +46,9 @@ table {
 /* page layout */
 #page_container {
 	background: #e9ebee;
-	
+	margin: 0;
+	width: 100%;
+	padding:0;
 }
 
 #page_header {
@@ -194,8 +196,46 @@ dl dd {
 #chat_more{
 	
 	border: 1px solid;
-	height : 1300px;
+	height : 900px;
 	margin : 5px;
 	
 }
+#page_center_contents_more{
+	position:relative;
+left:250px;
+width: 70%;
+height: 1000px;
+display: block;
+	
+	
+}
+#page_sidebar_more {
+	position:relative;
+	width: 20%;
+	height: 1000px;
+	padding: 1%;
+	float: left;
+	border: 1px solid #bcbcbc;
+	background: #fff;
+	border-bottom:  3px solid #344d91;
+}
 
+#page_content_more {
+	position:relative;
+	width: 80%;
+	height:1000px;
+	padding: 2%;
+	float: left;
+	border: 1px solid #bcbcbc;
+	background: #fff;
+	border-left: 3px solid #bcbcbc;
+	border-bottom:  3px solid #344d91	;
+}
+
+#main_cal_more{
+	
+	border: 1px solid;
+	height : 930px;
+	margin : 5px;
+	
+}

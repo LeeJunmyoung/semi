@@ -16,7 +16,21 @@
 <script src='/HoneyComb/Calendar/fullcalendar/lib/jquery.min.js'></script>
 <script src='/HoneyComb/Calendar/fullcalendar/lib/moment.min.js'></script>
 <script src='/HoneyComb/Calendar/fullcalendar/fullcalendar.js'></script>
+<style type="text/css">
+.row{
+position: relative;
+top: 30px;
+left:30px;
 
+}
+#calendar{
+position: relative;
+top:50px;
+
+
+}
+
+</style>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -46,6 +60,10 @@
 						});
 
 						$('.fc-next-button').click(function() {
+							//alert('next is clicked');
+							viewScaduel();
+						});
+						$('.fc-today-button').click(function() {
 							//alert('next is clicked');
 							viewScaduel();
 						});
@@ -90,9 +108,33 @@
 </script>
 
 </head>
-<body style="background-color: white;">
-<div align="right"><input type="button" value="+" onclick="location.href='/HoneyComb/page_layout/Calendar/Calendar_home.jsp'"></div>
-	<div id='calendar' style='margin: auto; font-size: 13px; width: 30%'></div>
+<body >
+	<div class="row">
+	
+		<div class="col-md-9">
+		
+			<b>CALENDAR<%-- <span class="badge">${promgr_count}</span> --%></b>
+			
+		</div>
+		
+		<div class="col-md-1"></div>
+		
+		<div class="col-md-1">
+		
+			<input type="button" class="btn btn-primary btn-xs" value="더보기"
+		  		onclick="location.href='/HoneyComb/page_layout/Calendar/Calendar_home.jsp'">
+			
+		</div>
+	
+	</div>
+	
+
+
+
+<br>
+<br>
+<br>
+	<div id='calendar' style='margin: auto; font-size: 13px; width:60%'></div>
 	
 	
 	

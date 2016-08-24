@@ -14,21 +14,21 @@
 
 	width: 90%;
 	margin: auto;
-	height: 1200px;
+	height: 800px;
 	border-collapse: collapse;
 }
 
 .box1_select_chat {
 	float: left;
 	width: 300px;
-	height: 1200px;
+	height: 800px;
 	border: 1px solid #CCCCCC;
 }
 
 .box2_execute_chat {
 	display: inline-block;
 	width: 62.5%;
-	height: 1200px;
+	height: 800px;
 	border: 1px solid #CCCCCC;
 	padding: 0px;
 	margin: 0px;
@@ -63,7 +63,7 @@ top:20px;
 	border: 1px solid #CCCCCC;
 	border-right-color: #999999;
 	border-bottom-color: #999999;
-	height: 1100px;
+	height: 700px;
 	overflow-y: scroll;
 	padding: 5px;
 	width: 100%;

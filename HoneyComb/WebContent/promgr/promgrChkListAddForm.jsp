@@ -6,6 +6,11 @@
 <head>
 <title>checklist write</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script>
 	function writeSave() {
 
@@ -20,15 +25,19 @@
 </script>
 
 </head>
-<body>
+<body style="background-color: #e9ebee;">
 
-	<form method="post" name="chkListAddform"
-		action="/HoneyComb/promgr/promgrChkListAddPro.promgr?promgr_num=${promgr_num}"
-		onsubmit="return writeSave()">
-
-		<input type="text" name="promgr_list_title" size="30" maxlength="40" placeholder="check list name" />
-		<input type="submit" value="Add List" />
+	<form class="col-sm-10" role="form" method="post" name="chkListAddform" 
+		action="/HoneyComb/promgr/promgrChkListAddPro.promgr?promgr_num=${promgr_num}" 
+		onsubmit="return writeSave()" >
 		
+		<div class="form-group">
+			<label for="promgr_list_title">목록 명:</label>
+			<input type="text" class="form-control" id="promgr_list_title" name="promgr_list_title">
+		</div>
+		
+		<input type="submit" class="btn btn-primary btn-xs" value="목록추가">
+
 	</form>
 
 </body>

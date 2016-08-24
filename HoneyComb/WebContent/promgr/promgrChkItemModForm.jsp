@@ -6,6 +6,11 @@
 <head>
 <title>checkitem write</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script>
 	function writeSave() {
 
@@ -20,14 +25,18 @@
 </script>
 
 </head>
-<body>
+<body style="background-color: #e9ebee;">
 
-	<form method="post" name="chkItemModform"
-		action="/HoneyComb/promgr/promgrChkItemModPro.promgr?item_num=${item_num}"
-		onsubmit="return writeSave()">
-
-		<input type="text" name="promgr_list_item" size="30" maxlength="40" placeholder="check item name" />
-		<input type="submit" value="Mod Item" />
+	<form class="col-sm-10" role="form" method="post" name="chkItemModform" 
+		action="/HoneyComb/promgr/promgrChkItemModPro.promgr?item_num=${item_num}" 
+		onsubmit="return writeSave()" >
+		
+		<div class="form-group">
+			<label for="promgr_list_item">항목 명:</label>
+			<input type="text" class="form-control" id="promgr_list_item" name="promgr_list_item">
+		</div>
+		
+		<input type="submit" class="btn btn-primary btn-xs" value="항목수정">
 
 	</form>
 

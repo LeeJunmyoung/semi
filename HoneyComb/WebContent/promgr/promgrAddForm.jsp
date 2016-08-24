@@ -6,6 +6,11 @@
 <head>
 <title>promgr write</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script>
 	function writeSave() {
 
@@ -27,14 +32,22 @@
 </script>
 
 </head>
-<body>
+<body style="background-color: #e9ebee;">
 
-	<form method="post" name="promgrAddform" action="/HoneyComb/promgr/promgrAddPro.promgr" onsubmit="return writeSave()">
-	
-		<input type="text" name="promgr_title" size="40" maxlength="50" placeholder="project name" /> <br>
-		<textarea name="promgr_content" rows="15" cols="30" placeholder="project described"></textarea> <br>
+	<form class="col-sm-10" role="form" method="post" name="promgrAddform" 
+		action="/HoneyComb/promgr/promgrAddPro.promgr" onsubmit="return writeSave()" >
 		
-		<input type="submit" value="Add Project"/>
+		<div class="form-group">
+			<label for="promgr_title">프로젝트제목:</label>
+			<input type="text" class="form-control" id="promgr_title" name="promgr_title">
+		</div>
+		
+		<div class="form-group">
+			<label for="promgr_content">프로젝트내용:</label>
+			<textarea class="form-control" rows="5" id="promgr_content" name="promgr_content"></textarea>
+		</div>
+		
+		<input type="submit" class="btn btn-primary btn-xs" value="프로젝트생성">
 
 	</form>
 	

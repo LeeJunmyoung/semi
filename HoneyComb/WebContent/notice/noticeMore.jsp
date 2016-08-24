@@ -25,7 +25,6 @@
 	
 </script>
 
-
 <body>
 
 	<div class="row">
@@ -47,29 +46,18 @@
 
 	</div>
 
-	<div class="row">
+	<div class="row" style="margin-top: 7px;">
 	
 		<div class="col-md-1"></div>
 
 		<div class="container col-md-10">
 
 			<c:if test="${notice_count == 0}">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th class="text-center">제목</th>
-							<th class="text-center">작성자</th>
-							<th class="text-center">작성일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>공지 글이 없습니다.</td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
+			
+				<div class="row">
+					<div class="col-md-12 text-center">공지사항이 없습니다.</div>
+				</div>
+				
 			</c:if>
 
 			<c:if test="${notice_count > 0}">

@@ -7,6 +7,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>회원가입</title>
+<style type="text/css">
+body{
+text-align:  center;
+background-color: #E9EBEE;
+}
+.indexbutton{
+position:static;
+color:black;
+width:70px;
+height: 25px;
+background-color: #F8F8F8 ;	
+border: 1px solid silver;
+margin: 5px 0px;
+text-align: center;
+cursor: pointer;
+}
+</style>
 <script type="text/javascript" src="/HoneyComb/view/script.js"></script>
 <script src=" https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
@@ -34,6 +51,7 @@ $('#insertKey').keyup(function(){
 });
 </script>
 
+
 </head>
 
 <body>
@@ -44,8 +62,8 @@ $('#insertKey').keyup(function(){
 <input type="hidden" name="email" value="${param.email}">
 <div id="keyCheck"></div>
 <input type="hidden" name="check" value="y"/>
-<p><input type="button" id="ok" value="확인" disabled="disabled" onclick="sendChildValue()"/>
-<input type="button" value="닫기" onclick="frameclose()"/></p>
+<p><input type="button" id="ok" value="확인" disabled="disabled" class="indexbutton" onclick="sendChildValue()"/>
+<input type="button" value="닫기" onclick="frameclose()" class="indexbutton" id="close"/></p>
 </form>
 </body>
 </html>

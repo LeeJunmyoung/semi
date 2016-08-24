@@ -36,9 +36,7 @@
 	
 	<div class="row">
 	
-		<div class="col-md-1"></div>
-		
-		<div class="col-md-10">
+		<div class="col-md-11">
 		
 			<c:if test="${promgr_count == 0}">
 				
@@ -74,9 +72,9 @@
 					<tbody>
 						<c:forEach var="article" items="${ pro_articleList}">
 							<tr>
-								<td>${article.promgr_name}</td>
-								<td>${article.promgr_date}</td>
-								<td>
+								<td class="col-md-2 text-center">${article.promgr_name}</td>
+								<td class="col-md-4 text-center">${article.promgr_date}</td>
+								<td class="col-md-6 text-center">
 									<div id="promgr_${article.promgr_num}_ing">
 										<div class="progress">
 				    						<div class="progress-bar" role="progressbar" aria-valuenow="${article.promgr_ing}" aria-valuemin="0" aria-valuemax="100" style="width:${article.promgr_ing}%">
@@ -94,8 +92,6 @@
 		
 		</div>
 		
-		<div class="col-md-1"></div>
-	
 	</div>
 
 </body>

@@ -36,7 +36,7 @@
 			
 		</div>
 		
-		<div class="col-md-1">	
+		<div class="col-md-1" style="margin-right: 3px;">	
 		
 			<input type="button" class="btn btn-primary btn-xs btn-lg" value="공지작성"
 				onclick="writeView()" >
@@ -54,9 +54,7 @@
 
 	<div class="row">
 	
-		<div class="col-md-1"></div>
-	
-		<div class="col-md-10">
+		<div class="col-md-11">
 			
 			<c:if test="${notice_count == 0}">
 				<table class="table table-hover">
@@ -94,7 +92,7 @@
 								<th class="col-md-6">
 									${article.notice_title}
 									<c:if test="${article.isNew == 0}">
-										<img src="../images/hot.gif">
+										<span class="badge">new</span>
 									</c:if>
 								</th>
 								<th class="col-md-2 text-center">${article.notice_member}</th>
@@ -127,7 +125,7 @@
 			
 		</div>
 		
-		<div class="col-md-1"></div>
 	</div>
+	
 </body>
 </html>

@@ -31,7 +31,7 @@
 </script>
 
 </head>
-<body>
+<body style="background-color: #e9ebee;">
 
 	<form class="col-sm-10" role="form" method="post" name="noticeWriteform" 
 		action="/HoneyComb/notice/noticeWritePro.notice" onsubmit="return writeSave()" >

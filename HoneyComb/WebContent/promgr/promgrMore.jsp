@@ -155,9 +155,9 @@
 						"toolbar=no,width=450,height=80,directories=no,status=yes,scrollbars=no,menubar=no");
 	}
 	
-	function DelItem(promgr_num, item_num) { // checkitem 삭제
+	function DelItem(promgr_num, list_num, item_num) { // checkitem 삭제
 		
-		url = "/HoneyComb/promgr/promgrChkItemDel.promgr?promgr_num="+promgr_num+"&item_num="+item_num;
+		url = "/HoneyComb/promgr/promgrChkItemDel.promgr?promgr_num="+promgr_num+"&list_num="+list_num+"&item_num="+item_num;
 		window
 				.open(
 						url,
@@ -385,7 +385,7 @@
 																	onclick="ModItem(${bean.chklist_item_num})">
 																	
 																<input type="button" class="btn btn-default btn-xs" value="DEL"  
-																	onclick="DelItem(${article.promgr_num}, ${bean.chklist_item_num})">
+																	onclick="DelItem(${article.promgr_num}, ${view.list_num}, ${bean.chklist_item_num})">
 																	
 																<input type="button" class="btn btn-default btn-xs" value="X" 
 																	onclick="HiddenList('item_btn_group_${bean.chklist_item_num}')">

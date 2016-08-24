@@ -943,6 +943,15 @@ public class PromgrDBBean {
 		
 		ResultSet rs = null;
 		ResultSet rs_chklist = null;
+		ResultSet rs_list_item_all = null;
+		ResultSet rs_list_item_chk = null;
+		ResultSet rs_promgr_item_all = null;
+		ResultSet rs_promgr_item_chk = null;
+		
+		int list_item_all = 0;
+		int list_item_chk = 0;
+		int promgr_item_all = 0;
+		int promgr_item_chk = 0;
 
 		String chkitem_num_str = "";
 
@@ -1001,6 +1010,78 @@ public class PromgrDBBean {
 						pstmt.setInt(2, article.getPromgr_num());
 
 						count = pstmt.executeUpdate();
+						
+						if(count > 0) {
+							
+							// [list_ing setting]
+							// list item all
+							sql = "select count(*) from chklist_item where chklist_title_num=?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, list_num);
+							rs_list_item_all = pstmt.executeQuery();
+
+							if (rs_list_item_all.next()) {
+								list_item_all = rs_list_item_all.getInt(1);
+							}
+
+							// list item chk
+							sql = "select count(*) from chklist_item where chklist_title_num=? and chklist_item_chk=1";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, list_num);
+
+							rs_list_item_chk = pstmt.executeQuery();
+
+							if (rs_list_item_chk.next()) {
+								list_item_chk = rs_list_item_chk.getInt(1);
+							}
+
+							// list_ing 계산
+							int list_ing = (int) ((double) list_item_chk / (double) list_item_all * 100);
+
+							sql = "update chklist_title set chklist_title_ing=? where chklist_title_num=?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, list_ing);
+							pstmt.setInt(2, list_num);
+
+							int list_update_count = pstmt.executeUpdate();
+
+							if (list_update_count > 0) {
+								
+								// [promgr_ing setting]
+								// promgr item all
+								
+								sql = "select count(*) from chklist_item where promgr_num = ?";
+								pstmt = conn.prepareStatement(sql);
+								pstmt.setInt(1, article.getPromgr_num());
+								rs_promgr_item_all = pstmt.executeQuery();
+
+								if (rs_promgr_item_all.next()) {
+									promgr_item_all = rs_promgr_item_all.getInt(1);
+								}
+
+								// promgr item chk
+								sql = "select count(*) from chklist_item where promgr_num=? and chklist_item_chk=1";
+								pstmt = conn.prepareStatement(sql);
+								pstmt.setInt(1, article.getPromgr_num());
+								rs_promgr_item_chk = pstmt.executeQuery();
+
+								if (rs_promgr_item_chk.next()) {
+									promgr_item_chk = rs_promgr_item_chk.getInt(1);
+								}
+								
+								// promgr_ing 계산
+								int promgr_ing = (int) ((double) promgr_item_chk / (double) promgr_item_all * 100);
+
+								sql = "update promgr set promgr_ing=? where promgr_num=?";
+								pstmt = conn.prepareStatement(sql);
+								pstmt.setInt(1, promgr_ing);
+								pstmt.setInt(2, article.getPromgr_num());
+
+								count = pstmt.executeUpdate();
+
+							}
+							
+						}
 
 					} // promgr chklist_item_num
 
@@ -1023,6 +1104,31 @@ public class PromgrDBBean {
 					rs.close();
 				} catch (SQLException ex) {
 				}
+			
+			if (rs_list_item_all != null)
+				try {
+					rs_list_item_all.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_list_item_chk != null)
+				try {
+					rs_list_item_chk.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_promgr_item_all != null)
+				try {
+					rs_promgr_item_all.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_promgr_item_chk != null)
+				try {
+					rs_promgr_item_chk.close();
+				} catch (SQLException ex) {
+				}
+
 
 			if (pstmt != null)
 				try {
@@ -1108,12 +1214,22 @@ public class PromgrDBBean {
 
 	} // int delPromgr(String promgr_num, int com_num) end
 
-	public int delChkItem(int promgr_num, int item_num) throws Exception {
+	public int delChkItem(int promgr_num, int list_num, int item_num) throws Exception {
 		// promgr의 item_num을 이용해 chklist_item 삭제
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		
 		ResultSet rs = null;
+		ResultSet rs_list_item_all = null;
+		ResultSet rs_list_item_chk = null;
+		ResultSet rs_promgr_item_all = null;
+		ResultSet rs_promgr_item_chk = null;
+		
+		int list_item_all = 0;
+		int list_item_chk = 0;
+		int promgr_item_all = 0;
+		int promgr_item_chk = 0;
 
 		String chkitem_num_str = "";
 
@@ -1157,6 +1273,78 @@ public class PromgrDBBean {
 					pstmt.setInt(2, promgr_num);
 
 					count = pstmt.executeUpdate();
+					
+					if(count > 0) {
+						
+						// [list_ing setting]
+						// list item all
+						sql = "select count(*) from chklist_item where chklist_title_num=?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, list_num);
+						rs_list_item_all = pstmt.executeQuery();
+
+						if (rs_list_item_all.next()) {
+							list_item_all = rs_list_item_all.getInt(1);
+						}
+
+						// list item chk
+						sql = "select count(*) from chklist_item where chklist_title_num=? and chklist_item_chk=1";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, list_num);
+
+						rs_list_item_chk = pstmt.executeQuery();
+
+						if (rs_list_item_chk.next()) {
+							list_item_chk = rs_list_item_chk.getInt(1);
+						}
+
+						// list_ing 계산
+						int list_ing = (int) ((double) list_item_chk / (double) list_item_all * 100);
+
+						sql = "update chklist_title set chklist_title_ing=? where chklist_title_num=?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, list_ing);
+						pstmt.setInt(2, list_num);
+
+						int list_update_count = pstmt.executeUpdate();
+
+						if (list_update_count > 0) {
+							
+							// [promgr_ing setting]
+							// promgr item all
+							
+							sql = "select count(*) from chklist_item where promgr_num = ?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, promgr_num);
+							rs_promgr_item_all = pstmt.executeQuery();
+
+							if (rs_promgr_item_all.next()) {
+								promgr_item_all = rs_promgr_item_all.getInt(1);
+							}
+
+							// promgr item chk
+							sql = "select count(*) from chklist_item where promgr_num=? and chklist_item_chk=1";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, promgr_num);
+							rs_promgr_item_chk = pstmt.executeQuery();
+
+							if (rs_promgr_item_chk.next()) {
+								promgr_item_chk = rs_promgr_item_chk.getInt(1);
+							}
+							
+							// promgr_ing 계산
+							int promgr_ing = (int) ((double) promgr_item_chk / (double) promgr_item_all * 100);
+
+							sql = "update promgr set promgr_ing=? where promgr_num=?";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setInt(1, promgr_ing);
+							pstmt.setInt(2, promgr_num);
+
+							count = pstmt.executeUpdate();
+
+						}
+						
+					}
 
 				} // promgr if (rs.next()) end
 
@@ -1171,6 +1359,31 @@ public class PromgrDBBean {
 			if (rs != null)
 				try {
 					rs.close();
+				} catch (SQLException ex) {
+				}
+			
+
+			if (rs_list_item_all != null)
+				try {
+					rs_list_item_all.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_list_item_chk != null)
+				try {
+					rs_list_item_chk.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_promgr_item_all != null)
+				try {
+					rs_promgr_item_all.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_promgr_item_chk != null)
+				try {
+					rs_promgr_item_chk.close();
 				} catch (SQLException ex) {
 				}
 
@@ -1199,6 +1412,11 @@ public class PromgrDBBean {
 		PreparedStatement pstmt = null;
 		
 		ResultSet rs = null;
+		ResultSet rs_promgr_item_all = null;
+		ResultSet rs_promgr_item_chk = null;
+		
+		int promgr_item_all = 0;
+		int promgr_item_chk = 0;
 
 		String chklist_num_str = "";
 		String chkitem_num_str = "";
@@ -1278,6 +1496,40 @@ public class PromgrDBBean {
 					pstmt.setInt(2, promgr_num);
 
 					count = pstmt.executeUpdate();
+					
+					if(count > 0) {
+						// ing update
+						
+						sql = "select count(*) from chklist_item where promgr_num = ?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, promgr_num);
+						rs_promgr_item_all = pstmt.executeQuery();
+
+						if (rs_promgr_item_all.next()) {
+							promgr_item_all = rs_promgr_item_all.getInt(1);
+						}
+
+						// promgr item chk
+						sql = "select count(*) from chklist_item where promgr_num=? and chklist_item_chk=1";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, promgr_num);
+						rs_promgr_item_chk = pstmt.executeQuery();
+
+						if (rs_promgr_item_chk.next()) {
+							promgr_item_chk = rs_promgr_item_chk.getInt(1);
+						}
+						
+						// promgr_ing 계산
+						int promgr_ing = (int) ((double) promgr_item_chk / (double) promgr_item_all * 100);
+
+						sql = "update promgr set promgr_ing=? where promgr_num=?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, promgr_ing);
+						pstmt.setInt(2, promgr_num);
+
+						count = pstmt.executeUpdate();
+						
+					}
 
 				}
 
@@ -1286,10 +1538,22 @@ public class PromgrDBBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-
+			
 			if (rs != null)
 				try {
 					rs.close();
+				} catch (SQLException ex) {
+				}
+
+			if (rs_promgr_item_all != null)
+				try {
+					rs_promgr_item_all.close();
+				} catch (SQLException ex) {
+				}
+			
+			if (rs_promgr_item_chk != null)
+				try {
+					rs_promgr_item_chk.close();
 				} catch (SQLException ex) {
 				}
 

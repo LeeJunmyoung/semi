@@ -65,7 +65,7 @@
 #main {
 	background: #fff;
 	position: relative;
-	height: 100%;
+	height: 700px;
 	width: 700px;
 	margin: 0 auto;
 	text-align: center;
@@ -102,7 +102,7 @@ table, tr, th, td {
 	cellspacing: 0;
 	text-align: center;
 } */
-img {
+#img_myprofile {
 	margin-top: 20px;
 	width: 100px;
 	height: 104px;
@@ -154,7 +154,7 @@ padding: 0;
 #image_b{
 padding: 0;
 margin:0;
-width: 287px;
+width: 400px;
 height:100px;
 }
 
@@ -182,7 +182,7 @@ height:100px;
 							<td class="a" id = 'image_a'>
 								<%-- ${ sessionScope.profile_img } --%> <img
 								src="${ sessionScope.profile_img }" name="profile_img"
-								onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진">
+								onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진" id = 'img_myprofile'>
 							</td>
 							<td class="b" id = 'image_b'> * '파일선택'을 클릭하여 프로필사진을 등록하세요 
 							<input 	type="file" value="선택" name="profile_img"> 

@@ -408,12 +408,12 @@ h3 {
 
 				<div id="company_find_form">
 					<form name="com_search" method="post"
-						action="Company_Temp_Join.company">
+						action="/HoneyComb/company/Company_Temp_Join.company">
 						<!-- onSubmit="return searchCheck()" -->
 						<h3>내 회사 등록</h3>
 						<hr class="subject">
 						<input type="text" placeholder="COMPANY NAME SEARCH" name="com_name"
-							class="cname" readonly> <img src="view/search.png"
+							class="cname" readonly> <img src="/HoneyComb/company/view/search.png"
 							id="search" value="찾기" onClick="companyCheck();"><br>
 						<input type="hidden" name="com_num" />DEPARTMENT<select
 							name="com_dept_num">

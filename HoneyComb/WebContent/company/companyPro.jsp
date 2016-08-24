@@ -8,7 +8,7 @@
 <title>사업장 등록 완료</title>
 <script type="text/javascript">
 	function tomain() {
-		location = "/HoneyComb/company/mainForm.jsp"
+		location.href="/HoneyComb/index.jsp"
 	}
 </script>
 
@@ -182,7 +182,7 @@ border-right: 5px solid white;
 }
 </style>
 </head>
-<body onLoad="setTimeout('tomain()',5000)">
+<body onLoad="setTimeout('tomain()',3000)">
 	<!-- onLoad="setTimeout('tomain()',5000)" -->
 
 	<div id="content">
@@ -227,7 +227,7 @@ border-right: 5px solid white;
 					</table>
 				</div>
 			</form>
-			<p>5초후 사업장 등록 페이지로 이동합니다.</p>
+			<p>3초후 사업장 등록 페이지로 이동합니다.</p>
 		</div>
 	</div>
 

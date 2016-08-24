@@ -111,26 +111,24 @@
 	
 	<div class="row">
 		
-		<div class="col-md-1"></div>
-		
-		<div class="col-md-10">
+		<div class="col-md-12 text-center">
 		
 			<c:if test="${notice_count > 0}">
 
 				<c:set var="pageCount"
-					value="${count / pageSize + (count % pageSize == 0 ? 0 : 1)}" />
-		
+					value="${notice_count / pageSize + ( notice_count % pageSize == 0 ? 0 : 1)}" />
+	
 				<fmt:parseNumber var="result" value="${currentPage / pageSize}"
 					integerOnly="true" />
-		
+	
 				<c:set var="startPage" value="${result * pageSize + 1}" />
-		
+	
 				<c:set var="endPage" value="${startPage + pageSize - 1}" />
-		
+	
 				<c:if test="${endPage > pageCount}">
 					<c:set var="endPage" value="${pageCount}" />
 				</c:if>
-		
+	
 				<ul class="pagination pagination-sm">
 				
 					<c:if test="${startPage > pageSize}">
@@ -152,12 +150,10 @@
 					</c:if>
 				
 				</ul>
-		
+	
 			</c:if>
 		
 		</div>
-		
-		<div class="col-md-1"></div>
 		
 	</div>
 

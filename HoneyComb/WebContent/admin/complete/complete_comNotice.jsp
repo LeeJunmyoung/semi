@@ -4,6 +4,42 @@
 <html>
 <head>
 <title>관리자 공지작성 폼</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<style>
+.myButton {
+	background-color: #4367b0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	font-size: 15px;
+	padding: 8px 25px;
+	text-decoration: none;
+	margin: 20px;
+	width: 100px;
+}
+
+.myButton:hover {
+	background-color: #344d91;
+}
+
+.myButton:active {
+	position: relative;
+	top: 1px;
+}
+</style>
+
+
 <script>
 	function writeSave() {
 
@@ -18,34 +54,29 @@
 			document.writeform.notice_content.focus();
 			return false;
 		}
-		/* else{
-			var num = notice_admin_num;
-			alert("notice_admin_num = "+notice_admin_num);
-			
-			url = "complete_comNotice.admin?notice_admin_num=" + num;
-
-				  window
-						.open(
-								url,
-								"post",
-								"toolbar=no,width=300,height=500,directories=no,status=yes,scrollbars=yes,menubar=no");
-		} */
-
 	}
 </script>
 
 </head>
 <body>
 
-	<form method="post" name="writeform" action="/HoneyComb/complete/complete_comNotice_admin.admin" onsubmit="return writeSave()">
-	
-		글제목 <input type="text" name="notice_admin_title" size="40" maxlength="50" /> <br>
-		공지팝업창 내용 <textarea name="notice_admin_content" rows="15" cols="30"></textarea> <br>
-		
-		<input type="reset" value="reset"> 
-		<input type="submit" value="submit">
+	<form class="col-sm-10" role="form" method="post" name="writeform"
+		action="/HoneyComb/complete/complete_comNotice_admin.admin"
+		onsubmit="return writeSave()">
 
+		<div class="form-group">
+			<label for="notice_admin_title">공지제목:</label> <input type="text"
+				class="form-control" id="notice_admin_title"
+				name="notice_admin_title">
+		</div>
+		<div class="form-group">
+			<label for="notice_admin_content">공지내용:</label>
+			<textarea class="form-control" rows="5" id="notice_admin_content"
+				name="notice_admin_content"></textarea>
+		</div>
+		<input type="submit" class="btn btn-primary btn-xs" value="공지작성">
+		<input type="button" class="btn btn-primary btn-xs" value="back"
+			onclick="history.go(-1)">
 	</form>
-	<input type="button" value="back" onclick="history.go(-1)">
 </body>
 </html>

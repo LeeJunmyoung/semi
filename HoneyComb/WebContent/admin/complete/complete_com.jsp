@@ -5,25 +5,33 @@
 <html>
 <head>
 <title>사업장 승인폼</title>
+
+<style>
+.myButton {
+	background-color: #4367b0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	font-size: 15px;
+	padding: 8px 25px;
+	text-decoration: none;
+	margin: 20px;
+}
+
+.myButton:hover {
+	background-color: #344d91;
+}
+
+.myButton:active {
+	position: relative;
+	top: 1px;
+}
+</style>
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<!-- <script>
-	$(document).ready(function() {
-		//최상단 체크박스 클릭
-		$("#chkall").click(function() {
-			//클릭되었으면
-			if ($("#chkall").prop("checked")) {
-				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-				$("input[name=com_name]").prop("checked", true);
-				//클릭이 안되있으면
-			} else {
-				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-				$("input[name=com_name]").prop("checked", false);
-			}
-		});
-
-	});
-</script> -->
 
 <script>
 	function listCheck(come_num) {;
@@ -72,14 +80,10 @@
 <body bgcolor="<%=bodyback_c%>">
 
 
-	<form name="wtf">
+	<form align="center">
 		<h3>사업장 신청 목록</h3>
-		<table width="400" border="1" cellpadding="1" cellspacing="0" name="">
+		<table width="400" border="1" cellpadding="1" cellspacing="0" align="center">
 			<tbody>
-				<!-- <tr>
-					<td align="center">AllSelect<input id="chkall" type="checkbox">
-					</td>
-				</tr> -->
 				<c:if test="${ empty comList }">
 					<tr>
 						<td align="center">신청한 사업장이 없습니다</td>
@@ -88,9 +92,7 @@
 				<c:if test="${ !empty comList }">
 					<c:forEach var="compl" items="${comList}">
 						<tr>
-							<td>
-							<!-- <input type="checkbox" id="company">  -->
-							<a onclick="listCheck(${compl.com_num})">${compl.com_name}</a><input
+							<td><a onclick="listCheck(${compl.com_num})">${compl.com_name}</a><input
 								type="submit" id="submit" value="등록"
 								onclick="submitCheck(${compl.com_num})"> <input
 								type="button" id="delete" value="삭제"
@@ -101,7 +103,7 @@
 			</tbody>
 		</table>
 		<tr>
-		<td align="center"><input type="button" value="back" onclick="history.go(-1)"></td>
+			<td align="center"><a onclick="history.go(-1)" class="myButton">back</a></td>
 		</tr>
 
 	</form>

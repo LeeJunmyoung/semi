@@ -105,7 +105,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 				System.out.println("프로젝트에서 실행됨");
 				//프로젝트 명 가지고 오기
 				progr_name = getProgrName(promgr_num);
-				createFolder(cloudDB, progr_name);
+				createFolder(cloudDB, progr_name, promgr_num);
 				sql = "insert into cloud values(cloud_seq.nextval,?,?,?,?,sysdate,?,?,?,?)";//마지막에 들어갈 promgr_num
 				String progrfolder = "*"+progr_name+"|";//프로젝트명의 가상파일 생성
 				cloudDB.setFolder(progrfolder);
@@ -155,7 +155,7 @@ public int cloudInsert(CloudDataBean cloudDB, int promgr_num)throws SQLException
 		return 1;
 	}
 
-public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLException{
+public void createFolder(CloudDataBean cloudPro, String progr_name, int progr_num)throws SQLException{
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	try{
@@ -174,11 +174,11 @@ public void createFolder(CloudDataBean cloudPro, String progr_name)throws SQLExc
 			int i = checkFolder(cloudPro);//그 폴더가 중복되었을 경우
 			
 			if (i != 0){//그 폴더가 중복이 아닐경우
-				pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,?,'',?)");
+				pstmt =conn.prepareStatement("insert into cloud values(cloud_seq.nextval,?,'',?,0,sysdate,?,'',?,?)");
 				pstmt.setString(1, cloudPro.getFile_name());
 				pstmt.setString(2,cloudPro.getFile_uploader());
 				pstmt.setInt(3,cloudPro.getCom_num());
-				pstmt.setString(4,cloudPro.getFolder());
+				pstmt.setInt(4, progr_num);
 				pstmt.setInt(5, cloudPro.getMem_num());
 				pstmt.executeUpdate();
 				conn.commit();

@@ -169,7 +169,7 @@ background-color: silver;
 </style>
 </head>
 <body>
-mem_num = ${mem_num}<br>	
+<%-- mem_num = ${mem_num}<br> --%>	
 <div class="indexbox">
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')" class="indexbutton">
 	<input type="button" name="download" value="다운로드" onclick="download()"class="indexbutton">

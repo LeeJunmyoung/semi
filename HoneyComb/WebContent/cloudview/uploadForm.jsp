@@ -11,7 +11,7 @@
 	 
  	if(	$('#filecheck').val() != ""){
 		alert("'"+'${param.filecheck}'+"'"+"은 이미 있는 파일입니다. 다른 파일명을 입력해 주세요");
-		var url = "/HoneyComb/cloudview/changeFilename.jsp?dupli=y&promgr_num="${param.promgr_num};
+		var url = '/HoneyComb/cloudview/changeFilename.jsp?dupli=y&promgr_num= ${param.promgr_num}';
 		$(location).attr('href',url);
 	}
 	/* if($('#uploadcheck').val() == 'done'){

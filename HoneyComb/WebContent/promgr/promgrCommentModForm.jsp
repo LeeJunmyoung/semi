@@ -13,15 +13,15 @@
 
 <script>
 	function writeSave() {
-
-		if (document.commentModform.promgr_content.value == "") {
+	
+		if (document.commentModform.promgr_comment.value == "") {
 			alert("내용을 입력하십시요.");
-			document.commentAddform.promgr_content.focus();
+			document.commentModform.promgr_comment.focus();
 			return false;
 		}
 		
 		return true;
-
+	
 	}
 </script>
 

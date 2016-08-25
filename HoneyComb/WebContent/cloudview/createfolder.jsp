@@ -12,7 +12,8 @@
 		alert("'"+'${param.name}'+"'"+"은 이미 있는 폴더입니다. 다른 폴더명을 입력해 주세요");
 		}
 	if($('#uploadcheck').val() == 'done'){
-		window.close()
+		window.opener.location.reload();
+		window.close();
 	}
 	})
 </script>
@@ -49,7 +50,7 @@ padding-top: 3px;
 
 <title>Insert title here</title>
 </head>
-<body onload="refresh()">
+<body>
 <form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('foldername')" class="foldertext">
 <h3>
 생성할 폴더 이름을 입력해 주세요

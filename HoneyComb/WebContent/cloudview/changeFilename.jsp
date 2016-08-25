@@ -6,8 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="/HoneyComb/cloudview/cloudScript.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 window.opener.location.reload();
+$(function(){
+	if(!${param.dupli == 'y'}){
+		window.opener.location.reload();
+		window.close();
+	};
+})
+
 </script>
 <style type="text/css">
 body{
@@ -45,10 +53,10 @@ padding-top: 3px;
 		<input type="submit" value="확인" class="indexbutton">
 		<input type="hidden" name="promgr_num" value="${param.promgr_num}">
 
-		<c:if test="${param.dupli == 'y'}">
+		
 	<div>취소버튼을 누를경우 파일이 업로드 되지 않습니다</div>
 	<a href="/HoneyComb/cloud/cloudDeleteItem.cloud">취소</a>
-		</c:if>
+		
 	</form>
 </body>
 </html>

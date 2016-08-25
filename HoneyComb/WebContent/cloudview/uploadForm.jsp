@@ -15,6 +15,7 @@
 		$(location).attr('href',url);
 	}
 	 if($('#uploadcheck').val() == 'done'){
+		 window.opener.location.reload();
 		window.close();
 	
 	}  
@@ -85,7 +86,7 @@ display: inline-block;
 </style>
 <title>Insert title here</title>
 </head>
-<body onload="refresh()">
+<body>
 <form  action="/HoneyComb/cloud/fileUploader.cloud?folder=${param.folder}"  name="uploadform" enctype="multipart/form-data" method="post" onsubmit="return emptyck('uploadfile')">
 	<div class="text">
 	<h3>업로드 파일을 선택해주세요</h3>

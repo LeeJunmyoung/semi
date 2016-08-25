@@ -41,12 +41,16 @@ public class FileUploader implements CommandActionCloud{
 			//작성한 파일이름
 			filename = mr.getParameter("filename");
 			//파일이름을 작성하지 않았을 경우
+			
 			if(filename.length() == 0){
-				int i = oldPath.lastIndexOf('.');//확장자
-				int j = oldPath.lastIndexOf('/');//경로
-				String tempoldPath = oldPath.substring(0, i);//확장자 지우기
-				filename = tempoldPath.substring(j+1);//파일경로 지우기
+				int Cpath = oldPath.lastIndexOf('/');//기본경로 자르기
+				filename= oldPath.substring(Cpath+1);
+			}else{
+				int Cpath = oldPath.lastIndexOf('.');//기본경로 자르기
+				String TPath= oldPath.substring(Cpath);
+				filename=filename+TPath;
 			}
+			
 			
 			//파일경로 재설정
 			CreateFilePath createfilePath =  CreateFilePath.getInstance();

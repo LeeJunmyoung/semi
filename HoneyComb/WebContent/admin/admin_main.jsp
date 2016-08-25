@@ -120,18 +120,24 @@ body {
 	position: relative;
 	top: 1px;
 }
+.cover{
+background: white;
+}
+#admin{
+width: 100%;
+}
 </style>
 
 </head>
 <body>
 	<div id="home_banner">
 		<div id="logo_wrapper">
-			<img id="logo_banner" src="/HoneyComb/view/Logo.png" width="100"
+			<img id="logo_banner" src="/HoneyComb/page_layout/page_image/logo.png" width="100"
 				height="100" onclick="location.href='/HoneyComb/index.jsp'"> <a
 				id="logo_a" href="/HoneyComb/index.jsp"><p id="Honey_comB">HoneyComb</p></a>
 		</div>
 	</div>
-	<div class="container" style="height: 89%; width: 80%;">
+	<div class="container" style="height: 89%; width: 70%;">
 		<div class="cover">
 			<div class="navbar navbar-default"></div>
 

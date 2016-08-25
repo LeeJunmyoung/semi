@@ -167,7 +167,7 @@ margin: auto;
 position:relative;
 top:150px;
 width: 700px;
-height:800px;
+height:500px;
 margin: auto;
 
 }
@@ -179,6 +179,23 @@ width: 700px
 width:700px;
 
 }
+
+
+
+
+#h1_tag {
+	width: 500px;
+	margin: auto;
+	font-size: 40px;
+	text-align: center;
+}
+
+h1 {
+	width: 500px;
+	margin: auto;
+	text-align: center;
+}
+
 </style>
 
 
@@ -212,9 +229,10 @@ width:700px;
 
 
 <div id='admin_notice_div'>
-<div id='notice_h'>
-<h1>팝업창 작성</h1>
-</div>
+<div id='h1_tag'>
+		<br>팝업 창 작성
+		<hr>
+	</div>
 <div id ='form_div'>
 	<form class="col-sm-10" role="form" method="post" name="writeform"
 		action="/HoneyComb/complete/complete_comNotice_admin.admin"

@@ -80,6 +80,18 @@ td {
 	vertical-align: middle;
 }
 
+#contain_memcheck{
+width: 70%;
+height:89%;
+background: white;
+position: relative;
+left: 250px;
+}
+body{
+background:#e9ebee;
+}
+
+
 #back_button {
 	position: relative;
 	top: 40px;
@@ -89,6 +101,7 @@ td {
 }
 
 #back_button_div {
+ 
 	width: 60px;
 	margin: auto;
 }
@@ -136,6 +149,40 @@ input[type=text] {
 	padding-left: 10px;
 	text-align: lift;
 }
+
+
+
+#home_banner {
+	width: 100%;
+	height: 11%;
+	background: #344d91;
+	margin: 0;
+	padding: 0;
+}
+
+#logo_wrapper {
+	position: absolute;
+	left: 250px;
+	z-index: 3;
+}
+
+#logo_banner {
+	display: inline;
+	margin: auto;
+	width: 100px;
+	height: 100px;
+}
+
+#Honey_comB {
+	display: inline;
+	font-size: 38pt;
+	color: #fff;
+	vertical-align: middle;
+}
+
+#logo_a {
+	text-decoration: none;
+}
 </style>
 
 
@@ -173,7 +220,20 @@ function in_focus(){
 	}
 </script>
 </head>
-<body onload="in_focus()">
+<body onload="in_focus()" >
+
+
+<div id="home_banner">
+		<div id="logo_wrapper">
+			<img id="logo_banner" src="/HoneyComb/page_layout/page_image/logo.png" width="100"
+				height="100" onclick="location.href='/HoneyComb/index.jsp'"> <a id="logo_a" href="/HoneyComb/index.jsp"><p id="Honey_comB">HoneyComb</p></a>
+		</div>
+</div>
+
+
+
+
+<div id = 'contain_memcheck'>
 	<div id='h1_tag'>
 		<br> Present Condition
 		<hr>
@@ -220,6 +280,7 @@ function in_focus(){
 					id='back_button' onclick="history.go(-1)">
 			</div>
 		</form>
+	</div>
 	</div>
 </body>
 </html>

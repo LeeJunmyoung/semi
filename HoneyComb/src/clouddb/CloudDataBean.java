@@ -13,6 +13,7 @@ public class CloudDataBean {
 	private int com_num;
 	private String folder;
 	private int mem_num;
+	private int promgr_num;
 	
 	public int getFile_num() {
 		return file_num;
@@ -70,6 +71,12 @@ public class CloudDataBean {
 	}
 	public void setMem_num(int mem_num) {
 		this.mem_num = mem_num;
+	}
+	public int getPromgr_num() {
+		return promgr_num;
+	}
+	public void setPromgr_num(int promgr_num) {
+		this.promgr_num = promgr_num;
 	}
 	
 	

@@ -14,17 +14,10 @@
 		var url = '/HoneyComb/cloudview/changeFilename.jsp?dupli=y&promgr_num= ${param.promgr_num}';
 		$(location).attr('href',url);
 	}
-	/* if($('#uploadcheck').val() == 'done'){
-		var result = confirm('파일을 더 업로드하시겠습니까?')
-		if(result){
-
-			window.opener.document.location.reload();
-			$('#uploadcheck').val('true');
-		}else{
-			window.opener.document.location.reload();
-			window.close();
-		}
-	}  */
+	 if($('#uploadcheck').val() == 'done'){
+		window.close();
+	
+	}  
  	 var fileTarget = $('.file_upload .upload_hidden');
 
  	  fileTarget.on('change', function(){  // 값이 변경되면

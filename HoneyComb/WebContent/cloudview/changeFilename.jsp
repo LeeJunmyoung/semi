@@ -46,7 +46,7 @@ padding-top: 3px;
 		<input type="hidden" name="promgr_num" value="${param.promgr_num}">
 
 		<c:if test="${param.dupli == 'y'}">
-	취소버튼을 누를경우 파일이 업로드 되지 않습니다
+	<div>취소버튼을 누를경우 파일이 업로드 되지 않습니다</div>
 	<a href="/HoneyComb/cloud/cloudDeleteItem.cloud">취소</a>
 		</c:if>
 	</form>

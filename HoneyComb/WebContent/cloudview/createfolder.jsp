@@ -11,6 +11,9 @@
 	if(	$('#foldercheck').val() != ""){
 		alert("'"+'${param.name}'+"'"+"은 이미 있는 폴더입니다. 다른 폴더명을 입력해 주세요");
 		}
+	if($('#uploadcheck').val() == 'done'){
+		window.close()
+	}
 	})
 </script>
 <style type="text/css">
@@ -57,7 +60,6 @@ padding-top: 3px;
 	<input type="hidden" value="${param.uploadcheck}" id="uploadcheck">
 	<input type="hidden" value="${param.name}" id="foldercheck">
 	<input type="hidden" value="${param.folder}" name="folder">
-	com_Num:${com_num}
 	
 </div>
 </form>

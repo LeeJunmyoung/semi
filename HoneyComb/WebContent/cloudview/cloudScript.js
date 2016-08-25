@@ -43,7 +43,8 @@ function emptyck(value){
 }
 function download(){
 	$("input[name=itemBox]:checked").each(function(){
-		var file_name = $(this).data('file_name');
+		var file_name = 
+		encodeURIComponent( encodeURIComponent( $(this).data('file_name')));
 		var file_path = $(this).data('file_path');		
 		var url="/HoneyComb/cloud/cloudDownItem.cloud?file_name="+file_name+"&file_path="+file_path;
 		$(location).attr('href',url);

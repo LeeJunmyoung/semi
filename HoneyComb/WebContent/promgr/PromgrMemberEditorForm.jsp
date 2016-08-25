@@ -90,7 +90,7 @@
 
 		<c:forEach var="item" items="${ memberSearchList }">
 
-			<div id="mem_search_item" name="${item.mem_name}" class="row text-center">
+			<div id="mem_search_item" name="${item.mem_name}" class="row">
 				<span class="col-md-1">
 					<input type="checkbox" name="mem_add" value="${item.mem_num}" />
 				</span>

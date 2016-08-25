@@ -38,8 +38,8 @@
 		
 		if(session_mem_num == file_mem_num) {
 		
-			if(document.getElementById(btn_group).style.display == "block") {
-				document.getElementById(btn_group).style.display = "none"
+			if(document.getElementById(btn_group).style.visibility == "visible") {
+				document.getElementById(btn_group).style.visibility = "hidden"
 			}
 			
 		}
@@ -50,8 +50,8 @@
 	
 		if(session_mem_num == file_mem_num) {
 		
-			if(document.getElementById(btn_group).style.display == "none") {
-				document.getElementById(btn_group).style.display = "block"
+			if(document.getElementById(btn_group).style.visibility == "hidden") {
+				document.getElementById(btn_group).style.visibility = "visible"
 			}
 			
 		}
@@ -430,13 +430,15 @@
 											<div id="${view.file_num}">
 
 												<label id="file_lab_${view.file_num}"
-													ondblclick="AppearFile(${my_mem_num}, ${view.mem_num},'item_btn_group_${bean.chklist_item_num}')">
-													${bean.chklist_item_name} </label> <input type="button"
+													ondblclick="AppearFile(${my_mem_num}, ${view.mem_num},'file_btn_group_${view.file_num}')">
+													${view.file_name} </label>
+													
+												<input type="button"
 													class="btn btn-default btn-xs" value="down"
 													onclick="DownFile('${view.file_name}', '${view.file_path}')">
 
 												<div class="btn-group" id="file_btn_group_${view.file_num}"
-													style="display: none;">
+													style="visibility: hidden;">
 
 													<input type="button" class="btn btn-default btn-xs"
 														value="DEL"

@@ -279,7 +279,7 @@ public class PromgrDBBean {
 					for (int i = 0; i < item_list.length; i++) {
 						// file_view item setting
 
-						sql = "select * from cloud where file_num=? order by file_num desc";
+						sql = "select * from cloud where file_num=?";
 						pstmt = conn.prepareStatement(sql);
 						pstmt.setInt(1, item_list[i]);
 
@@ -322,7 +322,7 @@ public class PromgrDBBean {
 					for (int i = 0; i < item_list.length; i++) {
 						// chklist_view item setting
 
-						sql = "select * from promgr_comment where comment_num=? order by comment_num desc";
+						sql = "select * from promgr_comment where comment_num=?";
 						pstmt = conn.prepareStatement(sql);
 						pstmt.setInt(1, item_list[i]);
 

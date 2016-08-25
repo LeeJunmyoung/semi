@@ -37,73 +37,91 @@
 	}
 
 	function addView() {
-		if (document.getElementById("add").checked == true) {
-			document.getElementById("mem_list").hidden = true;
-			document.getElementById("mem_search_input").hidden = false;
-			document.getElementById("mem_search_result").hidden = false;
+		
+		if(document.getElementById("mem_list").style.display == "block") {
+			document.getElementById("mem_list").style.display = "none"
+			document.getElementById("mem_search_input").style.display = "block"
+			document.getElementById("mem_search_result").style.display = "block"
 		}
+		
 	}
 
 	function delView() {
-		if (document.getElementById("del").checked == true) {
-			document.getElementById("mem_list").hidden = false;
-			document.getElementById("mem_search_input").hidden = true;
-			document.getElementById("mem_search_result").hidden = true;
+		if(document.getElementById("mem_list").style.display == "none") {
+			document.getElementById("mem_list").style.display = "block"
+			document.getElementById("mem_search_input").style.display = "none"
+			document.getElementById("mem_search_result").style.display = "none"
 		}
 	}
 </script>
 
 </head>
 
-<body>
+<body style="background-color: #e9ebee;">
 
-	<div id="tab_editor">
 
-		add <input type="radio" id="add" name="tab_editor"
-			onchange="addView()" checked="true" />
-		del <input type="radio"
-			id="del" name="tab_editor" onchange="delView()" />
+<div class="text-center">
 
+	<div class="btn-group" style="margin-bottom: 10px; margin-top: 10px;">
+	
+		<input type="button" class="btn btn-primary btn-md col-md-6" value="ADD"  
+			onclick="addView()">
+																		
+		<input type="button" class="btn btn-primary btn-md col-md-6" value="DEL"  
+			onclick="delView()">
+																		
 	</div>
 
+</div>
+	
 	<div id="mem_search_input">
-
-		참여자 명 : <input type="text" id="mem_name_filter"
+	
+		<div class="form-group col-md-10">
+			<label for="mem_name_filter">참여자 명 : </label>
+			<input type="text" class="form-control" id="mem_name_filter"
 			onkeyup='{filter();return false}'
-			onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}' />
+			onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
+		</div>
 
 	</div>
-
-	<form id="mem_search_result" name="mem_search_result" method="post"
+	
+	<form class="col-sm-10" role="form" id="mem_search_result" name="mem_search_result" method="post"
 		action="/HoneyComb/promgr/promgrMemberEditorAdd.promgr?promgr_num=${promgr_num}">
 
 		<c:forEach var="item" items="${ memberSearchList }">
 
-			<div id="mem_search_item" name="${item.mem_name}">
-				<input type="checkbox" name="mem_add" value="${item.mem_num}" />
-				${item.mem_num} / ${item.mem_name} / ${item.mem_email} /
-				${item.mem_pos}
+			<div id="mem_search_item" name="${item.mem_name}" class="row text-center">
+				<span class="col-md-1">
+					<input type="checkbox" name="mem_add" value="${item.mem_num}" />
+				</span>
+				<span class="col-md-3">${item.mem_name}</span>
+				<span class="col-md-6">${item.mem_email}</span>
+				<span class="col-md-2">${item.mem_pos}</span>
 			</div>
 
 		</c:forEach>
 
-		<input type="submit" value="add" />
+		<input type="submit" class="btn btn-primary btn-xs" value="참여자추가" style="margin-top: 5px;" />
 
 	</form>
 
-	<form id="mem_list" hidden="true" method="post"
+	<form class="col-sm-10" role="form" id="mem_list" method="post" style="display: none;"
 		action="/HoneyComb/promgr/promgrMemberEditorDel.promgr?promgr_num=${promgr_num}">
 
 		<c:forEach var="item" items="${ memberList }">
 
-			<div>
-				<input type="checkbox" name="mem_del" value="${item.mem_num}">${item.mem_num}
-				/ ${item.mem_name} / ${item.mem_email} / ${item.mem_pos}
+			<div class="row">
+				<span class="col-md-1">
+					<input type="checkbox" name="mem_del" value="${item.mem_num}" />
+				</span>
+				<span class="col-md-3">${item.mem_name}</span>
+				<span class="col-md-6">${item.mem_email}</span>
+				<span class="col-md-2">${item.mem_pos}</span>
 			</div>
 
 		</c:forEach>
 
-		<input type="submit" value="del" />
+		<input type="submit" class="btn btn-primary btn-xs" value="참여자삭제" style="margin-top:10px;" />
 
 	</form>
 

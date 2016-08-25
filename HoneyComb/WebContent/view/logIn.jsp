@@ -127,7 +127,7 @@ padding:0;
   <div id = "home_banner">
   <div id = "logo_wrapper">
        <img id="logo_banner" src="/HoneyComb/page_layout/page_image/logo.png" width="100" height="100"onclick="location.href='/HoneyComb/index.jsp'">
- <a id="logo_a" href="/HoneyComb/index.jsp"><p id="Honey_comB" >HoneyComb</p></a>
+ <a id="logo_a" href="/HoneyComb/index.jsp"><p id="Honey_comB" >HONEYCOMB</p></a>
   </div>
   </div>
       <div class="container" style="height:89%; width:80%;">
@@ -138,7 +138,7 @@ padding:0;
              <div class="container" style="width:70%;">
                 
                   <div class="col-md-12 text-center" id="col-md-12">
-                    <h1>HoneyComb</h1>
+                    <h1>HONEYCOMB</h1>
             <p>로그인페이지</p>
             <form class="form-horizontal text-center" action="/HoneyComb/coin/LogInPro.coin" method="post" onsubmit="return checkEmail()" name="myform">
             

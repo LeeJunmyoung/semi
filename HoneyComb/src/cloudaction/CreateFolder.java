@@ -20,9 +20,6 @@ public class CreateFolder implements CommandActionCloud{
 		/*session.setAttribute("com_num", "1");
 		session.setAttribute("name", "tester");*/
 		//占쌈시쇽옙占쏙옙 占쏙옙
-		
-		
-		
 		//占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨아울옙占쏙옙
 		String folder = (String)request.getParameter("folder");
 		//占쏙옙占쏙옙占쏙옙 占쌨아울옙占쏙옙

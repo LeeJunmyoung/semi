@@ -25,7 +25,6 @@ $(document).bind("contextmenu", function(event) {
 			$(this).find("input:checkbox[name=itemBox]").prop("checked",true);
 			$('#img.file').css("border","1px solid silver")
 			$(this).find('div#img.file').css("border","3px solid silver");
-			
     }); 
     
     if(!$("input[name=itemBox]:checked").length == 0){
@@ -40,6 +39,8 @@ $(document).bind("contextmenu", function(event) {
     if($("div.cloud_menu")!= null){
     	$("div.cloud_menu").hide();
     };
+ 
+ 
 	if($(checkboxck).data('file_path') ==""){
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
@@ -51,21 +52,25 @@ $(document).bind("contextmenu", function(event) {
 	}else{
     $("<div class='cloud_menu' style='position: absolute; z-index:1000;'>"+
 	    "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
-	    "<a href='javascript:download()' id='fileonly'><p >다운로드</p></a>"+
+	    "<a href='javascript:download()' id='fileonly' class='downdiv'><p >다운로드</p></a>"+
 	    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
 	    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
 	    +"</div>")
 	    .appendTo("body")
-	    .css({top: event.pageY + "px", left: event.pageX + "px"});
+	    .css({top: event.pageY + "px", left: event.pageX + "px"});   
 };
 	
-    
+if(${mem_num}!=($('input[name=itemBox]:checked').data('mem_num'))){
+	$(".downdiv").css("display","none");
+};
 	
         
 	
 }).bind("click", function(event) {
     $("div.cloud_menu").hide(); 
 });
+	
+	
 	
 	 $('#download').click(function(){
 		alert("test");
@@ -180,7 +185,7 @@ mem_num = ${mem_num}<br>
 		<div class="item" id="item">
 				<li style="display: inline;">
 					
-					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}">
+					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}" data-mem_num="${cloudlist.mem_num}"}>
 						<label for="${cloudlist.file_num}">
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">

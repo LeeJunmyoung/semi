@@ -28,7 +28,7 @@ public class CreateFolder implements CommandActionCloud{
 		//占쏙옙占쏙옙占쏙옙 占쌨아울옙占쏙옙
 		String file_name = (String)request.getParameter("foldername");
 		//com_num 占쌨아울옙占쏙옙
-		int com_num = Integer.parseInt((String)session.getAttribute("com_num"));
+		int com_num = Integer.parseInt(String.valueOf(session.getAttribute("com_num")));
 		//占쏙옙占쏙옙 占쏙옙占싸듸옙 占싼삼옙占� 占쌨아울옙占쏙옙
 		String file_uploader = (String)session.getAttribute("name");
 		//cloudPro占쏙옙 占쌍깍옙

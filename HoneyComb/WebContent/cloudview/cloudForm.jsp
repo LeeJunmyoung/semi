@@ -62,11 +62,14 @@ $(document).bind("contextmenu", function(event) {
 };
 	
 if(${mem_num}!=($('input[name=itemBox]:checked').data('mem_num'))){
+	$("#deletebutton").css("display","none");
 	$(".deldiv").css("display","none");
 	};
 	
 if($('input[name=itemBox]:checked').data('promgr_num') != 0){
-	$(".deldiv").css("display","none")};	
+	$("#deletebutton").css("display","none");
+	$(".deldiv").css("display","none")
+	};	
 
     
 	
@@ -98,9 +101,17 @@ if($('input[name=itemBox]:checked').data('promgr_num') != 0){
 		$(this).find("input:checkbox[name=itemBox]").prop("checked",true);
 		$('#img.file').css("border","1px solid silver")
 		$(this).find('div#img.file').css("border","3px solid silver");
+		$("#deletebutton").css("display","inline");
+
+		if(${mem_num}!=($('input[name=itemBox]:checked').data('mem_num'))){
+					$("#deletebutton").css("display","none");};
+
+		if($('input[name=itemBox]:checked').data('promgr_num') != 0){
+					$("#deletebutton").css("display","none");};	 
 		
 		
 	});
+	
 	 
 	 
 	
@@ -177,7 +188,7 @@ background-color: silver;
 <div class="indexbox">
 	<input type="button"name="upload" value="업로드" onclick="return fileUploader('${param.folder}')" class="indexbutton">
 	<input type="button" name="download" value="다운로드" onclick="download()"class="indexbutton">
-	<input type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')" class="indexbutton">
+	<input id="deletebutton" type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')" class="indexbutton" >
 </div>
 	
 	<div class="cloudForm">

@@ -31,7 +31,7 @@
 		action="/HoneyComb/promgr/promgrChkItemModPro.promgr?item_num=${item_num}" 
 		onsubmit="return writeSave()" >
 		
-		<div class="form-group">
+		<div class="form-group" style="margin-top: 10px;">
 			<label for="promgr_list_item">항목 명:</label>
 			<input type="text" class="form-control" id="promgr_list_item" name="promgr_list_item">
 		</div>

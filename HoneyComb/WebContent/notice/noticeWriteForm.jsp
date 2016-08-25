@@ -36,7 +36,7 @@
 	<form class="col-sm-10" role="form" method="post" name="noticeWriteform" 
 		action="/HoneyComb/notice/noticeWritePro.notice" onsubmit="return writeSave()" >
 		
-		<div class="form-group">
+		<div class="form-group" style="margin-top: 10px;">
 			<label for="notice_title">공지제목:</label>
 			<input type="text" class="form-control" id="notice_title" name="notice_title">
 		</div>

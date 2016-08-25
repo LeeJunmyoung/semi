@@ -32,7 +32,7 @@
 		action="/HoneyComb/promgr/promgrCommentModPro.promgr?comment_num=${comment_num}" 
 		onsubmit="return writeSave()" >
 		
-		<div class="form-group">
+		<div class="form-group" style="margin-top: 10px;">
 			<label for="promgr_comment">댓글내용:</label>
 			<textarea class="form-control" rows="5" id="promgr_comment" name="promgr_comment"></textarea>
 		</div>

@@ -37,7 +37,7 @@
 	<form class="col-sm-10" role="form" method="post" name="promgrAddform" 
 		action="/HoneyComb/promgr/promgrAddPro.promgr" onsubmit="return writeSave()" >
 		
-		<div class="form-group">
+		<div class="form-group" style="margin-top: 10px;">
 			<label for="promgr_title">프로젝트제목:</label>
 			<input type="text" class="form-control" id="promgr_title" name="promgr_title">
 		</div>

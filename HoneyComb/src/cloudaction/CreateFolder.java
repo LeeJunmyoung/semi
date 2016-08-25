@@ -30,7 +30,7 @@ public class CreateFolder implements CommandActionCloud{
 		String file_uploader = (String)session.getAttribute("name");
 		//cloudPro占쏙옙 占쌍깍옙
 
-		
+		 
 		
 		cloudPro.setFolder(folder);
 		cloudPro.setFile_name(file_name);
@@ -43,7 +43,7 @@ public class CreateFolder implements CommandActionCloud{
 		} 
 		//占쌩븝옙占쏙옙占� 확占쏙옙 占쏙옙
 	
-		cloud.createFolder(cloudPro, null);
+		cloud.createFolder(cloudPro, null, 0);
 		return "/cloudview/createfolder.jsp?uploadcheck=done";
 	}
 

@@ -50,7 +50,7 @@ public class FileUploader implements CommandActionCloud{
 				String TPath= oldPath.substring(Cpath);
 				filename=filename+TPath;
 			}
-			
+			 
 			
 			//파일경로 재설정
 			CreateFilePath createfilePath =  CreateFilePath.getInstance();

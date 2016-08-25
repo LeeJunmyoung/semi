@@ -28,7 +28,7 @@ public class FileUploader implements CommandActionCloud{
 			CloudDBBean cloud = CloudDBBean.getInstance();
 			
 			//저장 기본경로
-			String savefilepath = "D://cloud/";
+			String savefilepath = "E://cloud/";
 			HttpSession session = request.getSession();
 			
 			//파일먼저 업로드
@@ -84,10 +84,11 @@ public class FileUploader implements CommandActionCloud{
 			//이름바꿔줄 file_num session으로 저장
 			
 			if(filecheck == 0){
+				request.setCharacterEncoding("utf-8");
 				session.setAttribute("file_path", cloudDB.getFile_path());
 				return "/cloudview/uploadForm.jsp?filecheck="+cloudDB.getFile_name()+"&promgr_num="+(String)mr.getParameter("promgr_num");
 			}else{
-				
+				request.setCharacterEncoding("utf-8");
 				return "/cloudview/uploadForm.jsp?upload=done&promgr_num="+(String)mr.getParameter("promgr_num");
 			}
 		

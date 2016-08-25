@@ -4,6 +4,27 @@
 <html>
 <head>
 <title>공지팝업</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+<style>
+.title {
+	background: #344d91;
+	color: white;
+}
+
+#title {
+	table-layout: fixed;
+	position: relative;
+	margin: 0 auto;
+}
+
+#close_button {
+	margin: auto;
+}
+</style>
 <script>
 	function setCookie(name, value, expiredays) {
 		var todayDate = new Date();
@@ -26,17 +47,14 @@
 	<form name="noticeform">
 		<c:if test="${ !empty popup }">
 			<c:forEach var="pop" items="${ popup }">
+				<br>
 				<table width="320" border="1" bordercolor="#cccccc" align="center"
 					cellpadding="5" cellspacing="0">
-					<tr bgcolor="#ffcc00">
-						<td aling="center" colspan="2"><B>공지사항</B></td>
+					<tr>
+						<td align="center" class="title" colspan="2"><h4>공지사항</h4></td>
 					</tr>
 					<tr>
-						<td align="center">Subject</td>
 						<td align="center">${pop.notice_admin_title}</td>
-					</tr>
-					<tr>
-						<td align="center" colspan="2">Content</td>
 					</tr>
 					<tr>
 						<td align="center" colspan="2">${pop.notice_admin_content }</td>
@@ -47,12 +65,13 @@
 				</p>
 			</c:forEach>
 		</c:if>
-		<br />
 
 		<table align="center">
-		<tr>
-			<td><a href="javascript:this.close();">닫기</a>
-			<input type="checkbox" name="notice" onchange="closeWin()">하루동안 띄우지않기</td>
+			<tr>
+				<td><input
+					type="checkbox" name="notice" onchange="closeWin()">하루동안
+					띄우지않기 <input type="button" class="btn btn-primary btn-xs"
+					value="close" id='close_button' onclick="window.close()"></td>
 			</tr>
 		</table>
 

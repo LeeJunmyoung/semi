@@ -8,6 +8,8 @@ public class PromgrChkListModProAction implements PromgrFormAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
+		request.setCharacterEncoding("utf-8");
+		
 		int list_num = Integer.parseInt(request.getParameter("list_num"));
 		String list_name = String.valueOf(request.getParameter("promgr_list_title"));
 		

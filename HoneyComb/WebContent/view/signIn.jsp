@@ -163,9 +163,11 @@ height:35px;
 text-align:center;
 }
 
-.mailcheck{
-width:80px;
-height:35px;
+#mailcheck{
+position:relative;
+top:-2;
+width:85px;
+height:36px;
 }
 #phone input{
 text-align:center;

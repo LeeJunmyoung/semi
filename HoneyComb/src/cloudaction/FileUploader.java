@@ -22,7 +22,7 @@ public class FileUploader implements CommandActionCloud{
 			//기본설정
 			String filename= null;//file_name에 입력될 값
 			String oldPath = null;//multipart 가 설정한 처 경로
-			String newPath = null;//바꿀Path
+			String newPath = null;//바꿀Path 
 			File file = null;
 			CloudDataBean cloudDB = new CloudDataBean();
 			CloudDBBean cloud = CloudDBBean.getInstance();

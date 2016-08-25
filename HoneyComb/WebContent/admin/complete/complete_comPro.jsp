@@ -49,6 +49,7 @@ h1 {
 	table-layout: fixed;
 	position: relative;
 	margin: 0 auto;
+	text-overflow: ellipsis;
 }
 
 #title>tbody {

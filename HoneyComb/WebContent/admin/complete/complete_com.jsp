@@ -64,7 +64,7 @@ h1 {
 				.open(
 						url,
 						"post",
-						"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
+						"toolbar=no,width=700,height=300,directories=no,status=yes,scrollbars=yes,menubar=no");
  
 	}
 
@@ -78,7 +78,7 @@ h1 {
 					.open(
 							url,
 							"post",
-							"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
+							"toolbar=no,width=600,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
 			  
 	} 
 	 
@@ -90,7 +90,7 @@ h1 {
 		.open(
 				url,
 				"post",
-				"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
+				"toolbar=no,width=600,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
 	 }
 	 
 </script>

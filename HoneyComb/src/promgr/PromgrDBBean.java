@@ -1153,7 +1153,6 @@ public class PromgrDBBean {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		int count = 0;
 		String sql = "";
@@ -1162,24 +1161,32 @@ public class PromgrDBBean {
 
 			conn = getConnection();
 
+			// chkItem del
 			sql = "delete from chklist_item where promgr_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, promgr_num);
 			count = pstmt.executeUpdate();
 
+			// chkList del
 			sql = "delete from chklist_title where promgr_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, promgr_num);
 			count = pstmt.executeUpdate();
 
 			// file del
+			sql = "delete from cloud where promgr_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, promgr_num);
+			count = pstmt.executeUpdate();
 
+			// comment del
 			sql = "delete from promgr_comment where promgr_num=? and com_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, promgr_num);
 			pstmt.setInt(2, com_num);
 			count = pstmt.executeUpdate();
 
+			// promgr del
 			sql = "delete from promgr where promgr_num=? and com_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, promgr_num);
@@ -1189,12 +1196,6 @@ public class PromgrDBBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
 
 			if (pstmt != null)
 				try {

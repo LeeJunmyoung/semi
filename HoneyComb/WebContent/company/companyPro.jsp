@@ -8,7 +8,7 @@
 <title>사업장 등록 완료</title>
 <script type="text/javascript">
 	function tomain() {
-		location.href="/HoneyComb/index.jsp"
+		location.href="/HoneyComb/temp_accept_page/wait_accept_company.jsp"
 	}
 </script>
 

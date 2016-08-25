@@ -175,10 +175,7 @@ background-color: silver;
 	<input type="button" name="download" value="다운로드" onclick="download()"class="indexbutton">
 	<input type="button" name="searchbutton" value="삭제" onclick="deleteitem('${param.folder}')" class="indexbutton">
 </div>
-	<form name="searchform" action="">
-		<input type="text" name="search">
-		<input type="button" name="searchbutton" value="검색">
-	</form>
+	
 	<div class="cloudForm">
 	<ul>
 		<c:forEach items="${cloudList}" var="cloudlist">

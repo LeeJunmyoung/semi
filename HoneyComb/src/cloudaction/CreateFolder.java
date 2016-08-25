@@ -17,8 +17,8 @@ public class CreateFolder implements CommandActionCloud{
 		HttpSession session  =  request.getSession();
 		request.setCharacterEncoding("utf-8");
 		//占쌈시쇽옙占쏙옙
-		session.setAttribute("com_num", "1");
-		session.setAttribute("name", "tester");
+		/*session.setAttribute("com_num", "1");
+		session.setAttribute("name", "tester");*/
 		//占쌈시쇽옙占쏙옙 占쏙옙
 		
 		

@@ -6,29 +6,51 @@
 <head>
 <title>사업장 승인폼</title>
 
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+
 <style>
-.myButton {
-	background-color: #4367b0;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	display: inline-block;
-	cursor: pointer;
-	color: #fff;
-	font-size: 15px;
-	padding: 8px 25px;
-	text-decoration: none;
-	margin: 20px;
-}
-
-.myButton:hover {
-	background-color: #344d91;
-}
-
-.myButton:active {
+#back_button {
 	position: relative;
-	top: 1px;
+	top: 60px;
 }
+
+#back_button {
+	width: 50px;
+	margin: auto;
+}
+
+#submit {
+	width: 50px;
+	margin: auto;
+}
+
+#delete {
+	width: 50px;
+	margin: auto;
+}
+
+#back_button_div {
+	width: 60px;
+	margin: auto;
+}
+
+#h1_tag {
+	width: 500px;
+	margin: auto;
+	font-size: 40px;
+	text-align: center;
+}
+
+h1 {
+	width: 500px;
+	margin: auto;
+	text-align: center;
+}
+
 </style>
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
@@ -62,7 +84,6 @@
 	 
 	 function submitCheck(come_num){;
 	 var num = come_num;
-	 /* if($("#chkall").prop("checked",true)){ */
 	 
 	 url = "complete_comIn.admin?com_num="+num;
 	 window
@@ -70,19 +91,19 @@
 				url,
 				"post",
 				"toolbar=no,width=500,height=300,directories=no,status=yes,scrollbars=yes,menubar=no"); 
-	 /* }else{
-		 alert("등록할 사업장을 선택해주세요.");
-	 } */
 	 }
 	 
 </script>
 </head>
-<body bgcolor="<%=bodyback_c%>">
-
-
+<body>
+	<div id='h1_tag'>
+		<br>Company Approval
+		<hr>
+	</div>
+	<br>
 	<form align="center">
-		<h3>사업장 신청 목록</h3>
-		<table width="400" border="1" cellpadding="1" cellspacing="0" align="center">
+		<table width="400" border="1" cellpadding="1" cellspacing="0"
+			align="center">
 			<tbody>
 				<c:if test="${ empty comList }">
 					<tr>
@@ -92,19 +113,22 @@
 				<c:if test="${ !empty comList }">
 					<c:forEach var="compl" items="${comList}">
 						<tr>
-							<td><a onclick="listCheck(${compl.com_num})">${compl.com_name}</a><input
-								type="submit" id="submit" value="등록"
+							<td><a onclick="listCheck(${compl.com_num})" id="compl">${compl.com_name}</a></td>
+							<td id="compl_button"><input type="submit"
+								class="btn btn-primary btn-xs" id="submit" value="등록"
 								onclick="submitCheck(${compl.com_num})"> <input
-								type="button" id="delete" value="삭제"
-								onclick="del(${compl.com_num})"></td>
+								type="button" class="btn btn-primary btn-xs" id="delete"
+								value="삭제" onclick="del(${compl.com_num})"></td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
-		<tr>
-			<td align="center"><a onclick="history.go(-1)" class="myButton">back</a></td>
-		</tr>
+		<div id="back_button_div">
+
+			<input type="button" class="btn btn-primary btn-xs" value="back"
+				id='back_button' onclick="history.go(-1)">
+		</div>
 
 	</form>
 

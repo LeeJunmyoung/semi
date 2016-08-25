@@ -5,16 +5,49 @@
 <html>
 <head>
 <title>삭제 완료 폼</title>
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+
+<style>
+#close_button {
+	position: relative;
+	top: 60px;
+}
+
+#close_button {
+	width: 50px;
+	margin: auto;
+}
+
+#close_button_div {
+	width: 60px;
+	margin: auto;
+}
+
+#h1_tag {
+	width: 500px;
+	margin: auto;
+	font-size: 40px;
+	text-align: center;
+}
+</style>
 </head>
 <script type="text/javascript">
 	opener.location.reload();
 </script>
-<body bgcolor="<%=bodyback_c%>">
-	<center>
-		삭제가 완료 되었습니다.
-		<p>
-			<input type="button" value="확인" onclick="window.close()">
-	</center>
+<body>
+	<div id="h1_tag">
+		<br>삭제가 완료 되었습니다.
+	</div>
+	<div id="close_button_div">
+
+		<input type="button" class="btn btn-primary btn-xs" value="close"
+			id='close_button' onclick="window.close()">
+	</div>
 
 </body>
 </html>

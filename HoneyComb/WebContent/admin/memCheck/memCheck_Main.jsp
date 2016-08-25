@@ -7,11 +7,10 @@
 
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	
-	<script type='text/javascript'
+
+<script type='text/javascript'
 	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <style type="text/css">
-
 input[type=text] {
 	height: 30px;
 	border-radius: 5px 5px 5px 5px;
@@ -83,12 +82,10 @@ td {
 
 #back_button {
 	position: relative;
-	top: 60px;
-}
-
-#back_button {
+	top: 40px;
 	width: 50px;
-	margin: auto;
+	margin: 0 auto;
+	margin-bottom: 50px;
 }
 
 #back_button_div {
@@ -97,12 +94,12 @@ td {
 }
 
 tr {
-    width: 100px;
+	width: 100px;
 	height: 31px;
 }
 
 td {
-    width: 100px;
+	width: 100px;
 	height: 31px;
 }
 
@@ -125,10 +122,19 @@ h1 {
 	font-size: 20pt;
 	margin: auto;
 }
-#memCheck_table{
-width: 800px;
-text-align:center;
-margin:auto;
+
+#memCheck_table {
+	width: 800px;
+	text-align: center;
+	margin: auto;
+}
+
+input[type=text] {
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 16px;
+	padding-left: 10px;
+	text-align: lift;
 }
 </style>
 
@@ -156,7 +162,7 @@ margin:auto;
 <script>
 
 function in_focus(){
-	/* document.join_company.com_name_search.focus(); */
+	document.join_company.com_name_search.focus();
 }
 
 	
@@ -169,18 +175,18 @@ function in_focus(){
 </head>
 <body onload="in_focus()">
 	<div id='h1_tag'>
-	<br>
-	Present Condition
+		<br> Present Condition
+		<hr>
 	</div>
 	<div id="member_check">
 		<form name="join_company" align="center" method="post"
 			action="/HoneyComb/memCheck/memCheck_ComSearch.mc">
-			<hr><br>
-			<input type="text" placeholder="Company" id="com_name_search"
+			<input type="text" placeholder="COMPANY" id="com_name_search"
 				onkeyup='{filter();return false}'
 				onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
 			<p>
-			<br><br>
+				<br>
+				<br>
 				<c:if test="${ empty companyList }">
 					<tr>
 					<tr colspan="5">
@@ -197,21 +203,23 @@ function in_focus(){
 						<td width="70" class="title" align="center">Detail</td>
 					</tr>
 					<c:forEach var="com" items="${ companyList }">
-							<tr id="text" name="${ com.com_name }">
-								<td width="100" align="center">${ com.com_name }</td>
-								<td width="250" align="center">${ com.com_add }</td>
-								<td width="70" align="center">${ com.com_aff }</td>
-								<td width="150" align="center">0${ com.com_phone }</td>
-								<td><input type="button" class="btn btn-primary btn-xs" value="memberList"
-									onclick="memberList(${ com.com_num })"></td></tr>
-									</c:forEach>
+						<tr id="text" name="${ com.com_name }">
+							<td width="100" align="center">${ com.com_name }</td>
+							<td width="250" align="center">${ com.com_add }</td>
+							<td width="70" align="center">${ com.com_aff }</td>
+							<td width="150" align="center">0${ com.com_phone }</td>
+							<td><input type="button" class="btn btn-primary btn-xs"
+								value="memberList" onclick="memberList(${ com.com_num })"></td>
+						</tr>
+					</c:forEach>
 				</c:if>
 			</table>
-			<div id ="back_button_div">
+			<div id="back_button_div">
 
-<input type="button" class="btn btn-primary btn-xs" value="back" id='back_button' onclick="history.go(-1)">
-</div>
+				<input type="button" class="btn btn-primary btn-xs" value="back"
+					id='back_button' onclick="history.go(-1)">
+			</div>
 		</form>
-		</div>
+	</div>
 </body>
 </html>

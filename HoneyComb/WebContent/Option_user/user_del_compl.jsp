@@ -13,8 +13,14 @@
 		this.window.close();
 	}
 </script>
-
+<style>
+h1 {
+	margin-top: 50px;
+	text-align: center;
+	font-size: 20px;
+}
+</style>
 <body onload="setTimeout('opener_close()', '3000')">
-<h3 align="center">3초후 메인화면으로 이동합니다</h3>
+<h1 align="center">3초후 메인화면으로 이동합니다</h1>
 </body>
 </html>

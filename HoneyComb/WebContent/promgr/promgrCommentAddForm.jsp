@@ -14,9 +14,9 @@
 <script>
 	function writeSave() {
 
-		if (document.commentAddform.promgr_content.value == "") {
+		if (document.commentAddform.promgr_comment.value == "") {
 			alert("내용을 입력하십시요.");
-			document.commentAddform.promgr_content.focus();
+			document.commentAddform.promgr_comment.focus();
 			return false;
 		}
 		
@@ -29,7 +29,7 @@
 <body style="background-color: #e9ebee;">
 
 	<form class="col-sm-10" role="form" method="post" name="commentAddform" 
-		action="/HoneyComb/promgr/promgrCommentAddPro.promgr?promgr_num=${promgr_num}" 
+		action="/HoneyComb/promgr/promgrCommentAddPro.promgr?promgr_num=${promgr_num}"  
 		onsubmit="return writeSave()" >
 		
 		<div class="form-group" style="margin-top: 10px;">

@@ -84,7 +84,9 @@ public class CloudDBBean {
 		cloud.setFile_size(rs.getInt(5));
 		cloud.setFile_date(rs.getDate(6));
 		cloud.setFolder(rs.getString(8));
+		cloud.setPromgr_num(rs.getInt(9));
 		cloud.setMem_num(rs.getInt(10));
+		
 		
 		return cloud;
 		

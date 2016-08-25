@@ -31,7 +31,7 @@ public class CloudDownItem implements CommandActionCloud{
 		            OutputStream outputstream = null;
 		            FileInputStream inputstream = null;
 		            try {
-		            	response.setHeader("Content-Disposition","attachment; filename=" + file_name +extension+ ";");
+		            	response.setHeader("Content-Disposition","attachment; filename=" + file_name+";");
 		                outputstream = response.getOutputStream();
 		                inputstream = new FileInputStream(downloadfile);
 		                byte[] buffer = new byte[1024];  

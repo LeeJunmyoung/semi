@@ -45,7 +45,7 @@ $(document).bind("contextmenu", function(event) {
     $("<div class='cloud_menu'style='position: absolute; z-index:1000;'>"+
     "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
     "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
-    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+  
+    "<a href ="+"javascript:deleteitem('${param.folder}')"+"class='deldiv'><p>삭제</p> </a>"+  
     +"</div>")
     .appendTo("body")
     .css({top: event.pageY + "px", left: event.pageX + "px"});
@@ -54,7 +54,7 @@ $(document).bind("contextmenu", function(event) {
 	    "<a href="+"javascript:fileUploader('${param.folder}')"+"><p>업로드</p></a>"+
 	    "<a href='javascript:download()' id='fileonly' class='downdiv'><p >다운로드</p></a>"+
 	    "<a href = "+"javascript:createfolder('${param.folder}')"+"><p>폴더 만들기</p></a>"+
-	    "<a href ="+"javascript:deleteitem('${param.folder}')"+"><p>삭제</p> </a>"+
+	    "<a href ="+"javascript:deleteitem('${param.folder}')"+"class='deldiv'><p>삭제</p> </a>"+
 	    +"</div>")
 	    .appendTo("body")
 	    .css({top: event.pageY + "px", left: event.pageX + "px"});   
@@ -63,8 +63,7 @@ $(document).bind("contextmenu", function(event) {
 if(${mem_num}!=($('input[name=itemBox]:checked').data('mem_num'))){
 	$(".downdiv").css("display","none");
 };
-	
-        
+    
 	
 }).bind("click", function(event) {
     $("div.cloud_menu").hide(); 
@@ -73,16 +72,16 @@ if(${mem_num}!=($('input[name=itemBox]:checked').data('mem_num'))){
 	
 	
 	 $('#download').click(function(){
-		alert("test");
+	
 		var itemBox = document.getElementsByName("itemBox");
 		if($("input[name=itemBox]:checked").length == 0){
-			alert("false");
+		
 			return false;
 		}
 		$("input[name=itemBox]:checked").each(function(){
 			var file_name = $(this).data('file_name');
 			var file_path = $(this).data('file_path');
-			alert(file_name)
+			
 			var url="/HoneyComb/cloud/cloudDownItem.cloud?file_name="+file_name+"&file_path="+file_path;
 			$(location).attr('href',url);
 		});
@@ -182,7 +181,7 @@ background-color: silver;
 		<div class="item" id="item">
 				<li style="display: inline;">
 					
-					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}" data-mem_num="${cloudlist.mem_num}"}>
+					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}" data-mem_num="${cloudlist.mem_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>	
 						<c:when test="${fn:substring(cloudlist.file_path,fn:length(cloudlist.file_path)-1,fn:length(cloudlist.file_path))!=''}">
@@ -196,6 +195,7 @@ background-color: silver;
 						<div class="file" id="img"><img src="../images/folder.png"></div>
 						</c:otherwise>
 						</c:choose>
+						
 						<div class="file">${cloudlist.file_name}</div>
 						<div class="file">${cloudlist.file_uploader}</div>
 							<!-- 파일사이즈 byte 로 포맷 -->

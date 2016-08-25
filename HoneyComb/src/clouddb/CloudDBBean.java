@@ -331,10 +331,18 @@ public int deleteItem(String iteminfo, String folder)throws SQLException{
 			if(folder == ""){//메인페이지 삭제
 				pstmt = conn.prepareStatement("delete from cloud where file_name = ? and folder is null");
 				pstmt.setString(1, file_name);
+				x = pstmt.executeUpdate();
+				pstmt = conn.prepareStatement("delete from cloud where folder like ?");
+				String folderdel = file_name+"|%";
+				pstmt.setString(1, folderdel);
 			}else{
 			pstmt = conn.prepareStatement("delete from cloud where file_name = ? and folder = ?");
 			pstmt.setString(1, file_name);
 			pstmt.setString(2, folder);
+			x = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement("delete from cloud where folder like ?");
+			String folderdel = folder+file_name+"|%";
+			pstmt.setString(1, folderdel);
 			}
 			
 		}

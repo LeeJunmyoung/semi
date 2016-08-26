@@ -8,7 +8,6 @@
 <script src="/HoneyComb/cloudview/cloudScript.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-window.opener.location.reload();
 $(function(){
 	if(!${param.dupli == 'y'}){
 		window.opener.location.reload();

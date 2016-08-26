@@ -51,12 +51,12 @@ padding-top: 3px;
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('foldername')" class="foldertext">
+<form action="/HoneyComb/cloud/createFolder.cloud" method="post" onsubmit="return emptyck('folderck')" class="foldertext">
 <h3>
 생성할 폴더 이름을 입력해 주세요
 </h3>
 <div>
-	<input type="text" name="foldername" class="foldertext">
+	<input type="text" name="foldername" class="foldertext" id="folderck">
 	<input type="submit" value="폴더 생성" class="indexbutton">
 	<input type="hidden" value="${param.uploadcheck}" id="uploadcheck">
 	<input type="hidden" value="${param.name}" id="foldercheck">

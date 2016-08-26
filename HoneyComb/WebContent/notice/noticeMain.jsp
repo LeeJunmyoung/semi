@@ -108,10 +108,15 @@
 				      <div class="modal-content">
 				        <div class="modal-header">
 				          <button type="button" class="close" data-dismiss="modal" onclick="location.reload()">&times;</button>
-				          <h4 class="modal-title">${article.notice_title} (${article.notice_date})</h4>
+				          <h4 class="modal-title">${article.notice_title}
+				          	<c:if test="${article.isNew == 0}">
+								<span class="badge">new</span>
+							</c:if>
+				          </h4>
 				        </div>
 				        <div class="modal-body">
-				          <p>${article.notice_content}</p>
+				          <p>${article.notice_content}</p> <br>
+				          <p>작성일 : ${article.notice_date}</p>
 				        </div>
 				        <div class="modal-footer">
 				          <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" onclick="location.reload()">Close</button>

@@ -107,14 +107,9 @@ if($('input[name=itemBox]:checked').data('promgr_num') != 0){
 					$("#deletebutton").css("display","none");};
 
 		if($('input[name=itemBox]:checked').data('promgr_num') != 0){
-					$("#deletebutton").css("display","none");};	 
-		
-		
+					$("#deletebutton").css("display","none");};	
 	});
-	
-	 
-	 
-	
+
 });
 
 </script>
@@ -196,7 +191,6 @@ background-color: silver;
 		<c:forEach items="${cloudList}" var="cloudlist">
 		<div class="item" id="item">
 				<li style="display: inline;">
-					promgr_num=${cloudlist.promgr_num}
 					<input type="checkbox" id="${cloudlist.file_num}" name="itemBox" data-file_name="${cloudlist.file_name}" data-file_path="${cloudlist.file_path}" data-file_num="${cloudlist.file_num}" data-mem_num="${cloudlist.mem_num}" data-mem_num="${cloudlist.mem_num}"data-promgr_num="${cloudlist.promgr_num}">
 						<label for="${cloudlist.file_num}">
 						<c:choose>	

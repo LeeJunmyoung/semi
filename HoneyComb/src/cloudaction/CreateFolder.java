@@ -29,13 +29,14 @@ public class CreateFolder implements CommandActionCloud{
 		//占쏙옙占쏙옙 占쏙옙占싸듸옙 占싼삼옙占� 占쌨아울옙占쏙옙
 		String file_uploader = (String)session.getAttribute("name");
 		//cloudPro占쏙옙 占쌍깍옙
-
+		int mem_num = Integer.parseInt(String.valueOf(session.getAttribute("mem_num")));
 		 
 		
 		cloudPro.setFolder(folder);
 		cloudPro.setFile_name(file_name);
 		cloudPro.setCom_num(com_num);
 		cloudPro.setFile_uploader(file_uploader);
+		cloudPro.setMem_num(mem_num);
 		//占쌩븝옙占쏙옙占� 확占쏙옙
 		int folder_check = cloud.checkFolder(cloudPro);
 		if(folder_check == 0){

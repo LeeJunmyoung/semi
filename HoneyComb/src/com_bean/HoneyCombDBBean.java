@@ -107,6 +107,7 @@ public class HoneyCombDBBean {
 				HoneyCombDataBean searchCom = new HoneyCombDataBean();
 				searchCom.setCom_name(rs.getString("com_name"));
 				searchCom.setCom_add(rs.getString("com_add"));
+				searchCom.setCom_aff(rs.getString("com_aff"));
 				searchCom.setCom_phone(rs.getString("com_phone"));
 				searchCom.setCom_num(rs.getInt("com_num"));
 				resultList.addElement(searchCom);

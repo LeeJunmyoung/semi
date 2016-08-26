@@ -94,7 +94,7 @@ h1_tag{
 width: 230px;
 margin: 0px;
 }
-h1{
+#member{
 
  width:200px;
  margin: auto;
@@ -117,7 +117,7 @@ margin: auto;
 
 
 <div id = 'h1_tag'>
-<h1>가입자 명단</h1>
+<h1 id='member'>가입자 명단</h1>
 </div>
 <div id = "member_check">
 

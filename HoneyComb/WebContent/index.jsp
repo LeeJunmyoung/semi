@@ -12,5 +12,6 @@
 		response.sendRedirect("/HoneyComb/coin/LogOnCheck.coin"); 
 	%>
 
+
 </body>
 </html>

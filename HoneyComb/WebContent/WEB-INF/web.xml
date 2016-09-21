@@ -1,163 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<display-name>JulyProj</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-
-
-
-	<servlet>
-		<servlet-name>DBCPInit</servlet-name>
-		<servlet-class>LogInDB.DBCInit</servlet-class>
-		<init-param>
-			<param-name>jdbcdriver</param-name>
-			<param-value>oracle.jdbc.driver.OracleDriver</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-
-	<servlet>
-		<servlet-name>Controller</servlet-name>
-		<servlet-class>LogInaction.ControllerUsingURI</servlet-class>
-		<init-param>
-			<param-name>login_propertyConfig</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Controller</servlet-name>
-		<url-pattern>*.coin</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>com_Controller</servlet-name>
-		<servlet-class>Com_controll.Controller</servlet-class>
-		<init-param>
-			<param-name>com_Controller</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>com_Controller</servlet-name>
-		<url-pattern>*.company</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>cloud_Controller</servlet-name>
-		<servlet-class>cloudaction.CloudController</servlet-class>
-		<init-param>
-			<param-name>cloud_Controller</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>cloud_Controller</servlet-name>
-		<url-pattern>*.cloud</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>admin_Controller</servlet-name>
-		<servlet-class>com_complete.Complete_Controller</servlet-class>
-		<init-param>
-			<param-name>com_Controller</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\admin_accept_com.properties</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>admin_Controller</servlet-name>
-		<url-pattern>*.admin</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ControllerUsingURINotice</servlet-name>
-		<servlet-class>notice.ControllerUsingURINotice</servlet-class>
-		<init-param>
-			<param-name>propertyConfigNotice</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ControllerUsingURINotice</servlet-name>
-		<url-pattern>*.notice</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>tiles</servlet-name>
-		<servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
-		<init-param>
-			<param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
-			<param-value>/WEB-INF/tiles-home.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet>
-		<servlet-name>ControllerUsingURIProMgr</servlet-name>
-		<servlet-class>proMgr.ControllerUsingURIProMgr</servlet-class>
-		<init-param>
-			<param-name>propertyConfigProMgr</param-name>
-			<param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\ProMgrHandlerURI.properties</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ControllerUsingURIProMgr</servlet-name>
-		<url-pattern>*.pro</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>main_controller</servlet-name>
-		<servlet-class>main_controller.Controller</servlet-class>
-		<init-param>
-			<param-name>main_Controller</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Main_handler.properties</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>main_controller</servlet-name>
-		<url-pattern>*.main</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>chatting_Controll</servlet-name>
-		<servlet-class>chatting_Controll.ControllerUsingURI_Chatting</servlet-class>
-		<init-param>
-			<param-name>chat_propertyConfig</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Chatting.properties</param-value>		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>chatting_Controll</servlet-name>
-		<url-pattern>*.chat</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>option_controll</servlet-name>
-		<servlet-class>option_controll.Option_ControllerUsingURI</servlet-class>
-		<init-param>
-			<param-name>option_propertyConfig</param-name>
-			<param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\option_controller.properties</param-value>		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>option_controll</servlet-name>
-		<url-pattern>*.option</url-pattern>
-	</servlet-mapping>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>JulyProj</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>DBCPInit</servlet-name>
+    <servlet-class>LogInDB.DBCInit</servlet-class>
+    <init-param>
+      <param-name>jdbcdriver</param-name>
+      <param-value>oracle.jdbc.driver.OracleDriver</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>Controller</servlet-name>
+    <servlet-class>LogInaction.ControllerUsingURI</servlet-class>
+    <init-param>
+      <param-name>login_propertyConfig</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Controller</servlet-name>
+    <url-pattern>*.coin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>com_Controller</servlet-name>
+    <servlet-class>Com_controll.Controller</servlet-class>
+    <init-param>
+      <param-name>com_Controller</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com_Controller</servlet-name>
+    <url-pattern>*.company</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>cloud_Controller</servlet-name>
+    <servlet-class>cloudaction.CloudController</servlet-class>
+    <init-param>
+      <param-name>cloud_Controller</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cloud_Controller</servlet-name>
+    <url-pattern>*.cloud</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>admin_Controller</servlet-name>
+    <servlet-class>com_complete.Complete_Controller</servlet-class>
+    <init-param>
+      <param-name>com_Controller</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\admin_accept_com.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>admin_Controller</servlet-name>
+    <url-pattern>*.admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControllerUsingURINotice</servlet-name>
+    <servlet-class>notice.ControllerUsingURINotice</servlet-class>
+    <init-param>
+      <param-name>propertyConfigNotice</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerUsingURINotice</servlet-name>
+    <url-pattern>*.notice</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControllerUsingURIPromgr</servlet-name>
+    <servlet-class>promgr.ControllerUsingURIPromgr</servlet-class>
+    <init-param>
+      <param-name>propertyConfigPromgr</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\PromgrHandlerURI.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerUsingURIPromgr</servlet-name>
+    <url-pattern>*.promgr</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControllerUsingURI_Chatting</servlet-name>
+    <servlet-class>chatting_Controll.ControllerUsingURI_Chatting</servlet-class>
+    <init-param>
+      <param-name>chat_propertyConfig</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Chatting.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerUsingURI_Chatting</servlet-name>
+    <url-pattern>*.chat</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>tiles</servlet-name>
+    <servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
+    <init-param>
+      <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+      <param-value>/WEB-INF/tiles-home.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ControllerUsingURI_Main</servlet-name>
+    <servlet-class>main_controller.Controller</servlet-class>
+    <init-param>
+      <param-name>main_Controller</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Main_handler.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerUsingURI_Main</servlet-name>
+    <url-pattern>*.main</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Cal_controller</servlet-name>
+    <servlet-class>cal_Controll.ControllerUsingURI</servlet-class>
+    <init-param>
+      <param-name>cal_propertyConfig</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Cal_handler.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cal_controller</servlet-name>
+    <url-pattern>*.cal</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>option_controller</servlet-name>
+    <servlet-class>option_controll.Option_ControllerUsingURI</servlet-class>
+    <init-param>
+      <param-name>option_propertyConfig</param-name>
+      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\option_controller.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>option_controller</servlet-name>
+    <url-pattern>*.option</url-pattern>
+  </servlet-mapping>
 </web-app>

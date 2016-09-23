@@ -23,7 +23,7 @@
     <servlet-class>LogInaction.ControllerUsingURI</servlet-class>
     <init-param>
       <param-name>login_propertyConfig</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Login.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -35,7 +35,7 @@
     <servlet-class>Com_controll.Controller</servlet-class>
     <init-param>
       <param-name>com_Controller</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\honeyCombHandler.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -47,7 +47,7 @@
     <servlet-class>cloudaction.CloudController</servlet-class>
     <init-param>
       <param-name>cloud_Controller</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\cloudHandler.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -59,7 +59,7 @@
     <servlet-class>com_complete.Complete_Controller</servlet-class>
     <init-param>
       <param-name>com_Controller</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\admin_accept_com.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\admin_accept_com.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -71,7 +71,7 @@
     <servlet-class>notice.ControllerUsingURINotice</servlet-class>
     <init-param>
       <param-name>propertyConfigNotice</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\NoticeHandlerURI.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -83,7 +83,7 @@
     <servlet-class>promgr.ControllerUsingURIPromgr</servlet-class>
     <init-param>
       <param-name>propertyConfigPromgr</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\PromgrHandlerURI.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\PromgrHandlerURI.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -95,7 +95,7 @@
     <servlet-class>chatting_Controll.ControllerUsingURI_Chatting</servlet-class>
     <init-param>
       <param-name>chat_propertyConfig</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Chatting.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Chatting.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -116,7 +116,7 @@
     <servlet-class>main_controller.Controller</servlet-class>
     <init-param>
       <param-name>main_Controller</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Main_handler.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Main_handler.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -128,7 +128,7 @@
     <servlet-class>cal_Controll.ControllerUsingURI</servlet-class>
     <init-param>
       <param-name>cal_propertyConfig</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\Cal_handler.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\Cal_handler.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -140,7 +140,7 @@
     <servlet-class>option_controll.Option_ControllerUsingURI</servlet-class>
     <init-param>
       <param-name>option_propertyConfig</param-name>
-      <param-value>C:\Users\mia\Desktop\git\semi\HoneyComb\WebContent\WEB-INF\properties\option_controller.properties</param-value>
+      <param-value>C:\Users\user1\git\semi\HoneyComb\WebContent\WEB-INF\properties\option_controller.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

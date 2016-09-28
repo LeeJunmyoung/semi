@@ -22,18 +22,24 @@
 
 		<h2 ><img src="${ sessionScope.profile_img }"  width="150" height="153" onerror="this.src='/HoneyComb/images/user.png'" title="내 프로필 사진"></h2>
 		
+		
+
+		
 		<h2 id="my_profile">${ sessionScope.name }</h2>
+		
 
-	<ul>     
+	<ul>
 
-		<li><a href="/HoneyComb/Chatting/Chat_main.chat">MESSAGE</a></li>
-		<li><a href="/HoneyComb/cloud/cloudForm.cloud">CLOUD</a></li>
-		<li><a href="/HoneyComb/page_layout/Option/Option_home.jsp">OPTION</a></li>
-		<li><a href="#logout" onclick="logout();return false;" onkeypress="this.onclick;">LOG OUT</a></li>
+
+
+		<tiles:importAttribute name="userMenus" />
+		<c:forEach var="menu" items="${userMenus}">
+			<li><a id="menu_link" href="${menu.link}">${menu.name}</a></li>
+		</c:forEach>
+		<li><a id="menu_link"  href="#logout" onclick="logout();return false;" onkeypress="this.onclick;">LOG OUT</a></li>
 		<!-- <a href="/HoneyComb/Option_user/logout_page.jsp"> -->
 	
 	</ul>
-	
 </div>
 </body>
 </html>

@@ -24,7 +24,7 @@
 		
 		<h2 id="my_profile">${ sessionScope.name }</h2>
 
-	<ul>
+	<ul>     
 
 		<li><a href="/HoneyComb/Chatting/Chat_main.chat">MESSAGE</a></li>
 		<li><a href="/HoneyComb/cloud/cloudForm.cloud">CLOUD</a></li>
